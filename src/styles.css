@@ -407,7 +407,8 @@ select {
 .borneo-copy p,
 .timeline-card p,
 .track-summary,
-.track-audience {
+.track-audience,
+.track-value-line {
   color: var(--color-muted);
   line-height: 1.8;
 }
@@ -1039,6 +1040,11 @@ select {
 .track-audience,
 .track-summary {
   margin: 0;
+}
+
+.track-value-line {
+  margin: -2px 0 2px;
+  font-size: 0.92rem;
 }
 
 .track-chip-list {

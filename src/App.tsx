@@ -33,7 +33,7 @@ const passes = [
     label: 'Foundation Workshop Pass',
     headline: 'Build Your Professional Foundation',
     body:
-      'Designed for beginners, emerging performers, educators, youth leaders and entertainers who want strong clowning fundamentals.',
+      'Designed for beginners, emerging performers and educators who want stronger stage fundamentals, audience connection and practical performance confidence.',
     badges: ['No prior experience required', 'Certificate of Participation awarded'],
     includes: [
       'Physical Comedy Fundamentals',
@@ -52,7 +52,7 @@ const passes = [
     label: 'Mastery Workshop Pass',
     headline: 'Elevate Your Stage Performance',
     body:
-      'Designed for experienced performers ready to sharpen technique, stage confidence and professional performance direction.',
+      'Designed for experienced performers ready to sharpen timing, refine material and strengthen their professional stage identity.',
     badges: ['Prior stage experience recommended', 'Certificate of Completion awarded'],
     includes: [
       'Advanced Stage Craft',
@@ -142,30 +142,30 @@ const mentorCards = [
 const mentorPreviewCards = [
   {
     title: 'International Mentor',
-    meta: 'Physical Comedy',
+    meta: 'Physical Comedy & Stage Presence',
     track: 'Foundation Track',
-    note: 'Global Faculty',
+    note: 'Working International Faculty',
     image: clownHeroImage,
   },
   {
     title: 'Regional Teaching Artist',
-    meta: 'Foundation Track',
-    track: 'Creative Learning',
-    note: 'Sabah / Malaysia',
+    meta: 'Character Building & Creative Teaching',
+    track: 'Foundation Track',
+    note: 'Sabah / Malaysia Practice',
     image: clownStageImage,
   },
   {
     title: 'Creative Exchange Mentor',
-    meta: 'Performance & Community',
+    meta: 'Audience Connection & Community Performance',
     track: 'Exchange Lab',
-    note: 'Cross-Cultural Practice',
+    note: 'Cross-Cultural Collaboration',
     image: clownDuoImage,
   },
   {
     title: 'Showcase Development Mentor',
-    meta: 'Mastery Track',
-    track: 'Stage Direction',
-    note: 'Performance Growth',
+    meta: 'Act Refinement & Showcase Direction',
+    track: 'Mastery Track',
+    note: 'Professional Performance Feedback',
     image: clownShowImage,
   },
 ]
@@ -173,15 +173,15 @@ const mentorPreviewCards = [
 const storyFeatures = [
   {
     title: 'Professional Workshops',
-    body: 'Train with structured Foundation and Mastery tracks.',
+    body: 'Train inside clear Foundation and Mastery pathways built for real progress.',
   },
   {
     title: 'Performance Showcase',
-    body: 'Celebrate clowning as a serious performing art.',
+    body: 'Develop work for the stage, not just for the classroom.',
   },
   {
     title: 'Community & Cultural Exchange',
-    body: 'Connect through laughter, culture and shared humanity.',
+    body: 'Exchange ideas, methods and cultural perspectives with artists from different contexts.',
   },
 ]
 
@@ -444,9 +444,9 @@ function HomePage() {
             </h1>
           </div>
           <p className="hero-subheadline">
-            A 3-day international gathering for clown artists, performers, educators and communities in Borneo.
+            A 3-day international convention for clown artists, performers and educators who want stronger craft, sharper stage work and meaningful creative exchange.
           </p>
-          <p className="hero-mini-note">Professional training. Cultural exchange. Real stage energy.</p>
+          <p className="hero-mini-note">Train hard. Build better work. Meet the room that understands your craft.</p>
 
           <div className="event-badges">
             <span>Aug 3–5, 2026</span>
@@ -512,9 +512,9 @@ function HomePage() {
 
           <div className="story-copy">
             <p className="section-kicker">What Is BICC?</p>
-            <h2>A Festival of Performance, Culture and Human Connection.</h2>
+            <h2>A Convention For Performers Who Want More Than Inspiration.</h2>
             <p className="section-intro">
-              BICC brings together workshops, stage performance, cultural exchange and community outreach in one joyful convention experience.
+              BICC brings together practical training, live performance thinking, cultural exchange and community connection in one focused convention experience.
             </p>
 
             <div className="story-points">
@@ -542,9 +542,9 @@ function HomePage() {
         <div className="section-head with-copy">
           <div>
             <p className="section-kicker">Choose Your Track</p>
-            <h2>Two paths. One price. Built for different stages of growth.</h2>
+            <h2>Two Paths. One Price. Different Professional Needs.</h2>
           </div>
-          <p className="section-intro">A cleaner decision for beginners, emerging performers and experienced stage artists.</p>
+          <p className="section-intro">Each pass is designed to give you a clearer next step: stronger fundamentals, or sharper performance and critique.</p>
         </div>
 
         <div className="track-comparison">
@@ -558,9 +558,10 @@ function HomePage() {
               </div>
               <div className="track-card-copy">
                 <span className={`track-label ${pass.accent}`}>{pass.name}</span>
-                <p className="track-audience">{index === 0 ? 'For beginners and emerging performers.' : 'For experienced performers.'}</p>
+                <p className="track-audience">{index === 0 ? 'For beginners, emerging performers and teaching artists.' : 'For experienced performers and working stage artists.'}</p>
                 <p className="pass-price">{pass.price}</p>
-                <p className="track-summary">{index === 0 ? 'Build confidence, character and core performance skills.' : 'Refine your stage presence, timing and professional act.'}</p>
+                <p className="track-summary">{index === 0 ? 'Build confidence, character, timing and the core habits of a reliable live performer.' : 'Refine stage presence, strengthen your act and push your work toward a sharper professional standard.'}</p>
+                <p className="track-value-line">{index === 0 ? 'Best if you want clearer fundamentals, stronger audience connection and a more dependable performance base.' : 'Best if you want outside eyes on your act, stronger choices on stage and a more polished professional identity.'}</p>
                 <div className="track-chip-list">
                   {pass.includes.map((item) => (
                     <span className="track-chip" key={item}>
@@ -577,7 +578,7 @@ function HomePage() {
         </div>
 
         <div className="pass-helper">
-          <p>Not sure which track fits you? Compare both tracks.</p>
+          <p>Not sure which track fits you? Choose Foundation if you are building your base. Choose Mastery if you already perform and want sharper feedback.</p>
           <a className="text-link" href="/passes">
             Compare Tracks
           </a>
@@ -617,7 +618,7 @@ function HomePage() {
             <p className="section-kicker">Mentors & Performers</p>
             <h2>Learn From Artists Who Live The Stage.</h2>
           </div>
-          <p className="section-intro">Mentors, performers and creative leaders from the world of clowning and performance.</p>
+          <p className="section-intro">BICC is built around artists who perform, teach and shape work in front of real audiences, not just inside theory rooms.</p>
         </div>
 
         <div className="mentor-preview-grid">
@@ -638,7 +639,7 @@ function HomePage() {
 
         <div className="section-cta">
           <a className="secondary-btn" href="/mentors">
-            View Speakers
+            View Mentors
           </a>
         </div>
       </section>
