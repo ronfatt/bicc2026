@@ -172,15 +172,15 @@ const mentorPreviewCards = [
 
 const storyFeatures = [
   {
-    title: 'Professional Workshops',
+    title: 'Learn The Craft',
     body: 'Train inside clear Foundation and Mastery pathways built for real progress.',
   },
   {
-    title: 'Performance Showcase',
+    title: 'Share The Stage',
     body: 'Develop work for the stage, not just for the classroom.',
   },
   {
-    title: 'Community & Cultural Exchange',
+    title: 'Serve The Community',
     body: 'Exchange ideas, methods and cultural perspectives with artists from different contexts.',
   },
 ]
@@ -190,16 +190,19 @@ const borneoCards = [
     title: 'Local Taste',
     body: 'Food, coffee and Sabah flavours.',
     label: 'Tawau Food & Coffee',
+    tag: 'Taste',
   },
   {
     title: 'Nature & Culture',
     body: 'A warm destination shaped by people, stories and place.',
     label: 'Culture & Coastal Warmth',
+    tag: 'Culture',
   },
   {
     title: 'Travel Guide',
     body: 'Plan your stay with venue, hotel and visitor information.',
     label: 'Venue & Visitor Guide',
+    tag: 'Guide',
   },
 ]
 
@@ -430,7 +433,10 @@ function renderProgrammeCards() {
 function HomePage() {
   return (
     <main>
-      <section className="hero-section">
+      <section className="hero-section section-shell hero-stage">
+        <div aria-hidden="true" className="spotlight-glow" />
+        <div aria-hidden="true" className="confetti-field hero-confetti" />
+        <div aria-hidden="true" className="bunting-strip" />
         <div className="hero-copy">
           <div className="hero-eyebrow-row">
             <img alt="BICC 2026 official logo" className="hero-mini-logo" src={biccLogo} />
@@ -494,8 +500,8 @@ function HomePage() {
       </section>
 
       <section className="value-strip">
-        {values.map((item) => (
-          <article className="value-card" key={item.title}>
+        {values.map((item, index) => (
+          <article className={`value-card sticker-badge tone-${index + 1}`} key={item.title}>
             <RedNoseIcon />
             <strong>{item.title}</strong>
             <p>{item.body}</p>
@@ -503,7 +509,7 @@ function HomePage() {
         ))}
       </section>
 
-      <section className="editorial-section">
+      <section className="editorial-section section-shell playful-band">
         <div className="story-layout">
           <div className="story-photo-frame">
             <img alt="Clown performer or mentor on stage" src={clownShowImage} />
@@ -516,6 +522,7 @@ function HomePage() {
             <p className="section-intro">
               BICC brings together practical training, live performance thinking, cultural exchange and community connection in one focused convention experience.
             </p>
+            <p className="pull-quote">Not just a convention — a meeting place for performers who believe laughter can teach, heal, and connect.</p>
 
             <div className="story-points">
               {storyFeatures.map((item) => (
@@ -538,7 +545,8 @@ function HomePage() {
         </div>
       </section>
 
-      <section className="passes-section editorial-section">
+      <section className="passes-section editorial-section section-shell editorial-band ticket-band">
+        <div aria-hidden="true" className="confetti-field pass-confetti" />
         <div className="section-head with-copy">
           <div>
             <p className="section-kicker">Choose Your Track</p>
@@ -549,7 +557,7 @@ function HomePage() {
 
         <div className="track-comparison">
           {passes.map((pass, index) => (
-            <article className={`track-card ${pass.accent}`} key={pass.name}>
+            <article className={`track-card ticket-card ${pass.accent}`} key={pass.name}>
               <div className="track-card-media">
                 <img
                   alt={pass.name}
@@ -557,7 +565,7 @@ function HomePage() {
                 />
               </div>
               <div className="track-card-copy">
-                <span className={`track-label ${pass.accent}`}>{pass.name}</span>
+                <span className={`track-label ${pass.accent} sticker-badge`}>{pass.name}</span>
                 <p className="track-audience">{index === 0 ? 'For beginners, emerging performers and teaching artists.' : 'For experienced performers and working stage artists.'}</p>
                 <p className="pass-price">{pass.price}</p>
                 <p className="track-summary">{index === 0 ? 'Build confidence, character, timing and the core habits of a reliable live performer.' : 'Refine stage presence, strengthen your act and push your work toward a sharper professional standard.'}</p>
@@ -585,7 +593,7 @@ function HomePage() {
         </div>
       </section>
 
-      <section className="editorial-section programme-strip">
+      <section className="editorial-section programme-strip section-shell patterned-band journey-band">
         <div className="section-head with-copy">
           <div>
             <p className="section-kicker">Programme Snapshot</p>
@@ -612,7 +620,7 @@ function HomePage() {
         </div>
       </section>
 
-      <section className="editorial-section">
+      <section className="editorial-section section-shell mentor-band">
         <div className="section-head with-copy">
           <div>
             <p className="section-kicker">Mentors & Performers</p>
@@ -622,13 +630,13 @@ function HomePage() {
         </div>
 
         <div className="mentor-preview-grid">
-          {mentorPreviewCards.map((item) => (
-            <article className="mentor-preview-card" key={item.title}>
+          {mentorPreviewCards.map((item, index) => (
+            <article className={`mentor-preview-card ${index === 0 ? 'featured' : ''}`} key={item.title}>
               <div className="mentor-preview-image">
                 <img alt={item.title} src={item.image} />
               </div>
               <div className="mentor-preview-copy">
-                <span className="track-label red">{item.track}</span>
+                <span className="track-label red sticker-badge">{item.track}</span>
                 <h3>{item.title}</h3>
                 <p>{item.meta}</p>
                 <small>{item.note}</small>
@@ -644,7 +652,8 @@ function HomePage() {
         </div>
       </section>
 
-      <section className="editorial-section">
+      <section className="editorial-section section-shell destination-band">
+        <div aria-hidden="true" className="borneo-pattern destination-pattern" />
         <div className="section-head with-copy">
           <div>
             <p className="section-kicker">Borneo Experience</p>
@@ -657,6 +666,7 @@ function HomePage() {
           {borneoCards.map((item) => (
             <article className="borneo-card" key={item.title}>
               <div className="borneo-image-placeholder">
+                <span className="borneo-card-tag sticker-badge">{item.tag}</span>
                 <span>{item.label}</span>
               </div>
               <div className="borneo-copy">
