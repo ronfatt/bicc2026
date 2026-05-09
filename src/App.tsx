@@ -1,99 +1,39 @@
-import { useState } from 'react'
+const clownHeroImage =
+  'https://images.pexels.com/photos/18652042/pexels-photo-18652042/free-photo-of-clown-performing-on-stage.jpeg?auto=compress&cs=tinysrgb&w=1200&h=1500&dpr=2'
+const clownStageImage =
+  'https://images.pexels.com/photos/18652043/pexels-photo-18652043/free-photo-of-clown-on-stage.jpeg?auto=compress&cs=tinysrgb&w=1200&h=1500&dpr=2'
+const clownDuoImage =
+  'https://images.pexels.com/photos/18652033/pexels-photo-18652033/free-photo-of-clowns-playing-on-stage.jpeg?auto=compress&cs=tinysrgb&w=1200&h=1500&dpr=2'
+const clownShowImage =
+  'https://images.pexels.com/photos/17165097/pexels-photo-17165097/free-photo-of-man-in-a-colorful-costume-of-a-clown-standing-on-stage.jpeg?auto=compress&cs=tinysrgb&w=1200&h=1500&dpr=2'
+const biccLogo = '/bicc-logo.png'
 
-type ValueItem = {
-  title: string
-  body: string
-  icon: 'joy' | 'culture' | 'inspire' | 'world' | 'community'
-}
-
-type AudienceItem = {
-  title: string
-  body: string
-  icon: 'performer' | 'pro' | 'educator' | 'partner'
-}
-
-type PassItem = {
-  name: string
-  shortLabel: string
-  headline: string
-  description: string
-  badges: string[]
-  includes: string[]
-  accent: 'foundation' | 'mastery'
-  cta: string
-}
-
-type ProgrammeDay = {
-  day: string
-  title: string
-  body: string
-}
-
-type WorkshopPreview = {
-  track: 'Foundation' | 'Mastery'
-  title: string
-  benefit: string
-  accent: 'foundation' | 'mastery'
-}
-
-type MentorPreview = {
-  name: string
-  country: string
-  specialty: string
-  description: string
-  track: 'Foundation' | 'Mastery'
-  accent: 'red' | 'teal' | 'gold' | 'coral'
-}
-
-type ImpactItem = {
-  title: string
-  body: string
-}
-
-type ExploreItem = {
-  title: string
-  body: string
-  art: 'food' | 'islands' | 'culture' | 'coffee' | 'travel'
-}
-
-const values: ValueItem[] = [
-  { title: 'Joyful', body: 'Laughter that heals and connects.', icon: 'joy' },
-  { title: 'Cultural', body: 'Rooted in Borneo, open to the world.', icon: 'culture' },
-  { title: 'Inspiring', body: 'Creativity that grows confidence and craft.', icon: 'inspire' },
-  { title: 'International', body: 'Bringing artists, ideas and hearts together.', icon: 'world' },
-  { title: 'Community', body: 'Building hope through service and friendship.', icon: 'community' },
+const navItems = [
+  { label: 'About', path: '/about' },
+  { label: 'Programme', path: '/programme' },
+  { label: 'Workshops', path: '/workshops' },
+  { label: 'Mentors', path: '/mentors' },
+  { label: 'Passes', path: '/passes' },
+  { label: 'Venue', path: '/venue' },
+  { label: 'Sponsors', path: '/sponsors' },
 ]
 
-const audienceItems: AudienceItem[] = [
-  {
-    title: 'Emerging Performers',
-    body: 'For beginners ready to build confidence, character and stage presence.',
-    icon: 'performer',
-  },
-  {
-    title: 'Professional Clowns & Entertainers',
-    body: 'For performers who want to refine timing, routine structure and audience command.',
-    icon: 'pro',
-  },
-  {
-    title: 'Educators & Community Workers',
-    body: 'For teachers, youth leaders and community teams using creativity to connect with people.',
-    icon: 'educator',
-  },
-  {
-    title: 'Families, Sponsors & Cultural Partners',
-    body: 'For audiences and partners who believe in joyful, meaningful cultural experiences.',
-    icon: 'partner',
-  },
+const values = [
+  { title: 'Joyful', body: 'Joy that connects.' },
+  { title: 'Cultural', body: 'Rooted in Borneo.' },
+  { title: 'Inspiring', body: 'Creative growth.' },
+  { title: 'International', body: 'Global exchange.' },
+  { title: 'Community', body: 'Hope through service.' },
 ]
 
-const passes: PassItem[] = [
+const passes = [
   {
     name: 'Foundation Track Pass',
-    shortLabel: 'Foundation Workshop Pass',
+    price: 'US$130',
+    label: 'Foundation Workshop Pass',
     headline: 'Build Your Professional Foundation',
-    description:
-      'Designed for beginners, emerging performers, educators, youth leaders and entertainers who want a stronger foundation in clown performance.',
+    body:
+      'Designed for beginners, emerging performers, educators, youth leaders and entertainers who want strong clowning fundamentals.',
     badges: ['No prior experience required', 'Certificate of Participation awarded'],
     includes: [
       'Physical Comedy Fundamentals',
@@ -108,9 +48,10 @@ const passes: PassItem[] = [
   },
   {
     name: 'Mastery Track Pass',
-    shortLabel: 'Mastery Workshop Pass',
+    price: 'US$130',
+    label: 'Mastery Workshop Pass',
     headline: 'Elevate Your Stage Performance',
-    description:
+    body:
       'Designed for experienced performers ready to sharpen technique, stage confidence and professional performance direction.',
     badges: ['Prior stage experience recommended', 'Certificate of Completion awarded'],
     includes: [
@@ -126,16 +67,16 @@ const passes: PassItem[] = [
   },
 ]
 
-const programmeDays: ProgrammeDay[] = [
+const programme = [
   {
     day: 'Day 1',
     title: 'Arrival & Opening',
-    body: 'Registration, welcome reception, orientation, opening ceremony and early creative connections.',
+    body: 'Registration, welcome reception, orientation, opening ceremony and creative connections.',
   },
   {
     day: 'Day 2',
     title: 'Workshops & Exchange',
-    body: 'Full-day training, mentorship, workshop tracks, creative exchange and evening performance activity.',
+    body: 'Full-day training, mentorship, workshop tracks, creative exchange and performance activity.',
   },
   {
     day: 'Day 3',
@@ -144,138 +85,275 @@ const programmeDays: ProgrammeDay[] = [
   },
 ]
 
-const workshopPreviews: WorkshopPreview[] = [
+const workshopHighlights = [
   {
     track: 'Foundation',
     title: 'Physical Comedy Fundamentals',
-    benefit: 'Build body awareness, timing and stage confidence from the ground up.',
+    body: 'Build movement clarity, rhythm and body awareness for live performance.',
     accent: 'foundation',
   },
   {
     track: 'Foundation',
     title: 'Character & Persona Building',
-    benefit: 'Discover a stronger stage identity and more playful audience connection.',
+    body: 'Develop a stage identity that feels clear, warm and memorable.',
     accent: 'foundation',
   },
   {
     track: 'Foundation',
     title: 'Balloon Sculpting',
-    benefit: 'Learn practical visual engagement skills for family-facing live performance.',
+    body: 'Learn interactive crowd-friendly skills that add playfulness to performance.',
     accent: 'foundation',
   },
   {
     track: 'Mastery',
     title: 'Advanced Stage Craft',
-    benefit: 'Refine pacing, structure and presence for stronger professional stage command.',
+    body: 'Sharpen timing, transitions and stronger performance structure.',
     accent: 'mastery',
   },
   {
     track: 'Mastery',
     title: 'Signature Performance',
-    benefit: 'Shape a more memorable act with stronger theatrical identity and rhythm.',
+    body: 'Refine material that better represents your professional performance voice.',
     accent: 'mastery',
   },
   {
     track: 'Mastery',
     title: 'Showcase & Mentorship',
-    benefit: 'Receive critique, direction and refinement support for your developing act.',
+    body: 'Receive critique, direction and support shaped for experienced performers.',
     accent: 'mastery',
   },
 ]
 
-const mentors: MentorPreview[] = [
+const mentorCards = [
   {
-    name: 'International Mentor To Be Announced',
-    country: 'Global Faculty',
-    specialty: 'Clown Performance & Stage Presence',
-    description: 'A featured international mentor profile will be announced with the official workshop release.',
-    track: 'Mastery',
-    accent: 'red',
+    title: 'International Guest Mentors',
+    body: 'Official mentor announcements will be released as the faculty line-up is confirmed.',
   },
   {
-    name: 'Regional Teaching Artist',
-    country: 'Malaysia / Borneo',
-    specialty: 'Character Building & Performance Foundations',
-    description: 'This profile space is reserved for a teaching artist supporting emerging performers and educators.',
-    track: 'Foundation',
-    accent: 'teal',
+    title: 'Performance-Led Teaching',
+    body: 'The mentor team is being curated around clowning, stage craft, education and creative leadership.',
   },
   {
-    name: 'Creative Exchange Mentor',
-    country: 'International Faculty',
-    specialty: 'Community Performance & Audience Connection',
-    description: 'An invited mentor focused on creativity, exchange, and practical joy in live performance.',
-    track: 'Foundation',
-    accent: 'gold',
-  },
-  {
-    name: 'Showcase Development Mentor',
-    country: 'Guest Faculty',
-    specialty: 'Stage Craft, Feedback & Professional Growth',
-    description: 'A specialist guiding performers who want stronger critique, polish and professional direction.',
-    track: 'Mastery',
-    accent: 'coral',
+    title: 'Regional & Global Exchange',
+    body: 'BICC will bring together voices from Borneo, Malaysia and the wider international clown community.',
   },
 ]
 
-const impactItems: ImpactItem[] = [
+const mentorPreviewCards = [
   {
-    title: 'Cultural Exchange',
-    body: 'Bring together local heritage, international artists and meaningful creative dialogue in one shared gathering.',
+    title: 'International Mentor',
+    meta: 'Physical Comedy',
+    track: 'Foundation Track',
+    note: 'Global Faculty',
+    image: clownHeroImage,
   },
   {
-    title: 'Hospital Clowning & Outreach',
-    body: 'Highlight the role of laughter, presence and creative care in community-facing human connection work.',
+    title: 'Regional Teaching Artist',
+    meta: 'Foundation Track',
+    track: 'Creative Learning',
+    note: 'Sabah / Malaysia',
+    image: clownStageImage,
   },
   {
-    title: 'Creative Community Building',
-    body: 'Support friendships, collaboration and shared growth between performers, educators and partners.',
+    title: 'Creative Exchange Mentor',
+    meta: 'Performance & Community',
+    track: 'Exchange Lab',
+    note: 'Cross-Cultural Practice',
+    image: clownDuoImage,
+  },
+  {
+    title: 'Showcase Development Mentor',
+    meta: 'Mastery Track',
+    track: 'Stage Direction',
+    note: 'Performance Growth',
+    image: clownShowImage,
   },
 ]
 
-const exploreItems: ExploreItem[] = [
+const storyFeatures = [
   {
-    title: 'Local Food',
-    body: 'Enjoy flavours, markets and family-friendly food experiences unique to Tawau and Sabah.',
-    art: 'food',
+    title: 'Professional Workshops',
+    body: 'Train with structured Foundation and Mastery tracks.',
   },
   {
-    title: 'Nature & Islands',
-    body: 'Discover landscapes, sea air and day-trip inspiration beyond the convention programme.',
-    art: 'islands',
+    title: 'Performance Showcase',
+    body: 'Celebrate clowning as a serious performing art.',
   },
   {
-    title: 'Culture & Community',
-    body: 'Experience local hospitality, story, craft and shared community warmth while you gather.',
-    art: 'culture',
-  },
-  {
-    title: 'Coffee, Cocoa & Local Taste',
-    body: 'Explore the textures, tastes and agricultural identity that make Tawau memorable.',
-    art: 'coffee',
-  },
-  {
-    title: 'Travel Tips',
-    body: 'Plan your stay with clearer arrival, movement and venue guidance for a smooth convention journey.',
-    art: 'travel',
+    title: 'Community & Cultural Exchange',
+    body: 'Connect through laughter, culture and shared humanity.',
   },
 ]
+
+const borneoCards = [
+  {
+    title: 'Local Taste',
+    body: 'Food, coffee and Sabah flavours.',
+    label: 'Tawau Food & Coffee',
+  },
+  {
+    title: 'Nature & Culture',
+    body: 'A warm destination shaped by people, stories and place.',
+    label: 'Culture & Coastal Warmth',
+  },
+  {
+    title: 'Travel Guide',
+    body: 'Plan your stay with venue, hotel and visitor information.',
+    label: 'Venue & Visitor Guide',
+  },
+]
+
+const sponsorLogos = ['Arts & Culture', 'Tourism Sabah', 'Education Partner', 'Community Impact', 'Global Support']
+
+const routeContent = {
+  '/about': {
+    eyebrow: 'About BICC 2026',
+    title: 'A convention built around laughter, craft, culture and human connection.',
+    intro:
+      'BICC 2026 is designed as a professional clowning convention with a warm festival spirit, bringing together performance training, cultural exchange and meaningful community engagement in Borneo.',
+    cards: [
+      {
+        title: 'Professional Convention',
+        body: 'Structured learning, clear workshop tracks and international performance standards.',
+      },
+      {
+        title: 'Cultural Gathering',
+        body: 'A joyful event rooted in Tawau and Sabah, with room for local identity and international dialogue.',
+      },
+      {
+        title: 'Human Impact',
+        body: 'Clowning here is treated as both an art form and a tool for connection, hope and care.',
+      },
+    ],
+    asideTitle: 'Why it matters',
+    asideBody:
+      'BICC is not meant to feel like a generic entertainment event. It is positioned as an official gathering where performers, educators and communities can grow together.',
+    primaryCta: { label: 'View Passes', href: '/passes' },
+    secondaryCta: { label: 'Explore Programme', href: '/programme' },
+  },
+  '/programme': {
+    eyebrow: 'Programme',
+    title: 'A three-day convention journey with space for arrival, training and celebration.',
+    intro:
+      'The programme is being shaped to balance workshops, orientation, community exchange and showcase moments so delegates can learn, connect and perform with purpose.',
+    cards: programme,
+    asideTitle: 'Programme note',
+    asideBody:
+      'Detailed timeslots, sessions and featured moments will be announced in the full programme release.',
+    primaryCta: { label: 'View Passes', href: '/passes' },
+    secondaryCta: { label: 'About BICC', href: '/about' },
+  },
+  '/workshops': {
+    eyebrow: 'Workshops',
+    title: 'Training designed for real performance growth at two different experience levels.',
+    intro:
+      'BICC separates its workshop offer into two clear tracks so participants can choose a path that fits their current experience and learning goals.',
+    cards: workshopHighlights.map((item) => ({
+      title: `${item.track}: ${item.title}`,
+      body: item.body,
+    })),
+    asideTitle: 'Track structure',
+    asideBody:
+      'Foundation is for confidence and fundamentals. Mastery is for experienced performers seeking stronger critique, craft and stage direction.',
+    primaryCta: { label: 'Compare Passes', href: '/passes' },
+    secondaryCta: { label: 'View Programme', href: '/programme' },
+  },
+  '/mentors': {
+    eyebrow: 'Mentors',
+    title: 'Learning shaped by international artists, educators and performance mentors.',
+    intro:
+      'The BICC faculty is being built to support both artistic excellence and approachable teaching, with space for international exchange and regional leadership.',
+    cards: mentorCards,
+    asideTitle: 'Announcement status',
+    asideBody:
+      'Confirmed mentor names, countries and specialties will be published as soon as invitations and schedules are finalized.',
+    primaryCta: { label: 'Explore Workshops', href: '/workshops' },
+    secondaryCta: { label: 'Get Pass', href: '/passes' },
+  },
+  '/passes': {
+    eyebrow: 'Passes',
+    title: 'Two tracks. One price. A clearer way to choose your growth path.',
+    intro:
+      'BICC keeps the pass structure simple on purpose. Visitors should be able to decide quickly whether they need a foundation-building experience or a more advanced performance path.',
+    cards: [
+      {
+        title: 'Foundation Track Pass — US$130',
+        body: 'Best for beginners, emerging performers and educators building confidence, technique and core clowning fundamentals.',
+      },
+      {
+        title: 'Mastery Track Pass — US$130',
+        body: 'Best for experienced performers who want stronger stage craft, sharper structure and more professional critique.',
+      },
+      {
+        title: 'Simple Registration Decision',
+        body: 'No crowded ticket menu, no confusing tiers. Just two focused learning paths designed around actual participant needs.',
+      },
+    ],
+    asideTitle: 'Pass note',
+    asideBody:
+      'Both passes include access to your selected workshop track and a certificate aligned with that learning path.',
+    primaryCta: { label: 'Get Foundation Pass', href: '/passes' },
+    secondaryCta: { label: 'Get Mastery Pass', href: '/passes' },
+  },
+  '/venue': {
+    eyebrow: 'Venue & Travel',
+    title: 'Gather in Tawau, Sabah and experience Borneo as part of the convention story.',
+    intro:
+      'The venue page will help delegates understand where BICC takes place, how to plan travel and why the local setting matters to the convention atmosphere.',
+    cards: [
+      {
+        title: 'Tawau, Sabah, Malaysia',
+        body: 'A host city that brings together cultural warmth, local hospitality and access to distinctive Borneo experiences.',
+      },
+      {
+        title: 'Travel Planning',
+        body: 'Guidance for arrival, accommodation and practical venue logistics will be published here.',
+      },
+      {
+        title: 'Local Experience',
+        body: 'Food, nature, community and regional identity are intended to be part of the delegate journey, not just background.',
+      },
+    ],
+    asideTitle: 'Travel note',
+    asideBody:
+      'Venue details, maps and partner hotel information will be added as the event logistics are finalized.',
+    primaryCta: { label: 'View Programme', href: '/programme' },
+    secondaryCta: { label: 'Get Pass', href: '/passes' },
+  },
+  '/sponsors': {
+    eyebrow: 'Sponsors & Partners',
+    title: 'Partner with a joyful international movement rooted in performance, culture and community.',
+    intro:
+      'BICC offers sponsors and cultural partners a meaningful platform connected to education, tourism, live performance and social impact.',
+    cards: [
+      {
+        title: 'Brand Visibility',
+        body: 'Reach performers, educators, families, creative leaders and international delegates in one official event platform.',
+      },
+      {
+        title: 'Cultural Alignment',
+        body: 'Support an event that celebrates creativity, cross-cultural connection and hopeful community storytelling.',
+      },
+      {
+        title: 'Meaningful Partnership',
+        body: 'Build association with a convention that is warm enough for families and professional enough for serious collaborators.',
+      },
+    ],
+    asideTitle: 'Sponsorship deck',
+    asideBody:
+      'Detailed sponsor packages, benefits and deck downloads will be added here once the official partnership materials are ready.',
+    primaryCta: { label: 'Contact BICC', href: 'mailto:hello@bicc2026.com' },
+    secondaryCta: { label: 'View Venue', href: '/venue' },
+  },
+} as const
+
+type RouteKey = keyof typeof routeContent
 
 function RedNoseIcon({ large = false }: { large?: boolean }) {
   return (
     <span aria-hidden="true" className={`red-nose-icon${large ? ' large' : ''}`}>
       <span className="red-nose-dot" />
     </span>
-  )
-}
-
-function HeaderLogo() {
-  return (
-    <div className="brand-logo-line">
-      <span>BICC</span>
-      <RedNoseIcon />
-      <span>2026</span>
-    </div>
   )
 }
 
@@ -301,476 +379,549 @@ function PatternCorner({ side }: { side: 'left' | 'right' }) {
   )
 }
 
-function DecorativeIcon({ icon }: { icon: ValueItem['icon'] | AudienceItem['icon'] }) {
-  return <span aria-hidden="true" className={`decorative-icon ${icon}`} />
+function normalizePath(pathname: string) {
+  if (!pathname || pathname === '/') return '/'
+  return pathname.replace(/\/+$/, '')
 }
 
-function VisualPlaceholder() {
+function renderPassCards() {
   return (
-    <div className="hero-visual-card">
-      <div className="hero-illustration">
-        <span className="confetti-star star-a" />
-        <span className="confetti-star star-b" />
-        <span className="confetti-dot dot-a" />
-        <span className="confetti-dot dot-b" />
-        <div className="clown-figure">
-          <div className="clown-hat" />
-          <div className="clown-face">
-            <span className="clown-eyes" />
-            <RedNoseIcon />
-            <span className="clown-smile" />
+    <div className="passes-grid">
+      {passes.map((pass) => (
+        <article className={`pass-card ${pass.accent}`} key={pass.name}>
+          <span className={`track-label ${pass.accent}`}>{pass.label}</span>
+          <h3>{pass.name}</h3>
+          <p className="pass-price">{pass.price}</p>
+          <strong className="pass-headline">{pass.headline}</strong>
+          <p className="pass-description">{pass.body}</p>
+          <div className="pass-badges">
+            {pass.badges.map((badge) => (
+              <span key={badge}>{badge}</span>
+            ))}
           </div>
-          <div className="clown-costume" />
-        </div>
-        <div className="borneo-hall" />
-        <div className="hero-palm" />
-        <SmileDoodle />
-        <PatternCorner side="right" />
-      </div>
-      <p className="hero-caption">Official Convention Magazine & Delegate Handbook</p>
+          <ul className="feature-list">
+            {pass.includes.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+          <a className="primary-btn wide-btn" href="/passes">
+            {pass.cta}
+          </a>
+        </article>
+      ))}
     </div>
   )
 }
 
-function MentorPortrait({ accent }: { accent: MentorPreview['accent'] }) {
+function renderProgrammeCards() {
   return (
-    <div className={`mentor-portrait ${accent}`}>
-      <div className="mentor-portrait-ring" />
-      <span>MN</span>
+    <div className="programme-grid">
+      {programme.map((item) => (
+        <article className="programme-card" key={item.day}>
+          <span className="track-label red">{item.day}</span>
+          <h3>{item.title}</h3>
+          <p>{item.body}</p>
+        </article>
+      ))}
     </div>
   )
 }
 
-function ExploreArt({ art }: { art: ExploreItem['art'] }) {
-  return <div aria-hidden="true" className={`explore-art ${art}`} />
+function HomePage() {
+  return (
+    <main>
+      <section className="hero-section">
+        <div className="hero-copy">
+          <div className="hero-eyebrow-row">
+            <img alt="BICC 2026 official logo" className="hero-mini-logo" src={biccLogo} />
+            <p className="hero-eyebrow">Borneo International Clown Convention 2026</p>
+            <span className="hero-edition-tag">International Edition</span>
+          </div>
+          <div className="hero-title-block">
+            <p className="hero-monogram">BICC 2026</p>
+            <h1>
+              Where Laughter Becomes <span className="hero-highlight">Legacy</span>
+            </h1>
+          </div>
+          <p className="hero-subheadline">
+            A 3-day international gathering for clown artists, performers, educators and communities in Borneo.
+          </p>
+          <p className="hero-mini-note">Professional training. Cultural exchange. Real stage energy.</p>
+
+          <div className="event-badges">
+            <span>Aug 3–5, 2026</span>
+            <span>Tawau, Sabah</span>
+            <span>2 Workshop Tracks</span>
+            <span>US$130 Pass</span>
+          </div>
+
+          <div className="hero-actions">
+            <a className="primary-btn" href="/passes">
+              Get Your Pass
+            </a>
+            <a className="secondary-btn" href="/programme">
+              View Programme
+            </a>
+          </div>
+          <a className="hero-compare-link text-link" href="/passes">
+            Compare Foundation & Mastery Tracks
+          </a>
+        </div>
+
+        <div className="hero-collage">
+          <div className="hero-photo-frame hero-photo-main">
+            <img alt="Joyful professional clown performer" src={clownHeroImage} />
+            <div className="hero-logo-seal">
+              <img alt="BICC logo seal" src={biccLogo} />
+            </div>
+            <div className="hero-image-badge">
+              <strong>Official Convention Magazine</strong>
+              <span>Delegate Handbook 2026</span>
+            </div>
+            <SmileDoodle />
+            <PatternCorner side="right" />
+          </div>
+          <article className="floating-photo training-shot">
+            <img alt="Clown workshop training moment" src={clownStageImage} />
+            <span>Workshop / Training</span>
+          </article>
+          <article className="floating-photo audience-shot">
+            <img alt="Clown performance and audience moment" src={clownDuoImage} />
+            <span>Performance / Audience</span>
+          </article>
+          <p className="hero-caption">Official Convention Magazine & Delegate Handbook</p>
+        </div>
+      </section>
+
+      <section className="value-strip">
+        {values.map((item) => (
+          <article className="value-card" key={item.title}>
+            <RedNoseIcon />
+            <strong>{item.title}</strong>
+            <p>{item.body}</p>
+          </article>
+        ))}
+      </section>
+
+      <section className="editorial-section">
+        <div className="story-layout">
+          <div className="story-photo-frame">
+            <img alt="Clown performer or mentor on stage" src={clownShowImage} />
+            <span className="story-photo-tag">Performance / Culture / Connection</span>
+          </div>
+
+          <div className="story-copy">
+            <p className="section-kicker">What Is BICC?</p>
+            <h2>A Festival of Performance, Culture and Human Connection.</h2>
+            <p className="section-intro">
+              BICC brings together workshops, stage performance, cultural exchange and community outreach in one joyful convention experience.
+            </p>
+
+            <div className="story-points">
+              {storyFeatures.map((item) => (
+                <article className="story-point" key={item.title}>
+                  <RedNoseIcon />
+                  <div>
+                    <h3>{item.title}</h3>
+                    <p>{item.body}</p>
+                  </div>
+                </article>
+              ))}
+            </div>
+
+            <div className="section-cta left">
+              <a className="text-link" href="/about">
+                Learn About BICC
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="passes-section editorial-section">
+        <div className="section-head with-copy">
+          <div>
+            <p className="section-kicker">Choose Your Track</p>
+            <h2>Two paths. One price. Built for different stages of growth.</h2>
+          </div>
+          <p className="section-intro">A cleaner decision for beginners, emerging performers and experienced stage artists.</p>
+        </div>
+
+        <div className="track-comparison">
+          {passes.map((pass, index) => (
+            <article className={`track-card ${pass.accent}`} key={pass.name}>
+              <div className="track-card-media">
+                <img
+                  alt={pass.name}
+                  src={index === 0 ? clownStageImage : clownDuoImage}
+                />
+              </div>
+              <div className="track-card-copy">
+                <span className={`track-label ${pass.accent}`}>{pass.name}</span>
+                <p className="track-audience">{index === 0 ? 'For beginners and emerging performers.' : 'For experienced performers.'}</p>
+                <p className="pass-price">{pass.price}</p>
+                <p className="track-summary">{index === 0 ? 'Build confidence, character and core performance skills.' : 'Refine your stage presence, timing and professional act.'}</p>
+                <div className="track-chip-list">
+                  {pass.includes.map((item) => (
+                    <span className="track-chip" key={item}>
+                      {item}
+                    </span>
+                  ))}
+                </div>
+                <a className="primary-btn wide-btn" href="/passes">
+                  {pass.cta}
+                </a>
+              </div>
+            </article>
+          ))}
+        </div>
+
+        <div className="pass-helper">
+          <p>Not sure which track fits you? Compare both tracks.</p>
+          <a className="text-link" href="/passes">
+            Compare Tracks
+          </a>
+        </div>
+      </section>
+
+      <section className="editorial-section programme-strip">
+        <div className="section-head with-copy">
+          <div>
+            <p className="section-kicker">Programme Snapshot</p>
+            <h2>3 Days. One Shared Journey.</h2>
+          </div>
+          <p className="section-intro">Fast to scan, easy to understand and built around a shared convention rhythm.</p>
+        </div>
+
+        <div className="timeline-strip">
+          {programme.map((item) => (
+            <article className="timeline-card" key={item.day}>
+              <span className="timeline-dot" />
+              <span className="track-label red">{item.day}</span>
+              <h3>{item.title}</h3>
+              <p>{item.body}</p>
+            </article>
+          ))}
+        </div>
+
+        <div className="section-cta">
+          <a className="secondary-btn" href="/programme">
+            View Programme
+          </a>
+        </div>
+      </section>
+
+      <section className="editorial-section">
+        <div className="section-head with-copy">
+          <div>
+            <p className="section-kicker">Mentors & Performers</p>
+            <h2>Learn From Artists Who Live The Stage.</h2>
+          </div>
+          <p className="section-intro">Mentors, performers and creative leaders from the world of clowning and performance.</p>
+        </div>
+
+        <div className="mentor-preview-grid">
+          {mentorPreviewCards.map((item) => (
+            <article className="mentor-preview-card" key={item.title}>
+              <div className="mentor-preview-image">
+                <img alt={item.title} src={item.image} />
+              </div>
+              <div className="mentor-preview-copy">
+                <span className="track-label red">{item.track}</span>
+                <h3>{item.title}</h3>
+                <p>{item.meta}</p>
+                <small>{item.note}</small>
+              </div>
+            </article>
+          ))}
+        </div>
+
+        <div className="section-cta">
+          <a className="secondary-btn" href="/mentors">
+            View Speakers
+          </a>
+        </div>
+      </section>
+
+      <section className="editorial-section">
+        <div className="section-head with-copy">
+          <div>
+            <p className="section-kicker">Borneo Experience</p>
+            <h2>Gather in Borneo.</h2>
+          </div>
+          <p className="section-intro">Make Tawau / Sabah part of the convention experience.</p>
+        </div>
+
+        <div className="borneo-grid">
+          {borneoCards.map((item) => (
+            <article className="borneo-card" key={item.title}>
+              <div className="borneo-image-placeholder">
+                <span>{item.label}</span>
+              </div>
+              <div className="borneo-copy">
+                <h3>{item.title}</h3>
+                <p>{item.body}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+
+        <div className="section-cta">
+          <a className="secondary-btn" href="/venue">
+            View Venue & Travel
+          </a>
+        </div>
+      </section>
+
+      <section className="editorial-section sponsor-strip">
+        <div className="section-head with-copy">
+          <div>
+            <p className="section-kicker">Sponsors</p>
+            <h2>Partner With A Joyful International Movement.</h2>
+          </div>
+          <p className="section-intro">BICC connects performance, education, tourism, culture and community impact.</p>
+        </div>
+
+        <div className="logo-row" aria-label="Partner logo placeholders">
+          {sponsorLogos.map((item) => (
+            <span className="logo-pill" key={item}>
+              {item}
+            </span>
+          ))}
+        </div>
+
+        <div className="section-cta sponsor-actions">
+          <a className="primary-btn" href="/sponsors">
+            Become a Sponsor
+          </a>
+          <a className="secondary-btn" href="/sponsors">
+            Download Sponsorship Deck
+          </a>
+        </div>
+      </section>
+
+      <section className="final-cta">
+        <div className="final-cta-copy">
+          <p className="section-kicker">Final CTA</p>
+          <h2>Ready To Join BICC 2026?</h2>
+          <p>Choose your workshop track and be part of a joyful international convention in Borneo.</p>
+          <div className="final-cta-actions">
+            <a className="primary-btn" href="/passes">
+              Get Foundation Pass
+            </a>
+            <a className="secondary-btn" href="/passes">
+              Get Mastery Pass
+            </a>
+            <a className="secondary-btn" href="/programme">
+              View Programme
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+  )
+}
+
+function InteriorPage({ path }: { path: RouteKey }) {
+  const page = routeContent[path]
+
+  return (
+    <main className="interior-main">
+      <section className="page-hero">
+        <div className="page-hero-copy">
+          <p className="section-kicker">{page.eyebrow}</p>
+          <h1 className="page-title">{page.title}</h1>
+          <p className="page-intro">{page.intro}</p>
+          <div className="page-actions">
+            <a className="primary-btn" href={page.primaryCta.href}>
+              {page.primaryCta.label}
+            </a>
+            <a className="secondary-btn" href={page.secondaryCta.href}>
+              {page.secondaryCta.label}
+            </a>
+          </div>
+        </div>
+
+        <aside className="page-aside">
+          <SmileDoodle />
+          <PatternCorner side="right" />
+          <p className="page-aside-kicker">Editorial Note</p>
+          <h2>{page.asideTitle}</h2>
+          <p>{page.asideBody}</p>
+        </aside>
+      </section>
+
+      <section className="editorial-section">
+        <div className="section-head single">
+          <div>
+            <p className="section-kicker">Page Overview</p>
+            <h2>Focused content for this part of the BICC site.</h2>
+          </div>
+        </div>
+
+        <div className="page-card-grid">
+          {page.cards.map((card) => (
+            <article className="page-card" key={card.title}>
+              <RedNoseIcon />
+              <h3>{card.title}</h3>
+              <p>{card.body}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      {path === '/passes' ? (
+        <section className="editorial-section">
+          <div className="section-head single">
+            <div>
+              <p className="section-kicker">Pass Comparison</p>
+              <h2>The two pass options in full.</h2>
+            </div>
+          </div>
+          {renderPassCards()}
+        </section>
+      ) : null}
+
+      {path === '/programme' ? (
+        <section className="editorial-section">
+          <div className="section-head single">
+            <div>
+              <p className="section-kicker">Programme Flow</p>
+              <h2>The convention journey at a glance.</h2>
+            </div>
+          </div>
+          {renderProgrammeCards()}
+        </section>
+      ) : null}
+
+      {path === '/workshops' ? (
+        <section className="editorial-section">
+          <div className="section-head single">
+            <div>
+              <p className="section-kicker">Workshop Preview</p>
+              <h2>Examples of the learning focus across both tracks.</h2>
+            </div>
+          </div>
+          <div className="page-card-grid workshop-page-grid">
+            {workshopHighlights.map((item) => (
+              <article className={`page-card accent-${item.accent}`} key={item.title}>
+                <span className={`track-label ${item.accent}`}>{item.track}</span>
+                <h3>{item.title}</h3>
+                <p>{item.body}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+      ) : null}
+
+      <section className="final-cta">
+        <div className="final-cta-copy">
+          <p className="section-kicker">Next Step</p>
+          <h2>Return to the essentials or continue toward registration.</h2>
+          <p>
+            BICC 2026 is being shaped with a cleaner structure so each page can carry its own job while the homepage stays concise and conversion-focused.
+          </p>
+          <div className="final-cta-actions">
+            <a className="secondary-btn" href="/">
+              Back To Home
+            </a>
+            <a className="primary-btn" href="/passes">
+              Get Pass
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+  )
+}
+
+function Footer() {
+  return (
+    <footer className="site-footer">
+      <PatternCorner side="left" />
+      <PatternCorner side="right" />
+
+      <div className="footer-brand">
+        <h3>
+          Wear the <span>Red Nose.</span>
+          <br />
+          Share the Hope.
+        </h3>
+        <p>Official home of Borneo International Clown Convention 2026.</p>
+        <SmileDoodle />
+      </div>
+
+      <div className="footer-column">
+        <strong>BICC 2026</strong>
+        <a href="/about">About</a>
+        <a href="/programme">Programme</a>
+        <a href="/workshops">Workshops</a>
+      </div>
+
+      <div className="footer-column">
+        <strong>Passes</strong>
+        <a href="/passes">Foundation Track Pass</a>
+        <a href="/passes">Mastery Track Pass</a>
+        <a href="/venue">Venue & Travel</a>
+      </div>
+
+      <div className="footer-column">
+        <strong>Sponsors</strong>
+        <a href="/sponsors">Partners</a>
+        <a href="mailto:hello@bicc2026.com">Contact</a>
+        <div className="social-row" aria-label="Social links">
+          <span>f</span>
+          <span>◎</span>
+          <span>▶</span>
+          <span>♪</span>
+        </div>
+      </div>
+
+      <div className="footer-meta">
+        <span>hello@bicc2026.com</span>
+        <span>© 2026 Borneo International Clown Convention. All rights reserved.</span>
+      </div>
+    </footer>
+  )
 }
 
 function App() {
-  const [menuOpen, setMenuOpen] = useState(false)
+  const currentPath = normalizePath(window.location.pathname)
+  const isHome = currentPath === '/'
+  const routePath = isHome ? null : (currentPath in routeContent ? (currentPath as RouteKey) : null)
 
   return (
     <div className="page-shell">
-      <div aria-hidden="true" className="confetti-layer">
-        {Array.from({ length: 16 }).map((_, index) => (
-          <span className={`floating-confetti confetti-${(index % 6) + 1}`} key={index} />
-        ))}
-      </div>
-
       <header className="site-header">
-        <a className="brand-lockup" href="#top">
-          <HeaderLogo />
-          <small>Borneo International Clown Convention 2026</small>
+        <a className="brand-lockup" href="/">
+          <img alt="BICC 2026 logo" className="brand-logo-image" src={biccLogo} />
+          <div className="brand-text-lockup">
+            <span className="brand-site-tag">Official Site</span>
+            <div className="brand-logo-line">
+              <span>BICC</span>
+              <RedNoseIcon />
+              <span>2026</span>
+            </div>
+            <small>Borneo International Clown Convention 2026</small>
+          </div>
         </a>
 
-        <button
-          aria-expanded={menuOpen}
-          aria-label="Toggle menu"
-          className="menu-toggle"
-          onClick={() => setMenuOpen((open) => !open)}
-          type="button"
-        >
-          <span />
-          <span />
-          <span />
-        </button>
-
-        <nav className={`main-nav${menuOpen ? ' open' : ''}`}>
-          <a href="#about" onClick={() => setMenuOpen(false)}>
-            About
-          </a>
-          <a href="#programme" onClick={() => setMenuOpen(false)}>
-            Programme
-          </a>
-          <a href="#workshops" onClick={() => setMenuOpen(false)}>
-            Workshops
-          </a>
-          <a href="#mentors" onClick={() => setMenuOpen(false)}>
-            Mentors
-          </a>
-          <a href="#passes" onClick={() => setMenuOpen(false)}>
-            Passes
-          </a>
-          <a href="#venue" onClick={() => setMenuOpen(false)}>
-            Venue
-          </a>
-          <a href="#sponsors" onClick={() => setMenuOpen(false)}>
-            Sponsors
-          </a>
+        <nav className="main-nav">
+          {navItems.map((item) => (
+            <a className={currentPath === item.path ? 'active' : ''} href={item.path} key={item.path}>
+              {item.label}
+            </a>
+          ))}
         </nav>
 
-        <a className="primary-btn header-cta" href="#passes">
+        <a className="primary-btn header-cta" href="/passes">
           Get Pass
         </a>
       </header>
 
-      <main id="top">
-        <section className="hero-section">
-          <div className="hero-copy">
-            <p className="hero-eyebrow">Borneo International Clown Convention 2026</p>
-            <h1>Where Laughter Becomes Legacy</h1>
-            <p className="hero-subheadline">
-              A 3-day international clowning, performance, training and cultural exchange gathering in Borneo.
-            </p>
-            <p className="hero-body">
-              Join performers, educators, artists, mentors and communities for a joyful convention built around professional training, creative exchange, cultural connection and the healing power of laughter.
-            </p>
+      {isHome ? <HomePage /> : routePath ? <InteriorPage path={routePath} /> : <InteriorPage path="/about" />}
 
-            <div className="event-badges">
-              <span>Aug 3–5, 2026</span>
-              <span>Tawau, Sabah, Malaysia</span>
-              <span>Workshop Tracks Available</span>
-              <span>International Mentors</span>
-            </div>
-
-            <div className="hero-actions">
-              <a className="primary-btn" href="#passes">
-                Get Your Pass
-              </a>
-              <a className="secondary-btn" href="#programme">
-                View Programme
-              </a>
-              <a className="text-link" href="#passes">
-                Compare Foundation & Mastery Tracks
-              </a>
-            </div>
-          </div>
-
-          <VisualPlaceholder />
-        </section>
-
-        <section className="value-grid">
-          {values.map((item) => (
-            <article className="value-card" key={item.title}>
-              <DecorativeIcon icon={item.icon} />
-              <strong>{item.title}</strong>
-              <p>{item.body}</p>
-            </article>
-          ))}
-        </section>
-
-        <section className="editorial-section" id="about">
-          <div className="section-head with-copy">
-            <div>
-              <p className="section-kicker">What Is BICC?</p>
-              <h2>Professional training, cultural exchange, and joyful community in one bright international gathering.</h2>
-            </div>
-            <p className="section-intro">
-              BICC 2026 is an international gathering for clown artists, performers, educators, entertainers, community workers and creative leaders. It brings together structured training, performance development, cultural exchange, showcase experiences and community outreach in one joyful convention in Borneo.
-            </p>
-          </div>
-
-          <div className="triple-card-grid">
-            <article className="story-card">
-              <span className="tag-pill">Professional Training</span>
-              <h3>Structured workshop tracks for beginners and experienced performers.</h3>
-            </article>
-            <article className="story-card">
-              <span className="tag-pill teal">Creative Exchange</span>
-              <h3>Meet international mentors, artists, educators and performers.</h3>
-            </article>
-            <article className="story-card">
-              <span className="tag-pill coral">Community Impact</span>
-              <h3>Celebrate clowning as a craft that brings joy, connection and healing.</h3>
-            </article>
-          </div>
-
-          <div className="section-cta left">
-            <a className="text-link" href="#about">
-              Learn About BICC
-            </a>
-          </div>
-        </section>
-
-        <section className="editorial-section">
-          <div className="section-head single">
-            <div>
-              <p className="section-kicker">Who Is This For?</p>
-              <h2>Different journeys. Shared joy. One convention.</h2>
-            </div>
-          </div>
-
-          <div className="audience-grid">
-            {audienceItems.map((item) => (
-              <article className="audience-card" key={item.title}>
-                <DecorativeIcon icon={item.icon} />
-                <h3>{item.title}</h3>
-                <p>{item.body}</p>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        <section className="passes-section editorial-section" id="passes">
-          <div className="section-head with-copy">
-            <div>
-              <p className="section-kicker">Choose Your Workshop Track</p>
-              <h2>Two professional training paths. One price. Different growth journey.</h2>
-            </div>
-            <p className="section-intro">
-              Choose the path that best fits your current experience and the kind of performance growth you want to focus on.
-            </p>
-          </div>
-
-          <div className="passes-grid">
-            {passes.map((pass) => (
-              <article className={`pass-card ${pass.accent}`} key={pass.name}>
-                <span className={`track-label ${pass.accent}`}>{pass.shortLabel}</span>
-                <h3>{pass.name}</h3>
-                <p className="pass-price">US$130</p>
-                <strong className="pass-headline">{pass.headline}</strong>
-                <p className="pass-description">{pass.description}</p>
-                <div className="pass-badges">
-                  {pass.badges.map((badge) => (
-                    <span key={badge}>{badge}</span>
-                  ))}
-                </div>
-                <ul className="feature-list">
-                  {pass.includes.map((item) => (
-                    <li key={item}>{item}</li>
-                  ))}
-                </ul>
-                <a className="primary-btn wide-btn" href="#passes">
-                  {pass.cta}
-                </a>
-              </article>
-            ))}
-          </div>
-
-          <div className="pass-helper">
-            <p>
-              <strong>Not sure which track is right for you?</strong>
-            </p>
-            <p>Choose Foundation if you are building confidence, technique and core performance fundamentals.</p>
-            <p>Choose Mastery if you already perform and want stronger stage craft, critique and professional direction.</p>
-            <a className="text-link" href="#passes">
-              Compare Tracks
-            </a>
-          </div>
-        </section>
-
-        <section className="editorial-section" id="programme">
-          <div className="section-head single">
-            <div>
-              <p className="section-kicker">Your 3-Day BICC Journey</p>
-              <h2>A clear convention flow from arrival to showcase.</h2>
-            </div>
-          </div>
-
-          <div className="programme-grid">
-            {programmeDays.map((item) => (
-              <article className="programme-card" key={item.day}>
-                <span className="track-label red">{item.day}</span>
-                <h3>{item.title}</h3>
-                <p>{item.body}</p>
-              </article>
-            ))}
-          </div>
-
-          <div className="section-cta">
-            <a className="secondary-btn" href="#programme">
-              View Full Programme
-            </a>
-          </div>
-        </section>
-
-        <section className="editorial-section" id="workshops">
-          <div className="section-head single">
-            <div>
-              <p className="section-kicker">Training Built For Real Performance Growth</p>
-              <h2>Six workshop anchors to preview the kind of development BICC is built around.</h2>
-            </div>
-          </div>
-
-          <div className="workshop-preview-grid">
-            {workshopPreviews.map((item) => (
-              <article className={`workshop-preview-card ${item.accent}`} key={item.title}>
-                <span className={`track-label ${item.accent}`}>{item.track}</span>
-                <h3>{item.title}</h3>
-                <p>{item.benefit}</p>
-              </article>
-            ))}
-          </div>
-
-          <div className="section-cta">
-            <a className="text-link" href="#workshops">
-              Explore Workshops
-            </a>
-          </div>
-        </section>
-
-        <section className="editorial-section" id="mentors">
-          <div className="section-head">
-            <div>
-              <p className="section-kicker">Learn From International Mentors</p>
-              <h2>Editorial-style mentor profiles that build trust without overloading the page.</h2>
-            </div>
-            <a className="text-link" href="#mentors">
-              View All Mentors
-            </a>
-          </div>
-
-          <div className="mentor-grid">
-            {mentors.map((mentor) => (
-              <article className="mentor-card" key={mentor.name}>
-                <MentorPortrait accent={mentor.accent} />
-                <div className="mentor-copy">
-                  <h3>{mentor.name}</h3>
-                  <p className="mentor-meta">
-                    {mentor.country} · {mentor.specialty}
-                  </p>
-                  <p>{mentor.description}</p>
-                  <span className={`track-label ${mentor.track === 'Foundation' ? 'foundation' : 'mastery'}`}>
-                    {mentor.track} Track
-                  </span>
-                </div>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        <section className="editorial-section">
-          <div className="section-head single">
-            <div>
-              <p className="section-kicker">More Than A Convention</p>
-              <h2>BICC celebrates clowning as a professional art form and a human connection tool.</h2>
-            </div>
-          </div>
-
-          <div className="impact-grid">
-            {impactItems.map((item) => (
-              <article className="impact-card" key={item.title}>
-                <h3>{item.title}</h3>
-                <p>{item.body}</p>
-              </article>
-            ))}
-          </div>
-
-          <div className="section-cta left">
-            <a className="text-link" href="#about">
-              Discover Community Impact
-            </a>
-          </div>
-        </section>
-
-        <section className="editorial-section" id="venue">
-          <div className="section-head single">
-            <div>
-              <p className="section-kicker">Experience Borneo While You Gather</p>
-              <h2>Make Tawau / Sabah part of the convention experience.</h2>
-            </div>
-          </div>
-
-          <div className="explore-grid">
-            {exploreItems.map((item) => (
-              <article className="explore-card" key={item.title}>
-                <ExploreArt art={item.art} />
-                <h3>{item.title}</h3>
-                <p>{item.body}</p>
-              </article>
-            ))}
-          </div>
-
-          <div className="section-cta left">
-            <a className="text-link" href="#venue">
-              View Venue & Travel Guide
-            </a>
-          </div>
-        </section>
-
-        <section className="editorial-section sponsors-section" id="sponsors">
-          <div className="section-head with-copy">
-            <div>
-              <p className="section-kicker">Partner With A Joyful International Movement</p>
-              <h2>BICC offers sponsors and partners a meaningful platform connected to performance, education, tourism, culture and community impact.</h2>
-            </div>
-            <p className="section-intro">
-              Designed to feel warm and professional for family-facing audiences, international mentors, destination partners and values-led sponsors.
-            </p>
-          </div>
-
-          <div className="logo-row">
-            {Array.from({ length: 5 }).map((_, index) => (
-              <div className="logo-placeholder" key={index}>
-                Partner Logo
-              </div>
-            ))}
-          </div>
-
-          <div className="dual-cta-row">
-            <a className="primary-btn" href="mailto:hello@bicc2026.com">
-              Become a Sponsor
-            </a>
-            <a className="secondary-btn" href="mailto:hello@bicc2026.com">
-              Download Sponsorship Deck
-            </a>
-          </div>
-        </section>
-
-        <section className="final-cta">
-          <div className="final-cta-copy">
-            <p className="section-kicker">Final CTA</p>
-            <h2>Two Tracks. One Price. Choose Your Growth Path.</h2>
-            <p>
-              Whether you are beginning your performance journey or refining your professional stage craft, BICC 2026 gives you a focused path to grow.
-            </p>
-            <div className="final-cta-actions">
-              <a className="primary-btn" href="#passes">
-                Get Foundation Pass
-              </a>
-              <a className="secondary-btn" href="#passes">
-                Get Mastery Pass
-              </a>
-            </div>
-            <small>Both passes are US$130 and include access to your selected workshop track and certificate.</small>
-          </div>
-        </section>
-      </main>
-
-      <footer className="site-footer">
-        <PatternCorner side="left" />
-        <PatternCorner side="right" />
-
-        <div className="footer-brand">
-          <h3>
-            Wear the <span>Red Nose.</span>
-            <br />
-            Share the Hope.
-          </h3>
-          <p>Official home of Borneo International Clown Convention 2026.</p>
-          <SmileDoodle />
-        </div>
-
-        <div className="footer-column">
-          <strong>BICC 2026</strong>
-          <a href="#about">About</a>
-          <a href="#programme">Programme</a>
-          <a href="#workshops">Workshops</a>
-        </div>
-
-        <div className="footer-column">
-          <strong>Passes</strong>
-          <a href="#passes">Foundation Track Pass</a>
-          <a href="#passes">Mastery Track Pass</a>
-          <a href="#venue">Venue & Travel</a>
-        </div>
-
-        <div className="footer-column">
-          <strong>Sponsors</strong>
-          <a href="#sponsors">Partners</a>
-          <a href="mailto:hello@bicc2026.com">Contact</a>
-          <div className="social-row" aria-label="Social links">
-            <span>f</span>
-            <span>◎</span>
-            <span>▶</span>
-            <span>♪</span>
-          </div>
-        </div>
-
-        <div className="footer-meta">
-          <span>hello@bicc2026.com</span>
-          <span>© 2026 Borneo International Clown Convention. All rights reserved.</span>
-        </div>
-      </footer>
+      <Footer />
     </div>
   )
 }
