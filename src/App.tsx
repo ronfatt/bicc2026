@@ -1,768 +1,775 @@
-type Feature = {
+import { useState } from 'react'
+
+type ValueItem = {
+  title: string
+  body: string
+  icon: 'joy' | 'culture' | 'inspire' | 'world' | 'community'
+}
+
+type AudienceItem = {
+  title: string
+  body: string
+  icon: 'performer' | 'pro' | 'educator' | 'partner'
+}
+
+type PassItem = {
+  name: string
+  shortLabel: string
+  headline: string
+  description: string
+  badges: string[]
+  includes: string[]
+  accent: 'foundation' | 'mastery'
+  cta: string
+}
+
+type ProgrammeDay = {
+  day: string
   title: string
   body: string
 }
 
-type Speaker = {
-  name: string
-  role: string
-  country: string
-  bio: string
-  tag: string
-  accent: 'red' | 'turquoise' | 'sunshine' | 'coral'
-}
-
-type WorkshopTrack = {
-  name: string
-  accent: 'turquoise' | 'coral' | 'red'
-  description: string
-  items: string[]
-}
-
-type Session = {
-  track: 'Beginner' | 'Performance' | 'Mastery'
-  mentor: string
+type WorkshopPreview = {
+  track: 'Foundation' | 'Mastery'
   title: string
-  duration: string
-  attendees: string
-  points: string[]
+  benefit: string
+  accent: 'foundation' | 'mastery'
 }
 
-type Day = {
-  day: string
-  date: string
-  theme: string
-  accent: 'sunshine' | 'coral' | 'turquoise'
-  items: { time: string; title: string; note: string }[]
-}
-
-type Pass = {
+type MentorPreview = {
   name: string
-  badge: string
-  price: string
-  accent: 'red' | 'sunshine' | 'turquoise'
-  perks: string[]
+  country: string
+  specialty: string
+  description: string
+  track: 'Foundation' | 'Mastery'
+  accent: 'red' | 'teal' | 'gold' | 'coral'
 }
 
-const brandValues = [
-  ['Joyful', 'Laughter that heals and connects.'],
-  ['Cultural', 'Stories rooted in Sabah and Borneo spirit.'],
-  ['Inspiring', 'Learning that grows confidence and craft.'],
-  ['International', 'A global faculty and delegate community.'],
-  ['Community', 'Families, artists, educators, and sponsors together.'],
-] as const
+type ImpactItem = {
+  title: string
+  body: string
+}
 
-const features: Feature[] = [
+type ExploreItem = {
+  title: string
+  body: string
+  art: 'food' | 'islands' | 'culture' | 'coffee' | 'travel'
+}
+
+const values: ValueItem[] = [
+  { title: 'Joyful', body: 'Laughter that heals and connects.', icon: 'joy' },
+  { title: 'Cultural', body: 'Rooted in Borneo, open to the world.', icon: 'culture' },
+  { title: 'Inspiring', body: 'Creativity that grows confidence and craft.', icon: 'inspire' },
+  { title: 'International', body: 'Bringing artists, ideas and hearts together.', icon: 'world' },
+  { title: 'Community', body: 'Building hope through service and friendship.', icon: 'community' },
+]
+
+const audienceItems: AudienceItem[] = [
   {
-    title: 'Performance Lab',
-    body: 'Build stage confidence through live, coached practice.',
+    title: 'Emerging Performers',
+    body: 'For beginners ready to build confidence, character and stage presence.',
+    icon: 'performer',
   },
   {
-    title: 'Creative Exchange',
-    body: 'Meet artists, educators, performers, and clown leaders from around the world.',
+    title: 'Professional Clowns & Entertainers',
+    body: 'For performers who want to refine timing, routine structure and audience command.',
+    icon: 'pro',
   },
   {
-    title: 'Showcase Night',
-    body: 'Celebrate clowning as both craft and community.',
+    title: 'Educators & Community Workers',
+    body: 'For teachers, youth leaders and community teams using creativity to connect with people.',
+    icon: 'educator',
+  },
+  {
+    title: 'Families, Sponsors & Cultural Partners',
+    body: 'For audiences and partners who believe in joyful, meaningful cultural experiences.',
+    icon: 'partner',
   },
 ]
 
-const speakers: Speaker[] = [
+const passes: PassItem[] = [
   {
-    name: 'Jean-Pierre Laurent',
-    role: 'Guest Artist',
-    country: 'France',
-    bio: 'A celebrated physical comedy performer known for expressive stage language and emotionally intelligent clowning.',
-    tag: 'Festival Headliner',
-    accent: 'red',
-  },
-  {
-    name: 'Maria Valentina',
-    role: 'Mentor',
-    country: 'Argentina',
-    bio: 'An international workshop leader guiding performers through character discovery, presence, and transformation.',
-    tag: 'Workshop Leader',
-    accent: 'turquoise',
-  },
-  {
-    name: 'Sarah Chen',
-    role: 'Workshop Leader',
-    country: 'Malaysia',
-    bio: 'A movement specialist bringing precision, play, and confidence-building methods for emerging performers.',
-    tag: 'Regional Faculty',
-    accent: 'sunshine',
-  },
-  {
-    name: 'Marco Rossi',
-    role: 'Guest Mentor',
-    country: 'Italy',
-    bio: 'A mask and visual performance director blending classic clowning technique with modern theatrical storytelling.',
-    tag: 'Creative Mentor',
-    accent: 'coral',
-  },
-]
-
-const tracks: WorkshopTrack[] = [
-  {
-    name: 'Beginner Track',
-    accent: 'turquoise',
-    description: 'A welcoming entry point for first-time delegates, students, and curious artists.',
-    items: [
-      'Physical comedy foundations',
-      'Character play and ensemble trust',
-      'Safety, rhythm, and audience awareness',
+    name: 'Foundation Track Pass',
+    shortLabel: 'Foundation Workshop Pass',
+    headline: 'Build Your Professional Foundation',
+    description:
+      'Designed for beginners, emerging performers, educators, youth leaders and entertainers who want a stronger foundation in clown performance.',
+    badges: ['No prior experience required', 'Certificate of Participation awarded'],
+    includes: [
+      'Physical Comedy Fundamentals',
+      'Character & Persona Building',
+      'Balloon Sculpting',
+      'Interactive Storytelling',
+      'Magic & Visual Illusions',
+      'Puppetry Performance',
     ],
+    accent: 'foundation',
+    cta: 'Get Foundation Pass',
   },
   {
-    name: 'Performance Lab',
-    accent: 'coral',
-    description: 'Hands-on experimentation for artists who want to sharpen performance instincts.',
-    items: [
-      'Improvisation and response work',
-      'Live mentor feedback sessions',
-      'Scene shaping for stage confidence',
+    name: 'Mastery Track Pass',
+    shortLabel: 'Mastery Workshop Pass',
+    headline: 'Elevate Your Stage Performance',
+    description:
+      'Designed for experienced performers ready to sharpen technique, stage confidence and professional performance direction.',
+    badges: ['Prior stage experience recommended', 'Certificate of Completion awarded'],
+    includes: [
+      'Advanced Stage Craft',
+      'Signature Performance',
+      'Showcase & Mentorship',
+      'Advanced Comedy Timing & Acting',
+      'Professional Magic & Variety Integration',
+      'Career Positioning & Stage Command',
     ],
-  },
-  {
-    name: 'Mastery Track',
-    accent: 'red',
-    description: 'Advanced learning for professionals, teachers, and creative leaders in the field.',
-    items: [
-      'Business of performance',
-      'Advanced physical storytelling',
-      'Touring, branding, and international collaboration',
-    ],
+    accent: 'mastery',
+    cta: 'Get Mastery Pass',
   },
 ]
 
-const sessions: Session[] = [
-  {
-    track: 'Beginner',
-    mentor: 'Sarah Chen',
-    title: 'Introduction to Physical Comedy',
-    duration: '2 hours',
-    attendees: '30 attendees',
-    points: ['Basic techniques', 'Safety routines', 'Stage confidence'],
-  },
-  {
-    track: 'Beginner',
-    mentor: 'Marco Rossi',
-    title: 'Clown Makeup Essentials',
-    duration: '90 mins',
-    attendees: '25 attendees',
-    points: ['Colour language', 'Quick change tips', 'Character identity'],
-  },
-  {
-    track: 'Performance',
-    mentor: 'Viktor Petrov',
-    title: 'Juggling Fundamentals',
-    duration: '2.5 hours',
-    attendees: '20 attendees',
-    points: ['Ball control', 'Rhythm mastery', 'Performance flow'],
-  },
-  {
-    track: 'Mastery',
-    mentor: 'Maria Valentina',
-    title: 'Advanced Character Development',
-    duration: '3 hours',
-    attendees: '18 attendees',
-    points: ['Psychology of comedy', 'Improvisation arcs', 'Character depth'],
-  },
-  {
-    track: 'Mastery',
-    mentor: 'Jean-Pierre Laurent',
-    title: 'Stage Combat & Stunts',
-    duration: '3 hours',
-    attendees: '16 attendees',
-    points: ['Safety technique', 'Comic timing', 'Ensemble reactions'],
-  },
-  {
-    track: 'Mastery',
-    mentor: 'Jennifer Park',
-    title: 'Business of Performance',
-    duration: '2 hours',
-    attendees: '24 attendees',
-    points: ['Marketing strategy', 'Contracts', 'Social media growth'],
-  },
-]
-
-const days: Day[] = [
+const programmeDays: ProgrammeDay[] = [
   {
     day: 'Day 1',
-    date: 'May 15, 2026',
-    theme: 'Arrival, Welcome & Shared Joy',
-    accent: 'sunshine',
-    items: [
-      {
-        time: '09:00',
-        title: 'Registration & Welcome Reception',
-        note: 'Meet delegates, collect materials, and settle into the convention spirit.',
-      },
-      {
-        time: '11:00',
-        title: 'Opening Ceremony',
-        note: 'A joyful opening celebrating laughter, healing, and cultural connection.',
-      },
-      {
-        time: '14:00',
-        title: 'Beginner Workshop Sessions',
-        note: 'Hands-on foundations in movement, presence, and playful audience exchange.',
-      },
-      {
-        time: '19:00',
-        title: 'Showcase Night',
-        note: 'An evening performance programme welcoming local and international voices.',
-      },
-    ],
+    title: 'Arrival & Opening',
+    body: 'Registration, welcome reception, orientation, opening ceremony and early creative connections.',
   },
   {
     day: 'Day 2',
-    date: 'May 16, 2026',
-    theme: 'Skill, Craft & International Exchange',
-    accent: 'coral',
-    items: [
-      {
-        time: '09:00',
-        title: 'Advanced Masterclasses',
-        note: 'Focused sessions led by renowned artists, educators, and guest mentors.',
-      },
-      {
-        time: '12:00',
-        title: 'Panel: Performance Across Cultures',
-        note: 'Conversations on clowning, education, family audiences, and creative futures.',
-      },
-      {
-        time: '14:00',
-        title: 'Practice Labs',
-        note: 'Collaborative rehearsal and mentor feedback in smaller bookable groups.',
-      },
-      {
-        time: '20:00',
-        title: 'Convention Gala',
-        note: 'A celebratory gathering for delegates, partners, sponsors, and families.',
-      },
-    ],
+    title: 'Workshops & Exchange',
+    body: 'Full-day training, mentorship, workshop tracks, creative exchange and evening performance activity.',
   },
   {
     day: 'Day 3',
-    date: 'May 17, 2026',
-    theme: 'Community, Hope & The Road Ahead',
-    accent: 'turquoise',
-    items: [
-      {
-        time: '09:00',
-        title: 'Business of Performance',
-        note: 'Practical sessions on touring, sustainability, partnerships, and visibility.',
-      },
-      {
-        time: '11:00',
-        title: 'Community Building Session',
-        note: 'Create new regional networks for artistic support and future collaboration.',
-      },
-      {
-        time: '14:00',
-        title: 'Open Stage Performances',
-        note: 'Delegates share work, experimentation, and discoveries from the convention.',
-      },
-      {
-        time: '17:00',
-        title: 'Closing Ceremony',
-        note: 'A final call to carry laughter, courage, and hope back into our communities.',
-      },
-    ],
+    title: 'Showcase & Community',
+    body: 'Final sessions, community sharing, showcase preparation and closing celebration.',
   },
 ]
 
-const passes: Pass[] = [
+const workshopPreviews: WorkshopPreview[] = [
   {
-    name: 'Explorer Pass',
-    badge: 'Early Bird',
-    price: '$149',
-    accent: 'sunshine',
-    perks: [
-      'Opening ceremony and keynote access',
-      'Showcase night admission',
-      'Delegate handbook and community listing',
-    ],
+    track: 'Foundation',
+    title: 'Physical Comedy Fundamentals',
+    benefit: 'Build body awareness, timing and stage confidence from the ground up.',
+    accent: 'foundation',
   },
   {
-    name: 'Performer Pass',
-    badge: 'Most Popular',
-    price: '$289',
+    track: 'Foundation',
+    title: 'Character & Persona Building',
+    benefit: 'Discover a stronger stage identity and more playful audience connection.',
+    accent: 'foundation',
+  },
+  {
+    track: 'Foundation',
+    title: 'Balloon Sculpting',
+    benefit: 'Learn practical visual engagement skills for family-facing live performance.',
+    accent: 'foundation',
+  },
+  {
+    track: 'Mastery',
+    title: 'Advanced Stage Craft',
+    benefit: 'Refine pacing, structure and presence for stronger professional stage command.',
+    accent: 'mastery',
+  },
+  {
+    track: 'Mastery',
+    title: 'Signature Performance',
+    benefit: 'Shape a more memorable act with stronger theatrical identity and rhythm.',
+    accent: 'mastery',
+  },
+  {
+    track: 'Mastery',
+    title: 'Showcase & Mentorship',
+    benefit: 'Receive critique, direction and refinement support for your developing act.',
+    accent: 'mastery',
+  },
+]
+
+const mentors: MentorPreview[] = [
+  {
+    name: 'International Mentor To Be Announced',
+    country: 'Global Faculty',
+    specialty: 'Clown Performance & Stage Presence',
+    description: 'A featured international mentor profile will be announced with the official workshop release.',
+    track: 'Mastery',
     accent: 'red',
-    perks: [
-      'Full access across all 3 days',
-      'Priority booking for workshops and labs',
-      'Convention gala and networking sessions',
-    ],
   },
   {
-    name: 'Faculty Circle',
-    badge: 'Partner Access',
-    price: '$449',
-    accent: 'turquoise',
-    perks: [
-      'Mentor breakfast and special meet-up',
-      'Reserved seating for headline events',
-      'Post-event strategy circle with organisers',
-    ],
+    name: 'Regional Teaching Artist',
+    country: 'Malaysia / Borneo',
+    specialty: 'Character Building & Performance Foundations',
+    description: 'This profile space is reserved for a teaching artist supporting emerging performers and educators.',
+    track: 'Foundation',
+    accent: 'teal',
+  },
+  {
+    name: 'Creative Exchange Mentor',
+    country: 'International Faculty',
+    specialty: 'Community Performance & Audience Connection',
+    description: 'An invited mentor focused on creativity, exchange, and practical joy in live performance.',
+    track: 'Foundation',
+    accent: 'gold',
+  },
+  {
+    name: 'Showcase Development Mentor',
+    country: 'Guest Faculty',
+    specialty: 'Stage Craft, Feedback & Professional Growth',
+    description: 'A specialist guiding performers who want stronger critique, polish and professional direction.',
+    track: 'Mastery',
+    accent: 'coral',
   },
 ]
 
-const sponsors = [
-  'Sabah Creative Network',
-  'Tawau Arts Community',
-  'Borneo Culture Forum',
-  'PlayLab International',
-  'Global Performance Network',
-]
-
-const faqs = [
+const impactItems: ImpactItem[] = [
   {
-    question: 'Who is BICC 2026 for?',
-    answer:
-      'BICC 2026 welcomes performers, educators, cultural organisers, families, students, and international delegates interested in clowning, healing through laughter, and community-centred creativity.',
+    title: 'Cultural Exchange',
+    body: 'Bring together local heritage, international artists and meaningful creative dialogue in one shared gathering.',
   },
   {
-    question: 'Will there be beginner-friendly sessions?',
-    answer:
-      'Yes. The programme includes a clear Beginner Track, making the convention accessible to first-time performers and curious participants of different ages and backgrounds.',
+    title: 'Hospital Clowning & Outreach',
+    body: 'Highlight the role of laughter, presence and creative care in community-facing human connection work.',
   },
   {
-    question: 'Can international guests attend easily?',
-    answer:
-      'Yes. The event is designed for international participation, with travel-friendly scheduling, hospitality support, and a convention structure that balances professionalism with warmth.',
-  },
-  {
-    question: 'Can groups or schools enquire together?',
-    answer:
-      'Absolutely. Group bookings are encouraged for schools, organisations, community leaders, and cultural partners who wish to attend as a delegation.',
+    title: 'Creative Community Building',
+    body: 'Support friendships, collaboration and shared growth between performers, educators and partners.',
   },
 ]
 
-function RedNoseIcon({ className = '' }: { className?: string }) {
+const exploreItems: ExploreItem[] = [
+  {
+    title: 'Local Food',
+    body: 'Enjoy flavours, markets and family-friendly food experiences unique to Tawau and Sabah.',
+    art: 'food',
+  },
+  {
+    title: 'Nature & Islands',
+    body: 'Discover landscapes, sea air and day-trip inspiration beyond the convention programme.',
+    art: 'islands',
+  },
+  {
+    title: 'Culture & Community',
+    body: 'Experience local hospitality, story, craft and shared community warmth while you gather.',
+    art: 'culture',
+  },
+  {
+    title: 'Coffee, Cocoa & Local Taste',
+    body: 'Explore the textures, tastes and agricultural identity that make Tawau memorable.',
+    art: 'coffee',
+  },
+  {
+    title: 'Travel Tips',
+    body: 'Plan your stay with clearer arrival, movement and venue guidance for a smooth convention journey.',
+    art: 'travel',
+  },
+]
+
+function RedNoseIcon({ large = false }: { large?: boolean }) {
   return (
-    <span aria-hidden="true" className={`red-nose ${className}`.trim()}>
+    <span aria-hidden="true" className={`red-nose-icon${large ? ' large' : ''}`}>
       <span className="red-nose-dot" />
     </span>
   )
 }
 
-function BrushUnderline() {
-  return <span aria-hidden="true" className="brush-underline" />
-}
-
-function PatternStrip() {
+function HeaderLogo() {
   return (
-    <div aria-hidden="true" className="pattern-strip">
-      {Array.from({ length: 12 }).map((_, index) => (
-        <span key={index} />
-      ))}
+    <div className="brand-logo-line">
+      <span>BICC</span>
+      <RedNoseIcon />
+      <span>2026</span>
     </div>
   )
 }
 
-function ConfettiBackground() {
+function SmileDoodle() {
   return (
-    <div aria-hidden="true" className="confetti-field">
-      {Array.from({ length: 18 }).map((_, index) => (
-        <span className={`confetti confetti-${(index % 6) + 1}`} key={index} />
-      ))}
-      <span className="smile-doodle" />
-      <span className="heart-doodle" />
-      <span className="star-doodle star-a" />
-      <span className="star-doodle star-b" />
+    <div aria-hidden="true" className="smile-doodle">
+      <span className="smile-eye left" />
+      <span className="smile-eye right" />
+      <RedNoseIcon />
+      <span className="smile-mouth" />
     </div>
   )
 }
 
-function ValueIconCard({
-  title,
-  body,
-}: {
-  title: string
-  body: string
-}) {
+function PatternCorner({ side }: { side: 'left' | 'right' }) {
   return (
-    <article className="value-card">
-      <div className="value-icon-wrap">
-        <RedNoseIcon className="value-icon" />
+    <div aria-hidden="true" className={`pattern-corner ${side}`}>
+      <span />
+      <span />
+      <span />
+      <span />
+    </div>
+  )
+}
+
+function DecorativeIcon({ icon }: { icon: ValueItem['icon'] | AudienceItem['icon'] }) {
+  return <span aria-hidden="true" className={`decorative-icon ${icon}`} />
+}
+
+function VisualPlaceholder() {
+  return (
+    <div className="hero-visual-card">
+      <div className="hero-illustration">
+        <span className="confetti-star star-a" />
+        <span className="confetti-star star-b" />
+        <span className="confetti-dot dot-a" />
+        <span className="confetti-dot dot-b" />
+        <div className="clown-figure">
+          <div className="clown-hat" />
+          <div className="clown-face">
+            <span className="clown-eyes" />
+            <RedNoseIcon />
+            <span className="clown-smile" />
+          </div>
+          <div className="clown-costume" />
+        </div>
+        <div className="borneo-hall" />
+        <div className="hero-palm" />
+        <SmileDoodle />
+        <PatternCorner side="right" />
       </div>
-      <strong>{title}</strong>
-      <p>{body}</p>
-    </article>
+      <p className="hero-caption">Official Convention Magazine & Delegate Handbook</p>
+    </div>
   )
 }
 
-function PortraitFrame({
-  name,
-  accent,
-  country,
-}: {
-  name: string
-  accent: Speaker['accent']
-  country: string
-}) {
+function MentorPortrait({ accent }: { accent: MentorPreview['accent'] }) {
   return (
-    <div className={`portrait-frame accent-${accent}`}>
-      <div className="portrait-pattern" />
-      <div className="portrait-badge">{country}</div>
-      <div className="portrait-initials">{name.slice(0, 2)}</div>
+    <div className={`mentor-portrait ${accent}`}>
+      <div className="mentor-portrait-ring" />
+      <span>MN</span>
     </div>
   )
+}
+
+function ExploreArt({ art }: { art: ExploreItem['art'] }) {
+  return <div aria-hidden="true" className={`explore-art ${art}`} />
 }
 
 function App() {
+  const [menuOpen, setMenuOpen] = useState(false)
+
   return (
     <div className="page-shell">
-      <ConfettiBackground />
+      <div aria-hidden="true" className="confetti-layer">
+        {Array.from({ length: 16 }).map((_, index) => (
+          <span className={`floating-confetti confetti-${(index % 6) + 1}`} key={index} />
+        ))}
+      </div>
 
       <header className="site-header">
         <a className="brand-lockup" href="#top">
-          <RedNoseIcon />
-          <div>
-            <p>BICC 2026</p>
-            <strong>Borneo International Clown Convention</strong>
-          </div>
+          <HeaderLogo />
+          <small>Borneo International Clown Convention 2026</small>
         </a>
 
-        <nav className="main-nav">
-          <a href="#experience">Experience</a>
-          <a href="#speakers">Speakers</a>
-          <a href="#schedule">Schedule</a>
-          <a href="#workshops">Workshops</a>
-          <a href="#passes">Passes</a>
+        <button
+          aria-expanded={menuOpen}
+          aria-label="Toggle menu"
+          className="menu-toggle"
+          onClick={() => setMenuOpen((open) => !open)}
+          type="button"
+        >
+          <span />
+          <span />
+          <span />
+        </button>
+
+        <nav className={`main-nav${menuOpen ? ' open' : ''}`}>
+          <a href="#about" onClick={() => setMenuOpen(false)}>
+            About
+          </a>
+          <a href="#programme" onClick={() => setMenuOpen(false)}>
+            Programme
+          </a>
+          <a href="#workshops" onClick={() => setMenuOpen(false)}>
+            Workshops
+          </a>
+          <a href="#mentors" onClick={() => setMenuOpen(false)}>
+            Mentors
+          </a>
+          <a href="#passes" onClick={() => setMenuOpen(false)}>
+            Passes
+          </a>
+          <a href="#venue" onClick={() => setMenuOpen(false)}>
+            Venue
+          </a>
+          <a href="#sponsors" onClick={() => setMenuOpen(false)}>
+            Sponsors
+          </a>
         </nav>
 
-        <div className="header-actions">
-          <button className="menu-pill" type="button">
-            Menu
-          </button>
-          <a className="primary-btn" href="#passes">
-            Reserve Spot
-          </a>
-        </div>
+        <a className="primary-btn header-cta" href="#passes">
+          Get Pass
+        </a>
       </header>
 
       <main id="top">
-        <section className="hero">
+        <section className="hero-section">
           <div className="hero-copy">
-            <p className="eyebrow">
-              BORNEO INTERNATIONAL CLOWN CONVENTION <span>2026</span>
+            <p className="hero-eyebrow">Borneo International Clown Convention 2026</p>
+            <h1>Where Laughter Becomes Legacy</h1>
+            <p className="hero-subheadline">
+              A 3-day international clowning, performance, training and cultural exchange gathering in Borneo.
             </p>
-            <h1 className="hero-title">
-              BICC <span>2026</span>
-            </h1>
-            <p className="hero-subtitle">
-              Official Convention Magazine & Delegate Handbook
+            <p className="hero-body">
+              Join performers, educators, artists, mentors and communities for a joyful convention built around professional training, creative exchange, cultural connection and the healing power of laughter.
             </p>
-            <p className="hero-text">
-              A joyful international gathering where performance, culture,
-              creativity, and community come together in Tawau, Sabah.
-            </p>
+
+            <div className="event-badges">
+              <span>Aug 3–5, 2026</span>
+              <span>Tawau, Sabah, Malaysia</span>
+              <span>Workshop Tracks Available</span>
+              <span>International Mentors</span>
+            </div>
+
             <div className="hero-actions">
               <a className="primary-btn" href="#passes">
-                Get Tickets
+                Get Your Pass
               </a>
-              <a className="secondary-btn" href="#schedule">
+              <a className="secondary-btn" href="#programme">
                 View Programme
               </a>
+              <a className="text-link" href="#passes">
+                Compare Foundation & Mastery Tracks
+              </a>
             </div>
           </div>
 
-          <div className="hero-art">
-            <PatternStrip />
-            <div className="cover-illustration">
-              <div className="nose-orbit">
-                <RedNoseIcon className="hero-nose" />
-              </div>
-              <div className="smile-curve" />
-              <div className="balloon balloon-red" />
-              <div className="balloon balloon-yellow" />
-              <div className="balloon balloon-teal" />
-              <div className="brush-circle" />
-              <div className="textile-ring" />
+          <VisualPlaceholder />
+        </section>
+
+        <section className="value-grid">
+          {values.map((item) => (
+            <article className="value-card" key={item.title}>
+              <DecorativeIcon icon={item.icon} />
+              <strong>{item.title}</strong>
+              <p>{item.body}</p>
+            </article>
+          ))}
+        </section>
+
+        <section className="editorial-section" id="about">
+          <div className="section-head with-copy">
+            <div>
+              <p className="section-kicker">What Is BICC?</p>
+              <h2>Professional training, cultural exchange, and joyful community in one bright international gathering.</h2>
             </div>
-          </div>
-        </section>
-
-        <section className="value-grid-section">
-          <div className="value-grid">
-            {brandValues.map(([title, body]) => (
-              <ValueIconCard body={body} key={title} title={title} />
-            ))}
-          </div>
-        </section>
-
-        <section className="section" id="experience">
-          <div className="section-heading">
-            <p className="section-kicker">
-              Why We Gather <BrushUnderline />
+            <p className="section-intro">
+              BICC 2026 is an international gathering for clown artists, performers, educators, entertainers, community workers and creative leaders. It brings together structured training, performance development, cultural exchange, showcase experiences and community outreach in one joyful convention in Borneo.
             </p>
-            <h2>We gather to share joy, skill, culture, and the healing power of performance.</h2>
           </div>
 
-          <div className="feature-grid">
-            {features.map((feature) => (
-              <article className="editorial-card feature-card" key={feature.title}>
-                <div className="feature-icon-row">
-                  <RedNoseIcon />
-                </div>
-                <h3>{feature.title}</h3>
-                <p>{feature.body}</p>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        <section className="section" id="speakers">
-          <div className="section-heading">
-            <p className="section-kicker">Learn From The Very Best</p>
-            <h2>A world-class faculty of performers, educators, and creative mentors.</h2>
+          <div className="triple-card-grid">
+            <article className="story-card">
+              <span className="tag-pill">Professional Training</span>
+              <h3>Structured workshop tracks for beginners and experienced performers.</h3>
+            </article>
+            <article className="story-card">
+              <span className="tag-pill teal">Creative Exchange</span>
+              <h3>Meet international mentors, artists, educators and performers.</h3>
+            </article>
+            <article className="story-card">
+              <span className="tag-pill coral">Community Impact</span>
+              <h3>Celebrate clowning as a craft that brings joy, connection and healing.</h3>
+            </article>
           </div>
 
-          <div className="speaker-grid">
-            {speakers.map((speaker) => (
-              <article className={`speaker-card editorial-card accent-${speaker.accent}`} key={speaker.name}>
-                <PortraitFrame accent={speaker.accent} country={speaker.country} name={speaker.name} />
-                <div className="speaker-copy">
-                  <span className={`speaker-tag tag-${speaker.accent}`}>{speaker.tag}</span>
-                  <h3>{speaker.name}</h3>
-                  <p className="speaker-meta">
-                    {speaker.role} · {speaker.country}
-                  </p>
-                  <p>{speaker.bio}</p>
-                </div>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        <section className="section" id="workshops">
-          <div className="section-heading">
-            <p className="section-kicker">Workshop Tracks</p>
-            <h2>Three colourful paths for artists, educators, and delegates at every stage.</h2>
-          </div>
-
-          <div className="track-grid">
-            {tracks.map((track) => (
-              <article className={`track-card editorial-card track-${track.accent}`} key={track.name}>
-                <span className={`track-pill pill-${track.accent}`}>{track.name}</span>
-                <h3>{track.description}</h3>
-                <ul className="custom-list">
-                  {track.items.map((item) => (
-                    <li key={item}>{item}</li>
-                  ))}
-                </ul>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        <section className="section">
-          <div className="section-heading">
-            <p className="section-kicker">Detailed Workshop Schedule</p>
-            <h2>Bookable sessions designed for clear choices and joyful learning.</h2>
-          </div>
-
-          <div className="session-grid">
-            {sessions.map((session) => {
-              const accent =
-                session.track === 'Beginner'
-                  ? 'turquoise'
-                  : session.track === 'Performance'
-                    ? 'coral'
-                    : 'red'
-
-              return (
-                <article className={`session-card editorial-card session-${accent}`} key={session.title}>
-                  <div className="session-topline">
-                    <span className={`track-pill pill-${accent}`}>{session.track}</span>
-                    <small>{session.mentor}</small>
-                  </div>
-                  <h3>{session.title}</h3>
-                  <ul className="custom-list">
-                    {session.points.map((point) => (
-                      <li key={point}>{point}</li>
-                    ))}
-                  </ul>
-                  <div className="session-meta">
-                    <span>{session.duration}</span>
-                    <span>{session.attendees}</span>
-                  </div>
-                </article>
-              )
-            })}
-          </div>
-
-          <div className="section-cta">
-            <a className="primary-btn" href="#passes">
-              View Full Workshop Schedule
+          <div className="section-cta left">
+            <a className="text-link" href="#about">
+              Learn About BICC
             </a>
           </div>
         </section>
 
-        <section className="section" id="schedule">
-          <div className="section-heading">
-            <p className="section-kicker">Your Journey Through BICC 2026</p>
-            <h2>A magazine-style guide to three days of learning, celebration, and connection.</h2>
+        <section className="editorial-section">
+          <div className="section-head single">
+            <div>
+              <p className="section-kicker">Who Is This For?</p>
+              <h2>Different journeys. Shared joy. One convention.</h2>
+            </div>
           </div>
 
-          <div className="day-tabs">
-            {days.map((day) => (
-              <div className={`day-pill pill-${day.accent}`} key={day.day}>
-                <strong>{day.day}</strong>
-                <span>{day.date}</span>
-              </div>
-            ))}
-          </div>
-
-          <div className="journey-stack">
-            {days.map((day) => (
-              <section className="day-section" key={day.day}>
-                <div className="day-summary">
-                  <span className={`track-pill pill-${day.accent}`}>{day.day}</span>
-                  <h3>{day.theme}</h3>
-                  <p>{day.date}</p>
-                </div>
-                <div className="timeline-items">
-                  {day.items.map((item) => (
-                    <article className="timeline-card editorial-card" key={`${day.day}-${item.title}`}>
-                      <span className="timeline-dot">
-                        <RedNoseIcon />
-                      </span>
-                      <div className="timeline-copy">
-                        <div className="timeline-topline">
-                          <time>{item.time}</time>
-                          <h4>{item.title}</h4>
-                        </div>
-                        <p>{item.note}</p>
-                      </div>
-                    </article>
-                  ))}
-                </div>
-              </section>
+          <div className="audience-grid">
+            {audienceItems.map((item) => (
+              <article className="audience-card" key={item.title}>
+                <DecorativeIcon icon={item.icon} />
+                <h3>{item.title}</h3>
+                <p>{item.body}</p>
+              </article>
             ))}
           </div>
         </section>
 
-        <section className="section" id="passes">
-          <div className="section-heading">
-            <p className="section-kicker">Passes & Registration</p>
-            <h2>Choose the convention experience that best fits your journey.</h2>
+        <section className="passes-section editorial-section" id="passes">
+          <div className="section-head with-copy">
+            <div>
+              <p className="section-kicker">Choose Your Workshop Track</p>
+              <h2>Two professional training paths. One price. Different growth journey.</h2>
+            </div>
+            <p className="section-intro">
+              Choose the path that best fits your current experience and the kind of performance growth you want to focus on.
+            </p>
           </div>
 
-          <div className="pass-grid">
+          <div className="passes-grid">
             {passes.map((pass) => (
-              <article className={`pass-card editorial-card pass-${pass.accent}`} key={pass.name}>
-                <span className={`track-pill pill-${pass.accent}`}>{pass.badge}</span>
+              <article className={`pass-card ${pass.accent}`} key={pass.name}>
+                <span className={`track-label ${pass.accent}`}>{pass.shortLabel}</span>
                 <h3>{pass.name}</h3>
-                <p className="pass-price">{pass.price}</p>
-                <ul className="custom-list">
-                  {pass.perks.map((perk) => (
-                    <li key={perk}>{perk}</li>
+                <p className="pass-price">US$130</p>
+                <strong className="pass-headline">{pass.headline}</strong>
+                <p className="pass-description">{pass.description}</p>
+                <div className="pass-badges">
+                  {pass.badges.map((badge) => (
+                    <span key={badge}>{badge}</span>
+                  ))}
+                </div>
+                <ul className="feature-list">
+                  {pass.includes.map((item) => (
+                    <li key={item}>{item}</li>
                   ))}
                 </ul>
-                <a className="primary-btn wide-btn" href="#contact">
-                  Get Tickets
+                <a className="primary-btn wide-btn" href="#passes">
+                  {pass.cta}
                 </a>
               </article>
             ))}
           </div>
-        </section>
 
-        <section className="section venue-section">
-          <div className="venue-layout">
-            <div className="venue-copy">
-              <p className="section-kicker">Tawau, Sabah, Malaysia</p>
-              <h2>Where convention professionalism meets a warm Borneo welcome.</h2>
-              <p>
-                Expect cultural hospitality, daylight warmth, family-friendly energy, and a setting that makes sponsors, performers, and international delegates feel genuinely welcomed.
-              </p>
-              <PatternStrip />
-            </div>
-
-            <div className="image-frame venue-frame">
-              <div className="image-scene">
-                <span className="scene-sun" />
-                <span className="scene-mountain" />
-                <span className="scene-water" />
-                <span className="scene-house" />
-                <span className="scene-house scene-house-small" />
-              </div>
-            </div>
+          <div className="pass-helper">
+            <p>
+              <strong>Not sure which track is right for you?</strong>
+            </p>
+            <p>Choose Foundation if you are building confidence, technique and core performance fundamentals.</p>
+            <p>Choose Mastery if you already perform and want stronger stage craft, critique and professional direction.</p>
+            <a className="text-link" href="#passes">
+              Compare Tracks
+            </a>
           </div>
         </section>
 
-        <section className="section" id="contact">
-          <div className="faq-layout">
-            <div className="section-heading left">
-              <p className="section-kicker">Need Details?</p>
-              <h2>Bring your school, organisation, family, or creative team.</h2>
-              <p>
-                Group enquiries, sponsor conversations, and cultural partnerships are all welcome. The page keeps the warm, official tone you asked for while staying easy to browse on mobile.
-              </p>
-            </div>
-
-            <div className="faq-column">
-              <div className="faq-list">
-                {faqs.map((faq) => (
-                  <details className="editorial-card faq-card" key={faq.question}>
-                    <summary>{faq.question}</summary>
-                    <p>{faq.answer}</p>
-                  </details>
-                ))}
-              </div>
-
-              <form className="editorial-card contact-card">
-                <h3>Request Group Booking Info</h3>
-                <div className="form-grid">
-                  <label>
-                    Name
-                    <input placeholder="Your name" type="text" />
-                  </label>
-                  <label>
-                    Email
-                    <input placeholder="name@email.com" type="email" />
-                  </label>
-                  <label className="full">
-                    Organisation
-                    <input placeholder="School, theatre, or company" type="text" />
-                  </label>
-                  <label className="full">
-                    Message
-                    <textarea placeholder="Tell us about your group, delegation, or partnership idea" rows={4} />
-                  </label>
-                </div>
-                <button className="primary-btn wide-btn" type="button">
-                  Send Enquiry
-                </button>
-              </form>
+        <section className="editorial-section" id="programme">
+          <div className="section-head single">
+            <div>
+              <p className="section-kicker">Your 3-Day BICC Journey</p>
+              <h2>A clear convention flow from arrival to showcase.</h2>
             </div>
           </div>
-        </section>
 
-        <section className="section sponsor-section">
-          <div className="section-heading">
-            <p className="section-kicker">Supporting Partners</p>
-            <h2>Suitable for sponsors, families, performers, educators, and international delegates.</h2>
-          </div>
-          <div className="sponsor-grid">
-            {sponsors.map((sponsor) => (
-              <article className="editorial-card sponsor-card" key={sponsor}>
-                <span>{sponsor}</span>
+          <div className="programme-grid">
+            {programmeDays.map((item) => (
+              <article className="programme-card" key={item.day}>
+                <span className="track-label red">{item.day}</span>
+                <h3>{item.title}</h3>
+                <p>{item.body}</p>
               </article>
             ))}
+          </div>
+
+          <div className="section-cta">
+            <a className="secondary-btn" href="#programme">
+              View Full Programme
+            </a>
+          </div>
+        </section>
+
+        <section className="editorial-section" id="workshops">
+          <div className="section-head single">
+            <div>
+              <p className="section-kicker">Training Built For Real Performance Growth</p>
+              <h2>Six workshop anchors to preview the kind of development BICC is built around.</h2>
+            </div>
+          </div>
+
+          <div className="workshop-preview-grid">
+            {workshopPreviews.map((item) => (
+              <article className={`workshop-preview-card ${item.accent}`} key={item.title}>
+                <span className={`track-label ${item.accent}`}>{item.track}</span>
+                <h3>{item.title}</h3>
+                <p>{item.benefit}</p>
+              </article>
+            ))}
+          </div>
+
+          <div className="section-cta">
+            <a className="text-link" href="#workshops">
+              Explore Workshops
+            </a>
+          </div>
+        </section>
+
+        <section className="editorial-section" id="mentors">
+          <div className="section-head">
+            <div>
+              <p className="section-kicker">Learn From International Mentors</p>
+              <h2>Editorial-style mentor profiles that build trust without overloading the page.</h2>
+            </div>
+            <a className="text-link" href="#mentors">
+              View All Mentors
+            </a>
+          </div>
+
+          <div className="mentor-grid">
+            {mentors.map((mentor) => (
+              <article className="mentor-card" key={mentor.name}>
+                <MentorPortrait accent={mentor.accent} />
+                <div className="mentor-copy">
+                  <h3>{mentor.name}</h3>
+                  <p className="mentor-meta">
+                    {mentor.country} · {mentor.specialty}
+                  </p>
+                  <p>{mentor.description}</p>
+                  <span className={`track-label ${mentor.track === 'Foundation' ? 'foundation' : 'mastery'}`}>
+                    {mentor.track} Track
+                  </span>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section className="editorial-section">
+          <div className="section-head single">
+            <div>
+              <p className="section-kicker">More Than A Convention</p>
+              <h2>BICC celebrates clowning as a professional art form and a human connection tool.</h2>
+            </div>
+          </div>
+
+          <div className="impact-grid">
+            {impactItems.map((item) => (
+              <article className="impact-card" key={item.title}>
+                <h3>{item.title}</h3>
+                <p>{item.body}</p>
+              </article>
+            ))}
+          </div>
+
+          <div className="section-cta left">
+            <a className="text-link" href="#about">
+              Discover Community Impact
+            </a>
+          </div>
+        </section>
+
+        <section className="editorial-section" id="venue">
+          <div className="section-head single">
+            <div>
+              <p className="section-kicker">Experience Borneo While You Gather</p>
+              <h2>Make Tawau / Sabah part of the convention experience.</h2>
+            </div>
+          </div>
+
+          <div className="explore-grid">
+            {exploreItems.map((item) => (
+              <article className="explore-card" key={item.title}>
+                <ExploreArt art={item.art} />
+                <h3>{item.title}</h3>
+                <p>{item.body}</p>
+              </article>
+            ))}
+          </div>
+
+          <div className="section-cta left">
+            <a className="text-link" href="#venue">
+              View Venue & Travel Guide
+            </a>
+          </div>
+        </section>
+
+        <section className="editorial-section sponsors-section" id="sponsors">
+          <div className="section-head with-copy">
+            <div>
+              <p className="section-kicker">Partner With A Joyful International Movement</p>
+              <h2>BICC offers sponsors and partners a meaningful platform connected to performance, education, tourism, culture and community impact.</h2>
+            </div>
+            <p className="section-intro">
+              Designed to feel warm and professional for family-facing audiences, international mentors, destination partners and values-led sponsors.
+            </p>
+          </div>
+
+          <div className="logo-row">
+            {Array.from({ length: 5 }).map((_, index) => (
+              <div className="logo-placeholder" key={index}>
+                Partner Logo
+              </div>
+            ))}
+          </div>
+
+          <div className="dual-cta-row">
+            <a className="primary-btn" href="mailto:hello@bicc2026.com">
+              Become a Sponsor
+            </a>
+            <a className="secondary-btn" href="mailto:hello@bicc2026.com">
+              Download Sponsorship Deck
+            </a>
+          </div>
+        </section>
+
+        <section className="final-cta">
+          <div className="final-cta-copy">
+            <p className="section-kicker">Final CTA</p>
+            <h2>Two Tracks. One Price. Choose Your Growth Path.</h2>
+            <p>
+              Whether you are beginning your performance journey or refining your professional stage craft, BICC 2026 gives you a focused path to grow.
+            </p>
+            <div className="final-cta-actions">
+              <a className="primary-btn" href="#passes">
+                Get Foundation Pass
+              </a>
+              <a className="secondary-btn" href="#passes">
+                Get Mastery Pass
+              </a>
+            </div>
+            <small>Both passes are US$130 and include access to your selected workshop track and certificate.</small>
           </div>
         </section>
       </main>
 
       <footer className="site-footer">
-        <div>
-          <p className="footer-kicker">BICC 2026</p>
-          <strong>Wear the Red Nose. Share the Hope.</strong>
+        <PatternCorner side="left" />
+        <PatternCorner side="right" />
+
+        <div className="footer-brand">
+          <h3>
+            Wear the <span>Red Nose.</span>
+            <br />
+            Share the Hope.
+          </h3>
+          <p>Official home of Borneo International Clown Convention 2026.</p>
+          <SmileDoodle />
         </div>
-        <p>Website · Instagram · Facebook · hello@bicc2026.com · Tawau, Sabah, Malaysia</p>
+
+        <div className="footer-column">
+          <strong>BICC 2026</strong>
+          <a href="#about">About</a>
+          <a href="#programme">Programme</a>
+          <a href="#workshops">Workshops</a>
+        </div>
+
+        <div className="footer-column">
+          <strong>Passes</strong>
+          <a href="#passes">Foundation Track Pass</a>
+          <a href="#passes">Mastery Track Pass</a>
+          <a href="#venue">Venue & Travel</a>
+        </div>
+
+        <div className="footer-column">
+          <strong>Sponsors</strong>
+          <a href="#sponsors">Partners</a>
+          <a href="mailto:hello@bicc2026.com">Contact</a>
+          <div className="social-row" aria-label="Social links">
+            <span>f</span>
+            <span>◎</span>
+            <span>▶</span>
+            <span>♪</span>
+          </div>
+        </div>
+
+        <div className="footer-meta">
+          <span>hello@bicc2026.com</span>
+          <span>© 2026 Borneo International Clown Convention. All rights reserved.</span>
+        </div>
       </footer>
     </div>
   )
