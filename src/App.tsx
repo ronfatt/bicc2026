@@ -323,29 +323,6 @@ const workshopHighlights = [
   },
 ]
 
-const workshopValueItems = [
-  {
-    title: 'Learn the Craft',
-    body: 'Practical skills for clowning, movement, timing, interaction and visual play.',
-    tone: 'soft-aqua',
-  },
-  {
-    title: 'Practice with Mentors',
-    body: 'Train with artists who perform, teach and work with real audiences.',
-    tone: 'soft-coral',
-  },
-  {
-    title: 'Build Your Character',
-    body: 'Explore presence, persona, rhythm and the choices that make a clown memorable.',
-    tone: 'soft-yellow',
-  },
-  {
-    title: 'Apply It Beyond the Stage',
-    body: 'Use clowning in shows, schools, outreach, community spaces and family audiences.',
-    tone: 'soft-green',
-  },
-] as const
-
 const workshopCards = [
   {
     id: 'stage-work',
@@ -409,25 +386,6 @@ const workshopCards = [
   },
 ] as const
 
-const workshopLearningSteps = [
-  {
-    title: 'Watch',
-    body: 'See techniques demonstrated clearly by experienced mentors.',
-  },
-  {
-    title: 'Practice',
-    body: 'Try the method yourself through guided exercises and playful experimentation.',
-  },
-  {
-    title: 'Receive Feedback',
-    body: 'Get practical notes to improve timing, character, audience connection and confidence.',
-  },
-  {
-    title: 'Apply',
-    body: 'Bring the work into stage moments, outreach, school shows or your own creative practice.',
-  },
-] as const
-
 const workshopSchedulePreview = [
   {
     day: 'Day 1',
@@ -443,24 +401,6 @@ const workshopSchedulePreview = [
     day: 'Day 3',
     title: 'Showcase, Feedback & Community',
     body: 'Final sessions, performance sharing, community reflection and closing celebration.',
-  },
-] as const
-
-const workshopPracticalInfoItems = [
-  {
-    title: 'What to Bring',
-    body: 'Comfortable clothing, notebook, water bottle, personal props if needed and an open mind for practice.',
-    icon: 'B',
-  },
-  {
-    title: 'Who Can Join',
-    body: 'Clown artists, performers, educators, community workers, family entertainers and anyone serious about learning through performance.',
-    icon: 'J',
-  },
-  {
-    title: 'How to Prepare',
-    body: 'Come ready to move, experiment, laugh, receive feedback and work respectfully with other participants.',
-    icon: 'P',
   },
 ] as const
 
@@ -546,24 +486,6 @@ const mentorPreviewCards = [
 
 type MentorFilterKey = 'all' | 'malaysia' | 'asia' | 'usa' | 'workshop-mentors' | 'guest-artists'
 
-const mentorIntroCards = [
-  {
-    title: 'International Line-up',
-    body: 'Guest artists and mentors from different countries and performance traditions.',
-    tone: 'soft-aqua',
-  },
-  {
-    title: 'Practical Learning',
-    body: 'Mentors who bring real stage, workshop and audience experience.',
-    tone: 'soft-coral',
-  },
-  {
-    title: 'Creative Exchange',
-    body: 'A shared space for learning, cultural exchange and professional growth.',
-    tone: 'soft-yellow',
-  },
-] as const
-
 const mentorFilterItems: Array<{ key: MentorFilterKey; label: string }> = [
   { key: 'all', label: 'All' },
   { key: 'malaysia', label: 'Malaysia' },
@@ -572,24 +494,6 @@ const mentorFilterItems: Array<{ key: MentorFilterKey; label: string }> = [
   { key: 'workshop-mentors', label: 'Workshop Mentors' },
   { key: 'guest-artists', label: 'Guest Artists' },
 ]
-
-const mentorLearningCards = [
-  {
-    title: 'Through Workshops',
-    body: 'Hands-on sessions focused on practical clown craft, performance technique and creative development.',
-    icon: 'W',
-  },
-  {
-    title: 'Through Exchange',
-    body: 'Cross-cultural sharing between artists, educators, performers and community practitioners.',
-    icon: 'E',
-  },
-  {
-    title: 'Through Showcase',
-    body: 'Stage moments, performance presence and shared convention energy.',
-    icon: 'S',
-  },
-] as const
 
 const mentorLineup: MentorProfile[] = [
   {
@@ -763,35 +667,6 @@ const storyFeatures = [
   },
 ]
 
-const borneoCards = [
-  {
-    title: 'Local Taste',
-    body: 'Experience Tawau through food, coffee and the everyday warmth that makes gathering here memorable.',
-    label: 'Tawau Food & Coffee',
-    tag: 'Taste',
-  },
-  {
-    title: 'Nature & Culture',
-    body: 'Meet a destination shaped by people, place, stories and the wider cultural spirit of Sabah and Borneo.',
-    label: 'Culture & Coastal Warmth',
-    tag: 'Culture',
-  },
-  {
-    title: 'Travel Guide',
-    body: 'Plan your stay with practical venue, hotel and visitor guidance so the trip feels possible, not complicated.',
-    label: 'Venue & Visitor Guide',
-    tag: 'Guide',
-  },
-]
-
-const sponsorLogos = [
-  'CDesign Production Sdn. Bhd.',
-  'Rotary Club of Tawau',
-  'Sabah Convention Bureau',
-  'Sabah Tourism Board',
-  'World Clown Association',
-]
-
 const sponsorSupportGroups = [
   {
     title: 'Organiser',
@@ -865,21 +740,6 @@ const sponsorOpportunityCards = [
   },
 ] as const
 
-const sponsorBrandAppearItems = [
-  'Website',
-  'Stage Backdrop',
-  'Delegate Pass',
-  'Official Magazine',
-  'Social Media',
-  'Booth Area',
-  'Workshop Room',
-  'Welcome Kit',
-  'Venue Signage',
-  'Media Wall',
-  'Outreach Programme',
-  'Thank You Video',
-] as const
-
 const sponsorPackageCards = [
   {
     title: 'Legacy Partner',
@@ -900,21 +760,6 @@ const sponsorPackageCards = [
     title: 'Community Partner',
     body: 'For local businesses and supporters who want to be part of BICC.',
     points: ['Accessible local partnership', 'On-site visibility', 'Supporter recognition', 'Warm community alignment'],
-  },
-] as const
-
-const sponsorImpactMoments = [
-  {
-    title: 'A child smiles during outreach.',
-    body: 'Joy becomes visible when sponsorship supports real moments of connection.',
-  },
-  {
-    title: 'A performer learns a new skill.',
-    body: 'Training support helps delegates return to their work with stronger craft.',
-  },
-  {
-    title: 'A visitor discovers Tawau.',
-    body: 'Destination partnerships connect cultural tourism with convention energy.',
   },
 ] as const
 
@@ -1218,38 +1063,6 @@ const programmeDays: ProgrammeDay[] = [
   },
 ]
 
-const programmeHighlights = [
-  {
-    title: 'Opening Ceremony',
-    copy: 'A shared beginning for delegates, mentors, performers and guests from different creative communities.',
-    type: 'All Delegates',
-    accent: 'showcase',
-    image: clownShowImage,
-    featured: true,
-  },
-  {
-    title: 'Hands-On Workshop Blocks',
-    copy: 'Focused training sessions designed for practical learning, guided practice and creative feedback.',
-    type: 'Foundation & Mastery',
-    accent: 'foundation',
-    image: clownStageImage,
-  },
-  {
-    title: 'Exchange Lab',
-    copy: 'A space for international and local artists to share methods, culture, stories and performance perspectives.',
-    type: 'Exchange',
-    accent: 'exchange',
-    image: clownDuoImage,
-  },
-  {
-    title: 'Showcase & Closing Celebration',
-    copy: 'A final gathering to share performance work, celebrate learning and carry the joy forward.',
-    type: 'Showcase & Community',
-    accent: 'community',
-    image: clownHeroImage,
-  },
-] as const
-
 const programmeTrackConnection = [
   {
     title: 'Foundation Track Pass',
@@ -1278,29 +1091,6 @@ const programmeTrackConnection = [
     ],
     accent: 'mastery',
     cta: 'Get Mastery Pass',
-  },
-] as const
-
-const practicalInfoItems = [
-  {
-    title: 'Registration',
-    copy: 'Arrive early enough to check in, collect your materials and receive any programme updates.',
-    icon: 'R',
-  },
-  {
-    title: 'Track Access',
-    copy: 'Some sessions may be track-specific. Final access details will follow the selected pass and organiser confirmation.',
-    icon: 'T',
-  },
-  {
-    title: 'Room Assignments',
-    copy: 'Workshop rooms and venue zones will be announced closer to the convention.',
-    icon: 'V',
-  },
-  {
-    title: 'What to Bring',
-    copy: 'Comfortable clothing, notebook, water bottle, personal props if needed and an open mind for practice.',
-    icon: 'B',
   },
 ] as const
 
@@ -1395,42 +1185,6 @@ const venueQuickFacts = [
   },
 ] as const
 
-const calvaryCrownHighlights = [
-  {
-    title: 'The Building',
-    copy: `A ${venueInfo.buildingStoreys}-storey landmark completed in ${venueInfo.completedYear}, with the scale and identity of a real convention venue.`,
-  },
-  {
-    title: 'Where It Sits',
-    copy: 'Located in Taman Setia, Mile 3, it places delegates inside everyday Tawau rather than outside it.',
-  },
-  {
-    title: 'Why It Fits BICC',
-    copy: 'Its mix of reception, learning floors and shared halls makes it feel like a vertical convention campus, not a single hall.',
-  },
-] as const
-
-const venuePhotoStripItems = [
-  {
-    title: 'Exterior & neighbourhood',
-    body: 'See where the building sits in Tawau.',
-    image: calvaryCrownAerialImage,
-    tone: 'context',
-  },
-  {
-    title: 'Arrival side of the site',
-    body: 'Use the frontage and reception side as your first orientation cue.',
-    image: calvaryCrownAerialImage,
-    tone: 'arrival',
-  },
-  {
-    title: 'Architectural concept',
-    body: 'A quick way to understand the building’s vertical stack.',
-    image: calvaryCrownPlanImage,
-    tone: 'blueprint',
-  },
-] as const
-
 const calvaryCrownLevels = [
   {
     level: 'Level 1',
@@ -1501,54 +1255,6 @@ const calvaryCrownLevels = [
     copy: 'A strong upper-level venue for large sessions, celebration or showcase flow.',
     use: 'Showcase potential',
     type: 'showcase' as ProgrammeSessionType,
-  },
-] as const
-
-const venueZones = [
-  {
-    title: 'Registration & Check-in',
-    type: 'delegate-info' as ProgrammeSessionType,
-    icon: 'B',
-    description:
-      'Your first stop for delegate check-in, materials, badge or pass collection and the latest programme updates, most naturally tied to Calvary Crown’s reception level.',
-    features: ['Level 1 reception', 'Delegate badge / pass', 'Programme updates', 'Arrival guidance'],
-    status: 'Planned Zone',
-  },
-  {
-    title: 'Main Hall & Shared Gathering',
-    type: 'showcase' as ProgrammeSessionType,
-    icon: 'S',
-    description:
-      'The shared anchor for opening moments, announcements, community gathering and selected showcase flow.',
-    features: ['Level 2 worship hall', 'Level 10 function hall', 'Shared sessions', 'Announcements'],
-    status: 'Planned Zone',
-  },
-  {
-    title: 'Workshop Floors',
-    type: 'foundation' as ProgrammeSessionType,
-    icon: 'W',
-    description:
-      'Foundation and Mastery sessions can draw from the building’s education and training floors once final room assignments are issued.',
-    features: ['Level 3 gym', 'Level 4 school', 'Level 5 library / exhibition', 'Level 6 training school'],
-    status: 'Details Coming Soon',
-  },
-  {
-    title: 'Exchange & Community Area',
-    type: 'exchange' as ProgrammeSessionType,
-    icon: 'E',
-    description:
-      'A place for conversation, creative exchange and informal networking between delegates and mentors.',
-    features: ['Exchange Lab', 'Networking', 'Group sharing', 'Community connection'],
-    status: 'Planned Zone',
-  },
-  {
-    title: 'Showcase, Photo & Rest Moments',
-    type: 'community' as ProgrammeSessionType,
-    icon: 'P',
-    description:
-      'Performance sharing, red nose moments, breaks and recharge spaces can be organised around the building’s larger shared zones and reception-side rest pockets.',
-    features: ['Showcase prep', 'Photo moments', 'Cafe / reception floor', 'Recharge'],
-    status: 'Details Coming Soon',
   },
 ] as const
 
@@ -1914,14 +1620,13 @@ function ProgrammeHero() {
           <span className="programme-ticket-badge">Official Convention Programme</span>
         </div>
         <p className="programme-hero-intro">
-          From arrival and opening moments to hands-on workshops, cultural exchange, showcase preparation and community celebration, the BICC programme is designed as a complete convention journey.
+          A clear 3-day journey through arrival, workshops, exchange, showcase and community moments.
         </p>
         <div className="event-badges programme-hero-badges">
           <span>Aug 3–5, 2026</span>
           <span>Tawau, Sabah</span>
           <span>2 Workshop Tracks</span>
-          <span>International Mentors</span>
-          <span>Showcase & Community</span>
+          <span>Showcase Journey</span>
         </div>
         <div className="hero-actions programme-hero-actions">
           <a className="primary-btn" href="/passes">
@@ -1948,10 +1653,6 @@ function ProgrammeHero() {
           <img alt="Workshop moment" src={clownStageImage} />
           <span>Workshop energy</span>
         </article>
-        <article className="programme-floating-card bottom">
-          <img alt="Exchange and performance moment" src={clownDuoImage} />
-          <span>Exchange & performance</span>
-        </article>
         <PatternCorner side="right" />
       </div>
     </section>
@@ -1966,9 +1667,6 @@ function ProgramAtAGlance() {
           <p className="section-kicker">Convention at a Glance</p>
           <h2>A simple rhythm before the detailed schedule.</h2>
         </div>
-        <p className="section-intro">
-          A quick overview of the 3-day convention flow before you dive into the detailed programme preview.
-        </p>
       </div>
 
       <div className="programme-glance-grid">
@@ -1991,29 +1689,6 @@ function ProgramAtAGlance() {
             <a className="text-link" href={`#${day.id}`}>
               View Day Details
             </a>
-          </article>
-        ))}
-      </div>
-    </section>
-  )
-}
-
-function ProgramLegend() {
-  return (
-    <section className="editorial-section section-shell programme-legend-section">
-      <div className="section-head with-copy">
-        <div>
-          <p className="section-kicker">Programme Key</p>
-          <h2>Read the programme by colour and category.</h2>
-        </div>
-        <p className="section-intro">Use the labels below to quickly understand each programme block.</p>
-      </div>
-
-      <div className="programme-legend-grid">
-        {programmeLegendItems.map((item) => (
-          <article className="programme-legend-card" key={item.key}>
-            <ProgrammeTypePill label={item.label} type={item.key} />
-            <p>{item.description}</p>
           </article>
         ))}
       </div>
@@ -2134,39 +1809,6 @@ function ProgramTimeline({
   )
 }
 
-function ProgramHighlights() {
-  return (
-    <section className="editorial-section section-shell programme-highlights">
-      <div className="section-head with-copy">
-        <div>
-          <p className="section-kicker">Programme Highlights</p>
-          <h2>Some moments define the BICC experience beyond the timetable.</h2>
-        </div>
-        <p className="section-intro">A few key moments help shape the convention rhythm beyond the schedule grid.</p>
-      </div>
-
-      <div className="programme-highlights-grid">
-        {programmeHighlights.map((item) => {
-          const isFeatured = 'featured' in item && item.featured
-
-          return (
-            <article className={`programme-highlight-card ${isFeatured ? 'featured' : ''} ${item.accent}`} key={item.title}>
-              <div className="programme-highlight-image">
-                <img alt={item.title} src={item.image} />
-              </div>
-              <div className="programme-highlight-copy">
-                <ProgrammeTypePill label={item.type} type={item.accent as ProgrammeSessionType} />
-                <h3>{item.title}</h3>
-                <p>{item.copy}</p>
-              </div>
-            </article>
-          )
-        })}
-      </div>
-    </section>
-  )
-}
-
 function ProgramTrackConnection() {
   return (
     <section className="editorial-section section-shell programme-track-connection">
@@ -2175,9 +1817,6 @@ function ProgramTrackConnection() {
           <p className="section-kicker">How the Programme Connects to Your Pass</p>
           <h2>Your pass shapes the workshop focus inside the wider convention journey.</h2>
         </div>
-        <p className="section-intro">
-          Your pass gives you access to the convention journey, with workshop focus shaped by your selected track.
-        </p>
       </div>
 
       <div className="track-comparison">
@@ -2200,51 +1839,6 @@ function ProgramTrackConnection() {
             </div>
           </article>
         ))}
-      </div>
-    </section>
-  )
-}
-
-function ProgramPracticalInfo() {
-  return (
-    <section className="editorial-section section-shell programme-practical">
-      <div className="section-head with-copy">
-        <div>
-          <p className="section-kicker">Before You Follow the Programme</p>
-          <h2>Practical notes that help the convention flow feel easy.</h2>
-        </div>
-      </div>
-
-      <div className="programme-practical-grid">
-        {practicalInfoItems.map((item) => (
-          <article className="programme-practical-card" key={item.title}>
-            <span className="programme-practical-icon">{item.icon}</span>
-            <h3>{item.title}</h3>
-            <p>{item.copy}</p>
-          </article>
-        ))}
-      </div>
-    </section>
-  )
-}
-
-function ProgramUpdatesNotice() {
-  return (
-    <section className="editorial-section programme-updates">
-      <div className="programme-updates-copy">
-        <p className="section-kicker">Programme Updates</p>
-        <h2>The programme preview shows the flow. Final details will follow closer to the convention.</h2>
-        <p>
-          Final session times, room assignments, mentor allocations and special activities will be updated closer to the event. Official programme PDF coming soon.
-        </p>
-      </div>
-      <div className="programme-updates-actions">
-        <a className="secondary-btn" href="/workshops">
-          View Workshops
-        </a>
-        <a className="primary-btn" href="/passes">
-          Get Your Pass
-        </a>
       </div>
     </section>
   )
@@ -2290,9 +1884,6 @@ function ProgramCTA() {
         <a className="primary-btn" href="/passes">
           Get Your Pass
         </a>
-        <a className="secondary-btn" href="/passes">
-          Compare Tracks
-        </a>
         <a className="secondary-btn" href="/workshops">
           View Workshops
         </a>
@@ -2308,7 +1899,6 @@ function ProgrammePage() {
     <main className="programme-page">
       <ProgrammeHero />
       <ProgramAtAGlance />
-      <ProgramLegend />
 
       <section className="editorial-section section-shell programme-dayflow">
         <div className="section-head with-copy">
@@ -2331,10 +1921,7 @@ function ProgrammePage() {
         </div>
       </section>
 
-      <ProgramHighlights />
       <ProgramTrackConnection />
-      <ProgramPracticalInfo />
-      <ProgramUpdatesNotice />
       <ProgramFAQ />
       <ProgramCTA />
     </main>
@@ -2357,15 +1944,13 @@ function VenueHero() {
           <span className="programme-ticket-badge">Official Delegate Venue Guide</span>
         </div>
         <p className="venue-hero-intro">
-          BICC 2026 gathers delegates at {venueInfo.venueName} in {venueInfo.city}, {venueInfo.region}. Use this guide to understand the building, arrival flow and venue basics.
+          BICC 2026 gathers at {venueInfo.venueName} in {venueInfo.city}, {venueInfo.region}. This guide covers the building, arrival flow and essentials.
         </p>
         <div className="event-badges programme-hero-badges">
           <span>{venueInfo.city}, {venueInfo.region}</span>
           <span>Aug 3–5, 2026</span>
           <span>Delegate Registration</span>
-          <span>Workshop Zones</span>
-          <span>Showcase Space</span>
-          <span>Visitor Guide</span>
+          <span>Workshop Floors</span>
         </div>
         <div className="hero-actions programme-hero-actions">
           <a className="primary-btn" href="/passes">
@@ -2408,67 +1993,6 @@ function VenueHero() {
           <img alt="Calvary Crown exterior and city context" src={calvaryCrownAerialImage} />
           <span>Calvary Crown exterior</span>
         </article>
-        <article className="venue-floating-photo bottom">
-          <img alt="Calvary Crown architectural design board" src={calvaryCrownPlanImage} />
-          <span>Architectural concept</span>
-        </article>
-      </div>
-    </section>
-  )
-}
-
-function CalvaryCrownGuide() {
-  return (
-    <section className="editorial-section section-shell calvary-guide">
-      <div className="section-head with-copy">
-        <div>
-          <p className="section-kicker">Meet Calvary Crown</p>
-          <h2>A vertical landmark venue built for movement, gathering and shared convention rhythm.</h2>
-        </div>
-        <p className="section-intro">
-          Calvary Crown gives BICC more identity than a generic hall because the building already supports arrival, learning and shared gathering across multiple levels.
-        </p>
-      </div>
-
-      <div className="calvary-guide-shell">
-        <div className="calvary-guide-copy">
-          {calvaryCrownHighlights.map((item) => (
-            <article className="calvary-guide-note" key={item.title}>
-              <h3>{item.title}</h3>
-              <p>{item.copy}</p>
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
-  )
-}
-
-function VenuePhotoStrip() {
-  return (
-    <section className="editorial-section section-shell venue-photo-strip">
-      <div className="section-head with-copy">
-        <div>
-          <p className="section-kicker">See the Venue</p>
-          <h2>Real building context helps delegates feel oriented faster.</h2>
-        </div>
-        <p className="section-intro">
-          These views help delegates recognise the building, its setting and its vertical form before the full map is released.
-        </p>
-      </div>
-
-      <div className="venue-photo-grid">
-        {venuePhotoStripItems.map((item) => (
-          <article className={`venue-photo-card ${item.tone}`} key={item.title}>
-            <div className="venue-photo-media">
-              <img alt={item.title} src={item.image} />
-            </div>
-            <div className="venue-photo-copy">
-              <h3>{item.title}</h3>
-              <p>{item.body}</p>
-            </div>
-          </article>
-        ))}
       </div>
     </section>
   )
@@ -2482,7 +2006,6 @@ function VenueQuickFacts() {
           <p className="section-kicker">Venue at a Glance</p>
           <h2>The essentials most delegates want first.</h2>
         </div>
-        <p className="section-intro">Location, dates, building type and delegate flow in one scan.</p>
       </div>
 
       <div className="venue-facts-grid">
@@ -2502,72 +2025,6 @@ function VenueQuickFacts() {
   )
 }
 
-function VenueAnnouncementNotice() {
-  if (venueInfo.mapConfirmed && venueInfo.roomAssignmentsConfirmed) return null
-
-  return (
-    <section className="venue-announcement">
-      <div className="venue-announcement-copy">
-        <p className="section-kicker">Delegate Map & Room Guide Coming Soon</p>
-        <h2>The venue is confirmed. Final room directions come next.</h2>
-        <p>
-          Calvary Crown is confirmed. The next update will add room assignments, registration directions and the final wayfinding layer.
-        </p>
-      </div>
-      <div className="programme-updates-actions">
-        <a className="primary-btn" href="/passes">
-          Get Your Pass
-        </a>
-        <a className="secondary-btn" href="/programme">
-          View Programme
-        </a>
-        <a className="secondary-btn" href="mailto:hello@bicc2026.com">
-          Contact Organizers
-        </a>
-      </div>
-    </section>
-  )
-}
-
-function VenueZones() {
-  return (
-    <section className="editorial-section section-shell venue-zones">
-      <div className="section-head with-copy">
-        <div>
-          <p className="section-kicker">Navigate the Experience</p>
-          <h2>The venue can be understood in five practical delegate zones.</h2>
-        </div>
-        <p className="section-intro">
-          Think of the building as a small vertical convention campus, not a single-room event.
-        </p>
-      </div>
-
-      <div className="venue-zones-grid">
-        {venueZones.map((zone) => (
-          <article className={`venue-zone-card ${zone.type}`} key={zone.title}>
-            <div className="venue-zone-top">
-              <span className="venue-zone-icon">{zone.icon}</span>
-              <ProgrammeTypePill
-                label={zone.status}
-                type={zone.status === 'Planned Zone' ? zone.type : 'delegate-info'}
-              />
-            </div>
-            <h3>{zone.title}</h3>
-            <p>{zone.description}</p>
-            <div className="programme-day-chip-row">
-              {zone.features.map((feature) => (
-                <span className="programme-mini-chip" key={feature}>
-                  {feature}
-                </span>
-              ))}
-            </div>
-          </article>
-        ))}
-      </div>
-    </section>
-  )
-}
-
 function VenueMap() {
   return (
     <section className="editorial-section section-shell venue-map-section">
@@ -2576,9 +2033,7 @@ function VenueMap() {
           <p className="section-kicker">Venue Map</p>
           <h2>Find registration, workshop rooms and key delegate zones at a glance.</h2>
         </div>
-        <p className="section-intro">
-          The official venue map will guide delegates to reception, learning floors, shared halls and support points.
-        </p>
+        <p className="section-intro">Reception, learning floors and shared halls in one view.</p>
       </div>
 
       <div className="venue-map-shell">
@@ -2696,9 +2151,6 @@ function GettingToTawau() {
           <p className="section-kicker">Plan Your Visit</p>
           <h2>The practical details people actually need before arriving.</h2>
         </div>
-        <p className="section-intro">
-          Travel, stay, arrival, access and essentials are kept here in one lighter section.
-        </p>
       </div>
 
       <div className="venue-practical-grid">
@@ -2710,34 +2162,6 @@ function GettingToTawau() {
             <span className="venue-coming-soon neutral">{card.note}</span>
           </article>
         ))}
-      </div>
-    </section>
-  )
-}
-
-function VenueUpdatesNotice() {
-  return (
-    <section className="editorial-section section-shell venue-updates">
-      <div className="section-head with-copy">
-        <div>
-          <p className="section-kicker">Venue Updates</p>
-          <h2>One place to look for final room and wayfinding updates.</h2>
-        </div>
-        <p className="section-intro">
-          Final room assignments, map overlays and registration details for {venueInfo.venueName} will be updated closer to BICC 2026.
-        </p>
-      </div>
-
-      <div className="programme-updates-actions">
-        <a className="secondary-btn" href="/programme">
-          View Programme
-        </a>
-        <a className="secondary-btn" href="/workshops">
-          View Workshops
-        </a>
-        <a className="primary-btn" href="/passes">
-          Get Your Pass
-        </a>
       </div>
     </section>
   )
@@ -2786,9 +2210,6 @@ function VenueCTA() {
         <a className="secondary-btn" href="/programme">
           View Programme
         </a>
-        <a className="secondary-btn" href="/workshops">
-          Explore Workshops
-        </a>
       </div>
     </section>
   )
@@ -2799,14 +2220,9 @@ function VenuePage() {
     <main className="venue-page">
       <VenueHero />
       <VenueQuickFacts />
-      <VenuePhotoStrip />
-      <CalvaryCrownGuide />
-      <VenueAnnouncementNotice />
-      <VenueZones />
       <VenueMap />
       <DelegateArrivalFlow />
       <GettingToTawau />
-      <VenueUpdatesNotice />
       <VenueFAQ />
       <VenueCTA />
     </main>
@@ -2869,9 +2285,8 @@ function SponsorTrustStrip() {
       <div className="section-head with-copy">
         <div>
           <p className="section-kicker">Official Support & Current Partners</p>
-          <h2>Institutional support should be visible from the start.</h2>
+          <h2>Official support, visible from the start.</h2>
         </div>
-        <p className="section-intro">A clean trust strip that shows BICC is supported by recognised organisers, tourism bodies, community partners and international clown networks.</p>
       </div>
 
       <div className="sponsor-support-groups">
@@ -2898,7 +2313,7 @@ function SponsorWhySection() {
       <div className="section-head with-copy">
         <div>
           <p className="section-kicker">Why Sponsor BICC?</p>
-          <h2>Short, commercial reasons a sponsor can understand quickly.</h2>
+          <h2>Clear reasons a sponsor can understand quickly.</h2>
         </div>
       </div>
 
@@ -2925,7 +2340,7 @@ function SponsorOpportunities() {
           <p className="section-kicker">Sponsorship Opportunities</p>
           <h2>Clear ways different brands can participate.</h2>
         </div>
-        <p className="section-intro">Hotels, restaurants, CSR brands, education groups, tourism players, media partners and local businesses should be able to spot where they fit.</p>
+        <p className="section-intro">Different partners should be able to spot where they fit right away.</p>
       </div>
 
       <div className="sponsor-opportunity-grid">
@@ -2941,42 +2356,13 @@ function SponsorOpportunities() {
   )
 }
 
-function SponsorBrandMap() {
-  return (
-    <section className="editorial-section section-shell sponsor-brand-map-section">
-      <div className="section-head with-copy">
-        <div>
-          <p className="section-kicker">Where Your Brand Appears</p>
-          <h2>A simple visibility map instead of a long paragraph.</h2>
-        </div>
-      </div>
-
-      <div className="sponsor-brand-map-shell">
-        <div className="sponsor-brand-core">
-          <img alt="BICC logo" src={biccLogo} />
-          <strong>BICC 2026</strong>
-          <span>Brand visibility map</span>
-        </div>
-        <div className="sponsor-brand-points">
-          {sponsorBrandAppearItems.map((item) => (
-            <span className="programme-type-pill delegate-info" key={item}>
-              <ProgrammeTypeDot type="delegate-info" />
-              {item}
-            </span>
-          ))}
-        </div>
-      </div>
-    </section>
-  )
-}
-
 function SponsorPackages() {
   return (
     <section className="editorial-section section-shell sponsor-packages-section">
       <div className="section-head with-copy">
         <div>
           <p className="section-kicker">Sponsorship Packages</p>
-          <h2>Enough structure to invite inquiry, without dumping a pricing sheet on the page.</h2>
+          <h2>Simple tiers that invite inquiry.</h2>
         </div>
       </div>
 
@@ -2995,63 +2381,6 @@ function SponsorPackages() {
             </a>
           </article>
         ))}
-      </div>
-    </section>
-  )
-}
-
-function SponsorImpactStory() {
-  return (
-    <section className="sponsor-impact-band">
-      <div className="sponsor-impact-photo image-frame">
-        <img alt="BICC outreach and joyful convention moment" src={clownShowImage} />
-      </div>
-      <div className="sponsor-impact-copy">
-        <p className="section-kicker">Impact Story</p>
-        <h2>Sponsor more than an event. Sponsor a moment of joy.</h2>
-        <div className="sponsor-impact-grid">
-          {sponsorImpactMoments.map((item) => (
-            <article className="sponsor-impact-card" key={item.title}>
-              <h3>{item.title}</h3>
-              <p>{item.body}</p>
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
-  )
-}
-
-function SponsorLogoWall() {
-  return (
-    <section className="editorial-section section-shell sponsor-logo-wall-section">
-      <div className="section-head with-copy">
-        <div>
-          <p className="section-kicker">Partners Who Make BICC Possible</p>
-          <h2>A premium logo wall with clear groupings.</h2>
-        </div>
-        <p className="section-intro">Join these partners in supporting BICC 2026.</p>
-      </div>
-
-      <div className="sponsor-support-groups logo-wall">
-        {sponsorSupportGroups.map((group) => (
-          <article className="sponsor-support-group" key={`wall-${group.title}`}>
-            <h3>{group.title}</h3>
-            <div className="sponsor-support-grid">
-              {group.items.map((item) => (
-                <span className="sponsor-logo-card" key={`wall-${item}`}>
-                  {item}
-                </span>
-              ))}
-            </div>
-          </article>
-        ))}
-      </div>
-
-      <div className="section-cta sponsor-actions">
-        <a className="primary-btn" href="mailto:hello@bicc2026.com?subject=BICC%202026%20Sponsor%20Inquiry">
-          Become a Sponsor
-        </a>
       </div>
     </section>
   )
@@ -3112,10 +2441,7 @@ function SponsorsPage() {
       <SponsorTrustStrip />
       <SponsorWhySection />
       <SponsorOpportunities />
-      <SponsorBrandMap />
       <SponsorPackages />
-      <SponsorImpactStory />
-      <SponsorLogoWall />
       <SponsorCTA />
     </main>
   )
@@ -3149,15 +2475,10 @@ function PassHero() {
         <p className="passes-hero-intro">
           Foundation is for newer performers building confidence. Mastery is for experienced performers ready for sharper stage work and critique.
         </p>
-        <p className="passes-hero-note">
-          Good for first-time delegates, educators, family performers and international guests looking for a clear training path.
-        </p>
         <div className="event-badges programme-hero-badges">
           <span>Aug 3–5, 2026</span>
           <span>Tawau, Sabah</span>
-          <span>3-Day Convention</span>
           <span>2 Workshop Tracks</span>
-          <span>International Mentors</span>
           <span>US$130</span>
         </div>
         <div className="hero-actions programme-hero-actions">
@@ -3206,9 +2527,7 @@ function PassComparisonCards() {
           <p className="section-kicker">Two Passes. One Shared Convention.</p>
           <h2>Choose the pass that fits where you are right now.</h2>
         </div>
-        <p className="section-intro">
-          Both passes include the same 3-day convention. The difference is the training level and the kind of feedback you want.
-        </p>
+        <p className="section-intro">Same convention. Different training level.</p>
       </div>
 
       <div className="pass-ticket-grid">
@@ -3286,20 +2605,6 @@ function PassIncludedSection() {
             </div>
           </article>
         ))}
-      </div>
-    </section>
-  )
-}
-
-function PassImportantNotice() {
-  return (
-    <section className="pass-important-note">
-      <div className="pass-important-copy">
-        <p className="section-kicker">Before You Register</p>
-        <h2>A few things to keep in mind.</h2>
-        <p>
-          Unless the organizer states otherwise, passes do not automatically include accommodation, travel, meals or transport. Final session access and room assignments will be confirmed closer to the event.
-        </p>
       </div>
     </section>
   )
@@ -3412,14 +2717,8 @@ function PassCTA() {
         <a className="primary-btn" href={passes[1].ctaHref}>
           Get Mastery Pass
         </a>
-        <a className="secondary-btn" href="#pass-compare">
-          Compare Tracks
-        </a>
         <a className="secondary-btn" href="/programme">
           View Programme
-        </a>
-        <a className="secondary-btn" href="/workshops">
-          Explore Workshops
         </a>
       </div>
     </section>
@@ -3430,9 +2729,8 @@ function PassesPage() {
   return (
     <main className="passes-page">
       <PassHero />
-      <PassComparisonCards />
       <PassIncludedSection />
-      <PassImportantNotice />
+      <PassComparisonCards />
       <PassDecisionGuide />
       <PassRegistrationFlow />
       <PassFAQ />
@@ -3457,12 +2755,11 @@ function WorkshopHero() {
           <span className="programme-ticket-badge">Focused Workshop Learning</span>
         </div>
         <p className="passes-hero-intro">
-          Build stronger clown technique through practical workshops in performance, character, visual play, audience interaction, educational shows and community-based clowning.
+          Build stronger clown technique through practical training in performance, character, visual play and audience connection.
         </p>
         <div className="event-badges programme-hero-badges">
           <span>3 Days</span>
           <span>2 Workshop Tracks</span>
-          <span>International Mentors</span>
           <span>Practical Training</span>
           <span>Tawau, Sabah</span>
         </div>
@@ -3477,11 +2774,6 @@ function WorkshopHero() {
         <a className="text-link programme-hero-link" href="/programme">
           View Programme
         </a>
-        <div className="workshop-hero-note-row">
-          <span>Move with clarity</span>
-          <span>Play with purpose</span>
-          <span>Train for real audiences</span>
-        </div>
       </div>
 
       <div className="workshops-hero-visual">
@@ -3491,49 +2783,12 @@ function WorkshopHero() {
         <article className="workshop-hero-sidecard">
           <span className="workshop-hero-sidecard-label">Training Focus</span>
           <strong>Stage craft, visual play, outreach and live audience connection.</strong>
-          <div className="workshop-hero-sidecard-chips">
-            <span>Foundation</span>
-            <span>Mastery</span>
-            <span>Community</span>
-          </div>
         </article>
         <article className="programme-floating-card top">
           <img alt="Workshop practice" src={clownStageImage} />
           <span>Practice & props</span>
         </article>
-        <article className="programme-floating-card bottom">
-          <img alt="Mentor feedback and audience energy" src={clownDuoImage} />
-          <span>Mentor & audience energy</span>
-        </article>
         <PatternCorner side="right" />
-      </div>
-    </section>
-  )
-}
-
-function WorkshopValueCards() {
-  return (
-    <section className="editorial-section section-shell workshop-values-section">
-      <div className="section-head with-copy">
-        <div>
-          <p className="section-kicker">More Than Inspiration. Real Practice.</p>
-          <h2>Workshops designed for doing, not just watching.</h2>
-        </div>
-        <p className="section-intro">
-          Each session focuses on usable techniques, guided practice, creative feedback and performance confidence.
-        </p>
-      </div>
-
-      <div className="workshop-value-grid">
-        {workshopValueItems.map((item) => (
-          <article className={`venue-fact-card ${item.tone}`} key={item.title}>
-            <RedNoseIcon />
-            <div className="venue-fact-copy">
-              <h3>{item.title}</h3>
-              <p>{item.body}</p>
-            </div>
-          </article>
-        ))}
       </div>
     </section>
   )
@@ -3545,7 +2800,7 @@ function TrackSelector() {
       <div className="section-head with-copy">
         <div>
           <p className="section-kicker">Choose the Workshop Path That Fits Your Stage.</p>
-          <h2>Whether you are building your foundation or sharpening an existing practice, BICC gives you a clear path to grow.</h2>
+          <h2>Choose the path that fits your current stage.</h2>
         </div>
       </div>
 
@@ -3608,7 +2863,6 @@ function WorkshopCatalogue() {
           <p className="section-kicker">Workshop Catalogue</p>
           <h2>Hands-on sessions designed to help you create, connect, perform and serve.</h2>
         </div>
-        <p className="section-intro">Detailed session times will be announced closer to the convention.</p>
       </div>
 
       <div className="workshop-catalogue-grid">
@@ -3640,31 +2894,6 @@ function WorkshopCatalogue() {
   )
 }
 
-function LearningJourney() {
-  return (
-    <section className="editorial-section section-shell workshop-journey-section">
-      <div className="section-head with-copy">
-        <div>
-          <p className="section-kicker">How the Workshop Experience Works</p>
-          <h2>A practical learning loop built around doing.</h2>
-        </div>
-      </div>
-
-      <div className="pass-registration-flow">
-        {workshopLearningSteps.map((step, index) => (
-          <article className="venue-arrival-step" key={step.title}>
-            <span className="venue-arrival-number">{index + 1}</span>
-            <div>
-              <h3>{step.title}</h3>
-              <p>{step.body}</p>
-            </div>
-          </article>
-        ))}
-      </div>
-    </section>
-  )
-}
-
 function WorkshopSchedulePreview() {
   return (
     <section className="editorial-section section-shell workshop-rhythm-section">
@@ -3673,9 +2902,7 @@ function WorkshopSchedulePreview() {
           <p className="section-kicker">Workshop Rhythm</p>
           <h2>Workshops sit inside the wider 3-day BICC journey.</h2>
         </div>
-        <p className="section-intro">
-          Workshops are part of the 3-day convention flow, with training, exchange, stage practice and community connection.
-        </p>
+        <p className="section-intro">Training, exchange and showcase moments across three days.</p>
       </div>
 
       <div className="programme-journey-grid">
@@ -3688,66 +2915,9 @@ function WorkshopSchedulePreview() {
         ))}
       </div>
 
-      <p className="section-intro">Detailed session times and room assignments will be announced closer to the convention.</p>
       <a className="text-link" href="/programme">
         View Full Programme
       </a>
-    </section>
-  )
-}
-
-function WorkshopMentorGrid() {
-  return (
-    <section className="editorial-section section-shell workshop-mentors-section">
-      <div className="section-head with-copy">
-        <div>
-          <p className="section-kicker">Learn From Artists Who Work With Real Audiences.</p>
-          <h2>Performers, teaching artists and mentors who understand both the stage and the human side of clowning.</h2>
-        </div>
-        <p className="section-intro">
-          Mentor line-up details will continue to update as official faculty announcements are confirmed.
-        </p>
-      </div>
-
-      <div className="mentor-preview-grid">
-        {mentorPreviewCards.map((item) => (
-          <article className="mentor-preview-card" key={item.title}>
-            <div className="mentor-preview-media">
-              <img alt={item.title} src={item.image} />
-            </div>
-            <div className="mentor-preview-copy">
-              <span className="track-label red sticker-badge">{item.track}</span>
-              <h3>{item.title}</h3>
-              <p>{item.meta}</p>
-              <span className="mentor-preview-note">{item.note}</span>
-            </div>
-          </article>
-        ))}
-      </div>
-    </section>
-  )
-}
-
-function WorkshopPracticalInfo() {
-  return (
-    <section className="editorial-section section-shell workshop-practical-section">
-      <div className="section-head with-copy">
-        <div>
-          <p className="section-kicker">Before You Join a Workshop</p>
-          <h2>Simple, practical guidance before training starts.</h2>
-        </div>
-      </div>
-
-      <div className="programme-practical-grid">
-        {workshopPracticalInfoItems.map((item) => (
-          <article className="programme-practical-card" key={item.title}>
-            <span className="programme-practical-icon">{item.icon}</span>
-            <h3>{item.title}</h3>
-            <p>{item.body}</p>
-          </article>
-        ))}
-      </div>
-      <p className="section-intro">Final workshop requirements will be shared by the organizer before the convention.</p>
     </section>
   )
 }
@@ -3804,9 +2974,6 @@ function WorkshopCTA() {
         <a className="secondary-btn" href="/passes#pass-compare">
           Compare Tracks
         </a>
-        <a className="secondary-btn" href="/programme">
-          View Programme
-        </a>
       </div>
     </section>
   )
@@ -3816,13 +2983,9 @@ function WorkshopsPage() {
   return (
     <main className="workshops-page">
       <WorkshopHero />
-      <WorkshopValueCards />
       <TrackSelector />
       <WorkshopCatalogue />
-      <LearningJourney />
       <WorkshopSchedulePreview />
-      <WorkshopMentorGrid />
-      <WorkshopPracticalInfo />
       <WorkshopFAQ />
       <WorkshopCTA />
     </main>
@@ -3855,14 +3018,12 @@ function MentorHero() {
           Who Live the Stage.
         </h1>
         <p className="passes-hero-intro">
-          Meet the performers, teachers, storytellers and creative mentors joining BICC 2026 from Malaysia, Asia and beyond.
+          Meet the performers, teachers and guest artists joining BICC 2026 from Malaysia, Asia and beyond.
         </p>
         <div className="event-badges programme-hero-badges">
           <span>International Guest Artists</span>
           <span>Workshop Mentors</span>
-          <span>Stage Performers</span>
           <span>Creative Exchange</span>
-          <span>BICC 2026</span>
         </div>
         <div className="hero-actions programme-hero-actions">
           <a className="primary-btn" href="/workshops">
@@ -3874,7 +3035,6 @@ function MentorHero() {
         </div>
         <div className="mentor-hero-meta">
           <span>Malaysia • Asia • USA</span>
-          <span>Guest artists, workshop mentors and showcase voices</span>
         </div>
       </div>
 
@@ -3889,37 +3049,8 @@ function MentorHero() {
         <div className="mentor-hero-portraits">
           <img alt="Chagy portrait" src={mentorPortraitChagy} />
           <img alt="Uncle Button portrait" src={mentorPortraitUncleButton} />
-          <img alt="Mr. John portrait" src={mentorPortraitMrJohn} />
         </div>
         <PatternCorner side="right" />
-      </div>
-    </section>
-  )
-}
-
-function MentorIntro() {
-  return (
-    <section className="editorial-section section-shell mentor-intro-section">
-      <div className="section-head with-copy">
-        <div>
-          <p className="section-kicker">Artists. Teachers. Storytellers.</p>
-          <h2>Clowning perspectives shaped by stage work, visual play and human connection.</h2>
-        </div>
-        <p className="section-intro">
-          From stage comedy and character work to visual play, family entertainment, puppetry, magic, audience interaction and community clowning, the BICC mentor line-up represents a wide range of clowning practices.
-        </p>
-      </div>
-
-      <div className="mentor-intro-grid">
-        {mentorIntroCards.map((item) => (
-          <article className={`venue-fact-card ${item.tone}`} key={item.title}>
-            <RedNoseIcon />
-            <div className="venue-fact-copy">
-              <h3>{item.title}</h3>
-              <p>{item.body}</p>
-            </div>
-          </article>
-        ))}
       </div>
     </section>
   )
@@ -3966,7 +3097,7 @@ function FeaturedMentors() {
           <p className="section-kicker">Featured Mentors</p>
           <h2>A closer look at the artists helping shape the BICC 2026 learning and performance experience.</h2>
         </div>
-        <p className="section-intro">Final spelling, specialties and expanded bios can be updated easily as official mentor materials are confirmed.</p>
+        <p className="section-intro">Official bios and specialty details can be refined as materials are confirmed.</p>
       </div>
 
       <div className="mentor-featured-grid">
@@ -4015,37 +3146,11 @@ function MentorGrid() {
           </button>
         ))}
       </div>
-      <p className="mentor-directory-meta">
-        {filteredMentors.length} mentors and guest artists shown. Profiles can be updated as official bios and specialties are finalized.
-      </p>
+      <p className="mentor-directory-meta">{filteredMentors.length} mentors and guest artists shown.</p>
 
       <div className="mentor-directory-grid">
         {filteredMentors.map((mentor) => (
           <MentorCard key={`directory-${mentor.id}`} mentor={mentor} />
-        ))}
-      </div>
-    </section>
-  )
-}
-
-function MentorLearningSection() {
-  return (
-    <section className="mentor-learning-band">
-      <div className="section-head with-copy">
-        <div>
-          <p className="section-kicker">How You’ll Learn From Them</p>
-          <h2>Workshops, exchange and showcase moments that keep the mentor experience practical.</h2>
-        </div>
-      </div>
-      <p className="mentor-learning-quote">“Not a directory of names, but a line-up of working artists delegates can genuinely learn from.”</p>
-
-      <div className="mentor-learning-grid">
-        {mentorLearningCards.map((item) => (
-          <article className="mentor-learning-card" key={item.title}>
-            <span className="programme-practical-icon">{item.icon}</span>
-            <h3>{item.title}</h3>
-            <p>{item.body}</p>
-          </article>
         ))}
       </div>
     </section>
@@ -4068,9 +3173,6 @@ function MentorCTA() {
         <a className="secondary-btn" href="/passes">
           Get Your Pass
         </a>
-        <a className="text-link mentor-cta-link" href="/programme">
-          View Programme
-        </a>
       </div>
     </section>
   )
@@ -4080,10 +3182,8 @@ function MentorsPage() {
   return (
     <main className="mentors-page">
       <MentorHero />
-      <MentorIntro />
       <FeaturedMentors />
       <MentorGrid />
-      <MentorLearningSection />
       <MentorCTA />
     </main>
   )
@@ -4109,15 +3209,14 @@ function HomePage() {
             </h1>
           </div>
           <p className="hero-subheadline">
-            A 3-day international clown convention in Borneo for performers, educators, students and creative communities seeking stronger craft, real exchange and joyful live performance.
+            A 3-day international clown convention in Borneo for performers, educators and creative communities seeking stronger craft and joyful live performance.
           </p>
-          <p className="hero-mini-note">Come to train, watch, connect and grow, whether you are building a first act or refining a working one.</p>
 
           <div className="event-badges">
             <span>Aug 3–5, 2026</span>
             <span>Tawau, Sabah</span>
             <span>2 Workshop Tracks</span>
-            <span>US$130 Pass</span>
+            <span>US$130</span>
           </div>
 
           <div className="hero-actions">
@@ -4177,12 +3276,10 @@ function HomePage() {
 
           <div className="story-copy">
             <p className="section-kicker">What Is BICC?</p>
-            <h2>A Convention For Performers, Educators And Communities Who Want More Than Inspiration.</h2>
+            <h2>A convention for people who want practical growth, not just inspiration.</h2>
             <p className="section-intro">
-              BICC brings together workshop training, live performance, cultural exchange and community connection in one focused convention experience, open to emerging performers, working artists, educators, students and cultural partners.
+              BICC brings together training, live performance, cultural exchange and community connection in one focused convention experience.
             </p>
-            <p className="pull-quote">Not just a convention — a meeting place where performers, educators and audiences discover how laughter can teach, heal and connect.</p>
-
             <div className="story-points">
               {storyFeatures.map((item) => (
                 <article className="story-point" key={item.title}>
@@ -4211,7 +3308,7 @@ function HomePage() {
             <p className="section-kicker">Choose Your Track</p>
             <h2>Two Paths. One Price. Different Professional Needs.</h2>
           </div>
-          <p className="section-intro">Choose the path that matches where you are now: building your base, or refining a working act for stronger performance and critique.</p>
+          <p className="section-intro">Foundation builds your base. Mastery sharpens a working act.</p>
         </div>
 
         <div className="track-comparison">
@@ -4285,7 +3382,7 @@ function HomePage() {
             <p className="section-kicker">Mentors & Performers</p>
             <h2>Learn From Artists Who Live The Stage.</h2>
           </div>
-          <p className="section-intro">BICC is shaped by artists who perform, teach and develop work in front of real audiences, with faculty selected for stage credibility, teaching clarity and meaningful feedback.</p>
+          <p className="section-intro">Mentors are selected for stage credibility, teaching clarity and real audience experience.</p>
         </div>
 
         <div className="mentor-preview-grid">
@@ -4307,65 +3404,6 @@ function HomePage() {
         <div className="section-cta">
           <a className="secondary-btn" href="/mentors">
             View Mentors
-          </a>
-        </div>
-      </section>
-
-      <section className="editorial-section section-shell destination-band">
-        <div aria-hidden="true" className="borneo-pattern destination-pattern" />
-        <div className="section-head with-copy">
-          <div>
-            <p className="section-kicker">Borneo Experience</p>
-            <h2>Gather in Borneo.</h2>
-          </div>
-          <p className="section-intro">BICC is not only about what happens in the room. Tawau and Sabah become part of the journey, the atmosphere and the reason the gathering feels different.</p>
-        </div>
-
-        <div className="borneo-grid">
-          {borneoCards.map((item) => (
-            <article className="borneo-card" key={item.title}>
-              <div className="borneo-image-placeholder">
-                <span className="borneo-card-tag sticker-badge">{item.tag}</span>
-                <span>{item.label}</span>
-              </div>
-              <div className="borneo-copy">
-                <h3>{item.title}</h3>
-                <p>{item.body}</p>
-              </div>
-            </article>
-          ))}
-        </div>
-
-        <div className="section-cta">
-          <a className="secondary-btn" href="/venue">
-            View Venue & Travel
-          </a>
-        </div>
-      </section>
-
-      <section className="editorial-section sponsor-strip">
-        <div className="section-head with-copy">
-          <div>
-            <p className="section-kicker">Sponsors</p>
-            <h2>Partner With A Joyful International Movement.</h2>
-          </div>
-          <p className="section-intro">BICC gives partners a meaningful platform across live performance, education, tourism, culture and community impact, all within a brand that feels both joyful and credible.</p>
-        </div>
-
-        <div className="logo-row" aria-label="Partner logo placeholders">
-          {sponsorLogos.map((item) => (
-            <span className="logo-pill" key={item}>
-              {item}
-            </span>
-          ))}
-        </div>
-
-        <div className="section-cta sponsor-actions">
-          <a className="primary-btn" href="/sponsors">
-            Become a Sponsor
-          </a>
-          <a className="secondary-btn" href="/sponsors">
-            Download Sponsorship Deck
           </a>
         </div>
       </section>
