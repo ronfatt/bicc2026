@@ -107,7 +107,7 @@ const passes = [
     label: 'Foundation Workshop Pass',
     headline: 'Build Your Professional Foundation',
     body:
-      'Designed for beginners, emerging performers and educators who want stronger stage fundamentals, audience connection and practical performance confidence.',
+      'For beginners, educators and emerging performers who want clear fundamentals, playful tools and confidence in front of an audience.',
     badges: ['No prior experience required', 'Certificate of Participation awarded'],
     includes: [
       'Physical Comedy Fundamentals',
@@ -119,17 +119,14 @@ const passes = [
     ],
     bestFor: [
       'New clown performers',
-      'Educators using performance',
+      'Educators and school performers',
       'Family entertainers',
-      'Community volunteers',
       'Artists building confidence',
-      'Beginners exploring clown craft',
     ],
     decisionBullets: [
       'Are new to clowning or still building confidence',
-      'Want practical tools you can use immediately',
+      'Want practical tools you can use right away',
       'Work with children, schools, family audiences or community groups',
-      'Want to explore balloons, storytelling, magic, puppetry and character basics',
       'Prefer a supportive introduction to clown craft',
     ],
     learningStyle: 'Practical basics, guided introduction and confidence-building',
@@ -149,7 +146,7 @@ const passes = [
     label: 'Mastery Workshop Pass',
     headline: 'Elevate Your Stage Performance',
     body:
-      'Designed for experienced performers ready to sharpen timing, refine material and strengthen their professional stage identity.',
+      'For working performers who want stronger stage choices, sharper timing and more confident professional performance.',
     badges: ['Prior stage experience recommended', 'Certificate of Completion awarded'],
     includes: [
       'Advanced Stage Craft',
@@ -163,7 +160,6 @@ const passes = [
       'Experienced clowns',
       'Stage performers',
       'Working entertainers',
-      'Variety artists',
       'Performers seeking critique',
       'Artists building signature acts',
     ],
@@ -172,7 +168,6 @@ const passes = [
       'Want direct critique and deeper artistic development',
       'Are building a signature act or professional identity',
       'Want to strengthen timing, stage command and audience control',
-      'Are ready for more advanced performance practice',
     ],
     learningStyle: 'Advanced practice, critique, refinement and stage command',
     performanceLevel: 'Intermediate to advanced',
@@ -187,77 +182,27 @@ const passes = [
 const passIncludedItems = [
   {
     title: '3-Day Convention Access',
-    description: 'Join the full BICC 2026 journey across arrival, workshops, exchange, showcase and closing moments.',
+    description: 'Join the full BICC journey across opening, training, exchange and closing moments.',
     icon: 'C',
     tone: 'soft-aqua',
   },
   {
     title: 'Selected Workshop Track',
-    description: 'Access workshop sessions aligned with your chosen Foundation or Mastery path.',
+    description: 'Access sessions matched to your Foundation or Mastery path.',
     icon: 'T',
     tone: 'soft-coral',
   },
   {
     title: 'Mentor-Led Learning',
-    description: 'Learn through demonstration, practice, creative feedback and guided development.',
+    description: 'Learn through demonstration, practice and guided feedback.',
     icon: 'M',
     tone: 'soft-yellow',
   },
   {
-    title: 'Programme & Community Moments',
-    description: 'Take part in orientation, exchange sessions, community gathering and selected shared convention activities.',
+    title: 'Shared Convention Moments',
+    description: 'Join orientation, exchange sessions and selected community moments.',
     icon: 'P',
     tone: 'soft-green',
-  },
-  {
-    title: 'Showcase Connection',
-    description: 'Experience performance-sharing moments, showcase preparation or observation depending on programme flow and pass access.',
-    icon: 'S',
-    tone: 'soft-coral',
-  },
-  {
-    title: 'Delegate Updates',
-    description: 'Receive official updates about schedule, venue zones, registration and final programme details.',
-    icon: 'U',
-    tone: 'soft-aqua',
-  },
-] as const
-
-const passComparisonRows = [
-  {
-    label: 'Best for',
-    foundation: 'Beginners, educators, family entertainers and emerging performers',
-    mastery: 'Experienced clowns, stage performers and working entertainers',
-  },
-  {
-    label: 'Learning style',
-    foundation: 'Practical basics, guided introduction and confidence-building',
-    mastery: 'Advanced practice, critique, refinement and stage command',
-  },
-  {
-    label: 'Workshop focus',
-    foundation: 'Physical comedy, character basics, balloons, storytelling, magic and puppetry',
-    mastery: 'Advanced stage craft, signature performance, mentorship, timing and professional integration',
-  },
-  {
-    label: 'Performance level',
-    foundation: 'Beginner to emerging',
-    mastery: 'Intermediate to advanced',
-  },
-  {
-    label: 'Creative outcome',
-    foundation: 'Build a strong starting toolkit',
-    mastery: 'Sharpen your professional stage identity',
-  },
-  {
-    label: 'Price',
-    foundation: 'US$130',
-    mastery: 'US$130',
-  },
-  {
-    label: 'Recommended for first-time BICC delegates',
-    foundation: 'Yes, especially if new to clown training',
-    mastery: 'Yes, if already experienced',
   },
 ] as const
 
@@ -284,25 +229,6 @@ const passRegistrationSteps = [
   },
 ] as const
 
-const passValueCards = [
-  {
-    title: 'Train With Purpose',
-    body: 'Practice clowning as a craft through guided learning, movement, timing, audience connection and real feedback.',
-  },
-  {
-    title: 'Meet the Community',
-    body: 'Connect with performers, educators, mentors and creative practitioners from different backgrounds.',
-  },
-  {
-    title: 'Experience Borneo',
-    body: 'Gather in Tawau, Sabah and experience the warmth, culture and local rhythm of the convention destination.',
-  },
-  {
-    title: 'Carry the Joy Forward',
-    body: 'Leave with stronger tools, new connections and a renewed sense of how laughter can serve people and community.',
-  },
-] as const
-
 const passFaqItems = [
   {
     question: 'What is the price of each pass?',
@@ -323,24 +249,16 @@ const passFaqItems = [
     answer: 'Track changes are subject to availability and organizer confirmation.',
   },
   {
-    question: 'Is accommodation included?',
-    answer: 'Accommodation is not included unless specifically stated by the organizer.',
-  },
-  {
-    question: 'Are meals or transport included?',
-    answer: 'Meals and transport should not be assumed included unless confirmed by the organizer.',
+    question: 'Are accommodation, meals or transport included?',
+    answer: 'These should not be assumed included unless the organizer confirms them separately.',
   },
   {
     question: 'Will I receive a certificate?',
-    answer: 'Certificate details are aligned with the selected learning path and official organizer confirmation.',
+    answer: 'Certificate details, if available, will be shared by the organizer.',
   },
   {
     question: 'What happens after I register?',
     answer: 'You should receive official confirmation or next-step instructions through the organizer registration flow.',
-  },
-  {
-    question: 'Can international delegates register?',
-    answer: 'Yes, the convention is designed as an international gathering. Delegates should follow official registration, travel and venue updates.',
   },
   {
     question: 'What if the programme changes?',
@@ -866,7 +784,141 @@ const borneoCards = [
   },
 ]
 
-const sponsorLogos = ['Arts & Culture', 'Tourism Sabah', 'Education Partner', 'Community Impact', 'Global Support']
+const sponsorLogos = [
+  'CDesign Production Sdn. Bhd.',
+  'Rotary Club of Tawau',
+  'Sabah Convention Bureau',
+  'Sabah Tourism Board',
+  'World Clown Association',
+]
+
+const sponsorSupportGroups = [
+  {
+    title: 'Organiser',
+    items: ['CDesign Production Sdn. Bhd.'],
+  },
+  {
+    title: 'Collaboration Partners',
+    items: ['Rotary Club of Tawau', 'Sabah Convention Bureau'],
+  },
+  {
+    title: 'Supported By',
+    items: ['Sabah Tourism Board', 'Explore Sabah', 'Visit Malaysia 2026'],
+  },
+  {
+    title: 'Association & Business Partners',
+    items: ['World Clown Association', 'Tawau Chinese Chamber of Commerce'],
+  },
+] as const
+
+const sponsorValueCards = [
+  {
+    title: 'Brand Visibility',
+    body: 'Reach families, educators, performers, tourism partners and international delegates.',
+    tone: 'soft-coral',
+    icon: 'V',
+  },
+  {
+    title: 'CSR & Community Impact',
+    body: 'Support outreach, children’s joy, learning and meaningful social connection.',
+    tone: 'soft-green',
+    icon: 'C',
+  },
+  {
+    title: 'Tourism & Local Business',
+    body: 'Connect your brand with Tawau, Sabah and destination-event audiences.',
+    tone: 'soft-yellow',
+    icon: 'T',
+  },
+  {
+    title: 'Cultural Partnership',
+    body: 'Be part of a warm international convention built around creativity and hope.',
+    tone: 'soft-aqua',
+    icon: 'P',
+  },
+] as const
+
+const sponsorOpportunityCards = [
+  {
+    title: 'Main Stage Partner',
+    body: 'Logo on stage backdrop, opening moments and performance highlights.',
+  },
+  {
+    title: 'Workshop Partner',
+    body: 'Support balloon art, magic, hospital clowning or children’s education workshops.',
+  },
+  {
+    title: 'Red Nose CSR Partner',
+    body: 'Sponsor hospital, orphanage or community outreach programmes.',
+  },
+  {
+    title: 'Delegate Experience Partner',
+    body: 'Brand presence on passes, lanyards, welcome kits or delegate materials.',
+  },
+  {
+    title: 'Travel & Hospitality Partner',
+    body: 'Support hotels, transport, food, local tours or Tawau visitor experience.',
+  },
+  {
+    title: 'Official Magazine / Media Partner',
+    body: 'Feature your brand in the official convention magazine, website and social content.',
+  },
+] as const
+
+const sponsorBrandAppearItems = [
+  'Website',
+  'Stage Backdrop',
+  'Delegate Pass',
+  'Official Magazine',
+  'Social Media',
+  'Booth Area',
+  'Workshop Room',
+  'Welcome Kit',
+  'Venue Signage',
+  'Media Wall',
+  'Outreach Programme',
+  'Thank You Video',
+] as const
+
+const sponsorPackageCards = [
+  {
+    title: 'Legacy Partner',
+    body: 'For brands seeking maximum official visibility.',
+    points: ['Top-tier official visibility', 'Stage and media prominence', 'Priority branding placement', 'High-level partner recognition'],
+  },
+  {
+    title: 'Signature Partner',
+    body: 'For brands supporting key convention experiences.',
+    points: ['Named experience association', 'Workshop or showcase presence', 'Strong digital visibility', 'Premium delegate touchpoints'],
+  },
+  {
+    title: 'Impact Partner',
+    body: 'For CSR, education, healthcare and community sponsors.',
+    points: ['Outreach alignment', 'Community storytelling value', 'Education and care visibility', 'Meaningful impact positioning'],
+  },
+  {
+    title: 'Community Partner',
+    body: 'For local businesses and supporters who want to be part of BICC.',
+    points: ['Accessible local partnership', 'On-site visibility', 'Supporter recognition', 'Warm community alignment'],
+  },
+] as const
+
+const sponsorImpactMoments = [
+  {
+    title: 'A child smiles during outreach.',
+    body: 'Joy becomes visible when sponsorship supports real moments of connection.',
+  },
+  {
+    title: 'A performer learns a new skill.',
+    body: 'Training support helps delegates return to their work with stronger craft.',
+  },
+  {
+    title: 'A visitor discovers Tawau.',
+    body: 'Destination partnerships connect cultural tourism with convention energy.',
+  },
+] as const
+
+const sponsorInquiryFields = ['Name', 'Company', 'Sponsorship Interest', 'Budget Range / Partnership Type', 'Contact'] as const
 
 const programmeLegendItems = [
   {
@@ -2761,6 +2813,314 @@ function VenuePage() {
   )
 }
 
+function SponsorHero() {
+  return (
+    <section className="sponsors-hero section-shell">
+      <div aria-hidden="true" className="spotlight-glow passes-spotlight" />
+      <div aria-hidden="true" className="confetti-field passes-confetti" />
+      <div className="passes-hero-copy sponsor-hero-copy">
+        <p className="section-kicker">Sponsors & Partnerships</p>
+        <div className="passes-hero-title-row">
+          <h1>Partner with BICC 2026</h1>
+          <span className="programme-ticket-badge">Official Partnership Opportunities</span>
+        </div>
+        <p className="passes-hero-intro">
+          Put your brand at the heart of performance, culture, tourism and community impact.
+        </p>
+        <div className="event-badges programme-hero-badges">
+          <span>International Convention</span>
+          <span>Family & Community Reach</span>
+          <span>Sabah / Tawau Destination Event</span>
+        </div>
+        <div className="hero-actions programme-hero-actions">
+          <a className="primary-btn" href="mailto:hello@bicc2026.com?subject=BICC%202026%20Sponsorship%20Deck%20Request">
+            Request Sponsorship Deck
+          </a>
+          <a className="secondary-btn" href="mailto:hello@bicc2026.com?subject=BICC%202026%20Partnership%20Inquiry">
+            Talk to Partnership Team
+          </a>
+        </div>
+      </div>
+
+      <div className="sponsors-hero-visual">
+        <div className="sponsors-hero-main image-frame">
+          <img alt="BICC performance and audience engagement" src={clownDuoImage} />
+          <div className="programme-hero-caption">
+            <strong>Real audience impact</strong>
+            <span>Performance, workshops, red nose moments and shared convention energy.</span>
+          </div>
+        </div>
+        <article className="programme-floating-card top">
+          <img alt="Interactive clown performance" src={clownShowImage} />
+          <span>Stage visibility</span>
+        </article>
+        <article className="programme-floating-card bottom">
+          <img alt="Hands-on workshop" src={clownStageImage} />
+          <span>Workshop engagement</span>
+        </article>
+      </div>
+    </section>
+  )
+}
+
+function SponsorTrustStrip() {
+  return (
+    <section className="editorial-section section-shell sponsor-trust-strip">
+      <div className="section-head with-copy">
+        <div>
+          <p className="section-kicker">Official Support & Current Partners</p>
+          <h2>Institutional support should be visible from the start.</h2>
+        </div>
+        <p className="section-intro">A clean trust strip that shows BICC is supported by recognised organisers, tourism bodies, community partners and international clown networks.</p>
+      </div>
+
+      <div className="sponsor-support-groups">
+        {sponsorSupportGroups.map((group) => (
+          <article className="sponsor-support-group" key={group.title}>
+            <h3>{group.title}</h3>
+            <div className="sponsor-support-grid">
+              {group.items.map((item) => (
+                <span className="sponsor-logo-card" key={item}>
+                  {item}
+                </span>
+              ))}
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+  )
+}
+
+function SponsorWhySection() {
+  return (
+    <section className="editorial-section section-shell sponsor-why-section">
+      <div className="section-head with-copy">
+        <div>
+          <p className="section-kicker">Why Sponsor BICC?</p>
+          <h2>Short, commercial reasons a sponsor can understand quickly.</h2>
+        </div>
+      </div>
+
+      <div className="sponsor-value-grid">
+        {sponsorValueCards.map((card) => (
+          <article className={`venue-fact-card ${card.tone}`} key={card.title}>
+            <span className="venue-fact-icon">{card.icon}</span>
+            <div className="venue-fact-copy">
+              <h3>{card.title}</h3>
+              <p>{card.body}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+  )
+}
+
+function SponsorOpportunities() {
+  return (
+    <section className="editorial-section section-shell sponsor-opportunities-section">
+      <div className="section-head with-copy">
+        <div>
+          <p className="section-kicker">Sponsorship Opportunities</p>
+          <h2>Clear ways different brands can participate.</h2>
+        </div>
+        <p className="section-intro">Hotels, restaurants, CSR brands, education groups, tourism players, media partners and local businesses should be able to spot where they fit.</p>
+      </div>
+
+      <div className="sponsor-opportunity-grid">
+        {sponsorOpportunityCards.map((card, index) => (
+          <article className="sponsor-opportunity-card" key={card.title}>
+            <span className="sponsor-opportunity-index">0{index + 1}</span>
+            <h3>{card.title}</h3>
+            <p>{card.body}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+  )
+}
+
+function SponsorBrandMap() {
+  return (
+    <section className="editorial-section section-shell sponsor-brand-map-section">
+      <div className="section-head with-copy">
+        <div>
+          <p className="section-kicker">Where Your Brand Appears</p>
+          <h2>A simple visibility map instead of a long paragraph.</h2>
+        </div>
+      </div>
+
+      <div className="sponsor-brand-map-shell">
+        <div className="sponsor-brand-core">
+          <img alt="BICC logo" src={biccLogo} />
+          <strong>BICC 2026</strong>
+          <span>Brand visibility map</span>
+        </div>
+        <div className="sponsor-brand-points">
+          {sponsorBrandAppearItems.map((item) => (
+            <span className="programme-type-pill delegate-info" key={item}>
+              <ProgrammeTypeDot type="delegate-info" />
+              {item}
+            </span>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+function SponsorPackages() {
+  return (
+    <section className="editorial-section section-shell sponsor-packages-section">
+      <div className="section-head with-copy">
+        <div>
+          <p className="section-kicker">Sponsorship Packages</p>
+          <h2>Enough structure to invite inquiry, without dumping a pricing sheet on the page.</h2>
+        </div>
+      </div>
+
+      <div className="sponsor-package-grid">
+        {sponsorPackageCards.map((card) => (
+          <article className="sponsor-package-card" key={card.title}>
+            <h3>{card.title}</h3>
+            <p>{card.body}</p>
+            <ul className="pass-mini-list">
+              {card.points.map((point) => (
+                <li key={point}>{point}</li>
+              ))}
+            </ul>
+            <a className="secondary-btn wide-btn" href="mailto:hello@bicc2026.com?subject=BICC%202026%20Package%20Details%20Request">
+              Request Package Details
+            </a>
+          </article>
+        ))}
+      </div>
+    </section>
+  )
+}
+
+function SponsorImpactStory() {
+  return (
+    <section className="sponsor-impact-band">
+      <div className="sponsor-impact-photo image-frame">
+        <img alt="BICC outreach and joyful convention moment" src={clownShowImage} />
+      </div>
+      <div className="sponsor-impact-copy">
+        <p className="section-kicker">Impact Story</p>
+        <h2>Sponsor more than an event. Sponsor a moment of joy.</h2>
+        <div className="sponsor-impact-grid">
+          {sponsorImpactMoments.map((item) => (
+            <article className="sponsor-impact-card" key={item.title}>
+              <h3>{item.title}</h3>
+              <p>{item.body}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+function SponsorLogoWall() {
+  return (
+    <section className="editorial-section section-shell sponsor-logo-wall-section">
+      <div className="section-head with-copy">
+        <div>
+          <p className="section-kicker">Partners Who Make BICC Possible</p>
+          <h2>A premium logo wall with clear groupings.</h2>
+        </div>
+        <p className="section-intro">Join these partners in supporting BICC 2026.</p>
+      </div>
+
+      <div className="sponsor-support-groups logo-wall">
+        {sponsorSupportGroups.map((group) => (
+          <article className="sponsor-support-group" key={`wall-${group.title}`}>
+            <h3>{group.title}</h3>
+            <div className="sponsor-support-grid">
+              {group.items.map((item) => (
+                <span className="sponsor-logo-card" key={`wall-${item}`}>
+                  {item}
+                </span>
+              ))}
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <div className="section-cta sponsor-actions">
+        <a className="primary-btn" href="mailto:hello@bicc2026.com?subject=BICC%202026%20Sponsor%20Inquiry">
+          Become a Sponsor
+        </a>
+      </div>
+    </section>
+  )
+}
+
+function SponsorCTA() {
+  return (
+    <section className="sponsor-final-cta">
+      <div aria-hidden="true" className="confetti-field venue-cta-confetti" />
+      <div className="programme-final-copy">
+        <p className="section-kicker">Final CTA</p>
+        <h2>Let’s build a joyful partnership.</h2>
+        <p>
+          Whether your goal is brand visibility, CSR impact, tourism promotion or community engagement, BICC 2026 offers meaningful partnership opportunities.
+        </p>
+      </div>
+      <div className="sponsor-final-grid">
+        <div className="final-cta-actions sponsor-cta-actions">
+          <a className="primary-btn" href="mailto:hello@bicc2026.com?subject=BICC%202026%20Sponsorship%20Deck%20Request">
+            Request Sponsorship Deck
+          </a>
+          <a className="secondary-btn" href="mailto:hello@bicc2026.com?subject=BICC%202026%20Partnership%20Call%20Request">
+            Schedule a Partnership Call
+          </a>
+        </div>
+
+        <div className="sponsor-contact-panel">
+          <div className="sponsor-contact-card">
+            <strong>Email</strong>
+            <span>hello@bicc2026.com</span>
+          </div>
+          <div className="sponsor-contact-card muted">
+            <strong>WhatsApp</strong>
+            <span>Official number can be added here</span>
+          </div>
+          <div className="sponsor-contact-card muted">
+            <strong>Sponsorship Form</strong>
+            <span>QR and online form can be added here</span>
+          </div>
+          <div className="sponsor-inquiry-checklist">
+            <strong>Include these details in your inquiry:</strong>
+            <div className="pass-focus-chips">
+              {sponsorInquiryFields.map((field) => (
+                <span key={field}>{field}</span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+function SponsorsPage() {
+  return (
+    <main className="sponsors-page">
+      <SponsorHero />
+      <SponsorTrustStrip />
+      <SponsorWhySection />
+      <SponsorOpportunities />
+      <SponsorBrandMap />
+      <SponsorPackages />
+      <SponsorImpactStory />
+      <SponsorLogoWall />
+      <SponsorCTA />
+    </main>
+  )
+}
+
 function DecorativeBarcode() {
   return (
     <div aria-hidden="true" className="decorative-barcode">
@@ -2787,7 +3147,10 @@ function PassHero() {
           <span className="programme-ticket-badge">Official Convention Registration</span>
         </div>
         <p className="passes-hero-intro">
-          Select the pass that matches your current stage of practice: Foundation for essential clown craft, or Mastery for deeper stage work, critique and professional development.
+          Foundation is for newer performers building confidence. Mastery is for experienced performers ready for sharper stage work and critique.
+        </p>
+        <p className="passes-hero-note">
+          Good for first-time delegates, educators, family performers and international guests looking for a clear training path.
         </p>
         <div className="event-badges programme-hero-badges">
           <span>Aug 3–5, 2026</span>
@@ -2827,7 +3190,9 @@ function PassHero() {
             <RedNoseIcon />
           </article>
         ))}
-        <PatternCorner side="right" />
+        <div aria-hidden="true" className="passes-hero-pattern">
+          <PatternCorner side="right" />
+        </div>
       </div>
     </section>
   )
@@ -2839,10 +3204,10 @@ function PassComparisonCards() {
       <div className="section-head with-copy">
         <div>
           <p className="section-kicker">Two Passes. One Shared Convention.</p>
-          <h2>Choose the path that best matches your experience and learning goals.</h2>
+          <h2>Choose the pass that fits where you are right now.</h2>
         </div>
         <p className="section-intro">
-          Both passes connect you to the BICC experience. The difference is the level of practice, critique and performance focus.
+          Both passes include the same 3-day convention. The difference is the training level and the kind of feedback you want.
         </p>
       </div>
 
@@ -2864,24 +3229,13 @@ function PassComparisonCards() {
               <h3>{pass.shortName}</h3>
               <p className="pass-price">{pass.price}</p>
               <p className="pass-ticket-description">{pass.body}</p>
-
-              <div className="pass-ticket-columns">
-                <div>
-                  <strong>Best for</strong>
-                  <ul className="pass-mini-list">
-                    {pass.bestFor.map((item) => (
-                      <li key={item}>{item}</li>
-                    ))}
-                  </ul>
-                </div>
-                <div>
-                  <strong>Focus areas</strong>
-                  <div className="pass-focus-chips">
-                    {pass.includes.map((item) => (
-                      <span key={item}>{item}</span>
-                    ))}
-                  </div>
-                </div>
+              <p className="pass-ticket-audience">
+                <strong>Best for:</strong> {pass.bestFor.join(', ')}.
+              </p>
+              <div className="pass-focus-chips">
+                {pass.includes.slice(0, 4).map((item) => (
+                  <span key={item}>{item}</span>
+                ))}
               </div>
 
               <div className="pass-ticket-actions">
@@ -2897,6 +3251,14 @@ function PassComparisonCards() {
           </article>
         ))}
       </div>
+
+      <div className="pass-unsure-note compact">
+        <strong>Quick guide:</strong>
+        <p>Choose Foundation if you are newer to clowning. Choose Mastery if you already perform and want stronger critique.</p>
+        <a className="text-link" href="/workshops">
+          View Workshop Tracks
+        </a>
+      </div>
     </section>
   )
 }
@@ -2907,10 +3269,10 @@ function PassIncludedSection() {
       <div className="section-head with-copy">
         <div>
           <p className="section-kicker">What Your Pass Gives You</p>
-          <h2>Your pass connects you to the convention journey, not just a seat in a workshop.</h2>
+          <h2>The essentials most delegates want to know.</h2>
         </div>
         <p className="section-intro">
-          Included details are subject to final organizer confirmation, but this is the expected structure of the BICC delegate experience.
+          This is the expected BICC pass structure, with final details shared by the organizer closer to the convention.
         </p>
       </div>
 
@@ -2934,9 +3296,9 @@ function PassImportantNotice() {
     <section className="pass-important-note">
       <div className="pass-important-copy">
         <p className="section-kicker">Before You Register</p>
-        <h2>Clear expectations build trust.</h2>
+        <h2>A few things to keep in mind.</h2>
         <p>
-          Unless specifically stated by the organizer, accommodation, travel, transport, meals, personal expenses and optional activities are not automatically included in the pass. Final pass inclusions, session access and room assignments are subject to organizer confirmation.
+          Unless the organizer states otherwise, passes do not automatically include accommodation, travel, meals or transport. Final session access and room assignments will be confirmed closer to the event.
         </p>
       </div>
     </section>
@@ -2949,7 +3311,7 @@ function PassDecisionGuide() {
       <div className="section-head with-copy">
         <div>
           <p className="section-kicker">Which Pass Is Right for You?</p>
-          <h2>Choose the path that matches your current confidence and stage practice.</h2>
+          <h2>Pick the path that matches your current level.</h2>
         </div>
       </div>
 
@@ -2972,78 +3334,11 @@ function PassDecisionGuide() {
       <div className="pass-unsure-note">
         <strong>Still unsure?</strong>
         <p>
-          Start with the path that matches your current confidence and learning goals. Track switching is subject to availability and organizer confirmation.
+          If this is your first BICC or your first serious clown training, start with Foundation. If you already perform regularly, Mastery is usually the better fit.
         </p>
-        <a className="text-link" href="#pass-compare">
-          Compare Full Details
+        <a className="text-link" href="/programme">
+          See the 3-day flow
         </a>
-      </div>
-    </section>
-  )
-}
-
-function PassComparisonTable() {
-  return (
-    <section className="editorial-section section-shell pass-table-section" id="pass-compare">
-      <div className="section-head with-copy">
-        <div>
-          <p className="section-kicker">Compare Foundation & Mastery</p>
-          <h2>Everything important in one clean comparison.</h2>
-        </div>
-      </div>
-
-      <div className="pass-table-desktop">
-        <table className="pass-comparison-table">
-          <thead>
-            <tr>
-              <th scope="col">Compare</th>
-              <th scope="col">Foundation</th>
-              <th scope="col">Mastery</th>
-            </tr>
-          </thead>
-          <tbody>
-            {passComparisonRows.map((row) => (
-              <tr key={row.label}>
-                <th scope="row">{row.label}</th>
-                <td>{row.foundation}</td>
-                <td>{row.mastery}</td>
-              </tr>
-            ))}
-            <tr>
-              <th scope="row">Action</th>
-              <td>
-                <a className="primary-btn wide-btn" href={passes[0].ctaHref}>
-                  {passes[0].cta}
-                </a>
-              </td>
-              <td>
-                <a className="primary-btn wide-btn" href={passes[1].ctaHref}>
-                  {passes[1].cta}
-                </a>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div className="pass-table-mobile">
-        {passes.map((pass) => (
-          <article className={`pass-mobile-compare ${pass.accent}`} key={`mobile-${pass.id}`}>
-            <div className="pass-mobile-compare-head">
-              <span className={`track-label ${pass.accent}`}>{pass.shortName}</span>
-              <p className="pass-price">{pass.price}</p>
-            </div>
-            {passComparisonRows.map((row) => (
-              <div className="pass-mobile-row" key={`${pass.id}-${row.label}`}>
-                <strong>{row.label}</strong>
-                <span>{pass.id === 'foundation' ? row.foundation : row.mastery}</span>
-              </div>
-            ))}
-            <a className="primary-btn wide-btn" href={pass.ctaHref}>
-              {pass.cta}
-            </a>
-          </article>
-        ))}
       </div>
     </section>
   )
@@ -3055,7 +3350,7 @@ function PassRegistrationFlow() {
       <div className="section-head with-copy">
         <div>
           <p className="section-kicker">How Registration Works</p>
-          <h2>A clear four-step path from choosing to arriving.</h2>
+          <h2>A simple path from choosing to arriving.</h2>
         </div>
       </div>
 
@@ -3074,97 +3369,13 @@ function PassRegistrationFlow() {
   )
 }
 
-function PassValueSection() {
-  return (
-    <section className="pass-value-band">
-      <div className="section-head with-copy">
-        <div>
-          <p className="section-kicker">Why Join BICC 2026?</p>
-          <h2>This is more than a pass to attend.</h2>
-        </div>
-        <p className="section-intro">
-          It is an invitation to train, exchange, perform, connect and carry clowning forward as craft and community.
-        </p>
-      </div>
-
-      <div className="pass-value-grid">
-        {passValueCards.map((card) => (
-          <article className="pass-value-card" key={card.title}>
-            <RedNoseIcon />
-            <h3>{card.title}</h3>
-            <p>{card.body}</p>
-          </article>
-        ))}
-      </div>
-
-      <blockquote className="pass-pull-quote">Where laughter becomes craft, connection, and legacy.</blockquote>
-    </section>
-  )
-}
-
-function DelegatePassMockup() {
-  return (
-    <section className="editorial-section section-shell pass-mockup-section">
-      <div className="section-head with-copy">
-        <div>
-          <p className="section-kicker">Your Delegate Pass</p>
-          <h2>A small object that marks your place in the BICC 2026 journey.</h2>
-        </div>
-        <p className="section-intro">
-          Your pass represents three days of training, performance, cultural exchange and community connection in Tawau, Sabah.
-        </p>
-      </div>
-
-      <div className="pass-mockup-grid">
-        {passes.map((pass) => (
-          <article className={`delegate-pass-card ${pass.accent}`} key={`mockup-${pass.id}`}>
-            <div className="delegate-pass-lanyard" />
-            <div className="delegate-pass-shell">
-              <span className={`track-label ${pass.accent}`}>{pass.shortName}</span>
-              <h3>BICC 2026</h3>
-              <p>{pass.label}</p>
-              <div className="delegate-pass-meta">
-                <span>Tawau, Sabah</span>
-                <span>Aug 3–5, 2026</span>
-                <span>Delegate</span>
-              </div>
-              <DecorativeBarcode />
-            </div>
-          </article>
-        ))}
-      </div>
-    </section>
-  )
-}
-
-function OfficialRegistrationNotice() {
-  return (
-    <section className="editorial-section section-shell pass-official-note">
-      <div className="section-head with-copy">
-        <div>
-          <p className="section-kicker">Official BICC Registration</p>
-          <h2>Please register only through official BICC channels.</h2>
-        </div>
-        <p className="section-intro">
-          Final programme details, venue information and delegate updates will be shared through official communication from the organizer.
-        </p>
-      </div>
-      <div className="programme-updates-actions">
-        <a className="primary-btn" href="mailto:hello@bicc2026.com?subject=BICC%202026%20Pass%20Registration">
-          Contact Registration
-        </a>
-      </div>
-    </section>
-  )
-}
-
 function PassFAQ() {
   return (
     <section className="editorial-section section-shell programme-faq">
       <div className="section-head with-copy">
         <div>
           <p className="section-kicker">Pass FAQ</p>
-          <h2>Short, practical answers before you register.</h2>
+          <h2>Short answers before you register.</h2>
         </div>
       </div>
 
@@ -3191,7 +3402,7 @@ function PassCTA() {
         <p className="section-kicker">Final CTA</p>
         <h2>Ready to Choose Your Pass?</h2>
         <p>
-          Join BICC 2026 in Tawau, Sabah for three days of clown craft, performance practice, international exchange and community connection.
+          Join BICC 2026 in Tawau, Sabah for three days of training, exchange and live performance growth.
         </p>
       </div>
       <div className="final-cta-actions">
@@ -3223,11 +3434,7 @@ function PassesPage() {
       <PassIncludedSection />
       <PassImportantNotice />
       <PassDecisionGuide />
-      <PassComparisonTable />
       <PassRegistrationFlow />
-      <PassValueSection />
-      <DelegatePassMockup />
-      <OfficialRegistrationNotice />
       <PassFAQ />
       <PassCTA />
     </main>
@@ -4356,6 +4563,7 @@ function App() {
   const isMentors = currentPath === '/mentors'
   const isPasses = currentPath === '/passes'
   const isVenue = currentPath === '/venue'
+  const isSponsors = currentPath === '/sponsors'
   const routePath = isHome ? null : (currentPath in routeContent ? (currentPath as RouteKey) : null)
 
   return (
@@ -4399,6 +4607,8 @@ function App() {
         <PassesPage />
       ) : isVenue ? (
         <VenuePage />
+      ) : isSponsors ? (
+        <SponsorsPage />
       ) : routePath ? (
         <InteriorPage path={routePath} />
       ) : (

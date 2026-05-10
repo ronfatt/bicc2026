@@ -2678,6 +2678,26 @@ body {
   color: #fff9ef;
 }
 
+.passes-hero .programme-ticket-badge,
+.workshops-hero .programme-ticket-badge,
+.venue-hero .programme-ticket-badge,
+.mentor-page-hero .programme-ticket-badge {
+  background: rgba(255, 252, 244, 0.94);
+  border-color: rgba(20, 58, 63, 0.12);
+  color: var(--color-ink);
+  box-shadow: 0 10px 24px rgba(20, 58, 63, 0.06);
+}
+
+.passes-hero .programme-hero-badges span,
+.workshops-hero .programme-hero-badges span,
+.venue-hero .programme-hero-badges span,
+.mentor-page-hero .programme-hero-badges span {
+  background: rgba(255, 255, 255, 0.94);
+  border-color: rgba(20, 58, 63, 0.12);
+  color: var(--color-ink);
+  box-shadow: 0 8px 18px rgba(20, 58, 63, 0.05);
+}
+
 .programme-hero-link {
   margin-top: 16px;
   color: var(--color-sunshine);
@@ -4567,7 +4587,7 @@ body {
 
 .passes-page {
   display: grid;
-  gap: 22px;
+  gap: 18px;
 }
 
 .passes-hero,
@@ -4581,9 +4601,9 @@ body {
 
 .passes-hero {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(360px, 0.9fr);
-  gap: 28px;
-  padding: 34px 32px;
+  grid-template-columns: minmax(0, 1fr) minmax(340px, 0.84fr);
+  gap: 24px;
+  padding: 30px 28px;
   background:
     linear-gradient(135deg, rgba(255, 252, 244, 0.98), rgba(255, 247, 234, 0.98)),
     radial-gradient(circle at 18% 16%, rgba(255, 211, 78, 0.16), transparent 22%);
@@ -4615,8 +4635,8 @@ body {
 .pass-final-cta h2 {
   margin: 0;
   font-family: 'Playfair Display', Georgia, serif;
-  font-size: clamp(3rem, 5.4vw, 4.8rem);
-  line-height: 0.96;
+  font-size: clamp(2.7rem, 4.9vw, 4.35rem);
+  line-height: 0.98;
   letter-spacing: -0.04em;
   color: var(--color-ink);
   text-wrap: balance;
@@ -4626,20 +4646,33 @@ body {
   max-width: 60ch;
   margin: 0;
   color: var(--color-muted);
-  line-height: 1.8;
+  line-height: 1.65;
+}
+
+.passes-hero-note {
+  max-width: 54ch;
+  margin: -2px 0 0;
+  color: var(--color-ink);
+  font-size: 0.96rem;
+  line-height: 1.55;
 }
 
 .passes-hero-visual {
+  position: relative;
   display: grid;
   align-content: center;
   gap: 18px;
+  padding: 6px 10px 10px 0;
+  overflow: hidden;
+  border-radius: 28px;
 }
 
 .pass-badge-mockup {
   position: relative;
+  z-index: 1;
   display: grid;
-  gap: 12px;
-  padding: 20px 20px 22px;
+  gap: 10px;
+  padding: 18px 18px 20px;
   border-radius: 28px;
   border: 1px solid rgba(20, 58, 63, 0.08);
   box-shadow: 0 18px 38px rgba(20, 58, 63, 0.12);
@@ -4648,12 +4681,28 @@ body {
 
 .pass-badge-mockup.foundation {
   background: linear-gradient(180deg, rgba(221, 247, 247, 0.9), rgba(255, 255, 255, 0.98));
-  transform: rotate(-3deg);
+  transform: translateX(-4px) rotate(-2deg);
 }
 
 .pass-badge-mockup.mastery {
   background: linear-gradient(180deg, rgba(255, 225, 220, 0.88), rgba(255, 255, 255, 0.98));
-  transform: rotate(3deg);
+  transform: translateX(10px) rotate(1.2deg);
+}
+
+.passes-hero-pattern {
+  position: absolute;
+  right: -14px;
+  bottom: -18px;
+  z-index: 0;
+  opacity: 0.34;
+  transform: scale(0.82);
+  pointer-events: none;
+}
+
+.passes-hero-pattern .pattern-corner {
+  position: relative;
+  width: 144px;
+  height: 144px;
 }
 
 .pass-badge-top,
@@ -4716,13 +4765,14 @@ body {
 .pass-ticket-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 20px;
+  gap: 18px;
 }
 
 .pass-ticket-card {
   position: relative;
   overflow: hidden;
   display: grid;
+  grid-template-rows: auto 1fr;
   gap: 0;
   border-radius: 30px;
   border: 1px solid rgba(20, 58, 63, 0.08);
@@ -4776,7 +4826,8 @@ body {
 }
 
 .pass-ticket-media {
-  min-height: 220px;
+  min-height: 0;
+  aspect-ratio: 16 / 10;
 }
 
 .pass-ticket-media img {
@@ -4784,17 +4835,31 @@ body {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center center;
 }
 
 .pass-ticket-body {
   display: grid;
-  gap: 16px;
-  padding: 20px 20px 22px;
+  grid-template-rows: auto auto auto auto auto minmax(0, 1fr) auto auto;
+  gap: 14px;
+  padding: 18px 18px 20px;
+  min-height: 100%;
+}
+
+.pass-ticket-audience {
+  margin: 0;
+  color: var(--color-muted);
+  line-height: 1.65;
+  min-height: 4.9em;
+}
+
+.pass-ticket-audience strong {
+  color: var(--color-ink);
 }
 
 .pass-ticket-head {
   display: grid;
-  gap: 10px;
+  gap: 8px;
 }
 
 .pass-ticket-badge {
@@ -4831,26 +4896,29 @@ body {
 .pass-focus-chips {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 10px;
+  align-content: flex-start;
+  gap: 8px;
+  margin-top: 4px;
+  min-height: 76px;
 }
 
 .pass-focus-chips span {
   display: inline-flex;
   align-items: center;
-  min-height: 32px;
-  padding: 0 12px;
+  min-height: 30px;
+  padding: 0 11px;
   border-radius: 999px;
   background: rgba(255, 252, 244, 0.84);
   border: 1px solid rgba(20, 58, 63, 0.08);
   color: var(--color-ink);
-  font-size: 0.8rem;
+  font-size: 0.76rem;
   font-weight: 700;
 }
 
 .pass-ticket-actions {
   display: grid;
   gap: 10px;
+  align-self: end;
 }
 
 .pass-ticket-note {
@@ -4865,15 +4933,14 @@ body {
   gap: 18px;
 }
 
-.pass-included-grid,
-.pass-value-grid {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+.pass-included-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
 .pass-important-note {
   display: grid;
   gap: 12px;
-  padding: 26px 28px;
+  padding: 22px 24px;
   border: 1px solid rgba(20, 58, 63, 0.1);
   background: linear-gradient(180deg, rgba(255, 241, 184, 0.82), rgba(255, 255, 255, 0.98));
   box-shadow: var(--shadow-soft);
@@ -4899,8 +4966,8 @@ body {
 
 .pass-decision-card {
   display: grid;
-  gap: 14px;
-  padding: 22px 20px;
+  gap: 12px;
+  padding: 18px 18px;
   border-radius: 26px;
   border: 1px solid rgba(20, 58, 63, 0.08);
   box-shadow: var(--shadow-soft);
@@ -4928,11 +4995,15 @@ body {
 .pass-unsure-note {
   display: grid;
   gap: 10px;
-  margin-top: 18px;
-  padding: 18px 18px 20px;
+  margin-top: 16px;
+  padding: 16px 16px 18px;
   border-radius: 22px;
   background: rgba(255, 252, 244, 0.98);
   border: 1px solid rgba(20, 58, 63, 0.08);
+}
+
+.pass-unsure-note.compact {
+  max-width: 760px;
 }
 
 .pass-table-desktop {
@@ -5069,6 +5140,297 @@ body {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
+}
+
+.sponsors-page {
+  display: grid;
+  gap: 22px;
+}
+
+.sponsors-hero,
+.sponsor-impact-band,
+.sponsor-final-cta {
+  position: relative;
+  overflow: hidden;
+  border-radius: 32px;
+}
+
+.sponsors-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(360px, 1.05fr);
+  gap: 28px;
+  padding: 32px;
+  background:
+    linear-gradient(135deg, rgba(255, 252, 244, 0.98), rgba(255, 247, 234, 0.96)),
+    radial-gradient(circle at 22% 18%, rgba(255, 90, 79, 0.12), transparent 22%);
+  box-shadow: 0 24px 54px rgba(20, 58, 63, 0.12);
+}
+
+.sponsors-hero-visual {
+  position: relative;
+  min-height: 540px;
+  border-radius: 28px;
+}
+
+.sponsors-hero-main {
+  min-height: 540px;
+  overflow: hidden;
+}
+
+.sponsors-hero-main img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.sponsor-trust-strip,
+.sponsor-why-section,
+.sponsor-opportunities-section,
+.sponsor-brand-map-section,
+.sponsor-packages-section,
+.sponsor-logo-wall-section {
+  background: linear-gradient(180deg, rgba(255, 252, 244, 0.98), rgba(255, 255, 255, 0.98));
+}
+
+.sponsor-support-groups {
+  display: grid;
+  gap: 18px;
+}
+
+.sponsor-support-group {
+  display: grid;
+  gap: 12px;
+}
+
+.sponsor-support-group h3,
+.sponsor-opportunity-card h3,
+.sponsor-package-card h3,
+.sponsor-impact-card h3,
+.sponsor-brand-core strong,
+.sponsor-contact-card strong {
+  margin: 0;
+  color: var(--color-ink);
+}
+
+.sponsor-support-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.sponsor-logo-card {
+  display: grid;
+  place-items: center;
+  min-height: 88px;
+  padding: 16px;
+  border-radius: 20px;
+  border: 1px solid rgba(20, 58, 63, 0.08);
+  background: rgba(255, 255, 255, 0.98);
+  box-shadow: var(--shadow-soft);
+  color: var(--color-ink);
+  font-weight: 700;
+  text-align: center;
+}
+
+.sponsor-value-grid,
+.sponsor-opportunity-grid,
+.sponsor-package-grid,
+.sponsor-impact-grid {
+  display: grid;
+  gap: 18px;
+}
+
+.sponsor-value-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.sponsor-opportunity-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.sponsor-opportunity-card,
+.sponsor-package-card,
+.sponsor-impact-card {
+  display: grid;
+  gap: 12px;
+  padding: 20px 18px;
+  border-radius: 24px;
+  border: 1px solid rgba(20, 58, 63, 0.08);
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: var(--shadow-soft);
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.sponsor-opportunity-card:hover,
+.sponsor-package-card:hover,
+.sponsor-impact-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 36px rgba(20, 58, 63, 0.09);
+}
+
+.sponsor-opportunity-card p,
+.sponsor-package-card p,
+.sponsor-impact-card p {
+  margin: 0;
+  color: var(--color-muted);
+  line-height: 1.65;
+}
+
+.sponsor-opportunity-index {
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+  min-height: 30px;
+  padding: 0 10px;
+  border-radius: 999px;
+  background: rgba(255, 90, 79, 0.1);
+  color: var(--color-red);
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+.sponsor-brand-map-shell {
+  display: grid;
+  grid-template-columns: minmax(240px, 0.7fr) minmax(0, 1.3fr);
+  gap: 24px;
+  align-items: center;
+  padding: 22px;
+  border-radius: 28px;
+  background:
+    linear-gradient(135deg, rgba(20, 58, 63, 0.94), rgba(20, 58, 63, 0.88)),
+    radial-gradient(circle at 20% 16%, rgba(255, 211, 78, 0.16), transparent 22%);
+}
+
+.sponsor-brand-core {
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+  padding: 24px 20px;
+  border-radius: 24px;
+  background: rgba(255, 252, 244, 0.96);
+  text-align: center;
+}
+
+.sponsor-brand-core img {
+  width: 96px;
+  height: 96px;
+  object-fit: contain;
+}
+
+.sponsor-brand-core span {
+  color: var(--color-muted);
+  font-size: 0.86rem;
+  font-weight: 700;
+}
+
+.sponsor-brand-points {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.sponsor-package-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.sponsor-impact-band {
+  display: grid;
+  grid-template-columns: minmax(320px, 0.86fr) minmax(0, 1.14fr);
+  gap: 24px;
+  padding: 26px;
+  background:
+    linear-gradient(135deg, rgba(20, 58, 63, 0.96), rgba(20, 58, 63, 0.88)),
+    radial-gradient(circle at 82% 18%, rgba(255, 90, 79, 0.14), transparent 24%);
+}
+
+.sponsor-impact-photo {
+  min-height: 420px;
+  overflow: hidden;
+}
+
+.sponsor-impact-photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.sponsor-impact-copy {
+  display: grid;
+  align-content: center;
+  gap: 18px;
+}
+
+.sponsor-impact-band .section-kicker,
+.sponsor-impact-band h2,
+.sponsor-impact-band p {
+  color: #fff9ef;
+}
+
+.sponsor-impact-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.sponsor-impact-card {
+  background: rgba(255, 252, 244, 0.94);
+}
+
+.sponsor-impact-card h3 {
+  color: var(--color-ink);
+}
+
+.sponsor-logo-wall-section .section-cta {
+  justify-content: flex-start;
+}
+
+.sponsor-final-cta {
+  background:
+    linear-gradient(135deg, rgba(255, 211, 78, 0.16), rgba(255, 255, 255, 0.98) 38%, rgba(72, 199, 200, 0.14)),
+    linear-gradient(180deg, rgba(255, 252, 244, 0.98), rgba(255, 255, 255, 0.98));
+  padding: 34px 30px;
+}
+
+.sponsor-final-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(320px, 1.1fr);
+  gap: 22px;
+  margin-top: 18px;
+  align-items: start;
+}
+
+.sponsor-cta-actions {
+  justify-content: flex-start;
+}
+
+.sponsor-contact-panel {
+  display: grid;
+  gap: 14px;
+}
+
+.sponsor-contact-card,
+.sponsor-inquiry-checklist {
+  display: grid;
+  gap: 8px;
+  padding: 18px;
+  border-radius: 22px;
+  border: 1px solid rgba(20, 58, 63, 0.08);
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: var(--shadow-soft);
+}
+
+.sponsor-contact-card span,
+.sponsor-inquiry-checklist span {
+  color: var(--color-muted);
+}
+
+.sponsor-contact-card.muted {
+  background: rgba(255, 252, 244, 0.9);
+}
+
+.logo-wall .sponsor-logo-card {
+  min-height: 94px;
 }
 
 .workshops-page {
@@ -5595,6 +5957,7 @@ body {
 .mentor-lineup-card {
   overflow: hidden;
   display: grid;
+  grid-template-rows: auto 1fr;
   gap: 0;
   border-radius: 28px;
   border: 1px solid rgba(20, 58, 63, 0.08);
@@ -5622,11 +5985,17 @@ body {
     radial-gradient(circle at 20% 18%, rgba(255, 211, 78, 0.2), transparent 24%);
 }
 
+.mentor-directory-grid .mentor-lineup-media {
+  min-height: 0;
+  aspect-ratio: 4 / 5;
+}
+
 .mentor-lineup-media img {
   display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center top;
   transition: transform 180ms ease;
 }
 
@@ -5653,9 +6022,11 @@ body {
 
 .mentor-lineup-copy {
   display: grid;
+  grid-template-rows: auto auto minmax(0, 1fr) auto auto;
   align-content: start;
   gap: 12px;
   padding: 18px 18px 20px;
+  min-height: 100%;
 }
 
 .mentor-lineup-copy h3 {
@@ -5667,6 +6038,10 @@ body {
   margin: 0;
   color: var(--color-muted);
   line-height: 1.7;
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
 }
 
 .mentor-lineup-badges {
@@ -5839,12 +6214,15 @@ body {
 @media (max-width: 1180px) {
   .workshops-hero,
   .passes-hero,
+  .sponsors-hero,
   .mentor-page-hero,
   .venue-hero,
   .venue-announcement,
   .venue-checklist,
   .venue-final-cta,
-  .pass-final-cta {
+  .pass-final-cta,
+  .sponsor-impact-band,
+  .sponsor-final-grid {
     grid-template-columns: 1fr;
   }
 
@@ -5863,7 +6241,9 @@ body {
   .mentor-featured-grid,
   .mentor-directory-grid,
   .mentor-learning-grid,
-  .mentor-page-cta {
+  .mentor-page-cta,
+  .sponsor-value-grid,
+  .sponsor-package-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -5881,6 +6261,12 @@ body {
 
   .calvary-guide-shell {
     grid-template-columns: 1fr;
+  }
+
+  .sponsor-opportunity-grid,
+  .sponsor-impact-grid,
+  .sponsor-support-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
@@ -5906,7 +6292,12 @@ body {
   .venue-destination-grid,
   .venue-zones-grid,
   .venue-facts-grid,
-  .venue-photo-grid {
+  .venue-photo-grid,
+  .sponsor-value-grid,
+  .sponsor-opportunity-grid,
+  .sponsor-package-grid,
+  .sponsor-impact-grid,
+  .sponsor-support-grid {
     grid-template-columns: 1fr;
   }
 
@@ -5997,11 +6388,16 @@ body {
     grid-column: auto;
     grid-template-columns: 1fr;
   }
+
+  .sponsor-brand-map-shell {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 860px) {
   .workshops-hero,
   .passes-hero,
+  .sponsors-hero,
   .mentor-page-hero,
   .venue-hero,
   .venue-announcement,
@@ -6009,7 +6405,9 @@ body {
   .venue-final-cta,
   .pass-important-note,
   .pass-value-band,
-  .pass-final-cta {
+  .pass-final-cta,
+  .sponsor-impact-band,
+  .sponsor-final-cta {
     padding: 28px;
     border-radius: 24px;
   }
@@ -6019,8 +6417,18 @@ body {
     align-items: stretch;
   }
 
+  .sponsor-cta-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
   .workshops-hero-visual,
   .workshop-collage-main {
+    min-height: 360px;
+  }
+
+  .sponsors-hero-visual,
+  .sponsors-hero-main {
     min-height: 360px;
   }
 
