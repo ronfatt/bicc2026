@@ -373,21 +373,6 @@ select {
   box-shadow: 0 10px 20px rgba(23, 59, 76, 0.1);
 }
 
-.hero-edition-tag {
-  display: inline-flex;
-  align-items: center;
-  min-height: 28px;
-  padding: 0 10px;
-  border-radius: 999px;
-  background: linear-gradient(135deg, rgba(247, 200, 75, 0.22), rgba(37, 169, 187, 0.14));
-  border: 1px solid rgba(246, 91, 87, 0.16);
-  color: var(--color-red);
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-}
-
 .hero-mini-note {
   max-width: 34ch;
   margin: 0;
@@ -510,55 +495,6 @@ select {
 
 .hero-photo-main {
   width: calc(100% - 42px);
-}
-
-.hero-logo-seal {
-  position: absolute;
-  top: 18px;
-  left: 18px;
-  width: 90px;
-  height: 90px;
-  padding: 6px;
-  border-radius: 50%;
-  background: rgba(255, 253, 249, 0.9);
-  border: 1px solid rgba(238, 217, 184, 0.92);
-  box-shadow: 0 12px 28px rgba(23, 59, 76, 0.14);
-}
-
-.hero-logo-seal img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 50%;
-}
-
-.hero-image-badge {
-  position: absolute;
-  left: 18px;
-  bottom: 18px;
-  display: grid;
-  gap: 4px;
-  padding: 12px 14px;
-  border-radius: 18px;
-  background: rgba(255, 250, 241, 0.94);
-  border: 1px solid rgba(238, 217, 184, 0.92);
-  box-shadow: 0 10px 24px rgba(23, 59, 76, 0.1);
-}
-
-.hero-image-badge strong,
-.hero-image-badge span {
-  color: var(--color-navy);
-}
-
-.hero-image-badge strong {
-  font-size: 0.82rem;
-}
-
-.hero-image-badge span {
-  font-size: 0.74rem;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
 }
 
 .floating-photo {
@@ -1539,10 +1475,17 @@ select {
   .main-nav {
     grid-column: 1 / -1;
     justify-content: start;
-    gap: 14px;
+    flex-wrap: wrap;
+    gap: 8px 10px;
     padding-top: 8px;
-    overflow-x: auto;
-    white-space: nowrap;
+    overflow: visible;
+    white-space: normal;
+  }
+
+  .main-nav a {
+    min-height: 34px;
+    padding: 0 8px;
+    font-size: 0.84rem;
   }
 
   .header-cta {
@@ -1607,11 +1550,17 @@ select {
 
   .hero-collage {
     min-height: auto;
-    padding-bottom: 84px;
+    padding-bottom: 0;
   }
 
   .hero-photo-main {
     width: 100%;
+  }
+
+  .floating-photo,
+  .programme-floating-card,
+  .venue-floating-photo {
+    display: none;
   }
 
   .floating-photo {
@@ -1635,20 +1584,7 @@ select {
   }
 
   .hero-photo-frame img {
-    min-height: 360px;
-  }
-
-  .hero-logo-seal {
-    width: 72px;
-    height: 72px;
-    top: 12px;
-    left: 12px;
-  }
-
-  .hero-image-badge {
-    left: 12px;
-    right: 12px;
-    bottom: 12px;
+    min-height: 420px;
   }
 
   .story-photo-frame {
@@ -2005,14 +1941,6 @@ body {
 
 .hero-photo-main {
   transform: translateY(10px);
-}
-
-.hero-logo-seal {
-  border-color: rgba(255, 211, 78, 0.32);
-}
-
-.hero-image-badge {
-  z-index: 2;
 }
 
 .floating-photo {
@@ -2636,6 +2564,18 @@ body {
   align-content: start;
 }
 
+.programme-hero-title-row h1,
+.venue-hero-title-row h1,
+.passes-hero-title-row h1,
+.sponsors-hero .passes-hero-title-row h1,
+.workshops-hero .passes-hero-title-row h1 {
+  max-width: 9.5ch;
+}
+
+.mentor-page-hero h1 {
+  max-width: 13ch;
+}
+
 .programme-hero h1,
 .programme-updates h2,
 .programme-final-cta h2 {
@@ -2682,7 +2622,8 @@ body {
 .passes-hero .programme-ticket-badge,
 .workshops-hero .programme-ticket-badge,
 .venue-hero .programme-ticket-badge,
-.mentor-page-hero .programme-ticket-badge {
+.mentor-page-hero .programme-ticket-badge,
+.sponsors-hero .programme-ticket-badge {
   background: rgba(255, 252, 244, 0.94);
   border-color: rgba(20, 58, 63, 0.12);
   color: var(--color-ink);
@@ -2692,16 +2633,12 @@ body {
 .passes-hero .programme-hero-badges span,
 .workshops-hero .programme-hero-badges span,
 .venue-hero .programme-hero-badges span,
-.mentor-page-hero .programme-hero-badges span {
+.mentor-page-hero .programme-hero-badges span,
+.sponsors-hero .programme-hero-badges span {
   background: rgba(255, 255, 255, 0.94);
   border-color: rgba(20, 58, 63, 0.12);
   color: var(--color-ink);
   box-shadow: none;
-}
-
-.programme-hero-link {
-  margin-top: 16px;
-  color: var(--color-sunshine);
 }
 
 .programme-spotlight {
@@ -4690,22 +4627,6 @@ body {
   transform: translateX(0) rotate(1deg);
 }
 
-.passes-hero-pattern {
-  position: absolute;
-  right: -14px;
-  bottom: -18px;
-  z-index: 0;
-  opacity: 0.34;
-  transform: scale(0.82);
-  pointer-events: none;
-}
-
-.passes-hero-pattern .pattern-corner {
-  position: relative;
-  width: 144px;
-  height: 144px;
-}
-
 .pass-badge-top,
 .pass-badge-meta,
 .delegate-pass-meta {
@@ -5492,18 +5413,6 @@ body {
   line-height: 1.2;
 }
 
-.workshop-hero-sidecard-chips span {
-  display: inline-flex;
-  align-items: center;
-  min-height: 30px;
-  padding: 0 10px;
-  border-radius: 999px;
-  background: rgba(72, 199, 200, 0.12);
-  color: var(--color-ink);
-  font-size: 0.76rem;
-  font-weight: 700;
-}
-
 .workshop-collage-main {
   overflow: hidden;
   min-height: 520px;
@@ -5840,14 +5749,16 @@ body {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center 62%;
+  transform: scale(1.03);
 }
 
 .mentor-hero-overlay {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(90deg, rgba(20, 58, 63, 0.72), rgba(20, 58, 63, 0.18) 42%, rgba(20, 58, 63, 0.56)),
-    radial-gradient(circle at 82% 18%, rgba(72, 199, 200, 0.18), transparent 22%);
+    linear-gradient(180deg, rgba(20, 58, 63, 0.46), rgba(20, 58, 63, 0.16) 34%, rgba(20, 58, 63, 0.42)),
+    linear-gradient(90deg, rgba(20, 58, 63, 0.52), rgba(20, 58, 63, 0.12) 42%, rgba(20, 58, 63, 0.42));
 }
 
 .mentor-hero-badge {
@@ -5855,57 +5766,6 @@ body {
   left: 20px;
   top: 20px;
   z-index: 2;
-}
-
-.mentor-hero-editorial-note {
-  position: absolute;
-  left: 20px;
-  bottom: 20px;
-  z-index: 2;
-  display: grid;
-  gap: 8px;
-  width: min(300px, calc(100% - 180px));
-  padding: 16px 18px;
-  border-radius: 22px;
-  background: rgba(255, 252, 244, 0.92);
-  border: 1px solid rgba(20, 58, 63, 0.08);
-  box-shadow: 0 16px 34px rgba(20, 58, 63, 0.14);
-}
-
-.mentor-hero-note-label {
-  color: var(--color-red);
-  font-size: 0.74rem;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.mentor-hero-editorial-note strong {
-  color: var(--color-ink);
-  font-family: 'Playfair Display', Georgia, serif;
-  font-size: 1.14rem;
-  line-height: 1.28;
-}
-
-.mentor-hero-portraits {
-  position: absolute;
-  right: 18px;
-  bottom: 18px;
-  z-index: 2;
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 10px;
-  width: min(280px, calc(100% - 36px));
-}
-
-.mentor-hero-portraits img {
-  display: block;
-  width: 100%;
-  aspect-ratio: 0.88;
-  object-fit: cover;
-  border-radius: 18px;
-  border: 3px solid rgba(255, 252, 244, 0.88);
-  box-shadow: 0 12px 24px rgba(20, 58, 63, 0.18);
 }
 
 .mentor-intro-grid,
@@ -5974,8 +5834,21 @@ body {
   transition: transform 180ms ease;
 }
 
+.mentor-lineup-card.featured .mentor-lineup-media img {
+  object-position: center 78%;
+}
+
+.mentor-lineup-card[data-mentor-id='randy-christensen'] .mentor-lineup-media img {
+  object-position: center 34%;
+  transform: scale(1.24);
+}
+
 .mentor-lineup-card:hover .mentor-lineup-media img {
   transform: scale(1.02);
+}
+
+.mentor-lineup-card[data-mentor-id='randy-christensen']:hover .mentor-lineup-media img {
+  transform: scale(1.27);
 }
 
 .mentor-card-flag {
@@ -6293,10 +6166,6 @@ body {
     grid-template-columns: repeat(3, minmax(88px, 1fr));
   }
 
-  .mentor-hero-editorial-note {
-    width: min(320px, calc(100% - 32px));
-  }
-
   .workshop-hero-sidecard {
     left: 10px;
     bottom: 22px;
@@ -6409,12 +6278,6 @@ body {
 
   .mentor-hero-visual {
     min-height: 420px;
-  }
-
-  .mentor-hero-editorial-note {
-    left: 12px;
-    bottom: 110px;
-    width: min(280px, calc(100% - 24px));
   }
 
   .mentor-hero-portraits {

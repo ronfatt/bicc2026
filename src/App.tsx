@@ -1,13 +1,9 @@
 import { useState } from 'react'
 
-const clownHeroImage =
-  'https://images.pexels.com/photos/18652042/pexels-photo-18652042/free-photo-of-clown-performing-on-stage.jpeg?auto=compress&cs=tinysrgb&w=1200&h=1500&dpr=2'
-const clownStageImage =
-  'https://images.pexels.com/photos/18652043/pexels-photo-18652043/free-photo-of-clown-on-stage.jpeg?auto=compress&cs=tinysrgb&w=1200&h=1500&dpr=2'
-const clownDuoImage =
-  'https://images.pexels.com/photos/18652033/pexels-photo-18652033/free-photo-of-clowns-playing-on-stage.jpeg?auto=compress&cs=tinysrgb&w=1200&h=1500&dpr=2'
-const clownShowImage =
-  'https://images.pexels.com/photos/17165097/pexels-photo-17165097/free-photo-of-man-in-a-colorful-costume-of-a-clown-standing-on-stage.jpeg?auto=compress&cs=tinysrgb&w=1200&h=1500&dpr=2'
+const clownHeroImage = '/mentors/randy-christensen.jpg'
+const clownStageImage = '/mentors/watt-de-clown.jpg'
+const clownDuoImage = '/mentors/jackie-newton.jpg'
+const clownShowImage = '/mentors/chagy.jpg'
 const biccLogo = '/bicc-logo.png'
 const mentorPosterImage = '/mentors/uncle-sunday-poster.png'
 const mentorPortraitUncleSunday = '/mentors/uncle-sunday.png'
@@ -24,10 +20,8 @@ const mentorPortraitJackie = '/mentors/jackie-newton.jpg'
 const mentorPortraitKakYogi = '/mentors/kak-yogi.jpg'
 const mentorPortraitPayaCocos = '/mentors/paya-cocos.png'
 const mentorPortraitFrankie = '/mentors/frankie-malachi.jpg'
-const calvaryCrownAerialImage =
-  'https://static.wixstatic.com/media/1e9ed2_84e8f92053964139aac73a3455a257f4%7Emv2_d_3886_2182_s_2.jpg/v1/fit/w_2500,h_1330,al_c/1e9ed2_84e8f92053964139aac73a3455a257f4%7Emv2_d_3886_2182_s_2.jpg'
-const calvaryCrownPlanImage =
-  'https://static.wixstatic.com/media/1e9ed2_903e90533b8649df8f05d26de0d4e1ef~mv2.jpg/v1/fill/w_600,h_845,al_c,lg_1,q_85,enc_avif,quality_auto/1e9ed2_903e90533b8649df8f05d26de0d4e1ef~mv2.jpg'
+const calvaryCrownAerialImage = '/calvary-scene.png'
+const calvaryCrownPlanImage = '/tawau-town-map.jpg'
 
 type ProgrammeFilterKey =
   | 'all'
@@ -1616,7 +1610,7 @@ function ProgrammeHero() {
       <div className="programme-hero-copy">
         <p className="section-kicker">Programme</p>
         <div className="programme-hero-title-row">
-          <h1>3 Days. One Shared Journey.</h1>
+          <h1>See the 3-Day BICC Journey.</h1>
           <span className="programme-ticket-badge">Official Convention Programme</span>
         </div>
         <p className="programme-hero-intro">
@@ -1636,9 +1630,6 @@ function ProgrammeHero() {
             Compare Tracks
           </a>
         </div>
-        <a className="text-link programme-hero-link" href="/workshops">
-          View Workshop Tracks
-        </a>
       </div>
 
       <div className="programme-hero-visual">
@@ -1653,7 +1644,6 @@ function ProgrammeHero() {
           <img alt="Workshop moment" src={clownStageImage} />
           <span>Workshop energy</span>
         </article>
-        <PatternCorner side="right" />
       </div>
     </section>
   )
@@ -1936,11 +1926,7 @@ function VenueHero() {
       <div className="venue-hero-copy">
         <p className="section-kicker">Venue & Visitor Guide</p>
         <div className="venue-hero-title-row">
-          <h1>
-            Gather in Borneo.
-            <br />
-            Find Your Way With Ease.
-          </h1>
+          <h1>Find Your Way in Borneo.</h1>
           <span className="programme-ticket-badge">Official Delegate Venue Guide</span>
         </div>
         <p className="venue-hero-intro">
@@ -1960,9 +1946,6 @@ function VenueHero() {
             View Programme
           </a>
         </div>
-        <a className="text-link programme-hero-link" href="/workshops">
-          Explore Workshops
-        </a>
       </div>
 
       <div className="venue-hero-visual">
@@ -1984,10 +1967,9 @@ function VenueHero() {
             <span>{venueInfo.address}</span>
           </div>
           <article className="venue-blueprint-card">
-            <img alt="Calvary Crown architectural design view" src={calvaryCrownPlanImage} />
-            <span>Building design reference</span>
+            <img alt="Tawau town map reference" src={calvaryCrownPlanImage} />
+            <span>Tawau town map</span>
           </article>
-          <PatternCorner side="right" />
         </div>
         <article className="venue-floating-photo top">
           <img alt="Calvary Crown exterior and city context" src={calvaryCrownAerialImage} />
@@ -2071,8 +2053,8 @@ function VenueMap() {
             <span>Room assignments, route overlays and BICC zone labels will be updated before the event.</span>
           </div>
           <article className="venue-blueprint-card map">
-            <img alt="Calvary Crown building design elevations" src={calvaryCrownPlanImage} />
-            <span>Facade & massing study</span>
+            <img alt="Tawau town map reference" src={calvaryCrownPlanImage} />
+            <span>Tawau context map</span>
           </article>
         </div>
 
@@ -2237,7 +2219,7 @@ function SponsorHero() {
       <div className="passes-hero-copy sponsor-hero-copy">
         <p className="section-kicker">Sponsors & Partnerships</p>
         <div className="passes-hero-title-row">
-          <h1>Partner with BICC 2026</h1>
+          <h1>Partner with BICC 2026.</h1>
           <span className="programme-ticket-badge">Official Partnership Opportunities</span>
         </div>
         <p className="passes-hero-intro">
@@ -2261,10 +2243,6 @@ function SponsorHero() {
       <div className="sponsors-hero-visual">
         <div className="sponsors-hero-main image-frame">
           <img alt="BICC performance and audience engagement" src={clownDuoImage} />
-          <div className="programme-hero-caption">
-            <strong>Real audience impact</strong>
-            <span>Performance, workshops, red nose moments and shared convention energy.</span>
-          </div>
         </div>
         <article className="programme-floating-card top">
           <img alt="Interactive clown performance" src={clownShowImage} />
@@ -2465,11 +2443,7 @@ function PassHero() {
       <div className="passes-hero-copy">
         <p className="section-kicker">Passes & Registration</p>
         <div className="passes-hero-title-row">
-          <h1>
-            Choose Your Pass.
-            <br />
-            Start Your BICC Journey.
-          </h1>
+          <h1>Choose the Pass That Fits You.</h1>
           <span className="programme-ticket-badge">Official Convention Registration</span>
         </div>
         <p className="passes-hero-intro">
@@ -2489,9 +2463,6 @@ function PassHero() {
             Compare Tracks
           </a>
         </div>
-        <a className="text-link programme-hero-link" href="/programme">
-          View Programme
-        </a>
       </div>
 
       <div className="passes-hero-visual">
@@ -2511,9 +2482,6 @@ function PassHero() {
             <RedNoseIcon />
           </article>
         ))}
-        <div aria-hidden="true" className="passes-hero-pattern">
-          <PatternCorner side="right" />
-        </div>
       </div>
     </section>
   )
@@ -2747,11 +2715,7 @@ function WorkshopHero() {
       <div className="passes-hero-copy">
         <p className="section-kicker">Workshops & Training</p>
         <div className="passes-hero-title-row">
-          <h1>
-            Hands-On Learning,
-            <br />
-            Real-World Impact.
-          </h1>
+          <h1>Build Real Clown Practice.</h1>
           <span className="programme-ticket-badge">Focused Workshop Learning</span>
         </div>
         <p className="passes-hero-intro">
@@ -2771,9 +2735,6 @@ function WorkshopHero() {
             Compare Tracks
           </a>
         </div>
-        <a className="text-link programme-hero-link" href="/programme">
-          View Programme
-        </a>
       </div>
 
       <div className="workshops-hero-visual">
@@ -2788,7 +2749,6 @@ function WorkshopHero() {
           <img alt="Workshop practice" src={clownStageImage} />
           <span>Practice & props</span>
         </article>
-        <PatternCorner side="right" />
       </div>
     </section>
   )
@@ -3012,11 +2972,7 @@ function MentorHero() {
     <section className="mentor-page-hero section-shell">
       <div className="mentor-hero-copy">
         <p className="section-kicker">Mentors & Guest Artists</p>
-        <h1>
-          Learn From Artists
-          <br />
-          Who Live the Stage.
-        </h1>
+        <h1>Meet the Artists Leading BICC.</h1>
         <p className="passes-hero-intro">
           Meet the performers, teachers and guest artists joining BICC 2026 from Malaysia, Asia and beyond.
         </p>
@@ -3042,15 +2998,6 @@ function MentorHero() {
         <img alt="BICC mentor poster" className="mentor-hero-poster" src={mentorPosterImage} />
         <div aria-hidden="true" className="mentor-hero-overlay" />
         <span className="programme-ticket-badge mentor-hero-badge">International Mentor Line-up</span>
-        <article className="mentor-hero-editorial-note">
-          <span className="mentor-hero-note-label">2026 Guest Artist Edit</span>
-          <strong>Artists, teachers and stage practitioners brought together for a warm international exchange in Borneo.</strong>
-        </article>
-        <div className="mentor-hero-portraits">
-          <img alt="Chagy portrait" src={mentorPortraitChagy} />
-          <img alt="Uncle Button portrait" src={mentorPortraitUncleButton} />
-        </div>
-        <PatternCorner side="right" />
       </div>
     </section>
   )
@@ -3064,7 +3011,7 @@ function MentorCard({
   featured?: boolean
 }) {
   return (
-    <article className={`mentor-lineup-card ${featured ? 'featured' : ''}`}>
+    <article className={`mentor-lineup-card ${featured ? 'featured' : ''}`} data-mentor-id={mentor.id}>
       <div className="mentor-lineup-media">
         {mentor.image ? <img alt={`${mentor.name} portrait`} src={mentor.image} /> : <MentorPlaceholderArt label={mentor.name} />}
         <span className="mentor-card-flag">{featured ? 'Featured' : mentor.country}</span>
@@ -3200,12 +3147,11 @@ function HomePage() {
           <div className="hero-eyebrow-row">
             <img alt="BICC 2026 official logo" className="hero-mini-logo" src={biccLogo} />
             <p className="hero-eyebrow">Borneo International Clown Convention 2026</p>
-            <span className="hero-edition-tag">International Edition</span>
           </div>
           <div className="hero-title-block">
             <p className="hero-monogram">BICC 2026</p>
             <h1>
-              Where Laughter Becomes <span className="hero-highlight">Legacy</span>
+              Where Laughter Becomes <span className="hero-highlight">Legacy</span>.
             </h1>
           </div>
           <p className="hero-subheadline">
@@ -3235,15 +3181,7 @@ function HomePage() {
         <div className="hero-collage">
           <div className="hero-photo-frame hero-photo-main">
             <img alt="Joyful professional clown performer" src={clownHeroImage} />
-            <div className="hero-logo-seal">
-              <img alt="BICC logo seal" src={biccLogo} />
-            </div>
-            <div className="hero-image-badge">
-              <strong>Official Convention Magazine</strong>
-              <span>Delegate Handbook 2026</span>
-            </div>
             <SmileDoodle />
-            <PatternCorner side="right" />
           </div>
           <article className="floating-photo training-shot">
             <img alt="Clown workshop training moment" src={clownStageImage} />
