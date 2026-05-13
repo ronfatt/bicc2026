@@ -153,9 +153,9 @@ select {
   display: flex;
   justify-content: flex-start;
   flex-wrap: nowrap;
-  gap: clamp(12px, 1.6vw, 22px);
+  gap: clamp(8px, 1.1vw, 16px);
   min-width: 0;
-  font-size: 0.9rem;
+  font-size: 0.86rem;
   white-space: nowrap;
   overflow-x: auto;
   scrollbar-width: none;
@@ -179,7 +179,7 @@ select {
   display: inline-flex;
   align-items: center;
   min-height: 38px;
-  padding: 0 12px;
+  padding: 0 10px;
   border-radius: 999px;
   transition:
     color 180ms ease,
@@ -4523,6 +4523,703 @@ body {
     92px 12px 0 1px var(--color-turquoise);
 }
 
+.visit-page {
+  display: grid;
+  gap: 22px;
+}
+
+.visit-hero,
+.visit-route-band,
+.visit-final-cta {
+  position: relative;
+  overflow: hidden;
+  border-radius: 30px;
+}
+
+.visit-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(360px, 1.1fr);
+  gap: 26px;
+  padding: 30px;
+  background:
+    linear-gradient(135deg, rgba(255, 252, 244, 0.98), rgba(255, 247, 234, 0.96)),
+    radial-gradient(circle at 18% 16%, rgba(255, 90, 79, 0.1), transparent 22%);
+  box-shadow: 0 24px 54px rgba(20, 58, 63, 0.12);
+}
+
+.visit-hero-copy {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  align-content: center;
+  gap: 18px;
+}
+
+.visit-hero h1,
+.visit-final-cta h2 {
+  margin: 0;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(2.9rem, 5vw, 4.6rem);
+  line-height: 0.98;
+  letter-spacing: -0.04em;
+  color: var(--color-ink);
+  text-wrap: balance;
+}
+
+.visit-hero p,
+.visit-card-copy p,
+.visit-note {
+  color: var(--color-muted);
+  line-height: 1.75;
+}
+
+.visit-hero-visual {
+  position: relative;
+  z-index: 1;
+  min-height: 460px;
+  overflow: hidden;
+  border-radius: 30px;
+  border: 8px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 0 24px 54px rgba(20, 58, 63, 0.18);
+}
+
+.visit-hero-visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(1.08) contrast(1.04);
+}
+
+.visit-brand-overlay {
+  position: absolute;
+  left: 22px;
+  right: 22px;
+  bottom: 22px;
+  display: grid;
+  gap: 6px;
+  padding: 18px 20px;
+  border-radius: 22px;
+  background: rgba(255, 252, 244, 0.9);
+  backdrop-filter: blur(14px);
+}
+
+.visit-brand-overlay span {
+  color: var(--color-red);
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.visit-brand-overlay strong {
+  color: var(--color-ink);
+  font-size: 1.4rem;
+}
+
+.visit-hero-facts {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.visit-jump-bar {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 12px;
+  border-radius: 22px;
+  border: 1px solid rgba(20, 58, 63, 0.08);
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.visit-jump-bar a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  padding: 0 14px;
+  border-radius: 999px;
+  background: rgba(255, 252, 244, 0.92);
+  color: var(--color-ink);
+  font-weight: 900;
+  text-decoration: none;
+  transition: transform 180ms ease, background 180ms ease;
+}
+
+.visit-jump-bar a:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 225, 220, 0.86);
+}
+
+.visit-fact-card,
+.visit-photo-card {
+  border: 1px solid var(--color-border);
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: var(--shadow-soft);
+}
+
+.visit-fact-card {
+  display: grid;
+  gap: 8px;
+  padding: 18px;
+  border-radius: 22px;
+}
+
+.visit-fact-card.soft-aqua {
+  background: linear-gradient(135deg, rgba(221, 247, 247, 0.82), rgba(255, 255, 255, 0.96));
+}
+
+.visit-fact-card.soft-coral {
+  background: linear-gradient(135deg, rgba(255, 225, 220, 0.82), rgba(255, 255, 255, 0.96));
+}
+
+.visit-fact-card.soft-yellow {
+  background: linear-gradient(135deg, rgba(255, 241, 184, 0.82), rgba(255, 255, 255, 0.96));
+}
+
+.visit-fact-card h3,
+.visit-card-copy h3 {
+  margin: 0;
+  color: var(--color-ink);
+}
+
+.visit-fact-card p,
+.visit-card-copy p,
+.visit-note {
+  margin: 0;
+}
+
+.visit-food-grid,
+.visit-info-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.visit-things-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.visit-photo-card {
+  overflow: hidden;
+  display: grid;
+  border-radius: 26px;
+  color: inherit;
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.visit-food-link-card {
+  text-decoration: none;
+}
+
+.visit-photo-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 42px rgba(20, 58, 63, 0.14);
+}
+
+.visit-photo-placeholder,
+.visit-photo-media {
+  position: relative;
+  min-height: 210px;
+  display: grid;
+  align-content: end;
+  gap: 10px;
+  padding: 18px;
+  overflow: hidden;
+  color: #fff;
+  background: linear-gradient(135deg, var(--color-deep-teal), var(--color-turquoise));
+}
+
+.visit-photo-placeholder::before,
+.visit-photo-media::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.18;
+  background-image:
+    linear-gradient(45deg, transparent 25%, rgba(255, 255, 255, 0.9) 25% 36%, transparent 36%),
+    linear-gradient(-45deg, transparent 25%, rgba(255, 211, 78, 0.9) 25% 36%, transparent 36%);
+  background-size: 64px 64px;
+}
+
+.visit-photo-media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(20, 58, 63, 0.04), rgba(20, 58, 63, 0.7));
+}
+
+.visit-photo-media img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 180ms ease;
+}
+
+.visit-photo-card:hover .visit-photo-media img {
+  transform: scale(1.03);
+}
+
+.visit-photo-placeholder span,
+.visit-photo-media span {
+  position: relative;
+  z-index: 2;
+  max-width: 12rem;
+  font-weight: 900;
+  font-size: 1.2rem;
+  line-height: 1.1;
+}
+
+.visit-photo-placeholder small,
+.visit-photo-media small {
+  position: relative;
+  z-index: 2;
+  width: fit-content;
+  padding: 7px 10px;
+  border-radius: 999px;
+  background: rgba(255, 252, 244, 0.86);
+  color: var(--color-ink);
+  font-size: 0.68rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.visit-photo-placeholder.seafood,
+.visit-photo-placeholder.waterfront,
+.visit-photo-media.seafood,
+.visit-photo-media.waterfront {
+  background: linear-gradient(135deg, #0b5c68, #48c7c8);
+}
+
+.visit-photo-placeholder.kopitiam,
+.visit-photo-placeholder.cafe,
+.visit-photo-placeholder.cocoa,
+.visit-photo-media.kopitiam,
+.visit-photo-media.cafe,
+.visit-photo-media.cocoa {
+  background: linear-gradient(135deg, #8f4f31, #ffd34e);
+}
+
+.visit-photo-placeholder.street,
+.visit-photo-placeholder.market,
+.visit-photo-media.street,
+.visit-photo-media.market {
+  background: linear-gradient(135deg, #ff5a4f, #ffd34e);
+}
+
+.visit-photo-placeholder.hills,
+.visit-photo-media.hills {
+  background: linear-gradient(135deg, #226547, #4fa66a);
+}
+
+.visit-photo-placeholder.stone,
+.visit-photo-media.stone {
+  background: linear-gradient(135deg, #40575d, #b9c8c4);
+}
+
+.visit-card-copy {
+  display: grid;
+  gap: 8px;
+  padding: 18px;
+}
+
+.visit-card-copy small {
+  color: var(--color-muted);
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.visit-card-copy strong {
+  width: fit-content;
+  color: var(--color-red);
+  font-size: 0.88rem;
+  font-weight: 900;
+}
+
+.visit-food-picks {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+  padding: 14px 16px;
+  border-radius: 20px;
+  background: rgba(255, 241, 184, 0.42);
+  border: 1px solid rgba(255, 211, 78, 0.28);
+}
+
+.visit-food-picks > strong {
+  color: var(--color-ink);
+  font-size: 0.88rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.visit-food-guide {
+  display: grid;
+  gap: 18px;
+  margin-top: 24px;
+  padding: 22px;
+  border-radius: 28px;
+  border: 1px solid rgba(20, 58, 63, 0.1);
+  background:
+    linear-gradient(135deg, rgba(255, 252, 244, 0.98), rgba(255, 241, 184, 0.28)),
+    radial-gradient(circle at 92% 8%, rgba(72, 199, 200, 0.1), transparent 24%);
+}
+
+.visit-food-guide-head {
+  max-width: 820px;
+  display: grid;
+  gap: 8px;
+}
+
+.visit-food-guide-head h3,
+.visit-food-detail-copy h4 {
+  margin: 0;
+  color: var(--color-ink);
+}
+
+.visit-food-guide-head p,
+.visit-food-detail-copy p,
+.visit-food-detail-copy small,
+.visit-food-meta-grid span {
+  margin: 0;
+  color: var(--color-muted);
+  line-height: 1.65;
+}
+
+.visit-food-detail-list {
+  display: grid;
+  gap: 16px;
+}
+
+.visit-food-detail-card {
+  display: grid;
+  grid-template-columns: minmax(240px, 0.85fr) minmax(0, 1.15fr);
+  gap: 20px;
+  padding: 16px;
+  border-radius: 24px;
+  border: 1px solid rgba(20, 58, 63, 0.08);
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: var(--shadow-soft);
+  scroll-margin-top: 130px;
+}
+
+.visit-food-detail-image {
+  position: relative;
+  overflow: hidden;
+  min-height: 260px;
+  border-radius: 20px;
+}
+
+.visit-food-detail-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.visit-food-detail-image::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 34%, rgba(20, 58, 63, 0.58));
+}
+
+.visit-food-detail-image span {
+  position: absolute;
+  left: 14px;
+  bottom: 14px;
+  z-index: 1;
+  width: fit-content;
+  padding: 8px 10px;
+  border-radius: 999px;
+  background: rgba(255, 252, 244, 0.9);
+  color: var(--color-ink);
+  font-size: 0.68rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.visit-food-detail-copy {
+  display: grid;
+  align-content: center;
+  gap: 14px;
+}
+
+.visit-food-meta-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.3fr);
+  gap: 12px;
+}
+
+.visit-food-meta-grid div {
+  display: grid;
+  gap: 5px;
+  padding: 12px 14px;
+  border-radius: 16px;
+  background: rgba(221, 247, 247, 0.4);
+}
+
+.visit-food-meta-grid strong {
+  color: var(--color-ink);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.visit-note {
+  margin-top: 16px;
+  padding: 16px 18px;
+  border-radius: 20px;
+  background: rgba(255, 241, 184, 0.45);
+  border: 1px solid rgba(255, 211, 78, 0.3);
+  font-weight: 600;
+}
+
+.visit-hotel-panel {
+  display: grid;
+  gap: 16px;
+  margin-top: 18px;
+  padding: 22px;
+  border-radius: 26px;
+  border: 1px solid rgba(20, 58, 63, 0.1);
+  background:
+    linear-gradient(135deg, rgba(255, 252, 244, 0.98), rgba(221, 247, 247, 0.38)),
+    radial-gradient(circle at 92% 8%, rgba(255, 90, 79, 0.1), transparent 22%);
+}
+
+.visit-hotel-panel-head {
+  display: grid;
+  gap: 8px;
+  max-width: 760px;
+}
+
+.visit-hotel-panel-head h3,
+.visit-hotel-card h4 {
+  margin: 0;
+  color: var(--color-ink);
+}
+
+.visit-hotel-panel-head p,
+.visit-hotel-card p,
+.visit-hotel-card small {
+  margin: 0;
+  color: var(--color-muted);
+  line-height: 1.65;
+}
+
+.visit-hotel-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.visit-hotel-card {
+  display: grid;
+  grid-template-rows: minmax(240px, 7fr) minmax(0, 3fr);
+  overflow: hidden;
+  min-height: 430px;
+  border-radius: 24px;
+  border: 1px solid rgba(20, 58, 63, 0.08);
+  background: rgba(255, 255, 255, 0.9);
+  color: inherit;
+  box-shadow: var(--shadow-soft);
+  text-decoration: none;
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.visit-hotel-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 22px 44px rgba(20, 58, 63, 0.16);
+}
+
+.visit-hotel-image {
+  position: relative;
+  overflow: hidden;
+  min-height: 280px;
+}
+
+.visit-hotel-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 180ms ease;
+}
+
+.visit-hotel-card:hover .visit-hotel-image img {
+  transform: scale(1.03);
+}
+
+.visit-hotel-image::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(20, 58, 63, 0.02), rgba(20, 58, 63, 0.66));
+}
+
+.visit-hotel-image span,
+.visit-hotel-copy > span {
+  display: inline-flex;
+  width: fit-content;
+  padding: 7px 10px;
+  border-radius: 999px;
+  background: rgba(255, 225, 220, 0.78);
+  color: var(--color-red);
+  font-size: 0.68rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.visit-hotel-image span {
+  position: absolute;
+  left: 16px;
+  bottom: 16px;
+  z-index: 1;
+  background: rgba(255, 252, 244, 0.88);
+}
+
+.visit-hotel-copy {
+  display: grid;
+  align-content: start;
+  gap: 8px;
+  padding: 18px;
+}
+
+.visit-hotel-copy > span {
+  display: inline-flex;
+  margin-bottom: 2px;
+  background: rgba(221, 247, 247, 0.72);
+  color: var(--color-ink);
+}
+
+.visit-hotel-card h4 {
+  font-size: 1.18rem;
+}
+
+.visit-hotel-card strong {
+  width: fit-content;
+  color: var(--color-red);
+  font-size: 0.9rem;
+  font-weight: 900;
+}
+
+.visit-hotel-card em {
+  color: var(--color-muted);
+  font-size: 0.68rem;
+  font-style: normal;
+  font-weight: 700;
+}
+
+.visit-tip-strip {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.visit-tip-strip span {
+  display: block;
+  padding: 14px 16px;
+  border-radius: 18px;
+  border: 1px solid rgba(20, 58, 63, 0.08);
+  background: rgba(255, 255, 255, 0.84);
+  color: var(--color-ink);
+  font-size: 0.9rem;
+  font-weight: 700;
+  line-height: 1.45;
+}
+
+.visit-route-band {
+  padding: 28px;
+  background:
+    linear-gradient(135deg, rgba(20, 58, 63, 0.98), rgba(23, 52, 58, 0.94)),
+    radial-gradient(circle at 20% 16%, rgba(255, 211, 78, 0.18), transparent 28%);
+}
+
+.visit-route-band .section-kicker,
+.visit-route-band h2,
+.visit-route-band .section-intro {
+  color: #fff8eb;
+}
+
+.visit-route-line {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 12px;
+  margin: 22px 0;
+}
+
+.visit-route-note {
+  margin: -4px 0 20px;
+  padding: 14px 16px;
+  border-radius: 18px;
+  background: rgba(255, 252, 244, 0.12);
+  color: #fff8eb;
+  font-weight: 700;
+  line-height: 1.55;
+}
+
+.visit-route-line::before {
+  content: '';
+  position: absolute;
+  top: 23px;
+  left: 8%;
+  right: 8%;
+  height: 2px;
+  background: rgba(255, 211, 78, 0.55);
+}
+
+.visit-route-step {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+  color: #fff8eb;
+  text-align: center;
+}
+
+.visit-route-step span {
+  display: inline-grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #ffc0bc, var(--color-red) 56%, #b63d3a 100%);
+  color: #fff;
+  font-weight: 900;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.2);
+}
+
+.visit-route-band .venue-fact-card {
+  background: rgba(255, 252, 244, 0.94);
+}
+
+.visit-final-cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 32px;
+  background: linear-gradient(135deg, rgba(255, 90, 79, 0.94), rgba(20, 58, 63, 0.98));
+  box-shadow: 0 24px 54px rgba(20, 58, 63, 0.16);
+}
+
+.visit-final-cta .programme-final-copy h2,
+.visit-final-cta .programme-final-copy p,
+.visit-final-cta .section-kicker {
+  color: #fff8eb;
+}
+
 .passes-page {
   display: grid;
   gap: 18px;
@@ -6576,5 +7273,97 @@ body {
   .venue-updates .programme-updates-actions {
     flex-direction: column;
     align-items: stretch;
+  }
+}
+
+@media (max-width: 1180px) {
+  .visit-hero {
+    grid-template-columns: 1fr;
+  }
+
+  .visit-food-grid,
+  .visit-info-grid,
+  .visit-things-grid,
+  .visit-hotel-grid,
+  .visit-tip-strip {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .visit-food-detail-card {
+    grid-template-columns: 1fr;
+  }
+
+  .visit-final-cta {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 860px) {
+  .visit-hero,
+  .visit-route-band,
+  .visit-final-cta {
+    padding: 28px;
+    border-radius: 24px;
+  }
+
+  .visit-hero-visual {
+    min-height: 340px;
+  }
+
+  .visit-hero-facts,
+  .visit-food-grid,
+  .visit-info-grid,
+  .visit-things-grid,
+  .visit-hotel-grid,
+  .visit-tip-strip {
+    grid-template-columns: 1fr;
+  }
+
+  .visit-route-line {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .visit-route-line::before {
+    top: 18px;
+    bottom: 18px;
+    left: 23px;
+    right: auto;
+    width: 2px;
+    height: auto;
+  }
+
+  .visit-route-step {
+    grid-template-columns: 46px 1fr;
+    justify-items: start;
+    text-align: left;
+  }
+
+  .visit-food-meta-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .visit-final-cta .final-cta-actions {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+  }
+}
+
+@media (max-width: 560px) {
+  .visit-hero h1,
+  .visit-final-cta h2 {
+    font-size: 2.65rem;
+    letter-spacing: -0.02em;
+  }
+
+  .visit-hero-copy {
+    gap: 14px;
+  }
+
+  .visit-photo-placeholder,
+  .visit-photo-media {
+    min-height: 190px;
   }
 }

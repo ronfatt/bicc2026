@@ -7,6 +7,7 @@ const clownShowImage = '/mentors/chagy.jpg'
 const biccLogo = '/bicc-logo.png'
 const foundationPassPaymentLink = 'https://buy.stripe.com/6oUdR22tqekU9Siaun24006'
 const masteryPassPaymentLink = 'https://buy.stripe.com/28EeV69VS3Ggd4uaun24007'
+const visitTawauPartnerLink = 'https://linktr.ee/jwvnow'
 const delegateFormStorageKey = 'bicc2026-delegate-details-draft'
 const mentorPosterImage = '/mentors/uncle-sunday-poster.png'
 const mentorPortraitUncleSunday = '/mentors/uncle-sunday.png'
@@ -25,6 +26,17 @@ const mentorPortraitPayaCocos = '/mentors/paya-cocos.png'
 const mentorPortraitFrankie = '/mentors/frankie-malachi.jpg'
 const calvaryCrownAerialImage = '/calvary-scene.png'
 const calvaryCrownPlanImage = '/tawau-town-map.jpg'
+const visitSeafoodImage = 'https://commons.wikimedia.org/wiki/Special:FilePath/MakananLaut.jpg?width=1200'
+const visitKopitiamImage = 'https://commons.wikimedia.org/wiki/Special:FilePath/Coffee%20shop%20zz.jpg?width=900'
+const visitNasiKuningImage = 'https://commons.wikimedia.org/wiki/Special:FilePath/Nasi%20Kuning%20Tawau.jpg?width=900'
+const visitPasarTanjungImage = 'https://commons.wikimedia.org/wiki/Special:FilePath/Tawau%20Sabah%20Pasar-Tanjung-Tawau-01.jpg?width=1400'
+const visitTawauHillsImage = 'https://commons.wikimedia.org/wiki/Special:FilePath/Table%20Waterfall%20at%20Tawau%20Hills%20Park%20-%20panoramio.jpg?width=900'
+const visitCocoaVillageImage = 'https://commons.wikimedia.org/wiki/Special:FilePath/Teck%20Guan%20Cocoa%20Village%20Columnar%20Basalt.jpg?width=1000'
+const visitWaterfrontImage = 'https://commons.wikimedia.org/wiki/Special:FilePath/Tawau%20-%20The%20City%20%2848869140708%29.jpg?width=1600'
+const hotelBorneoRoyaleImage = 'https://commons.wikimedia.org/wiki/Special:FilePath/Eastern%20Plaza%20Tawau.jpg?width=1400'
+const hotelShervintonImage = 'https://commons.wikimedia.org/wiki/Special:FilePath/Tawau%20Sabah%20Shervinton-Executive-Boutique-Hotel-01.jpg?width=1200'
+const hotelLaImage = 'https://commons.wikimedia.org/wiki/Special:FilePath/Tawau%20Sabah%20LA-Hotel-01.jpg?width=900'
+const hotelDanlopImage = 'https://commons.wikimedia.org/wiki/Special:FilePath/Tawau%20Sabah%20Danlop-Hotel-02.jpg?width=1200'
 
 type ProgrammeFilterKey =
   | 'all'
@@ -104,6 +116,7 @@ const navItems = [
   { label: 'Mentors', path: '/mentors' },
   { label: 'Passes', path: '/passes' },
   { label: 'Venue', path: '/venue' },
+  { label: 'Visit Tawau', path: '/visit-tawau' },
   { label: 'Sponsors', path: '/sponsors' },
 ]
 
@@ -1349,6 +1362,256 @@ const practicalGuideCards = [
   },
 ] as const
 
+const visitTawauHeroFacts = [
+  {
+    title: 'Tawau, Sabah',
+    copy: 'A coastal city in Malaysian Borneo.',
+    tone: 'soft-aqua',
+  },
+  {
+    title: 'Event Destination',
+    copy: 'Home of BICC 2026.',
+    tone: 'soft-coral',
+  },
+  {
+    title: 'Local Experience',
+    copy: 'Food, nature, culture and warm hospitality.',
+    tone: 'soft-yellow',
+  },
+] as const
+
+const tawauFoodCards = [
+  {
+    id: 'seafood',
+    title: 'Seafood & Local Dining',
+    copy: 'Fresh coastal flavours, shared meals and easy delegate dinners after programme days.',
+    tone: 'seafood',
+    meta: 'Dinner / group meals',
+    image: visitSeafoodImage,
+    credit: 'Wikimedia Commons',
+    guideTitle: 'Start with Tawau seafood',
+    guideCopy:
+      'Tawau is widely known for fresh seafood, especially around waterfront and town-centre dining areas. This is the easiest dinner plan for groups after convention sessions.',
+    bestTime: 'Evening meals',
+    whereToStart: 'Look around Sabindo / waterfront seafood areas and established local seafood restaurants.',
+    highlights: ['Butter prawns', 'Fresh fish', 'Crab and shellfish', 'Vegetable seafood dishes'],
+  },
+  {
+    id: 'kopitiam',
+    title: 'Kopitiam Breakfast',
+    copy: 'Simple morning stops for coffee, toast, noodles and local breakfast rhythm.',
+    tone: 'kopitiam',
+    meta: 'Morning / quick start',
+    image: visitKopitiamImage,
+    credit: 'Chensiyuan / Wikimedia Commons',
+    guideTitle: 'Begin the day like a local',
+    guideCopy:
+      'A Tawau morning can be simple and satisfying: coffee, noodles, toast or a quick rice dish before heading to the venue.',
+    bestTime: 'Breakfast / early lunch',
+    whereToStart: 'Choose kopitiams near your hotel or along your hotel-to-venue route.',
+    highlights: ['Mee Tauhu', 'Local coffee', 'Toast and eggs', 'Noodle or rice plates'],
+  },
+  {
+    id: 'street-food',
+    title: 'Street Food & Local Snacks',
+    copy: 'Casual bites between sessions, markets or evening walks around town.',
+    tone: 'street',
+    meta: 'Evening / local flavour',
+    image: visitNasiKuningImage,
+    credit: 'Maslight / Wikimedia Commons',
+    guideTitle: 'Try local snacks and Tawau favourites',
+    guideCopy:
+      'Street food is where Tawau feels casual and alive. It is good for light meals, market stops or relaxed food hunting with friends.',
+    bestTime: 'Late afternoon / evening',
+    whereToStart: 'Pasar Tanjung Tawau, hawker areas and local food stalls around town.',
+    highlights: ['Nasi Kuning Tawau', 'Amplang', 'Keropok', 'Soto and local rice dishes'],
+  },
+  {
+    id: 'cafe',
+    title: 'Cafe Stops',
+    copy: 'Slow moments for delegates, families and guests to recharge between convention plans.',
+    tone: 'cafe',
+    meta: 'Breaks / casual meetings',
+    image: visitWaterfrontImage,
+    credit: 'Adznee Abas / Wikimedia Commons',
+    guideTitle: 'Use cafes as reset points',
+    guideCopy:
+      'Cafes are useful between travel, workshops and evening plans. They give delegates a calmer place to rest, talk and plan the next move.',
+    bestTime: 'Afternoon / between sessions',
+    whereToStart: 'Look near city-centre hotels, shopping areas and routes back from the venue.',
+    highlights: ['Coffee breaks', 'Cocoa drinks', 'Light meals', 'Delegate meetups'],
+  },
+] as const
+
+const firstTimeTawauFoodPicks = [
+  'Seafood dinner',
+  'Nasi Kuning Tawau',
+  'Kopitiam breakfast',
+  'Amplang snack',
+  'Local coffee or cocoa',
+] as const
+
+const tawauStayCards = [
+  {
+    title: 'Near the Convention Venue',
+    copy: 'Best for delegates who want the simplest morning arrival and evening return.',
+    icon: 'V',
+  },
+  {
+    title: 'City Centre Hotels',
+    copy: 'Useful for food access, town walks and a wider Tawau experience.',
+    icon: 'C',
+  },
+  {
+    title: 'Group-Friendly Stays',
+    copy: 'Good for teams, families, schools or travelling performer groups.',
+    icon: 'G',
+  },
+  {
+    title: 'Simple & Practical Options',
+    copy: 'Clean, convenient stays for delegates focused on programme days.',
+    icon: 'S',
+  },
+] as const
+
+const tawauHotelSamples = [
+  {
+    name: 'Borneo Royale Hotel',
+    area: 'Eastern Plaza / Jalan Kuhara',
+    fit: 'Larger hotel option',
+    tag: 'Venue access',
+    note: 'Useful for delegates who prefer a full-service hotel environment with mall-area convenience.',
+    image: hotelBorneoRoyaleImage,
+    link: 'https://www.google.com/maps/search/?api=1&query=Borneo%20Royale%20Hotel%20Tawau',
+    credit: 'CEphoto, Uwe Aranas / Wikimedia Commons',
+  },
+  {
+    name: 'Shervinton Executive Boutique Hotel',
+    area: 'Fajar Complex / Jalan Bunga',
+    fit: 'Boutique city stay',
+    tag: 'City centre',
+    note: 'A central option for delegates who want food, town access and a more business-hotel rhythm.',
+    image: hotelShervintonImage,
+    link: 'https://www.google.com/maps/search/?api=1&query=Shervinton%20Executive%20Boutique%20Hotel%20Tawau',
+    credit: 'CEphoto, Uwe Aranas / Wikimedia Commons',
+  },
+  {
+    name: 'LA Hotel',
+    area: 'Bandar Tawau / town centre',
+    fit: 'Central city stay',
+    tag: 'City centre',
+    note: 'A familiar town hotel reference for delegates who want city access and easy local movement.',
+    image: hotelLaImage,
+    link: 'https://www.google.com/maps/search/?api=1&query=LA%20Hotel%20Tawau',
+    credit: 'CEphoto, Uwe Aranas / Wikimedia Commons',
+  },
+  {
+    name: 'Danlop Hotel',
+    area: 'Jalan Dunlop',
+    fit: 'Simple town option',
+    tag: 'Practical stay',
+    note: 'A practical city hotel reference for short stays and easy food access around town.',
+    image: hotelDanlopImage,
+    link: 'https://www.google.com/maps/search/?api=1&query=Danlop%20Hotel%20Tawau',
+    credit: 'CEphoto, Uwe Aranas / Wikimedia Commons',
+  },
+  {
+    name: 'Marco Polo Hotel - Tawau',
+    area: 'Jalan Clinic',
+    fit: 'Classic town hotel',
+    tag: 'Classic hotel',
+    note: 'A familiar Tawau hotel name for visitors who want a straightforward city stay.',
+    image: visitWaterfrontImage,
+    link: 'https://www.google.com/maps/search/?api=1&query=Marco%20Polo%20Hotel%20Tawau',
+    credit: 'City reference image / Wikimedia Commons',
+  },
+  {
+    name: 'Heritage Hotel',
+    area: 'Jalan Bunga / Fajar Complex',
+    fit: 'City centre convenience',
+    tag: 'City centre',
+    note: 'Good for delegates who want to stay near restaurants, shops and town movement.',
+    image: visitPasarTanjungImage,
+    link: 'https://www.google.com/maps/search/?api=1&query=Heritage%20Hotel%20Tawau',
+    credit: 'City reference image / Wikimedia Commons',
+  },
+] as const
+
+const tawauTransportCards = [
+  {
+    title: 'By Air',
+    copy: 'Plan flights to Tawau early and check travel updates before departure.',
+    icon: 'A',
+  },
+  {
+    title: 'Airport to City / Venue',
+    copy: 'Arrange transfer or local ride options before arrival for a smoother first day.',
+    icon: 'T',
+  },
+  {
+    title: 'Around Town',
+    copy: 'Group rides, taxis or local transport are easiest when planned around meals and sessions.',
+    icon: 'R',
+  },
+  {
+    title: 'Convention Days',
+    copy: 'Leave extra time for check-in, workshop transitions and evening programme moments.',
+    icon: 'D',
+  },
+] as const
+
+const tawauRouteSteps = ['Airport', 'Hotel', 'Venue', 'Food', 'Attractions'] as const
+
+const tawauDelegateTips = [
+  'Book accommodation early around the convention dates.',
+  'Keep your first evening flexible for registration and settling in.',
+  'Plan food stops near your hotel or venue route.',
+  'Save extra time for airport, hotel and venue transfers.',
+] as const
+
+const tawauThingsToDoCards = [
+  {
+    title: 'Tawau Hills Park',
+    copy: 'A nature escape with forest, fresh air and a different side of Tawau beyond the convention hall.',
+    tone: 'hills',
+    tag: 'Nature',
+    image: visitTawauHillsImage,
+    credit: 'Annette Teng / Wikimedia Commons',
+  },
+  {
+    title: 'Teck Guan Cocoa Museum & Cocoa Village',
+    copy: 'A local heritage stop for visitors curious about Tawau cocoa, flavour and place.',
+    tone: 'cocoa',
+    tag: 'Cocoa heritage',
+    image: visitCocoaVillageImage,
+    credit: 'ChunXingWong / Wikimedia Commons',
+  },
+  {
+    title: 'Pasar Tanjung Tawau',
+    copy: 'A lively market experience for food, local colour and everyday city rhythm.',
+    tone: 'market',
+    tag: 'Market',
+    image: visitPasarTanjungImage,
+    credit: 'CEphoto, Uwe Aranas / Wikimedia Commons',
+  },
+  {
+    title: 'Batu Bersusun',
+    copy: 'A natural coastal formation that gives visitors a quieter Tawau landmark to explore.',
+    tone: 'stone',
+    tag: 'Coastal landmark',
+    image: visitCocoaVillageImage,
+    credit: 'ChunXingWong / Wikimedia Commons',
+  },
+  {
+    title: 'Waterfront & City Walks',
+    copy: 'Easy low-pressure moments for delegates who want to stretch, snack and see the city.',
+    tone: 'waterfront',
+    tag: 'Easy walk',
+    image: visitWaterfrontImage,
+    credit: 'Adznee Abas / Wikimedia Commons',
+  },
+] as const
+
 const venueFaqItems = [
   {
     question: 'Where is BICC 2026 held?',
@@ -2258,6 +2521,9 @@ function VenueCTA() {
         <a className="secondary-btn" href="/programme">
           View Programme
         </a>
+        <a className="secondary-btn" href="/visit-tawau">
+          Visit Tawau
+        </a>
       </div>
     </section>
   )
@@ -2273,6 +2539,329 @@ function VenuePage() {
       <GettingToTawau />
       <VenueFAQ />
       <VenueCTA />
+    </main>
+  )
+}
+
+function VisitTawauHero() {
+  return (
+    <section className="visit-hero section-shell">
+      <div aria-hidden="true" className="confetti-field visit-confetti" />
+      <div className="visit-hero-copy">
+        <p className="section-kicker">Visit Tawau</p>
+        <h1>Come for BICC. Stay for Tawau.</h1>
+        <p>
+          Discover the food, nature, culture and local warmth of Tawau, a coastal city in Sabah where your convention journey becomes a true Borneo experience.
+        </p>
+        <div className="hero-actions">
+          <a className="primary-btn" href={visitTawauPartnerLink} rel="noreferrer" target="_blank">
+            Plan Your Visit
+          </a>
+          <a className="secondary-btn" href="/programme">
+            View BICC Programme
+          </a>
+        </div>
+      </div>
+
+      <div className="visit-hero-visual image-frame">
+        <img alt="Tawau city and Borneo destination atmosphere" src={calvaryCrownAerialImage} />
+        <div className="visit-brand-overlay">
+          <span>BICC 2026 Destination Guide</span>
+          <strong>Tawau, Sabah</strong>
+        </div>
+      </div>
+
+      <div className="visit-hero-facts">
+        {visitTawauHeroFacts.map((fact) => (
+          <article className={`visit-fact-card ${fact.tone}`} key={fact.title}>
+            <h3>{fact.title}</h3>
+            <p>{fact.copy}</p>
+          </article>
+        ))}
+      </div>
+
+      <nav className="visit-jump-bar" aria-label="Visit Tawau guide sections">
+        <a href="#visit-food">Food</a>
+        <a href="#visit-stay">Stay</a>
+        <a href="#visit-transport">Transport</a>
+        <a href="#visit-things">Things To Do</a>
+        <a href={visitTawauPartnerLink} rel="noreferrer" target="_blank">
+          Travel Partner
+        </a>
+      </nav>
+    </section>
+  )
+}
+
+function VisitFoodSection() {
+  return (
+    <section className="editorial-section section-shell visit-section" id="visit-food">
+      <div className="section-head with-copy">
+        <div>
+          <p className="section-kicker">Food</p>
+          <h2>Food That Feels Like Tawau</h2>
+        </div>
+        <p className="section-intro">
+          Tawau is known for local flavours, seafood, kopitiam culture and comforting street food. Between workshops and convention sessions, enjoy the city through its food.
+        </p>
+      </div>
+
+      <div className="visit-food-picks">
+        <strong>First-time Tawau food picks</strong>
+        <div className="pass-focus-chips">
+          {firstTimeTawauFoodPicks.map((pick) => (
+            <span key={pick}>{pick}</span>
+          ))}
+        </div>
+      </div>
+
+      <div className="visit-food-grid">
+        {tawauFoodCards.map((card) => (
+          <a className="visit-photo-card visit-food-link-card" href={`#food-${card.id}`} key={card.title}>
+            <div className={`visit-photo-media ${card.tone}`}>
+              <img alt={card.title} src={card.image} />
+              <small>{card.meta}</small>
+              <span>{card.title}</span>
+            </div>
+            <div className="visit-card-copy">
+              <h3>{card.title}</h3>
+              <p>{card.copy}</p>
+              <strong>View food ideas</strong>
+              <small>{card.credit}</small>
+            </div>
+          </a>
+        ))}
+      </div>
+
+      <div className="visit-food-guide">
+        <div className="visit-food-guide-head">
+          <p className="section-kicker">Tawau Food Guide</p>
+          <h3>What to try between BICC sessions</h3>
+          <p>
+            Use these as starting points for delegate meals. Exact restaurant choices can be confirmed with your hotel, local hosts or the BICC travel partner.
+          </p>
+        </div>
+
+        <div className="visit-food-detail-list">
+          {tawauFoodCards.map((card) => (
+            <article className="visit-food-detail-card" id={`food-${card.id}`} key={`guide-${card.id}`}>
+              <div className="visit-food-detail-image">
+                <img alt={`${card.title} in Tawau`} src={card.image} />
+                <span>{card.meta}</span>
+              </div>
+              <div className="visit-food-detail-copy">
+                <p className="section-kicker">{card.title}</p>
+                <h4>{card.guideTitle}</h4>
+                <p>{card.guideCopy}</p>
+                <div className="visit-food-meta-grid">
+                  <div>
+                    <strong>Best time</strong>
+                    <span>{card.bestTime}</span>
+                  </div>
+                  <div>
+                    <strong>Where to start</strong>
+                    <span>{card.whereToStart}</span>
+                  </div>
+                </div>
+                <div className="pass-focus-chips">
+                  {card.highlights.map((item) => (
+                    <span key={item}>{item}</span>
+                  ))}
+                </div>
+                <small>{card.credit}</small>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+function VisitStaySection() {
+  return (
+    <section className="editorial-section section-shell visit-section" id="visit-stay">
+      <div className="section-head with-copy">
+        <div>
+          <p className="section-kicker">Stay</p>
+          <h2>Where to Stay</h2>
+        </div>
+        <p className="section-intro">
+          Choose a stay that fits your convention rhythm: close to the venue, easy for transport and comfortable after a full day of learning, performance and networking.
+        </p>
+      </div>
+
+      <div className="visit-info-grid">
+        {tawauStayCards.map((card) => (
+          <article className="venue-fact-card soft-aqua" key={card.title}>
+            <span className="venue-fact-icon">{card.icon}</span>
+            <div className="venue-fact-copy">
+              <h3>{card.title}</h3>
+              <p>{card.copy}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+      <p className="visit-note">
+        Official hotel partners and recommended delegate options will be updated once confirmed. BICC does not manage hotel bookings unless official hotel partners are announced.
+      </p>
+
+      <div className="visit-hotel-panel">
+        <div className="visit-hotel-panel-head">
+          <p className="section-kicker">Tawau Hotel Samples</p>
+          <h3>Popular names to start your accommodation search.</h3>
+          <p>
+            These are sample Tawau hotel references for planning only. They are not listed as official BICC hotel partners unless confirmed by the organizer.
+          </p>
+        </div>
+
+        <div className="visit-hotel-grid">
+          {tawauHotelSamples.map((hotel) => (
+            <a className="visit-hotel-card" href={hotel.link} key={hotel.name} rel="noreferrer" target="_blank">
+              <div className="visit-hotel-image">
+                <img alt={`${hotel.name} in Tawau`} src={hotel.image} />
+                <span>{hotel.tag}</span>
+              </div>
+              <div className="visit-hotel-copy">
+                <span>{hotel.fit}</span>
+                <h4>{hotel.name}</h4>
+                <p>{hotel.area}</p>
+                <small>{hotel.note}</small>
+                <strong>View on map</strong>
+                <em>{hotel.credit}</em>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <div className="visit-tip-strip">
+        {tawauDelegateTips.map((tip) => (
+          <span key={tip}>{tip}</span>
+        ))}
+      </div>
+    </section>
+  )
+}
+
+function VisitGettingAroundSection() {
+  return (
+    <section className="visit-route-band section-shell" id="visit-transport">
+      <div className="section-head with-copy">
+        <div>
+          <p className="section-kicker">Getting Around</p>
+          <h2>Getting Around Tawau</h2>
+        </div>
+        <p className="section-intro">
+          Tawau is easy to navigate with proper planning. Arrange airport transfers, hotel transport or local ride options before arrival.
+        </p>
+      </div>
+
+      <div className="visit-route-line" aria-label="Suggested visitor route">
+        {tawauRouteSteps.map((step, index) => (
+          <div className="visit-route-step" key={step}>
+            <span>{index + 1}</span>
+            <strong>{step}</strong>
+          </div>
+        ))}
+      </div>
+
+      <p className="visit-route-note">
+        International delegates should check flight connections into Tawau before booking hotels. Final BICC travel notes will be updated closer to the convention.
+      </p>
+
+      <div className="visit-info-grid">
+        {tawauTransportCards.map((card) => (
+          <article className="venue-fact-card soft-yellow" key={card.title}>
+            <span className="venue-fact-icon">{card.icon}</span>
+            <div className="venue-fact-copy">
+              <h3>{card.title}</h3>
+              <p>{card.copy}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <div className="section-cta">
+        <a className="primary-btn" href="mailto:hello@bicc2026.com?subject=BICC%202026%20Travel%20Help">
+          Need Travel Help? Contact BICC Team
+        </a>
+      </div>
+    </section>
+  )
+}
+
+function VisitThingsToDoSection() {
+  return (
+    <section className="editorial-section section-shell visit-section" id="visit-things">
+      <div className="section-head with-copy">
+        <div>
+          <p className="section-kicker">Things To Do</p>
+          <h2>Things To Do in Tawau</h2>
+        </div>
+        <p className="section-intro">
+          Beyond the convention, Tawau offers nature, food, local markets, cocoa heritage and quiet Borneo charm.
+        </p>
+      </div>
+
+      <div className="visit-things-grid">
+        {tawauThingsToDoCards.map((card) => (
+          <article className="visit-photo-card" key={card.title}>
+            <div className={`visit-photo-media ${card.tone}`}>
+              <img alt={card.title} src={card.image} />
+              <small>{card.tag}</small>
+              <span>{card.title}</span>
+            </div>
+            <div className="visit-card-copy">
+              <h3>{card.title}</h3>
+              <p>{card.copy}</p>
+              <small>{card.credit}</small>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <div className="section-cta">
+        <a className="secondary-btn" href="/programme">
+          Explore Tawau Between Sessions
+        </a>
+      </div>
+    </section>
+  )
+}
+
+function VisitTawauCTA() {
+  return (
+    <section className="visit-final-cta">
+      <div className="programme-final-copy">
+        <p className="section-kicker">Borneo Experience</p>
+        <h2>Make BICC 2026 Your Borneo Experience</h2>
+        <p>Join us in Tawau for learning, laughter, connection and a journey beyond the convention hall.</p>
+      </div>
+      <div className="final-cta-actions">
+        <a className="primary-btn" href={visitTawauPartnerLink} rel="noreferrer" target="_blank">
+          Plan with Travel Partner
+        </a>
+        <a className="primary-btn" href="/passes">
+          Get Your Pass
+        </a>
+        <a className="secondary-btn" href="/programme">
+          View Programme
+        </a>
+      </div>
+    </section>
+  )
+}
+
+function VisitTawauPage() {
+  return (
+    <main className="visit-page">
+      <VisitTawauHero />
+      <VisitFoodSection />
+      <VisitStaySection />
+      <VisitGettingAroundSection />
+      <VisitThingsToDoSection />
+      <VisitTawauCTA />
     </main>
   )
 }
@@ -3864,6 +4453,7 @@ function Footer() {
         <a href="/passes">Foundation Track Pass</a>
         <a href="/passes">Mastery Track Pass</a>
         <a href="/venue">Venue & Travel</a>
+        <a href="/visit-tawau">Visit Tawau</a>
       </div>
 
       <div className="footer-column">
@@ -3894,6 +4484,7 @@ function App() {
   const isMentors = currentPath === '/mentors'
   const isPasses = currentPath === '/passes'
   const isVenue = currentPath === '/venue'
+  const isVisitTawau = currentPath === '/visit-tawau'
   const isSponsors = currentPath === '/sponsors'
   const isRegistrationConfirmed = currentPath === '/registration-confirmed'
   const isDelegateDetails = currentPath === '/delegate-details'
@@ -3940,6 +4531,8 @@ function App() {
         <PassesPage />
       ) : isVenue ? (
         <VenuePage />
+      ) : isVisitTawau ? (
+        <VisitTawauPage />
       ) : isSponsors ? (
         <SponsorsPage />
       ) : isRegistrationConfirmed ? (
