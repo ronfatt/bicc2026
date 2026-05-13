@@ -1451,6 +1451,130 @@ const firstTimeTawauFoodPicks = [
   'Local coffee or cocoa',
 ] as const
 
+const tawauFoodDirectory = [
+  {
+    name: 'Nasi Kuning Tawau',
+    category: 'Street Food',
+    image: visitNasiKuningImage,
+    description: 'A signature Tawau rice dish often served with sambal and rich local flavours.',
+    bestFor: 'First-time local food',
+  },
+  {
+    name: 'Fresh Seafood Dinner',
+    category: 'Seafood',
+    image: visitSeafoodImage,
+    description: 'A relaxed group dinner option after workshops, especially around town or waterfront dining areas.',
+    bestFor: 'Delegate groups',
+  },
+  {
+    name: 'Mee Tauhu',
+    category: 'Kopitiam',
+    image: visitKopitiamImage,
+    description: 'A local breakfast or lunch idea to look for in kopitiams and casual food shops.',
+    bestFor: 'Morning meal',
+  },
+  {
+    name: 'Amplang',
+    category: 'Local Snack',
+    image: visitNasiKuningImage,
+    description: 'A crunchy Sabah snack that is easy to bring back or share with friends.',
+    bestFor: 'Souvenir snack',
+  },
+  {
+    name: 'Local Coffee',
+    category: 'Cafe / Kopitiam',
+    image: visitKopitiamImage,
+    description: 'A simple way to start the day or reset between programme blocks.',
+    bestFor: 'Coffee break',
+  },
+  {
+    name: 'Cocoa Drinks',
+    category: 'Cafe / Cocoa',
+    image: visitCocoaVillageImage,
+    description: 'A nice Tawau-themed drink idea, especially if you plan to explore cocoa heritage stops.',
+    bestFor: 'Afternoon stop',
+  },
+  {
+    name: 'Market Snacks',
+    category: 'Market',
+    image: visitPasarTanjungImage,
+    description: 'Small bites and everyday local flavours around Pasar Tanjung and town food areas.',
+    bestFor: 'Short walks',
+  },
+  {
+    name: 'Toast & Eggs',
+    category: 'Kopitiam',
+    image: visitKopitiamImage,
+    description: 'A familiar kopitiam breakfast option before heading to the convention venue.',
+    bestFor: 'Quick breakfast',
+  },
+  {
+    name: 'Soto',
+    category: 'Street Food',
+    image: visitNasiKuningImage,
+    description: 'A warm local bowl option for delegates who want something simple and comforting.',
+    bestFor: 'Light meal',
+  },
+  {
+    name: 'Satay',
+    category: 'Street Food',
+    image: visitPasarTanjungImage,
+    description: 'A casual sharing food idea for evening walks, markets or group food hunting.',
+    bestFor: 'Group snack',
+  },
+  {
+    name: 'Coconut Drink',
+    category: 'Drinks',
+    image: visitWaterfrontImage,
+    description: 'A refreshing tropical drink to look for after a warm day around town.',
+    bestFor: 'Hot afternoon',
+  },
+  {
+    name: 'Grilled Fish',
+    category: 'Seafood',
+    image: visitSeafoodImage,
+    description: 'A straightforward seafood dinner choice for visitors who want something familiar and local.',
+    bestFor: 'Dinner',
+  },
+  {
+    name: 'Prawn Dishes',
+    category: 'Seafood',
+    image: visitSeafoodImage,
+    description: 'Tawau seafood meals often work well for shared tables and group dining.',
+    bestFor: 'Shared meal',
+  },
+  {
+    name: 'Curry Mee',
+    category: 'Kopitiam',
+    image: visitKopitiamImage,
+    description: 'A richer noodle option for visitors who enjoy stronger breakfast or lunch flavours.',
+    bestFor: 'Lunch',
+  },
+  {
+    name: 'Local Cakes',
+    category: 'Cafe / Kopitiam',
+    image: visitKopitiamImage,
+    description: 'Small sweet bites for coffee breaks, casual meetups or after-session resets.',
+    bestFor: 'Tea break',
+  },
+  {
+    name: 'Seafood Noodles',
+    category: 'Seafood',
+    image: visitSeafoodImage,
+    description: 'A practical middle ground between seafood dinner and casual noodle meals.',
+    bestFor: 'Casual meal',
+  },
+  {
+    name: 'Market Fruit',
+    category: 'Market',
+    image: visitPasarTanjungImage,
+    description: 'Fresh fruit is an easy market stop for families, guests and delegates between plans.',
+    bestFor: 'Market walk',
+  },
+] as const
+
+const tawauFoodFilterItems = ['All', 'Seafood', 'Kopitiam', 'Street Food', 'Market', 'Cafe / Kopitiam', 'Drinks'] as const
+
 const tawauStayCards = [
   {
     title: 'Near the Convention Venue',
@@ -1836,6 +1960,10 @@ function getTrackFromSearch(search: string): PassTrackId {
 
 function getPassByTrack(track: PassTrackId) {
   return passes.find((pass) => pass.id === track) ?? passes[0]
+}
+
+function slugify(value: string) {
+  return value.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')
 }
 
 function buildDelegateSummary(form: DelegateFormState) {
@@ -2636,39 +2764,43 @@ function VisitFoodSection() {
       <div className="visit-food-guide">
         <div className="visit-food-guide-head">
           <p className="section-kicker">Tawau Food Guide</p>
-          <h3>What to try between BICC sessions</h3>
+          <h3>A scalable food directory for delegates</h3>
           <p>
-            Use these as starting points for delegate meals. Exact restaurant choices can be confirmed with your hotel, local hosts or the BICC travel partner.
+            Start with these food ideas, then expand the guide as more local recommendations are confirmed. Exact restaurant choices can be checked with your hotel, local hosts or the BICC travel partner.
           </p>
         </div>
 
-        <div className="visit-food-detail-list">
+        <div className="visit-food-category-grid">
           {tawauFoodCards.map((card) => (
-            <article className="visit-food-detail-card" id={`food-${card.id}`} key={`guide-${card.id}`}>
-              <div className="visit-food-detail-image">
-                <img alt={`${card.title} in Tawau`} src={card.image} />
-                <span>{card.meta}</span>
-              </div>
-              <div className="visit-food-detail-copy">
-                <p className="section-kicker">{card.title}</p>
-                <h4>{card.guideTitle}</h4>
-                <p>{card.guideCopy}</p>
-                <div className="visit-food-meta-grid">
-                  <div>
-                    <strong>Best time</strong>
-                    <span>{card.bestTime}</span>
-                  </div>
-                  <div>
-                    <strong>Where to start</strong>
-                    <span>{card.whereToStart}</span>
-                  </div>
-                </div>
-                <div className="pass-focus-chips">
-                  {card.highlights.map((item) => (
-                    <span key={item}>{item}</span>
-                  ))}
-                </div>
-                <small>{card.credit}</small>
+            <article className="visit-food-category-card" id={`food-${card.id}`} key={`guide-${card.id}`}>
+              <strong>{card.title}</strong>
+              <span>{card.bestTime}</span>
+              <p>{card.whereToStart}</p>
+            </article>
+          ))}
+        </div>
+
+        <div className="visit-food-filter-row" aria-label="Food directory filters">
+          {tawauFoodFilterItems.map((filter) => (
+            <a href={`#food-directory-${slugify(filter)}`} key={filter}>
+              {filter}
+            </a>
+          ))}
+        </div>
+
+        <div className="visit-food-directory-grid">
+          {tawauFoodDirectory.map((item) => (
+            <article
+              className="visit-food-directory-card"
+              id={`food-directory-${slugify(item.category)}`}
+              key={item.name}
+            >
+              <img alt={item.name} src={item.image} />
+              <div>
+                <span>{item.category}</span>
+                <h4>{item.name}</h4>
+                <p>{item.description}</p>
+                <small>{item.bestFor}</small>
               </div>
             </article>
           ))}
