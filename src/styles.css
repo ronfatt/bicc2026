@@ -5064,6 +5064,156 @@ body {
   gap: 12px;
 }
 
+.registration-page {
+  display: grid;
+  gap: 22px;
+}
+
+.registration-hero,
+.delegate-form-section,
+.registration-steps-panel {
+  position: relative;
+  overflow: hidden;
+  border-radius: 30px;
+}
+
+.registration-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.02fr) minmax(320px, 0.72fr);
+  gap: 22px;
+  padding: 30px;
+  background:
+    linear-gradient(135deg, rgba(255, 252, 244, 0.98), rgba(255, 247, 234, 0.96)),
+    radial-gradient(circle at 18% 18%, rgba(255, 90, 79, 0.1), transparent 24%);
+  box-shadow: 0 24px 54px rgba(20, 58, 63, 0.12);
+}
+
+.registration-hero-copy {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  align-content: center;
+  gap: 16px;
+}
+
+.registration-status-card {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  align-content: start;
+  gap: 14px;
+  padding: 22px;
+  border-radius: 26px;
+  border: 1px solid rgba(20, 58, 63, 0.1);
+  background: rgba(255, 255, 255, 0.84);
+  box-shadow: var(--shadow-soft);
+}
+
+.registration-status-card h2 {
+  margin: 0;
+  color: var(--color-ink);
+}
+
+.registration-checklist {
+  margin: 0;
+  padding-left: 1.1rem;
+  color: var(--color-ink);
+  display: grid;
+  gap: 10px;
+  line-height: 1.7;
+}
+
+.registration-checklist.bullets {
+  list-style: disc;
+}
+
+.registration-note {
+  margin: 0;
+  color: var(--color-muted);
+  line-height: 1.7;
+}
+
+.registration-steps-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.delegate-form-shell {
+  grid-template-columns: minmax(0, 1.05fr) minmax(300px, 0.7fr);
+}
+
+.delegate-form-section {
+  padding: 26px;
+  background:
+    linear-gradient(180deg, rgba(255, 252, 244, 0.98), rgba(255, 247, 234, 0.98));
+}
+
+.delegate-form {
+  display: grid;
+  gap: 22px;
+}
+
+.delegate-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.delegate-field {
+  display: grid;
+  gap: 8px;
+}
+
+.delegate-field span {
+  color: var(--color-ink);
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.delegate-field input,
+.delegate-field select,
+.delegate-field textarea {
+  width: 100%;
+  min-height: 52px;
+  padding: 14px 16px;
+  border-radius: 18px;
+  border: 1px solid rgba(20, 58, 63, 0.12);
+  background: rgba(255, 255, 255, 0.96);
+  color: var(--color-ink);
+  font: inherit;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  transition: border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.delegate-field textarea {
+  min-height: 140px;
+  resize: vertical;
+}
+
+.delegate-field input:focus,
+.delegate-field select:focus,
+.delegate-field textarea:focus {
+  outline: none;
+  border-color: rgba(255, 90, 79, 0.45);
+  box-shadow: 0 0 0 4px rgba(255, 90, 79, 0.12);
+}
+
+.delegate-field.full-width {
+  grid-column: 1 / -1;
+}
+
+.delegate-form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.delegate-form-actions .primary-btn {
+  border: 0;
+  cursor: pointer;
+}
+
 .sponsors-page {
   display: grid;
   gap: 22px;
@@ -6064,6 +6214,7 @@ body {
   .passes-hero,
   .sponsors-hero,
   .mentor-page-hero,
+  .registration-hero,
   .venue-hero,
   .venue-announcement,
   .venue-checklist,
@@ -6079,6 +6230,7 @@ body {
   .pass-value-grid,
   .pass-mockup-grid,
   .pass-decision-grid,
+  .registration-steps-grid,
   .workshop-value-grid,
   .venue-facts-grid,
   .workshop-final-cta {
@@ -6132,6 +6284,7 @@ body {
   .pass-mockup-grid,
   .pass-decision-grid,
   .pass-registration-flow,
+  .delegate-form-grid,
   .calvary-level-grid,
   .venue-arrival-flow,
   .venue-travel-grid,
@@ -6243,6 +6396,7 @@ body {
   .passes-hero,
   .sponsors-hero,
   .mentor-page-hero,
+  .registration-hero,
   .venue-hero,
   .venue-announcement,
   .venue-checklist,
@@ -6257,6 +6411,11 @@ body {
   }
 
   .pass-final-cta .final-cta-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .delegate-form-actions {
     flex-direction: column;
     align-items: stretch;
   }

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, type ChangeEvent, type FormEvent } from 'react'
 
 const clownHeroImage = '/mentors/randy-christensen.jpg'
 const clownStageImage = '/mentors/watt-de-clown.jpg'
@@ -73,6 +73,27 @@ type MentorProfile = {
   specialties: string[]
   image: string | null
   featured: boolean
+}
+
+type PassTrackId = 'foundation' | 'mastery'
+
+type DelegateRole =
+  | 'Performer'
+  | 'Educator'
+  | 'Student'
+  | 'Community Worker'
+  | 'Family Entertainer'
+  | 'Other'
+
+type DelegateFormState = {
+  fullName: string
+  email: string
+  whatsapp: string
+  country: string
+  organisation: string
+  track: PassTrackId
+  role: DelegateRole
+  notes: string
 }
 
 const navItems = [
@@ -1544,6 +1565,41 @@ function normalizePath(pathname: string) {
   return pathname.replace(/\/+$/, '')
 }
 
+function getTrackFromSearch(search: string): PassTrackId {
+  const track = new URLSearchParams(search).get('track')
+  return track === 'mastery' ? 'mastery' : 'foundation'
+}
+
+function getPassByTrack(track: PassTrackId) {
+  return passes.find((pass) => pass.id === track) ?? passes[0]
+}
+
+function buildDelegateMailto(form: DelegateFormState) {
+  const pass = getPassByTrack(form.track)
+  const subject = `BICC 2026 Delegate Details - ${pass.shortName}`
+  const body = [
+    'BICC 2026 Delegate Details',
+    '',
+    `Full Name: ${form.fullName}`,
+    `Email: ${form.email}`,
+    `WhatsApp / Phone: ${form.whatsapp}`,
+    `Country: ${form.country}`,
+    `Organisation / Group: ${form.organisation}`,
+    `Selected Track: ${pass.name}`,
+    `Role: ${form.role}`,
+    '',
+    'Notes:',
+    form.notes || '-',
+  ].join('\n')
+
+  const query = new URLSearchParams({
+    subject,
+    body,
+  })
+
+  return `mailto:hello@bicc2026.com?${query.toString()}`
+}
+
 function renderPassCards() {
   return (
     <div className="passes-grid">
@@ -2642,6 +2698,12 @@ function PassRegistrationFlow() {
           </article>
         ))}
       </div>
+
+      <div className="section-cta left">
+        <a className="text-link" href="/delegate-details?track=foundation">
+          Already paid? Complete Delegate Details
+        </a>
+      </div>
     </section>
   )
 }
@@ -2707,6 +2769,221 @@ function PassesPage() {
       <PassRegistrationFlow />
       <PassFAQ />
       <PassCTA />
+    </main>
+  )
+}
+
+function RegistrationConfirmedPage() {
+  const track = getTrackFromSearch(window.location.search)
+  const pass = getPassByTrack(track)
+
+  return (
+    <main className="registration-page">
+      <section className="registration-hero section-shell">
+        <div aria-hidden="true" className="spotlight-glow venue-spotlight" />
+        <div aria-hidden="true" className="confetti-field venue-confetti" />
+        <div className="registration-hero-copy">
+          <p className="section-kicker">Registration Confirmed</p>
+          <h1>Thank you for securing your BICC pass.</h1>
+          <p className="page-intro">
+            Your payment step is complete. The next thing we need is your delegate details so the BICC team can match your payment, selected track and future programme updates.
+          </p>
+          <div className="event-badges">
+            <span>{pass.shortName}</span>
+            <span>{pass.price}</span>
+            <span>Aug 3–5, 2026</span>
+            <span>Tawau, Sabah</span>
+          </div>
+          <div className="hero-actions">
+            <a className="primary-btn" href={`/delegate-details?track=${track}`}>
+              Complete Delegate Details
+            </a>
+            <a className="secondary-btn" href="/programme">
+              View Programme
+            </a>
+          </div>
+        </div>
+
+        <aside className="registration-status-card">
+          <span className={`track-label ${pass.accent}`}>{pass.shortName}</span>
+          <h2>What to do next</h2>
+          <ol className="registration-checklist">
+            <li>Save your Stripe receipt or payment confirmation.</li>
+            <li>Complete your delegate details form for BICC.</li>
+            <li>Watch for official updates about programme, venue and check-in.</li>
+          </ol>
+          <p className="registration-note">
+            If you reached this page after payment, you are on the right track. If your Stripe link currently returns elsewhere, update its success URL in Stripe to this page later.
+          </p>
+        </aside>
+      </section>
+
+      <section className="editorial-section section-shell registration-steps-panel">
+        <div className="section-head with-copy">
+          <div>
+            <p className="section-kicker">Delegate Flow</p>
+            <h2>The post-payment steps are simple.</h2>
+          </div>
+        </div>
+
+        <div className="registration-steps-grid">
+          <article className="venue-fact-card soft-aqua">
+            <span className="venue-fact-icon">1</span>
+            <div className="venue-fact-copy">
+              <h3>Payment complete</h3>
+              <p>Your pass purchase is done through Stripe.</p>
+            </div>
+          </article>
+          <article className="venue-fact-card soft-coral">
+            <span className="venue-fact-icon">2</span>
+            <div className="venue-fact-copy">
+              <h3>Send delegate details</h3>
+              <p>Tell BICC who you are, which track you selected and how to reach you.</p>
+            </div>
+          </article>
+          <article className="venue-fact-card soft-yellow">
+            <span className="venue-fact-icon">3</span>
+            <div className="venue-fact-copy">
+              <h3>Receive updates</h3>
+              <p>Programme, venue and arrival details will follow through official communication.</p>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+  )
+}
+
+function DelegateDetailsPage() {
+  const track = getTrackFromSearch(window.location.search)
+  const [form, setForm] = useState<DelegateFormState>({
+    fullName: '',
+    email: '',
+    whatsapp: '',
+    country: '',
+    organisation: '',
+    track,
+    role: 'Performer',
+    notes: '',
+  })
+
+  const handleChange = (
+    event: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>,
+  ) => {
+    const { name, value } = event.target
+    setForm((current) => ({
+      ...current,
+      [name]: value,
+    }))
+  }
+
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    window.location.href = buildDelegateMailto(form)
+  }
+
+  const selectedPass = getPassByTrack(form.track)
+
+  return (
+    <main className="registration-page">
+      <section className="registration-hero section-shell delegate-form-shell">
+        <div className="registration-hero-copy">
+          <p className="section-kicker">Delegate Details</p>
+          <h1>Complete your BICC delegate details.</h1>
+          <p className="page-intro">
+            Use this simple form so the BICC team can match your payment with your selected track and send you the right updates before the convention.
+          </p>
+          <div className="event-badges">
+            <span>{selectedPass.shortName}</span>
+            <span>{selectedPass.price}</span>
+            <span>International Delegate</span>
+            <span>Official BICC Contact Flow</span>
+          </div>
+        </div>
+
+        <aside className="registration-status-card delegate-aside">
+          <span className={`track-label ${selectedPass.accent}`}>{selectedPass.shortName}</span>
+          <h2>What this form covers</h2>
+          <ul className="registration-checklist bullets">
+            <li>Your name and contact details</li>
+            <li>Your selected Foundation or Mastery track</li>
+            <li>Your role or practice background</li>
+            <li>Any note the organizer should know before arrival</li>
+          </ul>
+          <p className="registration-note">Submitting this form opens your email app with the details prepared for the BICC team.</p>
+        </aside>
+      </section>
+
+      <section className="editorial-section section-shell delegate-form-section">
+        <form className="delegate-form" onSubmit={handleSubmit}>
+          <div className="delegate-form-grid">
+            <label className="delegate-field">
+              <span>Full Name</span>
+              <input name="fullName" onChange={handleChange} required type="text" value={form.fullName} />
+            </label>
+
+            <label className="delegate-field">
+              <span>Email</span>
+              <input name="email" onChange={handleChange} required type="email" value={form.email} />
+            </label>
+
+            <label className="delegate-field">
+              <span>WhatsApp / Phone</span>
+              <input name="whatsapp" onChange={handleChange} type="text" value={form.whatsapp} />
+            </label>
+
+            <label className="delegate-field">
+              <span>Country</span>
+              <input name="country" onChange={handleChange} required type="text" value={form.country} />
+            </label>
+
+            <label className="delegate-field">
+              <span>Organisation / Group</span>
+              <input name="organisation" onChange={handleChange} type="text" value={form.organisation} />
+            </label>
+
+            <label className="delegate-field">
+              <span>Selected Track</span>
+              <select name="track" onChange={handleChange} value={form.track}>
+                <option value="foundation">Foundation Pass</option>
+                <option value="mastery">Mastery Pass</option>
+              </select>
+            </label>
+
+            <label className="delegate-field">
+              <span>Your Role</span>
+              <select name="role" onChange={handleChange} value={form.role}>
+                <option value="Performer">Performer</option>
+                <option value="Educator">Educator</option>
+                <option value="Student">Student</option>
+                <option value="Community Worker">Community Worker</option>
+                <option value="Family Entertainer">Family Entertainer</option>
+                <option value="Other">Other</option>
+              </select>
+            </label>
+
+            <label className="delegate-field full-width">
+              <span>Notes</span>
+              <textarea
+                name="notes"
+                onChange={handleChange}
+                placeholder="Anything the organizer should know before BICC 2026."
+                rows={5}
+                value={form.notes}
+              />
+            </label>
+          </div>
+
+          <div className="delegate-form-actions">
+            <button className="primary-btn" type="submit">
+              Send Details to BICC
+            </button>
+            <a className="secondary-btn" href="/passes">
+              Back to Passes
+            </a>
+          </div>
+        </form>
+      </section>
     </main>
   )
 }
@@ -3544,6 +3821,8 @@ function App() {
   const isPasses = currentPath === '/passes'
   const isVenue = currentPath === '/venue'
   const isSponsors = currentPath === '/sponsors'
+  const isRegistrationConfirmed = currentPath === '/registration-confirmed'
+  const isDelegateDetails = currentPath === '/delegate-details'
   const routePath = isHome ? null : (currentPath in routeContent ? (currentPath as RouteKey) : null)
 
   return (
@@ -3589,6 +3868,10 @@ function App() {
         <VenuePage />
       ) : isSponsors ? (
         <SponsorsPage />
+      ) : isRegistrationConfirmed ? (
+        <RegistrationConfirmedPage />
+      ) : isDelegateDetails ? (
+        <DelegateDetailsPage />
       ) : routePath ? (
         <InteriorPage path={routePath} />
       ) : (
