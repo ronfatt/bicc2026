@@ -5133,6 +5133,27 @@ body {
   line-height: 1.7;
 }
 
+.registration-helper-box {
+  display: grid;
+  gap: 4px;
+  padding: 14px 16px;
+  border-radius: 18px;
+  border: 1px solid rgba(20, 58, 63, 0.08);
+  background: rgba(255, 252, 244, 0.92);
+}
+
+.registration-helper-box strong {
+  color: var(--color-ink);
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.registration-helper-box span {
+  color: var(--color-muted);
+  font-weight: 600;
+}
+
 .registration-steps-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -5152,6 +5173,15 @@ body {
 .delegate-form {
   display: grid;
   gap: 22px;
+}
+
+.delegate-form-status {
+  margin: 0;
+  padding: 14px 16px;
+  border-radius: 18px;
+  background: rgba(72, 199, 200, 0.1);
+  color: var(--color-ink);
+  font-weight: 600;
 }
 
 .delegate-form-grid {
@@ -5212,6 +5242,24 @@ body {
 .delegate-form-actions .primary-btn {
   border: 0;
   cursor: pointer;
+}
+
+.text-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 54px;
+  padding: 0 10px;
+  border: 0;
+  background: transparent;
+  color: var(--color-muted);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.text-button:hover {
+  color: var(--color-ink);
 }
 
 .sponsors-page {

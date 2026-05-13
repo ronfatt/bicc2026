@@ -1,4 +1,4 @@
-import { useState, type ChangeEvent, type FormEvent } from 'react'
+import { useEffect, useState, type ChangeEvent, type FormEvent } from 'react'
 
 const clownHeroImage = '/mentors/randy-christensen.jpg'
 const clownStageImage = '/mentors/watt-de-clown.jpg'
@@ -7,6 +7,7 @@ const clownShowImage = '/mentors/chagy.jpg'
 const biccLogo = '/bicc-logo.png'
 const foundationPassPaymentLink = 'https://buy.stripe.com/6oUdR22tqekU9Siaun24006'
 const masteryPassPaymentLink = 'https://buy.stripe.com/28EeV69VS3Ggd4uaun24007'
+const delegateFormStorageKey = 'bicc2026-delegate-details-draft'
 const mentorPosterImage = '/mentors/uncle-sunday-poster.png'
 const mentorPortraitUncleSunday = '/mentors/uncle-sunday.png'
 const mentorPortraitChagy = '/mentors/chagy.jpg'
@@ -1574,23 +1575,28 @@ function getPassByTrack(track: PassTrackId) {
   return passes.find((pass) => pass.id === track) ?? passes[0]
 }
 
-function buildDelegateMailto(form: DelegateFormState) {
+function buildDelegateSummary(form: DelegateFormState) {
   const pass = getPassByTrack(form.track)
-  const subject = `BICC 2026 Delegate Details - ${pass.shortName}`
-  const body = [
+  return [
     'BICC 2026 Delegate Details',
     '',
     `Full Name: ${form.fullName}`,
     `Email: ${form.email}`,
-    `WhatsApp / Phone: ${form.whatsapp}`,
+    `WhatsApp / Phone: ${form.whatsapp || '-'}`,
     `Country: ${form.country}`,
-    `Organisation / Group: ${form.organisation}`,
+    `Organisation / Group: ${form.organisation || '-'}`,
     `Selected Track: ${pass.name}`,
     `Role: ${form.role}`,
     '',
     'Notes:',
     form.notes || '-',
   ].join('\n')
+}
+
+function buildDelegateMailto(form: DelegateFormState) {
+  const pass = getPassByTrack(form.track)
+  const subject = `BICC 2026 Delegate Details - ${pass.shortName}`
+  const body = buildDelegateSummary(form)
 
   const query = new URLSearchParams({
     subject,
@@ -2866,11 +2872,40 @@ function DelegateDetailsPage() {
     role: 'Performer',
     notes: '',
   })
+  const [isDraftReady, setIsDraftReady] = useState(false)
+  const [statusMessage, setStatusMessage] = useState<string | null>(null)
+
+  useEffect(() => {
+    try {
+      const savedDraft = window.localStorage.getItem(delegateFormStorageKey)
+      if (!savedDraft) {
+        setIsDraftReady(true)
+        return
+      }
+
+      const parsed = JSON.parse(savedDraft) as Partial<DelegateFormState>
+      setForm((current) => ({
+        ...current,
+        ...parsed,
+        track,
+      }))
+    } catch {
+      window.localStorage.removeItem(delegateFormStorageKey)
+    } finally {
+      setIsDraftReady(true)
+    }
+  }, [track])
+
+  useEffect(() => {
+    if (!isDraftReady) return
+    window.localStorage.setItem(delegateFormStorageKey, JSON.stringify(form))
+  }, [form, isDraftReady])
 
   const handleChange = (
     event: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>,
   ) => {
     const { name, value } = event.target
+    setStatusMessage(null)
     setForm((current) => ({
       ...current,
       [name]: value,
@@ -2879,7 +2914,32 @@ function DelegateDetailsPage() {
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
+    setStatusMessage('Your email app should open with the delegate details prepared for hello@bicc2026.com.')
     window.location.href = buildDelegateMailto(form)
+  }
+
+  const handleCopyDetails = async () => {
+    try {
+      await navigator.clipboard.writeText(buildDelegateSummary(form))
+      setStatusMessage('Delegate details copied. You can paste them into an email to hello@bicc2026.com if needed.')
+    } catch {
+      setStatusMessage('Copy was not available in this browser. You can still use “Send Details to BICC” to open your email app.')
+    }
+  }
+
+  const handleClearDraft = () => {
+    window.localStorage.removeItem(delegateFormStorageKey)
+    setForm({
+      fullName: '',
+      email: '',
+      whatsapp: '',
+      country: '',
+      organisation: '',
+      track,
+      role: 'Performer',
+      notes: '',
+    })
+    setStatusMessage('Saved draft cleared.')
   }
 
   const selectedPass = getPassByTrack(form.track)
@@ -2910,7 +2970,13 @@ function DelegateDetailsPage() {
             <li>Your role or practice background</li>
             <li>Any note the organizer should know before arrival</li>
           </ul>
-          <p className="registration-note">Submitting this form opens your email app with the details prepared for the BICC team.</p>
+          <p className="registration-note">
+            Submitting this form opens your email app with the details prepared for the BICC team.
+          </p>
+          <div className="registration-helper-box">
+            <strong>Organizer email</strong>
+            <span>hello@bicc2026.com</span>
+          </div>
         </aside>
       </section>
 
@@ -2974,9 +3040,17 @@ function DelegateDetailsPage() {
             </label>
           </div>
 
+          {statusMessage ? <p className="delegate-form-status">{statusMessage}</p> : null}
+
           <div className="delegate-form-actions">
             <button className="primary-btn" type="submit">
               Send Details to BICC
+            </button>
+            <button className="secondary-btn" onClick={handleCopyDetails} type="button">
+              Copy Details
+            </button>
+            <button className="text-button" onClick={handleClearDraft} type="button">
+              Clear Saved Draft
             </button>
             <a className="secondary-btn" href="/passes">
               Back to Passes
