@@ -5,6 +5,8 @@ const clownStageImage = '/mentors/watt-de-clown.jpg'
 const clownDuoImage = '/mentors/jackie-newton.jpg'
 const clownShowImage = '/mentors/chagy.jpg'
 const biccLogo = '/bicc-logo.png'
+const foundationPassPaymentLink = 'https://buy.stripe.com/6oUdR22tqekU9Siaun24006'
+const masteryPassPaymentLink = 'https://buy.stripe.com/28EeV69VS3Ggd4uaun24007'
 const mentorPosterImage = '/mentors/uncle-sunday-poster.png'
 const mentorPortraitUncleSunday = '/mentors/uncle-sunday.png'
 const mentorPortraitChagy = '/mentors/chagy.jpg'
@@ -128,7 +130,7 @@ const passes = [
     creativeOutcome: 'Build a strong starting toolkit',
     accent: 'foundation',
     cta: 'Get Foundation Pass',
-    ctaHref: 'mailto:hello@bicc2026.com?subject=BICC%202026%20Foundation%20Pass%20Registration',
+    ctaHref: foundationPassPaymentLink,
     workshopHref: '/workshops',
   },
   {
@@ -168,7 +170,7 @@ const passes = [
     creativeOutcome: 'Sharpen your professional stage identity',
     accent: 'mastery',
     cta: 'Get Mastery Pass',
-    ctaHref: 'mailto:hello@bicc2026.com?subject=BICC%202026%20Mastery%20Pass%20Registration',
+    ctaHref: masteryPassPaymentLink,
     workshopHref: '/workshops',
   },
 ] as const
@@ -208,7 +210,7 @@ const passRegistrationSteps = [
   },
   {
     title: 'Register Your Details',
-    description: 'Submit your delegate information through the official BICC registration contact flow.',
+    description: 'Complete your checkout through the official BICC Stripe payment link for your selected pass.',
     icon: 'F',
   },
   {
@@ -252,7 +254,7 @@ const passFaqItems = [
   },
   {
     question: 'What happens after I register?',
-    answer: 'You should receive official confirmation or next-step instructions through the organizer registration flow.',
+    answer: 'After checkout, follow the official BICC updates and organizer communication for programme, venue and next-step details.',
   },
   {
     question: 'What if the programme changes?',
@@ -1071,6 +1073,7 @@ const programmeTrackConnection = [
     ],
     accent: 'foundation',
     cta: 'Get Foundation Pass',
+    ctaHref: foundationPassPaymentLink,
   },
   {
     title: 'Mastery Track Pass',
@@ -1085,6 +1088,7 @@ const programmeTrackConnection = [
     ],
     accent: 'mastery',
     cta: 'Get Mastery Pass',
+    ctaHref: masteryPassPaymentLink,
   },
 ] as const
 
@@ -1448,8 +1452,8 @@ const routeContent = {
     asideTitle: 'Pass note',
     asideBody:
       'Both passes include access to your selected workshop track and a certificate aligned with that learning path.',
-    primaryCta: { label: 'Get Foundation Pass', href: '/passes' },
-    secondaryCta: { label: 'Get Mastery Pass', href: '/passes' },
+    primaryCta: { label: 'Get Foundation Pass', href: foundationPassPaymentLink },
+    secondaryCta: { label: 'Get Mastery Pass', href: masteryPassPaymentLink },
   },
   '/venue': {
     eyebrow: 'Venue & Travel',
@@ -1560,9 +1564,9 @@ function renderPassCards() {
               <li key={item}>{item}</li>
             ))}
           </ul>
-          <a className="primary-btn wide-btn" href="/passes">
-            {pass.cta}
-          </a>
+              <a className="primary-btn wide-btn" href={pass.ctaHref} rel="noreferrer" target="_blank">
+                {pass.cta}
+              </a>
         </article>
       ))}
     </div>
@@ -1823,7 +1827,7 @@ function ProgramTrackConnection() {
                   </span>
                 ))}
               </div>
-              <a className="primary-btn wide-btn" href="/passes">
+              <a className="primary-btn wide-btn" href={item.ctaHref} rel="noreferrer" target="_blank">
                 {item.cta}
               </a>
             </div>
@@ -2526,7 +2530,7 @@ function PassComparisonCards() {
               </div>
 
               <div className="pass-ticket-actions">
-                <a className="primary-btn wide-btn" href={pass.ctaHref}>
+                <a className="primary-btn wide-btn" href={pass.ctaHref} rel="noreferrer" target="_blank">
                   {pass.cta}
                 </a>
                 <a className="text-link" href={pass.workshopHref}>
@@ -2679,10 +2683,10 @@ function PassCTA() {
         </p>
       </div>
       <div className="final-cta-actions">
-        <a className="primary-btn" href={passes[0].ctaHref}>
+        <a className="primary-btn" href={passes[0].ctaHref} rel="noreferrer" target="_blank">
           Get Foundation Pass
         </a>
-        <a className="primary-btn" href={passes[1].ctaHref}>
+        <a className="primary-btn" href={passes[1].ctaHref} rel="noreferrer" target="_blank">
           Get Mastery Pass
         </a>
         <a className="secondary-btn" href="/programme">
@@ -2800,7 +2804,7 @@ function TrackSelector() {
                 <span>3-day convention track</span>
                 <span>{pass.accent === 'foundation' ? 'Build core craft' : 'Sharpen stage identity'}</span>
               </div>
-              <a className="primary-btn wide-btn" href={pass.ctaHref}>
+              <a className="primary-btn wide-btn" href={pass.ctaHref} rel="noreferrer" target="_blank">
                 {pass.cta}
               </a>
             </div>
@@ -2925,10 +2929,10 @@ function WorkshopCTA() {
         <p>Choose the track that matches your current stage, then arrive ready to practice, receive feedback and perform with purpose.</p>
       </div>
       <div className="final-cta-actions">
-        <a className="primary-btn foundation-btn" href={passes[0].ctaHref}>
+        <a className="primary-btn foundation-btn" href={passes[0].ctaHref} rel="noreferrer" target="_blank">
           Get Foundation Pass
         </a>
-        <a className="primary-btn" href={passes[1].ctaHref}>
+        <a className="primary-btn" href={passes[1].ctaHref} rel="noreferrer" target="_blank">
           Get Mastery Pass
         </a>
         <a className="secondary-btn" href="/passes#pass-compare">
@@ -3352,10 +3356,10 @@ function HomePage() {
           <h2>Ready To Join BICC 2026?</h2>
           <p>Choose the path that fits you and join a joyful international convention built for real growth, meaningful exchange and live performance in Borneo.</p>
           <div className="final-cta-actions">
-            <a className="primary-btn" href="/passes">
+            <a className="primary-btn" href={foundationPassPaymentLink} rel="noreferrer" target="_blank">
               Get Foundation Pass
             </a>
-            <a className="secondary-btn" href="/passes">
+            <a className="secondary-btn" href={masteryPassPaymentLink} rel="noreferrer" target="_blank">
               Get Mastery Pass
             </a>
             <a className="secondary-btn" href="/programme">
