@@ -1,5 +1,5 @@
 import { useEffect, useState, type ChangeEvent, type FormEvent } from 'react'
-import { cmsQueries, fetchFromSanity, localize, sanityImageUrl, type CmsMentor } from './cms'
+import { cmsQueries, fetchFromSanity, localize, sanityImageUrl, type CmsMentor, type CmsPageContent } from './cms'
 
 const clownHeroImage = '/mentors/randy-christensen.jpg'
 const clownStageImage = '/mentors/watt-de-clown.jpg'
@@ -2190,6 +2190,107 @@ function getInitialLanguage(): SiteLanguage {
 
 function normalizeTranslationKey(value: string) {
   return value.replace(/\s+/g, ' ').trim()
+}
+
+function setCmsElementText(element: Element | null | undefined, value: string) {
+  const nextText = value.trim()
+  if (!element || !nextText) return
+  element.textContent = nextText
+}
+
+function findHeroBodyParagraph(hero: Element) {
+  const paragraphs = Array.from(hero.querySelectorAll('p')).filter((paragraph) => {
+    if (paragraph.classList.contains('section-kicker')) return false
+    if (paragraph.closest('.event-badges, .hero-actions, .final-cta-actions, .page-actions')) return false
+    return normalizeTranslationKey(paragraph.textContent || '').length > 20
+  })
+
+  return paragraphs[0] || null
+}
+
+function applyCmsPageContent(pageContent: CmsPageContent | null, language: SiteLanguage) {
+  if (!pageContent) return
+
+  const main = document.querySelector('main')
+  const hero = main?.querySelector('section')
+
+  if (hero) {
+    setCmsElementText(hero.querySelector('.section-kicker'), localize(pageContent.kicker, language))
+    setCmsElementText(hero.querySelector('h1'), localize(pageContent.headline, language))
+    setCmsElementText(findHeroBodyParagraph(hero), localize(pageContent.subheadline, language))
+
+    const primaryCta = hero.querySelector<HTMLAnchorElement>('.primary-btn')
+    const secondaryCta = hero.querySelector<HTMLAnchorElement>('.secondary-btn')
+    setCmsElementText(primaryCta, localize(pageContent.primaryCtaLabel, language))
+    setCmsElementText(secondaryCta, localize(pageContent.secondaryCtaLabel, language))
+    if (primaryCta && pageContent.primaryCtaHref) primaryCta.href = pageContent.primaryCtaHref
+    if (secondaryCta && pageContent.secondaryCtaHref) secondaryCta.href = pageContent.secondaryCtaHref
+
+    const heroImageUrl = sanityImageUrl(pageContent.heroImage)
+    const heroImage = hero.querySelector<HTMLImageElement>('img:not(.brand-logo-image)')
+    if (heroImage && heroImageUrl) {
+      heroImage.src = heroImageUrl
+      const alt = localize(pageContent.heroImage?.alt ? { en: pageContent.heroImage.alt } : undefined, language)
+      if (alt) heroImage.alt = alt
+    }
+  }
+
+  const textOverrides = pageContent.textOverrides?.filter((item) => item.isPublished !== false) || []
+  if (textOverrides.length) {
+    const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+      acceptNode(node) {
+        const parent = node.parentElement
+        if (!parent) return NodeFilter.FILTER_REJECT
+        if (parent.closest('[data-no-translate]')) return NodeFilter.FILTER_REJECT
+        if (['SCRIPT', 'STYLE', 'NOSCRIPT'].includes(parent.tagName)) return NodeFilter.FILTER_REJECT
+        return normalizeTranslationKey(node.textContent || '') ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT
+      },
+    })
+
+    const nodes: Text[] = []
+    while (walker.nextNode()) {
+      nodes.push(walker.currentNode as Text)
+    }
+
+    nodes.forEach((node) => {
+      const original = node.textContent || ''
+      const key = normalizeTranslationKey(original)
+      const override = textOverrides.find((item) => {
+        const replacementCandidates = Object.values(item.replacementText || {}).filter(Boolean)
+        const candidates = [item.sourceText, ...replacementCandidates]
+        return candidates.some((candidate) => candidate && normalizeTranslationKey(candidate) === key)
+      })
+      const replacement = localize(override?.replacementText, language)
+      if (!replacement) return
+
+      const leading = original.match(/^\s*/)?.[0] ?? ''
+      const trailing = original.match(/\s*$/)?.[0] ?? ''
+      node.textContent = `${leading}${replacement}${trailing}`
+    })
+  }
+
+  const imageOverrides = pageContent.imageOverrides?.filter((item) => item.isPublished !== false && sanityImageUrl(item.image)) || []
+  if (!imageOverrides.length) return
+
+  document.querySelectorAll<HTMLImageElement>('main img').forEach((image) => {
+    const alt = image.getAttribute('alt') || ''
+    const src = image.getAttribute('src') || ''
+    const cmsKey = image.getAttribute('data-cms-image') || ''
+    const override = imageOverrides.find((item) => {
+      const matchText = normalizeTranslationKey(item.matchText || '')
+      if (!matchText) return false
+      return (
+        normalizeTranslationKey(alt) === matchText ||
+        normalizeTranslationKey(cmsKey) === matchText ||
+        src.includes(item.matchText || '')
+      )
+    })
+    const imageUrl = sanityImageUrl(override?.image)
+    if (!override || !imageUrl) return
+    image.src = imageUrl
+    const nextAlt = localize(override.alt, language) || override.image?.alt
+    if (nextAlt) image.alt = nextAlt
+  })
 }
 
 function applyPageTranslations(language: SiteLanguage) {
@@ -5249,6 +5350,7 @@ function App() {
   const currentPath = normalizePath(window.location.pathname)
   const [siteLanguage, setSiteLanguage] = useState<SiteLanguage>(getInitialLanguage)
   const [cmsMentors, setCmsMentors] = useState<MentorProfile[] | null>(null)
+  const [cmsPageContent, setCmsPageContent] = useState<CmsPageContent | null>(null)
   const isHome = currentPath === '/'
   const isProgramme = currentPath === '/programme'
   const isWorkshops = currentPath === '/workshops'
@@ -5267,8 +5369,30 @@ function App() {
 
   useEffect(() => {
     window.localStorage.setItem('bicc-site-language', siteLanguage)
-    applyPageTranslations(siteLanguage)
-  }, [siteLanguage, currentPath])
+    window.setTimeout(() => {
+      applyPageTranslations(siteLanguage)
+      applyCmsPageContent(cmsPageContent, siteLanguage)
+    }, 0)
+  }, [siteLanguage, currentPath, cmsPageContent, cmsMentors])
+
+  useEffect(() => {
+    let isActive = true
+
+    async function loadCmsPageContent() {
+      try {
+        const result = await fetchFromSanity<CmsPageContent | null>(cmsQueries.pageContent, { route: currentPath })
+        if (!isActive) return
+        setCmsPageContent(result || null)
+      } catch {
+        if (isActive) setCmsPageContent(null)
+      }
+    }
+
+    loadCmsPageContent()
+    return () => {
+      isActive = false
+    }
+  }, [currentPath])
 
   useEffect(() => {
     let isActive = true

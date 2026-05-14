@@ -5,6 +5,8 @@ This project is now prepared for Sanity CMS content editing.
 ## What the CMS Can Manage
 
 - Page hero content, section text, CTA labels and images
+- Page-level text overrides without changing the website layout
+- Page-level image overrides by matching image alt text or filename
 - Mentors and guest artists
 - Sponsor / partner logos
 - Visit Tawau food, hotels, transport and attractions
@@ -38,6 +40,35 @@ npm run studio
 
 5. Open `http://localhost:3333`.
 
+## Editing Page Text Without Code
+
+Open `Page Content` in Sanity Studio, then choose the page you want to edit.
+
+Use the top hero fields for simple hero edits:
+
+- `Kicker`
+- `Hero Headline`
+- `Hero Subheadline`
+- `Primary CTA Label`
+- `Primary CTA Link`
+- `Secondary CTA Label`
+- `Secondary CTA Link`
+- `Hero Image`
+
+Use `Text Overrides` when you want to change any existing sentence on that page without changing the layout. The seed script prepares common page text items for the main pages, so you can usually edit the `New Text` field directly:
+
+1. Find the item label, for example `Hero: headline` or `Value badge: Joyful copy`.
+2. Leave `Current Website Text` unchanged.
+3. Enter the new wording in English, 简体中文 or Bahasa Melayu.
+4. Publish the page content document.
+
+Use `Image Overrides` when you want to replace a page image:
+
+1. Find the item label, for example `Hero: main clown performer photo`.
+2. Upload the replacement image.
+3. Add replacement alt text if needed.
+4. Publish the page content document.
+
 ## Deploying The Studio
 
 After the project ID is configured, deploy the Studio with:
@@ -50,4 +81,4 @@ Sanity will give you a hosted Studio URL where the team can log in and edit cont
 
 ## Current Status
 
-The content models are ready. The public website still uses the existing hardcoded content as fallback while the Sanity project is connected and filled. The next implementation step is to wire the frontend pages to read Sanity content first and use existing content only when CMS data is missing.
+The content models are ready and the public website reads Sanity content when available. Existing website content remains as fallback, so the site still works even if a CMS field is empty.

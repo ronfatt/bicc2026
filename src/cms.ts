@@ -38,6 +38,44 @@ export type CmsVisitTawauItem = {
   sortOrder?: number
 }
 
+export type CmsTextOverride = {
+  sourceText?: string
+  replacementText?: LocalizedValue
+  isPublished?: boolean
+}
+
+export type CmsImageOverride = {
+  matchText?: string
+  image?: CmsImage
+  alt?: LocalizedValue
+  isPublished?: boolean
+}
+
+export type CmsPageSection = {
+  sectionKey?: string
+  title?: LocalizedValue
+  body?: LocalizedValue
+  image?: CmsImage
+  isPublished?: boolean
+}
+
+export type CmsPageContent = {
+  _id: string
+  route: string
+  title?: string
+  kicker?: LocalizedValue
+  headline?: LocalizedValue
+  subheadline?: LocalizedValue
+  primaryCtaLabel?: LocalizedValue
+  primaryCtaHref?: string
+  secondaryCtaLabel?: LocalizedValue
+  secondaryCtaHref?: string
+  heroImage?: CmsImage
+  textOverrides?: CmsTextOverride[]
+  imageOverrides?: CmsImageOverride[]
+  sections?: CmsPageSection[]
+}
+
 const sanityProjectId = import.meta.env.VITE_SANITY_PROJECT_ID as string | undefined
 const sanityDataset = (import.meta.env.VITE_SANITY_DATASET as string | undefined) || 'production'
 const sanityApiVersion = (import.meta.env.VITE_SANITY_API_VERSION as string | undefined) || '2026-05-14'
@@ -72,6 +110,42 @@ export async function fetchFromSanity<T>(query: string, params: Record<string, s
 }
 
 export const cmsQueries = {
+  pageContent: `*[_type == "pageContent" && route == $route && isPublished == true][0] {
+    _id,
+    route,
+    title,
+    kicker,
+    headline,
+    subheadline,
+    primaryCtaLabel,
+    primaryCtaHref,
+    secondaryCtaLabel,
+    secondaryCtaHref,
+    textOverrides,
+    sections[] {
+      sectionKey,
+      title,
+      body,
+      isPublished,
+      "image": {
+        "url": image.asset->url,
+        "alt": image.alt
+      }
+    },
+    imageOverrides[] {
+      matchText,
+      alt,
+      isPublished,
+      "image": {
+        "url": image.asset->url,
+        "alt": image.alt
+      }
+    },
+    "heroImage": {
+      "url": heroImage.asset->url,
+      "alt": heroImage.alt
+    }
+  }`,
   mentors: `*[_type == "mentor" && isPublished == true] | order(sortOrder asc, name asc) {
     _id,
     name,
