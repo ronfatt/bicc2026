@@ -1,0 +1,111 @@
+export type CmsLanguage = 'en' | 'zh' | 'ms'
+
+export type LocalizedValue = {
+  en?: string
+  zh?: string
+  ms?: string
+}
+
+export type CmsImage = {
+  url?: string
+  alt?: string
+}
+
+export type CmsMentor = {
+  _id: string
+  name: string
+  country?: string
+  role?: LocalizedValue
+  shortIntro?: LocalizedValue
+  portrait?: CmsImage
+  specialties?: LocalizedValue[]
+  isFeatured?: boolean
+  sortOrder?: number
+}
+
+export type CmsVisitTawauItem = {
+  _id: string
+  name?: LocalizedValue
+  category?: string
+  summary?: LocalizedValue
+  image?: CmsImage
+  address?: string
+  website?: string
+  mapLink?: string
+  bestFor?: LocalizedValue
+  tags?: LocalizedValue[]
+  sortOrder?: number
+}
+
+const sanityProjectId = import.meta.env.VITE_SANITY_PROJECT_ID as string | undefined
+const sanityDataset = (import.meta.env.VITE_SANITY_DATASET as string | undefined) || 'production'
+const sanityApiVersion = (import.meta.env.VITE_SANITY_API_VERSION as string | undefined) || '2026-05-14'
+
+export function isSanityConfigured() {
+  return Boolean(sanityProjectId && sanityProjectId !== 'your-project-id')
+}
+
+export function localize(value: LocalizedValue | undefined, language: CmsLanguage) {
+  if (!value) return ''
+  return value[language] || value.en || value.zh || value.ms || ''
+}
+
+export function sanityImageUrl(image: CmsImage | undefined) {
+  return image?.url || ''
+}
+
+export async function fetchFromSanity<T>(query: string, params: Record<string, string | number | boolean> = {}) {
+  if (!isSanityConfigured()) return null
+
+  const url = new URL(`https://${sanityProjectId}.api.sanity.io/v${sanityApiVersion}/data/query/${sanityDataset}`)
+  url.searchParams.set('query', query)
+  Object.entries(params).forEach(([key, value]) => url.searchParams.set(`$${key}`, JSON.stringify(value)))
+
+  const response = await fetch(url.toString())
+  if (!response.ok) {
+    throw new Error(`Sanity request failed: ${response.status}`)
+  }
+
+  const payload = (await response.json()) as { result: T }
+  return payload.result
+}
+
+export const cmsQueries = {
+  mentors: `*[_type == "mentor" && isPublished == true] | order(sortOrder asc, name asc) {
+    _id,
+    name,
+    country,
+    role,
+    shortIntro,
+    specialties,
+    isFeatured,
+    sortOrder,
+    "portrait": {
+      "url": portrait.asset->url,
+      "alt": portrait.alt
+    }
+  }`,
+  visitTawauItems: `*[_type == "visitTawauItem" && isPublished == true] | order(category asc, sortOrder asc) {
+    _id,
+    name,
+    category,
+    summary,
+    address,
+    website,
+    mapLink,
+    bestFor,
+    tags,
+    sortOrder,
+    "image": {
+      "url": image.asset->url,
+      "alt": image.alt
+    }
+  }`,
+  faqItems: `*[_type == "faqItem" && isPublished == true] | order(category asc, sortOrder asc) {
+    _id,
+    question,
+    answer,
+    category,
+    sortOrder
+  }`,
+}

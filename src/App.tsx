@@ -1,4 +1,5 @@
 import { useEffect, useState, type ChangeEvent, type FormEvent } from 'react'
+import { cmsQueries, fetchFromSanity, localize, sanityImageUrl, type CmsMentor } from './cms'
 
 const clownHeroImage = '/mentors/randy-christensen.jpg'
 const clownStageImage = '/mentors/watt-de-clown.jpg'
@@ -89,6 +90,7 @@ type MentorProfile = {
 }
 
 type PassTrackId = 'foundation' | 'mastery'
+type SiteLanguage = 'en' | 'zh' | 'ms'
 
 type DelegateRole =
   | 'Performer'
@@ -101,6 +103,7 @@ type DelegateRole =
 type DelegateFormState = {
   fullName: string
   email: string
+  paymentEmail: string
   whatsapp: string
   country: string
   organisation: string
@@ -119,6 +122,191 @@ const navItems = [
   { label: 'Visit Tawau', path: '/visit-tawau' },
   { label: 'Sponsors', path: '/sponsors' },
 ]
+
+const languageOptions: { code: SiteLanguage; label: string; shortLabel: string }[] = [
+  { code: 'en', label: 'English', shortLabel: 'EN' },
+  { code: 'zh', label: '简体中文', shortLabel: '中文' },
+  { code: 'ms', label: 'Bahasa Melayu', shortLabel: 'BM' },
+]
+
+const translations: Record<Exclude<SiteLanguage, 'en'>, Record<string, string>> = {
+  zh: {
+    'Official Site': '官方网站',
+    About: '关于',
+    Programme: '日程',
+    Workshops: '工作坊',
+    Mentors: '导师',
+    Passes: '通行证',
+    Venue: '场地',
+    'Visit Tawau': '探索斗湖',
+    Sponsors: '赞助伙伴',
+    FAQ: '常见问题',
+    Contact: '联系',
+    'Get Pass': '购买通行证',
+    'Get Your Pass': '购买通行证',
+    'Choose Your Pass': '选择通行证',
+    'Compare Tracks': '比较课程',
+    'View Programme': '查看日程',
+    'View BICC Programme': '查看 BICC 日程',
+    'View Workshops': '查看工作坊',
+    'Back to Home': '返回首页',
+    'Plan Your Visit': '规划行程',
+    'Contact BICC': '联系 BICC',
+    'Email BICC Team': '电邮 BICC 团队',
+    'View FAQ': '查看常见问题',
+    'Foundation Pass': 'Foundation 通行证',
+    'Mastery Pass': 'Mastery 通行证',
+    'Foundation Track Pass': 'Foundation 课程通行证',
+    'Mastery Track Pass': 'Mastery 课程通行证',
+    'Borneo International Clown Convention 2026': '婆罗洲国际小丑大会 2026',
+    'Where Laughter Becomes Legacy': '让欢笑成为传承',
+    'A 3-day international gathering for clown artists, performers, educators and communities in Borneo.':
+      '一场为小丑艺术家、表演者、教育工作者与社区而设的三天国际大会。',
+    'Aug 3-5, 2026': '2026年8月3日至5日',
+    'Aug 3–5, 2026': '2026年8月3日至5日',
+    'Tawau, Sabah': '沙巴斗湖',
+    '2 Workshop Tracks': '两大工作坊课程',
+    'US$130 Pass': 'US$130 通行证',
+    'Choose Your Track': '选择你的课程',
+    'Two Paths. One Price. Different Professional Needs.': '两条路径，同一价格，满足不同专业需求。',
+    'Foundation Track': 'Foundation 课程',
+    'Mastery Track': 'Mastery 课程',
+    'Professional Workshops': '专业工作坊',
+    'Performance Showcase': '演出展示',
+    'Community & Cultural Exchange': '社区与文化交流',
+    '3 Days. One Shared Journey.': '三天，一段共同旅程。',
+    'Day 1': '第一天',
+    'Day 2': '第二天',
+    'Day 3': '第三天',
+    'Arrival & Opening': '抵达与开幕',
+    'Workshops & Exchange': '工作坊与交流',
+    'Showcase & Celebration': '展示与庆祝',
+    'Mentors & Guest Artists': '导师与嘉宾艺术家',
+    'Learn From Artists Who Live the Stage.': '向真正活在舞台上的艺术家学习。',
+    'Passes & Registration': '通行证与报名',
+    'Choose Your Pass. Start Your BICC Journey.': '选择通行证，开启你的 BICC 旅程。',
+    'What Your Pass Gives You': '通行证包含什么',
+    'Before You Register': '报名之前',
+    'Which Pass Is Right for You?': '哪一种通行证适合你？',
+    'How Registration Works': '报名流程',
+    'Why Join BICC 2026?': '为什么参加 BICC 2026？',
+    'Ready to Choose Your Pass?': '准备好选择通行证了吗？',
+    'Venue & Visitor Guide': '场地与访客指南',
+    'Gather in Borneo. Find Your Way With Ease.': '相聚婆罗洲，轻松找到方向。',
+    'Venue at a Glance': '场地重点',
+    'Navigate the Experience': '大会区域导览',
+    'Getting to Tawau': '如何前往斗湖',
+    'Where to Stay': '住宿选择',
+    'Make Tawau Part of the Convention Experience.': '让斗湖成为大会体验的一部分。',
+    'Come for BICC. Stay for Tawau.': '为 BICC 而来，为斗湖而停留。',
+    'Food That Feels Like Tawau': '斗湖的味道',
+    'Getting Around Tawau': '斗湖交通',
+    'Things To Do in Tawau': '斗湖景点与体验',
+    'Make BICC 2026 Your Borneo Experience': '让 BICC 2026 成为你的婆罗洲体验',
+    'Contact BICC 2026': '联系 BICC 2026',
+    'Need help with passes, travel, sponsorship or the convention?': '需要通行证、旅行、赞助或大会协助？',
+    'Send your question to the right place.': '把问题发送到正确的团队。',
+    'Delegate Support': '参与者支持',
+    'Sponsors & Partnerships': '赞助与合作',
+    'Travel & Visitor Help': '旅行与访客协助',
+    'Media & General': '媒体与一般询问',
+    'BICC FAQ': 'BICC 常见问题',
+    'Quick answers before you join BICC 2026.': '参加 BICC 2026 前的快速解答。',
+    General: '一般',
+    'Passes & Registration questions': '通行证与报名问题',
+    'Workshops questions': '工作坊问题',
+    'Programme questions': '日程问题',
+    'Venue & Visit questions': '场地与旅行问题',
+  },
+  ms: {
+    'Official Site': 'Laman Rasmi',
+    About: 'Tentang',
+    Programme: 'Program',
+    Workshops: 'Bengkel',
+    Mentors: 'Mentor',
+    Passes: 'Pas',
+    Venue: 'Lokasi',
+    'Visit Tawau': 'Lawati Tawau',
+    Sponsors: 'Penaja',
+    FAQ: 'Soalan Lazim',
+    Contact: 'Hubungi',
+    'Get Pass': 'Dapatkan Pas',
+    'Get Your Pass': 'Dapatkan Pas',
+    'Choose Your Pass': 'Pilih Pas',
+    'Compare Tracks': 'Bandingkan Trek',
+    'View Programme': 'Lihat Program',
+    'View BICC Programme': 'Lihat Program BICC',
+    'View Workshops': 'Lihat Bengkel',
+    'Back to Home': 'Kembali ke Laman Utama',
+    'Plan Your Visit': 'Rancang Lawatan',
+    'Contact BICC': 'Hubungi BICC',
+    'Email BICC Team': 'E-mel Pasukan BICC',
+    'View FAQ': 'Lihat Soalan Lazim',
+    'Foundation Pass': 'Pas Foundation',
+    'Mastery Pass': 'Pas Mastery',
+    'Foundation Track Pass': 'Pas Trek Foundation',
+    'Mastery Track Pass': 'Pas Trek Mastery',
+    'Borneo International Clown Convention 2026': 'Konvensyen Badut Antarabangsa Borneo 2026',
+    'Where Laughter Becomes Legacy': 'Di Mana Tawa Menjadi Legasi',
+    'A 3-day international gathering for clown artists, performers, educators and communities in Borneo.':
+      'Perhimpunan antarabangsa tiga hari untuk artis badut, penghibur, pendidik dan komuniti di Borneo.',
+    'Aug 3-5, 2026': '3-5 Ogos 2026',
+    'Aug 3–5, 2026': '3-5 Ogos 2026',
+    'Tawau, Sabah': 'Tawau, Sabah',
+    '2 Workshop Tracks': '2 Trek Bengkel',
+    'US$130 Pass': 'Pas US$130',
+    'Choose Your Track': 'Pilih Trek Anda',
+    'Two Paths. One Price. Different Professional Needs.': 'Dua laluan. Satu harga. Keperluan profesional berbeza.',
+    'Foundation Track': 'Trek Foundation',
+    'Mastery Track': 'Trek Mastery',
+    'Professional Workshops': 'Bengkel Profesional',
+    'Performance Showcase': 'Persembahan Showcase',
+    'Community & Cultural Exchange': 'Komuniti & Pertukaran Budaya',
+    '3 Days. One Shared Journey.': '3 Hari. Satu Perjalanan Bersama.',
+    'Day 1': 'Hari 1',
+    'Day 2': 'Hari 2',
+    'Day 3': 'Hari 3',
+    'Arrival & Opening': 'Ketibaan & Pembukaan',
+    'Workshops & Exchange': 'Bengkel & Pertukaran',
+    'Showcase & Celebration': 'Showcase & Sambutan',
+    'Mentors & Guest Artists': 'Mentor & Artis Jemputan',
+    'Learn From Artists Who Live the Stage.': 'Belajar daripada artis yang hidup di pentas.',
+    'Passes & Registration': 'Pas & Pendaftaran',
+    'Choose Your Pass. Start Your BICC Journey.': 'Pilih pas anda. Mulakan perjalanan BICC.',
+    'What Your Pass Gives You': 'Apa Yang Termasuk Dalam Pas',
+    'Before You Register': 'Sebelum Mendaftar',
+    'Which Pass Is Right for You?': 'Pas Mana Yang Sesuai?',
+    'How Registration Works': 'Cara Pendaftaran',
+    'Why Join BICC 2026?': 'Mengapa Sertai BICC 2026?',
+    'Ready to Choose Your Pass?': 'Sedia Memilih Pas?',
+    'Venue & Visitor Guide': 'Panduan Lokasi & Pelawat',
+    'Gather in Borneo. Find Your Way With Ease.': 'Berkumpul di Borneo. Bergerak dengan mudah.',
+    'Venue at a Glance': 'Lokasi Sepintas Lalu',
+    'Navigate the Experience': 'Panduan Kawasan Konvensyen',
+    'Getting to Tawau': 'Menuju ke Tawau',
+    'Where to Stay': 'Tempat Menginap',
+    'Make Tawau Part of the Convention Experience.': 'Jadikan Tawau sebahagian pengalaman konvensyen.',
+    'Come for BICC. Stay for Tawau.': 'Datang untuk BICC. Tinggal untuk Tawau.',
+    'Food That Feels Like Tawau': 'Rasa Makanan Tawau',
+    'Getting Around Tawau': 'Bergerak di Tawau',
+    'Things To Do in Tawau': 'Aktiviti di Tawau',
+    'Make BICC 2026 Your Borneo Experience': 'Jadikan BICC 2026 Pengalaman Borneo Anda',
+    'Contact BICC 2026': 'Hubungi BICC 2026',
+    'Need help with passes, travel, sponsorship or the convention?': 'Perlukan bantuan pas, perjalanan, penajaan atau konvensyen?',
+    'Send your question to the right place.': 'Hantar soalan anda ke saluran yang betul.',
+    'Delegate Support': 'Sokongan Delegat',
+    'Sponsors & Partnerships': 'Penaja & Kerjasama',
+    'Travel & Visitor Help': 'Bantuan Perjalanan & Pelawat',
+    'Media & General': 'Media & Umum',
+    'BICC FAQ': 'Soalan Lazim BICC',
+    'Quick answers before you join BICC 2026.': 'Jawapan ringkas sebelum menyertai BICC 2026.',
+    General: 'Umum',
+    'Passes & Registration questions': 'Soalan Pas & Pendaftaran',
+    'Workshops questions': 'Soalan Bengkel',
+    'Programme questions': 'Soalan Program',
+    'Venue & Visit questions': 'Soalan Lokasi & Lawatan',
+  },
+}
 
 const values = [
   { title: 'Joyful', body: 'Joy that connects.' },
@@ -1962,8 +2150,90 @@ function getPassByTrack(track: PassTrackId) {
   return passes.find((pass) => pass.id === track) ?? passes[0]
 }
 
+function mapCmsMentors(cmsMentors: CmsMentor[], language: SiteLanguage): MentorProfile[] {
+  return cmsMentors.map((mentor) => ({
+    id: mentor._id,
+    name: mentor.name,
+    country: mentor.country || 'International',
+    region: mentor.country === 'USA' ? 'USA' : mentor.country === 'Malaysia' ? 'Malaysia' : 'Asia',
+    role: localize(mentor.role, language) || 'Guest Artist',
+    shortIntro:
+      localize(mentor.shortIntro, language) ||
+      'A guest artist joining BICC 2026 to share clown craft, performance experience and creative exchange with delegates.',
+    specialties: mentor.specialties?.map((specialty) => localize(specialty, language)).filter(Boolean).slice(0, 3) || [
+      'Guest Artist',
+      'Performance',
+      'Creative Exchange',
+    ],
+    image: sanityImageUrl(mentor.portrait) || null,
+    featured: Boolean(mentor.isFeatured),
+  }))
+}
+
 function slugify(value: string) {
   return value.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')
+}
+
+function isSiteLanguage(value: string | null): value is SiteLanguage {
+  return value === 'en' || value === 'zh' || value === 'ms'
+}
+
+function getInitialLanguage(): SiteLanguage {
+  const urlLanguage = new URLSearchParams(window.location.search).get('lang')
+  if (isSiteLanguage(urlLanguage)) return urlLanguage
+
+  const savedLanguage = window.localStorage.getItem('bicc-site-language')
+  if (isSiteLanguage(savedLanguage)) return savedLanguage
+
+  return 'en'
+}
+
+function normalizeTranslationKey(value: string) {
+  return value.replace(/\s+/g, ' ').trim()
+}
+
+function applyPageTranslations(language: SiteLanguage) {
+  document.documentElement.lang = language === 'zh' ? 'zh-Hans' : language === 'ms' ? 'ms' : 'en'
+  document.documentElement.dataset.siteLanguage = language
+
+  if (language === 'en') return
+
+  const dictionary = translations[language]
+  const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+    acceptNode(node) {
+      const parent = node.parentElement
+      if (!parent) return NodeFilter.FILTER_REJECT
+      if (parent.closest('[data-no-translate]')) return NodeFilter.FILTER_REJECT
+      if (['SCRIPT', 'STYLE', 'NOSCRIPT'].includes(parent.tagName)) return NodeFilter.FILTER_REJECT
+      return normalizeTranslationKey(node.textContent || '') ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT
+    },
+  })
+
+  const nodes: Text[] = []
+  while (walker.nextNode()) {
+    nodes.push(walker.currentNode as Text)
+  }
+
+  nodes.forEach((node) => {
+    const original = node.textContent || ''
+    const key = normalizeTranslationKey(original)
+    const translated = dictionary[key]
+    if (!translated) return
+
+    const leading = original.match(/^\s*/)?.[0] ?? ''
+    const trailing = original.match(/\s*$/)?.[0] ?? ''
+    node.textContent = `${leading}${translated}${trailing}`
+  })
+
+  document.querySelectorAll<HTMLElement>('[placeholder], [aria-label], [title]').forEach((element) => {
+    if (element.closest('[data-no-translate]')) return
+    ;(['placeholder', 'aria-label', 'title'] as const).forEach((attribute) => {
+      const value = element.getAttribute(attribute)
+      if (!value) return
+      const translated = dictionary[normalizeTranslationKey(value)]
+      if (translated) element.setAttribute(attribute, translated)
+    })
+  })
 }
 
 function buildDelegateSummary(form: DelegateFormState) {
@@ -1973,6 +2243,7 @@ function buildDelegateSummary(form: DelegateFormState) {
     '',
     `Full Name: ${form.fullName}`,
     `Email: ${form.email}`,
+    `Stripe Receipt / Payment Email: ${form.paymentEmail || form.email}`,
     `WhatsApp / Phone: ${form.whatsapp || '-'}`,
     `Country: ${form.country}`,
     `Organisation / Group: ${form.organisation || '-'}`,
@@ -2717,6 +2988,10 @@ function VisitTawauHero() {
           Travel Partner
         </a>
       </nav>
+
+      <p className="visit-official-note">
+        Visitor information is provided as a planning guide. Hotel, tour and transport bookings are managed directly by delegates or appointed travel partners unless BICC announces an official arrangement.
+      </p>
     </section>
   )
 }
@@ -2994,6 +3269,353 @@ function VisitTawauPage() {
       <VisitGettingAroundSection />
       <VisitThingsToDoSection />
       <VisitTawauCTA />
+    </main>
+  )
+}
+
+function ContactPage() {
+  const contactCards = [
+    {
+      title: 'Delegate Support',
+      copy: 'Passes, track selection, payment follow-up and arrival questions.',
+      cta: 'Email Delegate Support',
+      href: 'mailto:hello@bicc2026.com?subject=BICC%202026%20Delegate%20Support',
+      tone: 'soft-aqua',
+      external: false,
+    },
+    {
+      title: 'Sponsors & Partnerships',
+      copy: 'Sponsorship deck, CSR ideas, tourism partnerships and brand visibility.',
+      cta: 'Request Partnership Info',
+      href: 'mailto:hello@bicc2026.com?subject=BICC%202026%20Partnership%20Inquiry',
+      tone: 'soft-coral',
+      external: false,
+    },
+    {
+      title: 'Travel & Visitor Help',
+      copy: 'Tawau planning, travel partner support and visitor guide questions.',
+      cta: 'Plan With Travel Partner',
+      href: visitTawauPartnerLink,
+      tone: 'soft-yellow',
+      external: true,
+    },
+    {
+      title: 'Media & General',
+      copy: 'Official questions, media requests and general convention enquiries.',
+      cta: 'Contact BICC',
+      href: 'mailto:hello@bicc2026.com?subject=BICC%202026%20General%20Inquiry',
+      tone: 'soft-green',
+      external: false,
+    },
+  ] as const
+
+  return (
+    <main className="contact-page">
+      <section className="contact-hero section-shell">
+        <div className="contact-hero-copy">
+          <p className="section-kicker">Contact BICC 2026</p>
+          <h1>Need help with passes, travel, sponsorship or the convention?</h1>
+          <p>
+            Reach the BICC team through the right channel so your question can move quickly to the people handling registration, partnerships or visitor planning.
+          </p>
+          <div className="hero-actions">
+            <a className="primary-btn" href="mailto:hello@bicc2026.com?subject=BICC%202026%20Inquiry">
+              Email BICC Team
+            </a>
+            <a className="secondary-btn" href="/faq">
+              View FAQ
+            </a>
+          </div>
+        </div>
+
+        <aside className="contact-official-card">
+          <span className="programme-ticket-badge">Official Contact</span>
+          <h2>hello@bicc2026.com</h2>
+          <p>Use official BICC links and channels for pass updates, programme changes and venue information.</p>
+        </aside>
+      </section>
+
+      <section className="editorial-section section-shell contact-grid-section">
+        <div className="section-head with-copy">
+          <div>
+            <p className="section-kicker">Choose the right desk</p>
+            <h2>Send your question to the right place.</h2>
+          </div>
+          <p>Short, direct routes for delegates, international visitors, partners and media.</p>
+        </div>
+        <div className="contact-card-grid">
+          {contactCards.map((card) => (
+            <article className={`contact-card ${card.tone}`} key={card.title}>
+              <span className="red-nose-dot" aria-hidden="true" />
+              <h3>{card.title}</h3>
+              <p>{card.copy}</p>
+              <a href={card.href} rel={card.external ? 'noreferrer' : undefined} target={card.external ? '_blank' : undefined}>
+                {card.cta}
+              </a>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="contact-notice section-shell">
+        <div>
+          <p className="section-kicker">Before you write</p>
+          <h2>Include the details that help us answer faster.</h2>
+        </div>
+        <div className="contact-check-grid">
+          <span>Full name</span>
+          <span>Pass or track</span>
+          <span>Country / organisation</span>
+          <span>Payment email if purchased</span>
+        </div>
+      </section>
+    </main>
+  )
+}
+
+const generalFaqItems = [
+  {
+    question: 'Where should I ask general questions?',
+    answer: 'Email hello@bicc2026.com or use the Contact page so the BICC team can route your enquiry.',
+  },
+  {
+    question: 'How do I match my Stripe payment with my delegate details?',
+    answer:
+      'After payment, submit your delegate details and include the email used for your Stripe receipt so the organiser can match the purchase with your selected pass.',
+  },
+  {
+    question: 'Will there be a programme PDF?',
+    answer:
+      'The programme preview is available on the website. An official PDF can be added once final times, rooms and mentor allocations are confirmed.',
+  },
+  {
+    question: 'Are hotel and travel bookings handled by BICC?',
+    answer:
+      'Delegates should arrange hotels, flights and local travel directly unless BICC announces an official partner arrangement.',
+  },
+] as const
+
+const faqGroups = [
+  { title: 'General', items: generalFaqItems },
+  { title: 'Passes & Registration', items: passFaqItems },
+  { title: 'Workshops', items: workshopFaqItems },
+  { title: 'Programme', items: programmeFaqItems },
+  { title: 'Venue & Visit', items: venueFaqItems },
+] as const
+
+function FAQPage() {
+  return (
+    <main className="faq-page">
+      <section className="faq-hero section-shell">
+        <div>
+          <p className="section-kicker">BICC FAQ</p>
+          <h1>Quick answers before you join BICC 2026.</h1>
+          <p>
+            A practical guide for delegates, international visitors, mentors, sponsors and families planning for Tawau, Sabah.
+          </p>
+        </div>
+        <div className="hero-actions">
+          <a className="primary-btn" href="/passes">
+            Get Your Pass
+          </a>
+          <a className="secondary-btn" href="/contact">
+            Contact BICC
+          </a>
+        </div>
+      </section>
+
+      <section className="editorial-section section-shell faq-index">
+        {faqGroups.map((group) => (
+          <a href={`#faq-${slugify(group.title)}`} key={`faq-link-${group.title}`}>
+            {group.title}
+          </a>
+        ))}
+      </section>
+
+      {faqGroups.map((group) => (
+        <section className="editorial-section section-shell faq-group" id={`faq-${slugify(group.title)}`} key={group.title}>
+          <div className="section-head single">
+            <div>
+              <p className="section-kicker">{group.title}</p>
+              <h2>{group.title} questions</h2>
+            </div>
+          </div>
+          <div className="programme-faq-list">
+            {group.items.map((item) => (
+              <details className="programme-faq-item" key={`${group.title}-${item.question}`}>
+                <summary>
+                  <span className="programme-faq-dot" />
+                  {item.question}
+                </summary>
+                <p>{item.answer}</p>
+              </details>
+            ))}
+          </div>
+        </section>
+      ))}
+    </main>
+  )
+}
+
+function LanguagesPage() {
+  const languageGuides = [
+    {
+      id: 'english',
+      label: 'English',
+      title: 'Main Site Language',
+      headline: 'BICC 2026 is presented primarily in English.',
+      copy:
+        'The full website, pass information, programme preview and visitor guide are maintained in English for international delegates and partners.',
+      points: ['Official website language', 'International delegate information', 'Programme and pass details'],
+      cta: 'Back to Home',
+      href: '/',
+      tone: 'soft-aqua',
+    },
+    {
+      id: 'chinese',
+      label: '简体中文',
+      title: '中文速览',
+      headline: '婆罗洲国际小丑大会 2026 将在沙巴斗湖举行。',
+      copy:
+        '这是一个为小丑演员、教育工作者、舞台表演者、家庭娱乐者和国际参与者而设的三天大会，内容包括工作坊、导师交流、演出展示、社区连接和斗湖体验。',
+      points: ['日期：2026年8月3日至5日', '地点：马来西亚沙巴斗湖', '通行证：Foundation / Mastery，US$130'],
+      cta: '查看通行证',
+      href: '/passes',
+      tone: 'soft-coral',
+    },
+    {
+      id: 'malay',
+      label: 'Bahasa Melayu',
+      title: 'Ringkasan BM',
+      headline: 'BICC 2026 berlangsung di Tawau, Sabah.',
+      copy:
+        'Konvensyen tiga hari ini menghimpunkan artis badut, penghibur, pendidik dan komuniti melalui bengkel, persembahan, pertukaran budaya dan pengalaman destinasi Borneo.',
+      points: ['Tarikh: 3-5 Ogos 2026', 'Lokasi: Tawau, Sabah, Malaysia', 'Pas: Foundation / Mastery, US$130'],
+      cta: 'Lihat Pas',
+      href: '/passes',
+      tone: 'soft-yellow',
+    },
+  ] as const
+
+  return (
+    <main className="languages-page">
+      <section className="languages-hero section-shell">
+        <div>
+          <p className="section-kicker">Language Support</p>
+          <h1>English main site, with Chinese and Malay quick guides.</h1>
+          <p>
+            BICC is an international convention rooted in Sabah. These quick guides help delegates, families, local partners and visitors understand the essentials before they explore the full English site.
+          </p>
+        </div>
+        <div className="language-quick-links" aria-label="Language quick links">
+          {languageGuides.map((guide) => (
+            <a href={`#${guide.id}`} key={`language-link-${guide.id}`}>
+              {guide.label}
+            </a>
+          ))}
+        </div>
+      </section>
+
+      <section className="editorial-section section-shell language-grid-section">
+        <div className="language-guide-grid">
+          {languageGuides.map((guide) => (
+            <article className={`language-guide-card ${guide.tone}`} id={guide.id} key={guide.id}>
+              <span className="language-label">{guide.label}</span>
+              <p className="section-kicker">{guide.title}</p>
+              <h2>{guide.headline}</h2>
+              <p>{guide.copy}</p>
+              <div className="language-point-list">
+                {guide.points.map((point) => (
+                  <span key={`${guide.id}-${point}`}>{point}</span>
+                ))}
+              </div>
+              <a className="secondary-btn" href={guide.href}>
+                {guide.cta}
+              </a>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="contact-notice section-shell language-notice">
+        <div>
+          <p className="section-kicker">Translation Roadmap</p>
+          <h2>Next step: translate the highest-conversion pages first.</h2>
+        </div>
+        <div className="contact-check-grid">
+          <span>Passes</span>
+          <span>Programme</span>
+          <span>Visit Tawau</span>
+          <span>Contact & FAQ</span>
+        </div>
+      </section>
+    </main>
+  )
+}
+
+function AdminPage() {
+  return (
+    <main className="admin-page">
+      <section className="contact-hero section-shell">
+        <div className="contact-hero-copy">
+          <p className="section-kicker">Content Admin</p>
+          <h1>Manage BICC content through Sanity Studio.</h1>
+          <p>
+            Sanity will become the editing dashboard for page content, images, mentors, sponsors, FAQ, workshops and Visit Tawau listings.
+          </p>
+          <div className="hero-actions">
+            <a className="primary-btn" href="http://localhost:3333" rel="noreferrer" target="_blank">
+              Open Local Studio
+            </a>
+            <a className="secondary-btn" href="https://www.sanity.io/manage" rel="noreferrer" target="_blank">
+              Manage Sanity Project
+            </a>
+          </div>
+        </div>
+
+        <aside className="contact-official-card">
+          <span className="programme-ticket-badge">CMS Setup</span>
+          <h2>Run npm run studio</h2>
+          <p>After adding your Sanity project ID in `.env.local`, this command opens the content dashboard locally.</p>
+        </aside>
+      </section>
+
+      <section className="editorial-section section-shell contact-grid-section">
+        <div className="section-head with-copy">
+          <div>
+            <p className="section-kicker">Editable Content</p>
+            <h2>What the backend will manage.</h2>
+          </div>
+          <p>The content models are ready for multilingual editing and image uploads.</p>
+        </div>
+        <div className="contact-card-grid">
+          {[
+            ['Page Content', 'Hero text, section text, CTA labels and page images.'],
+            ['Mentors', 'Profile photo, country, role, bio, specialties and featured status.'],
+            ['Visit Tawau', 'Food, hotels, transport, attractions, links, maps and photos.'],
+            ['Sponsors & FAQ', 'Partner logos, sponsor groups, questions and answers.'],
+          ].map(([title, copy]) => (
+            <article className="contact-card soft-aqua" key={title}>
+              <span className="red-nose-dot" aria-hidden="true" />
+              <h3>{title}</h3>
+              <p>{copy}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="contact-notice section-shell">
+        <div>
+          <p className="section-kicker">Before Launch</p>
+          <h2>Connect the Sanity project ID, then publish the Studio.</h2>
+        </div>
+        <div className="contact-check-grid">
+          <span>Create Sanity project</span>
+          <span>Fill `.env.local`</span>
+          <span>Run `npm run studio`</span>
+          <span>Deploy Studio</span>
+        </div>
+      </section>
     </main>
   )
 }
@@ -3586,6 +4208,7 @@ function DelegateDetailsPage() {
   const [form, setForm] = useState<DelegateFormState>({
     fullName: '',
     email: '',
+    paymentEmail: '',
     whatsapp: '',
     country: '',
     organisation: '',
@@ -3653,6 +4276,7 @@ function DelegateDetailsPage() {
     setForm({
       fullName: '',
       email: '',
+      paymentEmail: '',
       whatsapp: '',
       country: '',
       organisation: '',
@@ -3712,6 +4336,17 @@ function DelegateDetailsPage() {
             <label className="delegate-field">
               <span>Email</span>
               <input name="email" onChange={handleChange} required type="email" value={form.email} />
+            </label>
+
+            <label className="delegate-field">
+              <span>Stripe Receipt / Payment Email</span>
+              <input
+                name="paymentEmail"
+                onChange={handleChange}
+                placeholder="If different from your main email"
+                type="email"
+                value={form.paymentEmail}
+              />
             </label>
 
             <label className="delegate-field">
@@ -4083,7 +4718,7 @@ function MentorCard({
   mentor,
   featured = false,
 }: {
-  mentor: (typeof mentorLineup)[number]
+  mentor: MentorProfile
   featured?: boolean
 }) {
   return (
@@ -4110,8 +4745,8 @@ function MentorCard({
   )
 }
 
-function FeaturedMentors() {
-  const featuredMentors = mentorLineup.filter((mentor) => mentor.featured).slice(0, 6)
+function FeaturedMentors({ mentors }: { mentors: MentorProfile[] }) {
+  const featuredMentors = mentors.filter((mentor) => mentor.featured).slice(0, 6)
 
   return (
     <section className="editorial-section section-shell mentor-featured-section">
@@ -4132,10 +4767,10 @@ function FeaturedMentors() {
   )
 }
 
-function MentorGrid() {
+function MentorGrid({ mentors }: { mentors: MentorProfile[] }) {
   const [activeFilter, setActiveFilter] = useState<MentorFilterKey>('all')
 
-  const filteredMentors = mentorLineup.filter((mentor) => {
+  const filteredMentors = mentors.filter((mentor) => {
     if (mentor.featured) return false
     if (activeFilter === 'all') return true
     if (activeFilter === 'malaysia') return mentor.country === 'Malaysia'
@@ -4201,12 +4836,12 @@ function MentorCTA() {
   )
 }
 
-function MentorsPage() {
+function MentorsPage({ mentors = mentorLineup }: { mentors?: MentorProfile[] }) {
   return (
     <main className="mentors-page">
       <MentorHero />
-      <FeaturedMentors />
-      <MentorGrid />
+      <FeaturedMentors mentors={mentors} />
+      <MentorGrid mentors={mentors} />
       <MentorCTA />
     </main>
   )
@@ -4586,12 +5221,14 @@ function Footer() {
         <a href="/passes">Mastery Track Pass</a>
         <a href="/venue">Venue & Travel</a>
         <a href="/visit-tawau">Visit Tawau</a>
+        <a href="/faq">FAQ</a>
+        <a href="/admin">Admin</a>
       </div>
 
       <div className="footer-column">
         <strong>Sponsors</strong>
         <a href="/sponsors">Partners</a>
-        <a href="mailto:hello@bicc2026.com">Contact</a>
+        <a href="/contact">Contact</a>
         <div className="social-row" aria-label="Social links">
           <span>f</span>
           <span>◎</span>
@@ -4610,6 +5247,8 @@ function Footer() {
 
 function App() {
   const currentPath = normalizePath(window.location.pathname)
+  const [siteLanguage, setSiteLanguage] = useState<SiteLanguage>(getInitialLanguage)
+  const [cmsMentors, setCmsMentors] = useState<MentorProfile[] | null>(null)
   const isHome = currentPath === '/'
   const isProgramme = currentPath === '/programme'
   const isWorkshops = currentPath === '/workshops'
@@ -4618,9 +5257,74 @@ function App() {
   const isVenue = currentPath === '/venue'
   const isVisitTawau = currentPath === '/visit-tawau'
   const isSponsors = currentPath === '/sponsors'
+  const isContact = currentPath === '/contact'
+  const isFaq = currentPath === '/faq'
+  const isLanguages = currentPath === '/languages'
+  const isAdmin = currentPath === '/admin'
   const isRegistrationConfirmed = currentPath === '/registration-confirmed'
   const isDelegateDetails = currentPath === '/delegate-details'
   const routePath = isHome ? null : (currentPath in routeContent ? (currentPath as RouteKey) : null)
+
+  useEffect(() => {
+    window.localStorage.setItem('bicc-site-language', siteLanguage)
+    applyPageTranslations(siteLanguage)
+  }, [siteLanguage, currentPath])
+
+  useEffect(() => {
+    let isActive = true
+
+    async function loadCmsMentors() {
+      try {
+        const result = await fetchFromSanity<CmsMentor[]>(cmsQueries.mentors)
+        if (!isActive || !result?.length) return
+        setCmsMentors(mapCmsMentors(result, siteLanguage))
+      } catch {
+        if (isActive) setCmsMentors(null)
+      }
+    }
+
+    loadCmsMentors()
+    return () => {
+      isActive = false
+    }
+  }, [siteLanguage])
+
+  useEffect(() => {
+    const handleInternalLinkClick = (event: MouseEvent) => {
+      const target = event.target as HTMLElement | null
+      const anchor = target?.closest('a')
+      if (!anchor) return
+      const href = anchor.getAttribute('href')
+      if (!href || href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('tel:')) return
+      if (anchor.target === '_blank' || anchor.hasAttribute('download')) return
+
+      const url = new URL(anchor.href, window.location.origin)
+      if (url.origin !== window.location.origin) return
+
+      if (siteLanguage === 'en') {
+        url.searchParams.delete('lang')
+      } else {
+        url.searchParams.set('lang', siteLanguage)
+      }
+
+      event.preventDefault()
+      window.location.href = `${url.pathname}${url.search}${url.hash}`
+    }
+
+    document.addEventListener('click', handleInternalLinkClick)
+    return () => document.removeEventListener('click', handleInternalLinkClick)
+  }, [siteLanguage])
+
+  const handleLanguageChange = (language: SiteLanguage) => {
+    setSiteLanguage(language)
+    const url = new URL(window.location.href)
+    if (language === 'en') {
+      url.searchParams.delete('lang')
+    } else {
+      url.searchParams.set('lang', language)
+    }
+    window.history.replaceState({}, '', `${url.pathname}${url.search}${url.hash}`)
+  }
 
   return (
     <div className="page-shell">
@@ -4644,6 +5348,19 @@ function App() {
               {item.label}
             </a>
           ))}
+          <span className="language-switcher" data-no-translate>
+            {languageOptions.map((option) => (
+              <button
+                aria-pressed={siteLanguage === option.code}
+                className={siteLanguage === option.code ? 'active' : ''}
+                key={option.code}
+                onClick={() => handleLanguageChange(option.code)}
+                type="button"
+              >
+                {option.shortLabel}
+              </button>
+            ))}
+          </span>
         </nav>
 
         <a className="primary-btn header-cta" href="/passes">
@@ -4658,7 +5375,7 @@ function App() {
       ) : isWorkshops ? (
         <WorkshopsPage />
       ) : isMentors ? (
-        <MentorsPage />
+        <MentorsPage mentors={cmsMentors || mentorLineup} />
       ) : isPasses ? (
         <PassesPage />
       ) : isVenue ? (
@@ -4667,6 +5384,14 @@ function App() {
         <VisitTawauPage />
       ) : isSponsors ? (
         <SponsorsPage />
+      ) : isContact ? (
+        <ContactPage />
+      ) : isFaq ? (
+        <FAQPage />
+      ) : isLanguages ? (
+        <LanguagesPage />
+      ) : isAdmin ? (
+        <AdminPage />
       ) : isRegistrationConfirmed ? (
         <RegistrationConfirmedPage />
       ) : isDelegateDetails ? (

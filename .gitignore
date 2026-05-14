@@ -4,3 +4,7 @@ dist
 vite.config.js
 vite.config.d.ts
 .vercel
+.sanity
+.env
+.env.local
+.env.*.local
