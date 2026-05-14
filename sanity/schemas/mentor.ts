@@ -11,8 +11,20 @@ export const mentor = defineType({
     defineField({ name: 'role', title: 'Role Label', type: 'localizedString' }),
     defineField({ name: 'shortIntro', title: 'Short Intro', type: 'localizedText' }),
     defineField({ name: 'bio', title: 'Full Bio', type: 'localizedText' }),
-    defineField({ name: 'portrait', title: 'Portrait', type: 'image', options: { hotspot: true } }),
-    defineField({ name: 'posterImage', title: 'Poster / Feature Image', type: 'image', options: { hotspot: true } }),
+    defineField({
+      name: 'portrait',
+      title: 'Portrait',
+      description: 'Best for website mentor cards. Upload a clean portrait here when available.',
+      type: 'image',
+      options: { hotspot: true },
+    }),
+    defineField({
+      name: 'posterImage',
+      title: 'Poster / Feature Image',
+      description: 'Best for feature visuals and posters. The website will also use this if Portrait is empty.',
+      type: 'image',
+      options: { hotspot: true },
+    }),
     defineField({ name: 'specialties', title: 'Specialties', type: 'array', of: [{ type: 'localizedString' }] }),
     defineField({ name: 'trackLabels', title: 'Track Labels', type: 'array', of: [{ type: 'string' }] }),
     defineField({ name: 'isFeatured', title: 'Featured Mentor', type: 'boolean', initialValue: false }),
@@ -23,7 +35,15 @@ export const mentor = defineType({
     select: {
       title: 'name',
       subtitle: 'country',
-      media: 'portrait',
+      portrait: 'portrait',
+      posterImage: 'posterImage',
+    },
+    prepare({ title, subtitle, portrait, posterImage }) {
+      return {
+        title,
+        subtitle,
+        media: portrait || posterImage,
+      }
     },
   },
 })

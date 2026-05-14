@@ -2165,7 +2165,7 @@ function mapCmsMentors(cmsMentors: CmsMentor[], language: SiteLanguage): MentorP
       'Performance',
       'Creative Exchange',
     ],
-    image: sanityImageUrl(mentor.portrait) || null,
+    image: sanityImageUrl(mentor.portrait) || sanityImageUrl(mentor.posterImage) || null,
     featured: Boolean(mentor.isFeatured),
   }))
 }

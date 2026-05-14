@@ -18,6 +18,7 @@ export type CmsMentor = {
   role?: LocalizedValue
   shortIntro?: LocalizedValue
   portrait?: CmsImage
+  posterImage?: CmsImage
   specialties?: LocalizedValue[]
   isFeatured?: boolean
   sortOrder?: number
@@ -83,6 +84,10 @@ export const cmsQueries = {
     "portrait": {
       "url": portrait.asset->url,
       "alt": portrait.alt
+    },
+    "posterImage": {
+      "url": posterImage.asset->url,
+      "alt": posterImage.alt
     }
   }`,
   visitTawauItems: `*[_type == "visitTawauItem" && isPublished == true] | order(category asc, sortOrder asc) {
