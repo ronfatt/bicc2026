@@ -12,12 +12,16 @@ const landingWorkshopMagicImage = '/landing/workshop-magic-wonder.jpg'
 const landingWorkshopOutreachImage = '/landing/workshop-community-outreach.jpg'
 const landingWorkshopEducationImage = '/landing/workshop-educational-show.jpg'
 const landingSponsorImpactImage = '/landing/sponsors-impact-story.jpg'
+const mentorHeroLineupImage = '/landing/mentors-hero-lineup.jpg'
+const passesRegistrationMomentImage = '/landing/passes-registration-moment.jpg'
+const passesFoundationWorkshopImage = '/landing/passes-foundation-workshop.jpg'
+const passesMasteryStageImage = '/landing/passes-mastery-stage.jpg'
+const venueArrivalDelegatesImage = '/landing/venue-arrival-delegates.jpg'
 const biccLogo = '/bicc-logo.png'
 const foundationPassPaymentLink = 'https://buy.stripe.com/6oUdR22tqekU9Siaun24006'
 const masteryPassPaymentLink = 'https://buy.stripe.com/28EeV69VS3Ggd4uaun24007'
 const visitTawauPartnerLink = 'https://linktr.ee/jwvnow'
 const delegateFormStorageKey = 'bicc2026-delegate-details-draft'
-const mentorPosterImage = '/mentors/uncle-sunday-poster.png'
 const mentorPortraitUncleSunday = '/mentors/uncle-sunday.png'
 const mentorPortraitChagy = '/mentors/chagy.jpg'
 const mentorPortraitUncleButton = '/mentors/uncle-button.jpg'
@@ -332,8 +336,7 @@ const passes = [
     badge: 'Best for beginners and emerging performers',
     label: 'Foundation Workshop Pass',
     headline: 'Build Your Professional Foundation',
-    body:
-      'For beginners, educators and emerging performers who want clear fundamentals, playful tools and confidence in front of an audience.',
+    body: 'For newer performers who want fundamentals, playful tools and stage confidence.',
     badges: ['No prior experience required', 'Certificate of Participation awarded'],
     includes: [
       'Physical Comedy Fundamentals',
@@ -371,8 +374,7 @@ const passes = [
     badge: 'Best for experienced performers',
     label: 'Mastery Workshop Pass',
     headline: 'Elevate Your Stage Performance',
-    body:
-      'For working performers who want stronger stage choices, sharper timing and more confident professional performance.',
+    body: 'For working performers ready for sharper timing, critique and stage command.',
     badges: ['Prior stage experience recommended', 'Certificate of Completion awarded'],
     includes: [
       'Advanced Stage Craft',
@@ -966,6 +968,21 @@ const sponsorOpportunityCards = [
   },
 ] as const
 
+const sponsorExposurePoints = [
+  'Website',
+  'Stage Backdrop',
+  'Delegate Pass',
+  'Official Magazine',
+  'Social Media',
+  'Workshop Room',
+  'Welcome Kit',
+  'Venue Signage',
+  'Media Wall',
+  'Outreach Programme',
+  'Thank You Video',
+  'Travel Guide',
+] as const
+
 const sponsorPackageCards = [
   {
     title: 'Legacy Partner',
@@ -1412,88 +1429,6 @@ const venueQuickFacts = [
     comingSoon: true,
   },
 ] as const
-
-const calvaryCrownLevels = [
-  {
-    level: 'Level 1',
-    title: 'Cafe / Reception',
-    copy: 'Arrival, reception energy and first-point delegate flow.',
-    use: 'Arrival & support',
-    type: 'delegate-info' as ProgrammeSessionType,
-  },
-  {
-    level: 'Level 2',
-    title: 'Worship Hall',
-    copy: 'A likely shared-space anchor for opening or gathered moments.',
-    use: 'Shared hall',
-    type: 'showcase' as ProgrammeSessionType,
-  },
-  {
-    level: 'Level 3',
-    title: 'Gym',
-    copy: 'A movement-friendly level that supports active practice and rehearsal energy.',
-    use: 'Movement practice',
-    type: 'foundation' as ProgrammeSessionType,
-  },
-  {
-    level: 'Level 4',
-    title: 'School',
-    copy: 'Learning-oriented space that aligns naturally with structured workshops.',
-    use: 'Workshop rooms',
-    type: 'foundation' as ProgrammeSessionType,
-  },
-  {
-    level: 'Level 5',
-    title: 'Library / Exhibition Rooms',
-    copy: 'Useful for quieter sessions, displays and reflective exchange.',
-    use: 'Exchange & display',
-    type: 'exchange' as ProgrammeSessionType,
-  },
-  {
-    level: 'Level 6',
-    title: 'Bible Training School',
-    copy: 'A teaching floor that supports classroom-style convention use.',
-    use: 'Training floor',
-    type: 'foundation' as ProgrammeSessionType,
-  },
-  {
-    level: 'Level 7',
-    title: 'Accommodation',
-    copy: 'Internal stay capacity within the wider building mix.',
-    use: 'Support stay',
-    type: 'community' as ProgrammeSessionType,
-  },
-  {
-    level: 'Level 8',
-    title: 'Office',
-    copy: 'Operational and support functions within the venue stack.',
-    use: 'Operations',
-    type: 'delegate-info' as ProgrammeSessionType,
-  },
-  {
-    level: 'Level 9',
-    title: 'Office',
-    copy: 'Additional admin and organisational support floors.',
-    use: 'Operations',
-    type: 'delegate-info' as ProgrammeSessionType,
-  },
-  {
-    level: 'Level 10',
-    title: 'Function Hall',
-    copy: 'A strong upper-level venue for large sessions, celebration or showcase flow.',
-    use: 'Showcase potential',
-    type: 'showcase' as ProgrammeSessionType,
-  },
-] as const
-
-const venueMapPins = [
-  { label: 'L1 Cafe / Reception', type: 'delegate-info' as ProgrammeSessionType, top: '18%', left: '16%' },
-  { label: 'L2 Worship Hall', type: 'showcase' as ProgrammeSessionType, top: '34%', left: '49%' },
-  { label: 'L3-6 Learning Floors', type: 'foundation' as ProgrammeSessionType, top: '56%', left: '28%' },
-  { label: 'Exchange Points', type: 'exchange' as ProgrammeSessionType, top: '52%', left: '66%' },
-  { label: 'L10 Function Hall', type: 'showcase' as ProgrammeSessionType, top: '76%', left: '52%' },
-  { label: 'Rest & Photo Moments', type: 'community' as ProgrammeSessionType, top: '78%', left: '18%' },
-]
 
 const arrivalSteps = [
   {
@@ -2785,32 +2720,28 @@ function VenueHero() {
       </div>
 
       <div className="venue-hero-visual">
-        <div className="venue-map-poster image-frame">
-          <img alt="Calvary Crown aerial exterior view" className="venue-real-photo" src={calvaryCrownAerialImage} />
-          <div className="venue-map-grid" />
-          {venueMapPins.slice(0, 4).map((pin) => (
-            <span
-              className={`venue-map-pin ${pin.type}`}
-              key={pin.label}
-              style={{ top: pin.top, left: pin.left }}
-            >
-              <span className="venue-map-pin-dot" />
-              <span>{pin.label}</span>
-            </span>
-          ))}
+        <div className="venue-hero-collage">
+          <img alt="Delegates arriving at a BICC venue in Tawau" className="venue-hero-main-photo" src={venueArrivalDelegatesImage} />
+          <div className="venue-hero-photo-overlay" />
           <div className="venue-hero-card">
+            <span>Confirmed Venue</span>
             <strong>{venueInfo.venueName}</strong>
-            <span>{venueInfo.address}</span>
+            <small>{venueInfo.address}</small>
           </div>
-          <article className="venue-blueprint-card">
-            <img alt="Tawau town map reference" src={calvaryCrownPlanImage} />
-            <span>Tawau town map</span>
+          <article className="venue-hero-mini-card venue">
+            <img alt="Calvary Crown aerial exterior view" src={calvaryCrownAerialImage} />
+            <span>Venue context</span>
           </article>
+          <article className="venue-hero-mini-card map">
+            <img alt="Tawau town map reference" src={calvaryCrownPlanImage} />
+            <span>Visitor route</span>
+          </article>
+          <div className="venue-hero-flow-strip">
+            <span>L1 Reception</span>
+            <span>L3-L6 Learning</span>
+            <span>L10 Showcase</span>
+          </div>
         </div>
-        <article className="venue-floating-photo top">
-          <img alt="Calvary Crown exterior and city context" src={calvaryCrownAerialImage} />
-          <span>Calvary Crown exterior</span>
-        </article>
       </div>
     </section>
   )
@@ -2844,92 +2775,136 @@ function VenueQuickFacts() {
 }
 
 function VenueMap() {
+  const floorGroups = [
+    {
+      range: 'L10',
+      title: 'Function Hall',
+      note: 'Showcase / large gathering potential',
+      type: 'showcase' as ProgrammeSessionType,
+    },
+    {
+      range: 'L7-L9',
+      title: 'Support Floors',
+      note: 'Accommodation and operations',
+      type: 'community' as ProgrammeSessionType,
+    },
+    {
+      range: 'L3-L6',
+      title: 'Learning Floors',
+      note: 'Workshops, practice and exchange',
+      type: 'foundation' as ProgrammeSessionType,
+    },
+    {
+      range: 'L2',
+      title: 'Worship Hall',
+      note: 'Shared hall / opening flow',
+      type: 'showcase' as ProgrammeSessionType,
+    },
+    {
+      range: 'L1',
+      title: 'Cafe / Reception',
+      note: 'Arrival, check-in and support',
+      type: 'delegate-info' as ProgrammeSessionType,
+    },
+  ]
+
+  const keyZones = [
+    {
+      title: 'Arrive',
+      level: 'L1',
+      copy: 'Start at reception for check-in, materials and latest room guidance.',
+      type: 'delegate-info' as ProgrammeSessionType,
+    },
+    {
+      title: 'Train',
+      level: 'L3-L6',
+      copy: 'Workshop and learning floors support Foundation, Mastery and exchange moments.',
+      type: 'foundation' as ProgrammeSessionType,
+    },
+    {
+      title: 'Gather',
+      level: 'L2 / L10',
+      copy: 'Shared hall and function spaces support opening, showcase and celebration flow.',
+      type: 'showcase' as ProgrammeSessionType,
+    },
+  ]
+
   return (
-    <section className="editorial-section section-shell venue-map-section">
+    <section className="editorial-section section-shell venue-map-section venue-orientation-section">
       <div className="section-head with-copy">
         <div>
-          <p className="section-kicker">Venue Map</p>
-          <h2>Find registration, workshop rooms and key delegate zones at a glance.</h2>
+          <p className="section-kicker">Calvary Crown Overview</p>
+          <h2>Know the building before you arrive.</h2>
         </div>
-        <p className="section-intro">Reception, learning floors and shared halls in one view.</p>
+        <p className="section-intro">A simple guide to the venue flow: arrival, learning floors and shared gathering spaces.</p>
       </div>
 
-      <div className="venue-map-shell">
-        <div className="venue-map-illustration">
-          <img alt="Calvary Crown aerial site context" className="venue-real-photo" src={calvaryCrownAerialImage} />
-          <div className="venue-map-grid large" />
-          <div className="venue-building-spine" />
-          <div className="venue-building-stack">
-            {calvaryCrownLevels
-              .slice()
-              .reverse()
-              .map((level) => (
-                <div className={`venue-building-level ${level.type}`} key={`stack-${level.level}`}>
-                  <span>{level.level.replace('Level ', 'L')}</span>
-                </div>
-              ))}
-          </div>
-          {venueMapPins.map((pin) => (
-            <span
-              className={`venue-map-pin ${pin.type}`}
-              key={`${pin.label}-full`}
-              style={{ top: pin.top, left: pin.left }}
-            >
-              <span className="venue-map-pin-dot" />
-              <span>{pin.label}</span>
-            </span>
-          ))}
-          <div className="venue-building-plaque">
-            <span className="venue-building-plaque-kicker">Calvary Crown</span>
-            <strong>{venueInfo.buildingStoreys}-storey venue guide</strong>
+      <div className="venue-orientation-shell">
+        <article className="venue-orientation-photo-card">
+          <img alt="Calvary Crown aerial site context" src={calvaryCrownAerialImage} />
+          <div className="venue-orientation-photo-overlay" />
+          <div className="venue-orientation-badge">
+            <span>Confirmed Venue</span>
+            <strong>{venueInfo.venueName}</strong>
             <small>{venueInfo.city}, {venueInfo.region}</small>
           </div>
-          <div className="venue-map-overlay-note">
-            <strong>{venueInfo.venueName} delegate map coming soon</strong>
-            <span>Room assignments, route overlays and BICC zone labels will be updated before the event.</span>
+          <div className="venue-orientation-address">
+            <strong>Address</strong>
+            <span>{venueInfo.address}</span>
           </div>
-          <article className="venue-blueprint-card map">
-            <img alt="Tawau town map reference" src={calvaryCrownPlanImage} />
-            <span>Tawau context map</span>
-          </article>
-        </div>
+        </article>
 
-        <div className="venue-map-directory">
-          <div className="venue-map-directory-head">
-            <p className="section-kicker">Floor Directory</p>
-            <h3>How the building is stacked.</h3>
-            <p>
-              A practical guide to the known floor mix. Final BICC room assignments will be layered onto this closer to the event.
-            </p>
-            <div className="venue-directory-meta">
-              <span>{venueInfo.buildingStoreys} storeys</span>
-              <span>Completed {venueInfo.completedYear}</span>
-              <span>Taman Setia, Mile 3</span>
+        <div className="venue-orientation-panel">
+          <div className="venue-orientation-panel-head">
+            <p className="section-kicker">Delegate Flow</p>
+            <h3>Think vertical, not complicated.</h3>
+            <p>Calvary Crown is a 10-storey venue. For BICC, delegates mainly need to understand three movements: arrive, train, gather.</p>
+          </div>
+
+          <div className="venue-building-cutaway">
+            <div className="venue-building-cutaway-stack" aria-label="Calvary Crown floor overview">
+              {floorGroups.map((group) => (
+                <article className={`venue-building-cutaway-level ${group.type}`} key={`cutaway-${group.range}`}>
+                  <span>{group.range}</span>
+                  <div>
+                    <strong>{group.title}</strong>
+                    <small>{group.note}</small>
+                  </div>
+                </article>
+              ))}
+            </div>
+            <div className="venue-key-zone-grid">
+              {keyZones.map((zone) => (
+                <article className={`venue-key-zone-card ${zone.type}`} key={zone.title}>
+                  <span>{zone.level}</span>
+                  <h4>{zone.title}</h4>
+                  <p>{zone.copy}</p>
+                </article>
+              ))}
             </div>
           </div>
 
-          <div className="venue-map-level-list">
-            {calvaryCrownLevels
-              .slice()
-              .reverse()
-              .map((level) => (
-                <article className={`venue-map-level-card ${level.type}`} key={`directory-${level.level}`}>
-                  <div className="venue-map-level-top">
-                    <div className="venue-map-level-identity">
-                      <span className="venue-map-level-number">{level.level.replace('Level ', 'L')}</span>
-                      <span className="calvary-level-label">{level.level}</span>
-                    </div>
-                    <ProgrammeTypePill label={level.use} type={level.type} />
+          <div className="venue-floor-flow-card">
+            <div className="venue-floor-flow-head">
+              <strong>Floor guide</strong>
+              <span>Room assignments coming soon</span>
+            </div>
+            <div className="venue-floor-flow-list">
+              {floorGroups.map((group) => (
+                <article className={`venue-floor-flow-row ${group.type}`} key={group.range}>
+                  <span>{group.range}</span>
+                  <div>
+                    <strong>{group.title}</strong>
+                    <small>{group.note}</small>
                   </div>
-                  <h4>{level.title}</h4>
-                  <p>{level.copy}</p>
                 </article>
               ))}
+            </div>
           </div>
 
-          <div className="section-cta venue-map-cta">
-            <span className="secondary-btn">Official Map Coming Soon</span>
-          </div>
+          <p className="venue-map-status-note">
+            The official BICC room map will be added closer to the convention. Use this section as the venue orientation, not a final floor plan.
+          </p>
         </div>
       </div>
     </section>
@@ -2962,24 +2937,55 @@ function DelegateArrivalFlow() {
 }
 
 function GettingToTawau() {
+  const visitSteps = ['Airport', 'Hotel', venueInfo.venueName, 'Reception', 'Programme']
+  const priorityCards = practicalGuideCards.slice(0, 4)
+
   return (
-    <section className="editorial-section section-shell venue-practical-guide">
+    <section className="editorial-section section-shell venue-practical-guide venue-visit-planner">
       <div className="section-head with-copy">
         <div>
           <p className="section-kicker">Plan Your Visit</p>
-          <h2>The practical details people actually need before arriving.</h2>
+          <h2>A clear arrival plan for delegates.</h2>
+        </div>
+        <p className="section-intro">Use this as your convention-day checklist before the final delegate guide is released.</p>
+      </div>
+
+      <div className="venue-visit-planner-shell">
+        <article className="venue-route-card">
+          <img alt="Delegates arriving for BICC in Tawau" className="venue-route-photo" src={venueArrivalDelegatesImage} />
+          <div className="venue-route-photo-overlay" />
+          <div className="venue-route-head">
+            <span className="section-kicker">Arrival Route</span>
+            <h3>From travel to check-in.</h3>
+          </div>
+          <div className="venue-route-line">
+            {visitSteps.map((step, index) => (
+              <div className="venue-route-node" key={step}>
+                <span>{index + 1}</span>
+                <strong>{step}</strong>
+              </div>
+            ))}
+          </div>
+          <p>Plan flights, stay close enough for easy mornings, then start at reception for your pass, materials and latest room directions.</p>
+        </article>
+
+        <div className="venue-practical-grid refined">
+          {priorityCards.map((card) => (
+            <article className="venue-travel-card refined" key={card.title}>
+              <span className="venue-fact-icon">{card.icon}</span>
+              <div>
+                <h3>{card.title}</h3>
+                <p>{card.copy}</p>
+              </div>
+              <span className="venue-coming-soon neutral">{card.note}</span>
+            </article>
+          ))}
         </div>
       </div>
 
-      <div className="venue-practical-grid">
-        {practicalGuideCards.map((card) => (
-          <article className="venue-travel-card" key={card.title}>
-            <span className="venue-fact-icon">{card.icon}</span>
-            <h3>{card.title}</h3>
-            <p>{card.copy}</p>
-            <span className="venue-coming-soon neutral">{card.note}</span>
-          </article>
-        ))}
+      <div className="venue-planner-note">
+        <strong>Still to be confirmed:</strong>
+        <span>final room assignments, detailed accessibility notes and any last venue route updates.</span>
       </div>
     </section>
   )
@@ -3098,7 +3104,7 @@ function VisitTawauHero() {
       </nav>
 
       <p className="visit-official-note">
-        Visitor information is provided as a planning guide. Hotel, tour and transport bookings are managed directly by delegates or appointed travel partners unless BICC announces an official arrangement.
+        Use this as a delegate planning guide. Final hotel, tour and transport arrangements should be confirmed directly with providers or the BICC travel partner.
       </p>
     </section>
   )
@@ -3110,14 +3116,14 @@ function VisitFoodSection() {
       <div className="section-head with-copy">
         <div>
           <p className="section-kicker">Food</p>
-          <h2>Food That Feels Like Tawau</h2>
+          <h2>Eat Tawau Without Overplanning</h2>
         </div>
         <p className="section-intro">
-          Tawau is known for local flavours, seafood, kopitiam culture and comforting street food. Between workshops and convention sessions, enjoy the city through its food.
+          Start with seafood, kopitiam breakfasts, market snacks and cafe resets. The guide is built to grow as more local recommendations are confirmed.
         </p>
       </div>
 
-      <div className="visit-food-picks">
+      <div className="visit-food-picks visit-food-picks-compact">
         <strong>First-time Tawau food picks</strong>
         <div className="pass-focus-chips">
           {firstTimeTawauFoodPicks.map((pick) => (
@@ -3144,35 +3150,21 @@ function VisitFoodSection() {
         ))}
       </div>
 
-      <div className="visit-food-guide">
+      <div className="visit-food-guide visit-food-guide-compact">
         <div className="visit-food-guide-head">
           <p className="section-kicker">Tawau Food Guide</p>
-          <h3>A scalable food directory for delegates</h3>
-          <p>
-            Start with these food ideas, then expand the guide as more local recommendations are confirmed. Exact restaurant choices can be checked with your hotel, local hosts or the BICC travel partner.
-          </p>
-        </div>
-
-        <div className="visit-food-category-grid">
-          {tawauFoodCards.map((card) => (
-            <article className="visit-food-category-card" id={`food-${card.id}`} key={`guide-${card.id}`}>
-              <strong>{card.title}</strong>
-              <span>{card.bestTime}</span>
-              <p>{card.whereToStart}</p>
-            </article>
-          ))}
+          <h3>Food ideas delegates can scan fast.</h3>
+          <p>Use these as starting points. Exact restaurant choices can be confirmed with your hotel, local hosts or the travel partner.</p>
         </div>
 
         <div className="visit-food-filter-row" aria-label="Food directory filters">
-          {tawauFoodFilterItems.map((filter) => (
-            <a href={`#food-directory-${slugify(filter)}`} key={filter}>
-              {filter}
-            </a>
+          {tawauFoodFilterItems.slice(1).map((filter) => (
+            <span key={filter}>{filter}</span>
           ))}
         </div>
 
-        <div className="visit-food-directory-grid">
-          {tawauFoodDirectory.map((item) => (
+        <div className="visit-food-directory-grid visit-food-directory-compact">
+          {tawauFoodDirectory.slice(0, 12).map((item) => (
             <article
               className="visit-food-directory-card"
               id={`food-directory-${slugify(item.category)}`}
@@ -3188,6 +3180,7 @@ function VisitFoodSection() {
             </article>
           ))}
         </div>
+        <p className="visit-directory-note">More local food entries can be added later without changing the page structure.</p>
       </div>
     </section>
   )
@@ -3206,13 +3199,13 @@ function VisitStaySection() {
         </p>
       </div>
 
-      <div className="visit-info-grid">
+      <div className="visit-stay-strategy" aria-label="Accommodation planning styles">
         {tawauStayCards.map((card) => (
-          <article className="venue-fact-card soft-aqua" key={card.title}>
-            <span className="venue-fact-icon">{card.icon}</span>
-            <div className="venue-fact-copy">
-              <h3>{card.title}</h3>
-              <p>{card.copy}</p>
+          <article key={card.title}>
+            <span>{card.icon}</span>
+            <div>
+              <strong>{card.title}</strong>
+              <small>{card.copy}</small>
             </div>
           </article>
         ))}
@@ -3224,9 +3217,9 @@ function VisitStaySection() {
       <div className="visit-hotel-panel">
         <div className="visit-hotel-panel-head">
           <p className="section-kicker">Tawau Hotel Samples</p>
-          <h3>Popular names to start your accommodation search.</h3>
+          <h3>Popular names to start your stay search.</h3>
           <p>
-            These are sample Tawau hotel references for planning only. They are not listed as official BICC hotel partners unless confirmed by the organizer.
+            Planning references only. They are not official BICC hotel partners unless announced by the organiser.
           </p>
         </div>
 
@@ -3251,6 +3244,7 @@ function VisitStaySection() {
       </div>
 
       <div className="visit-tip-strip">
+        <strong>Delegate reminders</strong>
         {tawauDelegateTips.map((tip) => (
           <span key={tip}>{tip}</span>
         ))}
@@ -3737,10 +3731,10 @@ function SponsorHero() {
         <p className="section-kicker">Sponsors & Partnerships</p>
         <div className="passes-hero-title-row">
           <h1>Partner with BICC 2026.</h1>
-          <span className="programme-ticket-badge">Official Partnership Opportunities</span>
+          <span className="programme-ticket-badge">Official Partnership Entry</span>
         </div>
         <p className="passes-hero-intro">
-          Put your brand at the heart of performance, culture, tourism and community impact.
+          Put your brand at the heart of performance, culture, tourism and community impact in Tawau, Sabah.
         </p>
         <div className="event-badges programme-hero-badges">
           <span>International Convention</span>
@@ -3760,6 +3754,11 @@ function SponsorHero() {
       <div className="sponsors-hero-visual">
         <div className="sponsors-hero-main image-frame">
           <img alt="BICC performance and audience engagement" src={landingSponsorImpactImage} />
+          <div className="sponsor-hero-overlay" />
+          <div className="sponsor-hero-impact-card">
+            <span>Partnership Focus</span>
+            <strong>Visibility + CSR + Destination Impact</strong>
+          </div>
         </div>
         <article className="programme-floating-card top">
           <img alt="Interactive clown performance" src={landingPerformanceAudienceImage} />
@@ -3779,9 +3778,10 @@ function SponsorTrustStrip() {
     <section className="editorial-section section-shell sponsor-trust-strip">
       <div className="section-head with-copy">
         <div>
-          <p className="section-kicker">Official Support & Current Partners</p>
-          <h2>Official support, visible from the start.</h2>
+          <p className="section-kicker">Trust Strip</p>
+          <h2>Official support, visible immediately.</h2>
         </div>
+        <p className="section-intro">A clean partner strip helps sponsors understand that BICC is a real convention platform, not a small private activity.</p>
       </div>
 
       <div className="sponsor-support-groups">
@@ -3808,7 +3808,7 @@ function SponsorWhySection() {
       <div className="section-head with-copy">
         <div>
           <p className="section-kicker">Why Sponsor BICC?</p>
-          <h2>Clear reasons a sponsor can understand quickly.</h2>
+          <h2>Four reasons sponsors can see quickly.</h2>
         </div>
       </div>
 
@@ -3833,9 +3833,9 @@ function SponsorOpportunities() {
       <div className="section-head with-copy">
         <div>
           <p className="section-kicker">Sponsorship Opportunities</p>
-          <h2>Clear ways different brands can participate.</h2>
+          <h2>Choose the sponsorship lane that fits your brand.</h2>
         </div>
-        <p className="section-intro">Different partners should be able to spot where they fit right away.</p>
+        <p className="section-intro">Stage, workshops, CSR, delegates, travel or media. Each route can be shaped into a package.</p>
       </div>
 
       <div className="sponsor-opportunity-grid">
@@ -3847,6 +3847,19 @@ function SponsorOpportunities() {
           </article>
         ))}
       </div>
+
+      <div className="sponsor-exposure-strip">
+        <div className="sponsor-brand-core compact">
+          <img alt="BICC 2026 logo" src={biccLogo} />
+          <strong>Where Your Brand Appears</strong>
+          <span>Visibility points can be packaged based on sponsor level.</span>
+        </div>
+        <div className="sponsor-brand-points">
+          {sponsorExposurePoints.map((point) => (
+            <span className="playful-chip" key={point}>{point}</span>
+          ))}
+        </div>
+      </div>
     </section>
   )
 }
@@ -3857,8 +3870,9 @@ function SponsorPackages() {
       <div className="section-head with-copy">
         <div>
           <p className="section-kicker">Sponsorship Packages</p>
-          <h2>Simple tiers that invite inquiry.</h2>
+          <h2>Simple tiers. Details by request.</h2>
         </div>
+        <p className="section-intro">Keep the page easy to scan. Full benefits, pricing and custom options belong in the sponsorship deck.</p>
       </div>
 
       <div className="sponsor-package-grid">
@@ -3867,7 +3881,7 @@ function SponsorPackages() {
             <h3>{card.title}</h3>
             <p>{card.body}</p>
             <ul className="pass-mini-list">
-              {card.points.map((point) => (
+              {card.points.slice(0, 3).map((point) => (
                 <li key={point}>{point}</li>
               ))}
             </ul>
@@ -3886,10 +3900,10 @@ function SponsorCTA() {
     <section className="sponsor-final-cta">
       <div aria-hidden="true" className="confetti-field venue-cta-confetti" />
       <div className="programme-final-copy">
-        <p className="section-kicker">Final CTA</p>
+        <p className="section-kicker">Partnership Inquiry</p>
         <h2>Let’s build a joyful partnership.</h2>
         <p>
-          Whether your goal is brand visibility, CSR impact, tourism promotion or community engagement, BICC 2026 offers meaningful partnership opportunities.
+          Tell us your sponsorship goal. We will match your brand with the right visibility, CSR, tourism or community opportunity.
         </p>
       </div>
       <div className="sponsor-final-grid">
@@ -3908,12 +3922,8 @@ function SponsorCTA() {
             <span>hello@bicc2026.com</span>
           </div>
           <div className="sponsor-contact-card muted">
-            <strong>WhatsApp</strong>
-            <span>Official number can be added here</span>
-          </div>
-          <div className="sponsor-contact-card muted">
-            <strong>Sponsorship Form</strong>
-            <span>QR and online form can be added here</span>
+            <strong>Best next step</strong>
+            <span>Request the sponsorship deck, then schedule a package discussion.</span>
           </div>
           <div className="sponsor-inquiry-checklist">
             <strong>Include these details in your inquiry:</strong>
@@ -3942,16 +3952,6 @@ function SponsorsPage() {
   )
 }
 
-function DecorativeBarcode() {
-  return (
-    <div aria-hidden="true" className="decorative-barcode">
-      {Array.from({ length: 18 }).map((_, index) => (
-        <span key={index} style={{ height: `${50 + (index % 5) * 10}%` }} />
-      ))}
-    </div>
-  )
-}
-
 function PassHero() {
   return (
     <section className="passes-hero section-shell">
@@ -3960,16 +3960,15 @@ function PassHero() {
       <div className="passes-hero-copy">
         <p className="section-kicker">Passes & Registration</p>
         <div className="passes-hero-title-row">
-          <h1>Choose the Pass That Fits You.</h1>
-          <span className="programme-ticket-badge">Official Convention Registration</span>
+          <h1>Choose Your BICC Pass.</h1>
+          <span className="programme-ticket-badge">Official Registration</span>
         </div>
         <p className="passes-hero-intro">
-          Foundation is for newer performers building confidence. Mastery is for experienced performers ready for sharper stage work and critique.
+          One convention. Two training paths. Pick Foundation if you are building confidence, or Mastery if you are ready for stronger stage critique.
         </p>
         <div className="event-badges programme-hero-badges">
           <span>Aug 3–5, 2026</span>
           <span>Tawau, Sabah</span>
-          <span>2 Workshop Tracks</span>
           <span>US$130</span>
         </div>
         <div className="hero-actions programme-hero-actions">
@@ -3983,22 +3982,17 @@ function PassHero() {
       </div>
 
       <div className="passes-hero-visual">
-        {passes.map((pass) => (
-          <article className={`pass-badge-mockup ${pass.accent}`} key={`hero-${pass.id}`}>
-            <div className="pass-badge-top">
+        <img alt="Delegate receiving a BICC convention pass" className="passes-hero-photo" src={passesRegistrationMomentImage} />
+        <div className="passes-hero-photo-overlay" />
+        <div className="passes-hero-ticket-stack" aria-label="Available passes">
+          {passes.map((pass) => (
+            <article className={`pass-mini-ticket ${pass.accent}`} key={`hero-${pass.id}`}>
               <span className={`track-label ${pass.accent}`}>{pass.shortName}</span>
-              <span className="pass-badge-city">Tawau, Sabah</span>
-            </div>
-            <h3>BICC 2026</h3>
-            <p>{pass.label}</p>
-            <div className="pass-badge-meta">
-              <span>Delegate</span>
-              <span>Aug 3–5, 2026</span>
-            </div>
-            <DecorativeBarcode />
-            <RedNoseIcon />
-          </article>
-        ))}
+              <strong>{pass.price}</strong>
+              <small>{pass.accent === 'foundation' ? 'Beginner-friendly' : 'Performance-focused'}</small>
+            </article>
+          ))}
+        </div>
       </div>
     </section>
   )
@@ -4022,7 +4016,7 @@ function PassComparisonCards() {
             <div className="pass-ticket-media">
               <img
                 alt={pass.name}
-                src={pass.accent === 'foundation' ? landingFoundationTrackImage : landingMasteryTrackImage}
+                src={pass.accent === 'foundation' ? passesFoundationWorkshopImage : passesMasteryStageImage}
               />
             </div>
             <div className="pass-ticket-body">
@@ -4033,11 +4027,16 @@ function PassComparisonCards() {
               <h3>{pass.shortName}</h3>
               <p className="pass-price">{pass.price}</p>
               <p className="pass-ticket-description">{pass.body}</p>
-              <p className="pass-ticket-audience">
-                <strong>Best for:</strong> {pass.bestFor.join(', ')}.
-              </p>
+              <div className="pass-ticket-quick-row">
+                <strong>Best for</strong>
+                <div>
+                  {pass.bestFor.slice(0, 3).map((item) => (
+                    <span key={item}>{item}</span>
+                  ))}
+                </div>
+              </div>
               <div className="pass-focus-chips">
-                {pass.includes.slice(0, 4).map((item) => (
+                {pass.includes.slice(0, 3).map((item) => (
                   <span key={item}>{item}</span>
                 ))}
               </div>
@@ -4058,7 +4057,7 @@ function PassComparisonCards() {
 
       <div className="pass-unsure-note compact">
         <strong>Quick guide:</strong>
-        <p>Choose Foundation if you are newer to clowning. Choose Mastery if you already perform and want stronger critique.</p>
+        <p>New to clown training? Choose Foundation. Already performing? Choose Mastery.</p>
         <a className="text-link" href="/workshops">
           View Workshop Tracks
         </a>
@@ -4073,11 +4072,9 @@ function PassIncludedSection() {
       <div className="section-head with-copy">
         <div>
           <p className="section-kicker">What Your Pass Gives You</p>
-          <h2>The essentials most delegates want to know.</h2>
+          <h2>Everything essential. Nothing confusing.</h2>
         </div>
-        <p className="section-intro">
-          This is the expected BICC pass structure, with final details shared by the organizer closer to the convention.
-        </p>
+        <p className="section-intro">A clear 3-day convention pass connected to your selected training track.</p>
       </div>
 
       <div className="pass-included-grid">
@@ -4095,52 +4092,13 @@ function PassIncludedSection() {
   )
 }
 
-function PassDecisionGuide() {
-  return (
-    <section className="editorial-section section-shell pass-decision-section">
-      <div className="section-head with-copy">
-        <div>
-          <p className="section-kicker">Which Pass Is Right for You?</p>
-          <h2>Pick the path that matches your current level.</h2>
-        </div>
-      </div>
-
-      <div className="pass-decision-grid">
-        {passes.map((pass) => (
-          <article className={`pass-decision-card ${pass.accent}`} key={`decision-${pass.id}`}>
-            <div className="pass-decision-head">
-              <span className={`track-label ${pass.accent}`}>{pass.shortName}</span>
-              <h3>{pass.accent === 'foundation' ? 'Choose Foundation if you…' : 'Choose Mastery if you…'}</h3>
-            </div>
-            <ul className="pass-mini-list">
-              {pass.decisionBullets.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
-          </article>
-        ))}
-      </div>
-
-      <div className="pass-unsure-note">
-        <strong>Still unsure?</strong>
-        <p>
-          If this is your first BICC or your first serious clown training, start with Foundation. If you already perform regularly, Mastery is usually the better fit.
-        </p>
-        <a className="text-link" href="/programme">
-          See the 3-day flow
-        </a>
-      </div>
-    </section>
-  )
-}
-
 function PassRegistrationFlow() {
   return (
     <section className="editorial-section section-shell pass-registration-section">
       <div className="section-head with-copy">
         <div>
           <p className="section-kicker">How Registration Works</p>
-          <h2>A simple path from choosing to arriving.</h2>
+          <h2>Buy your pass. Then prepare for BICC.</h2>
         </div>
       </div>
 
@@ -4195,11 +4153,9 @@ function PassCTA() {
     <section className="pass-final-cta">
       <div aria-hidden="true" className="confetti-field venue-cta-confetti" />
       <div className="programme-final-copy">
-        <p className="section-kicker">Final CTA</p>
+        <p className="section-kicker">Join BICC 2026</p>
         <h2>Ready to Choose Your Pass?</h2>
-        <p>
-          Join BICC 2026 in Tawau, Sabah for three days of training, exchange and live performance growth.
-        </p>
+        <p>Three days. Two tracks. One joyful international convention in Tawau, Sabah.</p>
       </div>
       <div className="final-cta-actions">
         <a className="primary-btn" href={passes[0].ctaHref} rel="noreferrer" target="_blank">
@@ -4220,9 +4176,8 @@ function PassesPage() {
   return (
     <main className="passes-page">
       <PassHero />
-      <PassIncludedSection />
       <PassComparisonCards />
-      <PassDecisionGuide />
+      <PassIncludedSection />
       <PassRegistrationFlow />
       <PassFAQ />
       <PassCTA />
@@ -4791,9 +4746,10 @@ function MentorHero() {
     <section className="mentor-page-hero section-shell">
       <div className="mentor-hero-copy">
         <p className="section-kicker">Mentors & Guest Artists</p>
-        <h1>Meet the Artists Leading BICC.</h1>
+        <h1>Meet the Artists Behind the BICC Stage.</h1>
         <p className="passes-hero-intro">
-          Meet the performers, teachers and guest artists joining BICC 2026 from Malaysia, Asia and beyond.
+          Meet the performers, teachers and guest artists bringing real stage experience, practical craft and
+          creative exchange to BICC 2026.
         </p>
         <div className="event-badges programme-hero-badges">
           <span>International Guest Artists</span>
@@ -4810,13 +4766,18 @@ function MentorHero() {
         </div>
         <div className="mentor-hero-meta">
           <span>Malaysia • Asia • USA</span>
+          <span>Workshops • Showcase • Community Exchange</span>
         </div>
       </div>
 
       <div className="mentor-hero-visual">
-        <img alt="BICC mentor poster" className="mentor-hero-poster" src={mentorPosterImage} />
+        <img alt="International BICC mentor and guest artist lineup" className="mentor-hero-poster" src={mentorHeroLineupImage} />
         <div aria-hidden="true" className="mentor-hero-overlay" />
-        <span className="programme-ticket-badge mentor-hero-badge">International Mentor Line-up</span>
+        <span className="programme-ticket-badge mentor-hero-badge">2026 Mentor Line-up</span>
+        <div className="mentor-hero-note">
+          <span>Faculty Edition</span>
+          <strong>Stage artists, teachers and performers gathered for a warm international exchange.</strong>
+        </div>
       </div>
     </section>
   )
@@ -4861,14 +4822,14 @@ function FeaturedMentors({ mentors }: { mentors: MentorProfile[] }) {
       <div className="section-head with-copy">
         <div>
           <p className="section-kicker">Featured Mentors</p>
-          <h2>A closer look at the artists helping shape the BICC 2026 learning and performance experience.</h2>
+          <h2>Featured mentors shaping BICC 2026.</h2>
         </div>
-        <p className="section-intro">Official bios and specialty details can be refined as materials are confirmed.</p>
+        <p className="section-intro">A focused preview of the guest artists, teachers and stage voices joining the convention.</p>
       </div>
 
       <div className="mentor-featured-grid">
-        {featuredMentors.map((mentor, index) => (
-          <MentorCard featured={index === 0} key={mentor.id} mentor={mentor} />
+        {featuredMentors.map((mentor) => (
+          <MentorCard key={mentor.id} mentor={mentor} />
         ))}
       </div>
     </section>
@@ -5488,6 +5449,9 @@ function App() {
               {item.label}
             </a>
           ))}
+        </nav>
+
+        <div className="header-actions">
           <span className="language-switcher" data-no-translate>
             {languageOptions.map((option) => (
               <button
@@ -5501,11 +5465,11 @@ function App() {
               </button>
             ))}
           </span>
-        </nav>
 
-        <a className="primary-btn header-cta" href="/passes">
-          Get Pass
-        </a>
+          <a className="primary-btn header-cta" href="/passes">
+            Get Pass
+          </a>
+        </div>
       </header>
 
       {isHome ? (
