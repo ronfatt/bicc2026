@@ -5143,8 +5143,8 @@ function HomePage() {
         </div>
 
         <div className="mentor-preview-grid">
-          {mentorPreviewCards.map((item, index) => (
-            <article className={`mentor-preview-card ${index === 0 ? 'featured' : ''}`} key={item.title}>
+          {mentorPreviewCards.map((item) => (
+            <article className="mentor-preview-card" key={item.title}>
               <div className="mentor-preview-image">
                 <img alt={item.title} src={item.image} />
               </div>
@@ -5165,21 +5165,31 @@ function HomePage() {
         </div>
       </section>
 
-      <section className="final-cta">
+      <section className="final-cta home-final-cta">
+        <div aria-hidden="true" className="home-cta-orbit">
+          <span />
+          <span />
+          <span />
+        </div>
         <div className="final-cta-copy">
-          <p className="section-kicker">Final CTA</p>
-          <h2>Ready To Join BICC 2026?</h2>
-          <p>Choose the path that fits you and join a joyful international convention built for real growth, meaningful exchange and live performance in Borneo.</p>
+          <span className="home-cta-badge">Aug 3–5, 2026 · Tawau, Sabah</span>
+          <h2>Take your place in the BICC 2026 circle.</h2>
+          <p>Choose your track and join three days of training, performance, exchange and red-nose energy in Borneo.</p>
           <div className="final-cta-actions">
-            <a className="primary-btn" href={foundationPassPaymentLink} rel="noreferrer" target="_blank">
+            <a className="primary-btn home-cta-primary" href={foundationPassPaymentLink} rel="noreferrer" target="_blank">
               Get Foundation Pass
             </a>
-            <a className="secondary-btn" href={masteryPassPaymentLink} rel="noreferrer" target="_blank">
+            <a className="secondary-btn home-cta-secondary" href={masteryPassPaymentLink} rel="noreferrer" target="_blank">
               Get Mastery Pass
             </a>
-            <a className="secondary-btn" href="/programme">
+            <a className="secondary-btn home-cta-ghost" href="/programme">
               View Programme
             </a>
+          </div>
+          <div className="home-cta-meta" aria-label="Convention highlights">
+            <span>2 Workshop Tracks</span>
+            <span>International Mentors</span>
+            <span>US$130 Pass</span>
           </div>
         </div>
       </section>
@@ -5313,7 +5323,6 @@ function Footer() {
           Share the Hope.
         </h3>
         <p>Official home of Borneo International Clown Convention 2026.</p>
-        <SmileDoodle />
       </div>
 
       <div className="footer-column">
