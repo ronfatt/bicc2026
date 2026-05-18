@@ -1,10 +1,17 @@
 import { useEffect, useState, type ChangeEvent, type FormEvent } from 'react'
 import { cmsQueries, fetchFromSanity, localize, sanityImageUrl, type CmsMentor, type CmsPageContent } from './cms'
 
-const clownHeroImage = '/mentors/randy-christensen.jpg'
-const clownStageImage = '/mentors/watt-de-clown.jpg'
-const clownDuoImage = '/mentors/jackie-newton.jpg'
-const clownShowImage = '/mentors/chagy.jpg'
+const landingHeroPerformerImage = '/landing/home-hero-performer.jpg'
+const landingWorkshopTrainingImage = '/landing/home-workshop-training.jpg'
+const landingPerformanceAudienceImage = '/landing/home-performance-audience.jpg'
+const landingStoryConnectionImage = '/landing/home-story-connection.jpg'
+const landingFoundationTrackImage = '/landing/home-foundation-track.jpg'
+const landingMasteryTrackImage = '/landing/home-mastery-track.jpg'
+const landingProgrammeOpeningImage = '/landing/programme-opening-journey.jpg'
+const landingWorkshopMagicImage = '/landing/workshop-magic-wonder.jpg'
+const landingWorkshopOutreachImage = '/landing/workshop-community-outreach.jpg'
+const landingWorkshopEducationImage = '/landing/workshop-educational-show.jpg'
+const landingSponsorImpactImage = '/landing/sponsors-impact-story.jpg'
 const biccLogo = '/bicc-logo.png'
 const foundationPassPaymentLink = 'https://buy.stripe.com/6oUdR22tqekU9Siaun24006'
 const masteryPassPaymentLink = 'https://buy.stripe.com/28EeV69VS3Ggd4uaun24007'
@@ -552,7 +559,7 @@ const workshopCards = [
       'Strengthen the performer’s body, rhythm, character choices and connection with an audience.',
     forWhom: 'Stage performers, experienced clowns, actors and variety artists.',
     outcomes: ['Stage presence', 'Character clarity', 'Movement and rhythm', 'Performance structure', 'Audience timing'],
-    image: clownHeroImage,
+    image: landingMasteryTrackImage,
     featured: true,
   },
   {
@@ -564,7 +571,7 @@ const workshopCards = [
       'Learn how balloons, shape, colour and physical play can become tools for storytelling, audience connection and instant visual comedy.',
     forWhom: 'Beginners, family entertainers, teaching artists and event performers.',
     outcomes: ['Simple balloon forms', 'Visual storytelling', 'Audience participation', 'Prop-based comedy', 'Safe playful handling'],
-    image: clownStageImage,
+    image: landingFoundationTrackImage,
     featured: false,
   },
   {
@@ -576,7 +583,7 @@ const workshopCards = [
       'Build small moments of surprise that invite children, families and audiences into shared wonder.',
     forWhom: 'Clowns, magicians, family performers and educators.',
     outcomes: ['Simple magic structure', 'Audience interaction', 'Comic timing', 'Volunteer handling', 'Personal wonder'],
-    image: clownShowImage,
+    image: landingWorkshopMagicImage,
     featured: false,
   },
   {
@@ -588,7 +595,7 @@ const workshopCards = [
       'Explore the sensitivity, presence and emotional awareness needed for meaningful clowning in care and outreach environments.',
     forWhom: 'Community clowns, outreach teams, volunteers and performers interested in humanitarian clowning.',
     outcomes: ['Gentle presence', 'Reading the room', 'Consent and sensitivity', 'Emotional safety', 'Human connection'],
-    image: clownDuoImage,
+    image: landingWorkshopOutreachImage,
     featured: false,
   },
   {
@@ -600,7 +607,7 @@ const workshopCards = [
       'Learn how clowning can make educational messages more memorable, engaging and audience-friendly.',
     forWhom: 'Educators, school performers, community workers and family entertainers.',
     outcomes: ['Educational storytelling', 'Safety show structure', 'Child-friendly communication', 'Participation formats', 'Message retention'],
-    image: clownStageImage,
+    image: landingWorkshopEducationImage,
     featured: false,
   },
 ] as const
@@ -678,28 +685,28 @@ const mentorPreviewCards = [
     meta: 'Physical Comedy, Stage Presence & Live Performance Craft',
     track: 'Foundation Track',
     note: 'Faculty Announcement Wave 1',
-    image: clownHeroImage,
+    image: mentorPortraitRandy,
   },
   {
     title: 'Regional Teaching Artist',
     meta: 'Character Building, Teaching Practice & Community Performance',
     track: 'Foundation Track',
     note: 'Regional Artist-Educator',
-    image: clownStageImage,
+    image: mentorPortraitUncleButton,
   },
   {
     title: 'Creative Exchange Mentor',
     meta: 'Audience Connection, Exchange Practice & Cultural Collaboration',
     track: 'Exchange Lab',
     note: 'International Exchange Faculty',
-    image: clownDuoImage,
+    image: mentorPortraitPayaCocos,
   },
   {
     title: 'Showcase Development Mentor',
     meta: 'Act Refinement, Showcase Direction & Professional Feedback',
     track: 'Mastery Track',
     note: 'Mastery Track Faculty',
-    image: clownShowImage,
+    image: mentorPortraitChagy,
   },
 ]
 
@@ -1051,7 +1058,7 @@ const programmeDays: ProgrammeDay[] = [
       'Creative Connection Session',
       'Track Briefing',
     ],
-    image: clownHeroImage,
+    image: landingProgrammeOpeningImage,
     sessions: [
       {
         time: 'Schedule to be announced',
@@ -1082,7 +1089,7 @@ const programmeDays: ProgrammeDay[] = [
         description: 'A shared opening moment for delegates, mentors, organisers and guests from different communities.',
         status: 'coming-soon',
         icon: 'S',
-        image: clownShowImage,
+        image: landingPerformanceAudienceImage,
       },
       {
         time: 'Schedule to be announced',
@@ -1133,7 +1140,7 @@ const programmeDays: ProgrammeDay[] = [
       'Exchange Lab',
       'Practice / Rehearsal Blocks',
     ],
-    image: clownStageImage,
+    image: landingWorkshopTrainingImage,
     sessions: [
       {
         time: 'Detailed session times will be announced closer to the convention.',
@@ -1164,7 +1171,7 @@ const programmeDays: ProgrammeDay[] = [
         description: 'Guided practice moments where participants test material and receive direct feedback.',
         status: 'limited-capacity',
         icon: 'P',
-        image: clownDuoImage,
+        image: landingWorkshopOutreachImage,
       },
       {
         time: 'Schedule to be announced',
@@ -1215,7 +1222,7 @@ const programmeDays: ProgrammeDay[] = [
       'Performance Showcase',
       'Closing Celebration',
     ],
-    image: clownShowImage,
+    image: landingPerformanceAudienceImage,
     sessions: [
       {
         time: 'Schedule to be announced',
@@ -1266,7 +1273,7 @@ const programmeDays: ProgrammeDay[] = [
         description: 'A shared performance moment where work, practice and celebration meet the audience.',
         status: 'coming-soon',
         icon: 'S',
-        image: clownHeroImage,
+        image: landingMasteryTrackImage,
       },
       {
         time: 'Schedule to be announced',
@@ -2463,14 +2470,14 @@ function ProgrammeHero() {
 
       <div className="programme-hero-visual">
         <div className="programme-hero-main image-frame">
-          <img alt="Convention workshop and stage energy" src={clownHeroImage} />
+          <img alt="Convention workshop and stage energy" src={landingProgrammeOpeningImage} />
           <div className="programme-hero-caption">
             <strong>Programme opening spread</strong>
             <span>Workshop, stage, audience and community moments.</span>
           </div>
         </div>
         <article className="programme-floating-card top">
-          <img alt="Workshop moment" src={clownStageImage} />
+          <img alt="Workshop moment" src={landingWorkshopTrainingImage} />
           <span>Workshop energy</span>
         </article>
       </div>
@@ -3752,14 +3759,14 @@ function SponsorHero() {
 
       <div className="sponsors-hero-visual">
         <div className="sponsors-hero-main image-frame">
-          <img alt="BICC performance and audience engagement" src={clownDuoImage} />
+          <img alt="BICC performance and audience engagement" src={landingSponsorImpactImage} />
         </div>
         <article className="programme-floating-card top">
-          <img alt="Interactive clown performance" src={clownShowImage} />
+          <img alt="Interactive clown performance" src={landingPerformanceAudienceImage} />
           <span>Stage visibility</span>
         </article>
         <article className="programme-floating-card bottom">
-          <img alt="Hands-on workshop" src={clownStageImage} />
+          <img alt="Hands-on workshop" src={landingWorkshopTrainingImage} />
           <span>Workshop engagement</span>
         </article>
       </div>
@@ -4015,7 +4022,7 @@ function PassComparisonCards() {
             <div className="pass-ticket-media">
               <img
                 alt={pass.name}
-                src={pass.accent === 'foundation' ? clownStageImage : clownShowImage}
+                src={pass.accent === 'foundation' ? landingFoundationTrackImage : landingMasteryTrackImage}
               />
             </div>
             <div className="pass-ticket-body">
@@ -4551,14 +4558,14 @@ function WorkshopHero() {
 
       <div className="workshops-hero-visual">
         <div className="workshop-collage-main image-frame">
-          <img alt="Hands-on clown workshop training" src={clownHeroImage} />
+          <img alt="Hands-on clown workshop training" src={landingWorkshopTrainingImage} />
         </div>
         <article className="workshop-hero-sidecard">
           <span className="workshop-hero-sidecard-label">Training Focus</span>
           <strong>Stage craft, visual play, outreach and live audience connection.</strong>
         </article>
         <article className="programme-floating-card top">
-          <img alt="Workshop practice" src={clownStageImage} />
+          <img alt="Workshop practice" src={landingFoundationTrackImage} />
           <span>Practice & props</span>
         </article>
       </div>
@@ -4581,7 +4588,7 @@ function TrackSelector() {
           <article className={`pass-ticket-card workshop-track-ticket ${pass.accent}`} key={`workshop-track-${pass.id}`}>
             <div className="ticket-perforation" />
             <div className="pass-ticket-media">
-              <img alt={pass.name} src={pass.accent === 'foundation' ? clownStageImage : clownShowImage} />
+              <img alt={pass.name} src={pass.accent === 'foundation' ? landingFoundationTrackImage : landingMasteryTrackImage} />
             </div>
             <div className="pass-ticket-body">
               <div className="pass-ticket-head">
@@ -4992,15 +4999,15 @@ function HomePage() {
 
         <div className="hero-collage">
           <div className="hero-photo-frame hero-photo-main">
-            <img alt="Joyful professional clown performer" src={clownHeroImage} />
+            <img alt="Joyful professional clown performer" src={landingHeroPerformerImage} />
             <SmileDoodle />
           </div>
           <article className="floating-photo training-shot">
-            <img alt="Clown workshop training moment" src={clownStageImage} />
+            <img alt="Clown workshop training moment" src={landingWorkshopTrainingImage} />
             <span>Workshop / Training</span>
           </article>
           <article className="floating-photo audience-shot">
-            <img alt="Clown performance and audience moment" src={clownDuoImage} />
+            <img alt="Clown performance and audience moment" src={landingPerformanceAudienceImage} />
             <span>Performance / Audience</span>
           </article>
           <p className="hero-caption">Official Convention Magazine & Delegate Handbook</p>
@@ -5020,7 +5027,7 @@ function HomePage() {
       <section className="editorial-section section-shell playful-band">
         <div className="story-layout">
           <div className="story-photo-frame">
-            <img alt="Clown performer or mentor on stage" src={clownShowImage} />
+            <img alt="Clown performer or mentor on stage" src={landingStoryConnectionImage} />
             <span className="story-photo-tag">Performance / Culture / Connection</span>
           </div>
 
@@ -5067,7 +5074,7 @@ function HomePage() {
               <div className="track-card-media">
                 <img
                   alt={pass.name}
-                  src={index === 0 ? clownStageImage : clownDuoImage}
+                  src={index === 0 ? landingFoundationTrackImage : landingMasteryTrackImage}
                 />
               </div>
               <div className="track-card-copy">
