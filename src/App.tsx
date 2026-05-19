@@ -1904,6 +1904,33 @@ const venueFaqItems = [
   },
 ] as const
 
+const aboutValueCards = [
+  {
+    title: 'Professional Learning',
+    body: 'Structured workshops, international mentors and practical training for performers who want to grow their craft.',
+  },
+  {
+    title: 'Cultural Exchange',
+    body: 'A joyful gathering rooted in Borneo, connecting local creativity with regional and international clowning communities.',
+  },
+  {
+    title: 'Community Impact',
+    body: 'Clowning is presented not only as performance, but as a way to bring hope, care and connection to people.',
+  },
+] as const
+
+const aboutAudienceGroups = [
+  'Professional clowns and entertainers',
+  'New performers who want proper training',
+  'Educators and children ministry teams',
+  'Social workers and community workers',
+  'Event performers, magicians, balloon artists and mascots',
+  'Families and supporters of creative community events',
+  'International guests who want to experience Tawau and Borneo',
+] as const
+
+const aboutBeyondPoints = ['Ongoing learning', 'Community connection', 'Future collaborations'] as const
+
 const routeContent = {
   '/about': {
     eyebrow: 'About BICC 2026',
@@ -2093,23 +2120,25 @@ function getPassByTrack(track: PassTrackId) {
 }
 
 function mapCmsMentors(cmsMentors: CmsMentor[], language: SiteLanguage): MentorProfile[] {
-  return cmsMentors.map((mentor) => ({
-    id: mentor._id,
-    name: mentor.name,
-    country: mentor.country || 'International',
-    region: mentor.country === 'USA' ? 'USA' : mentor.country === 'Malaysia' ? 'Malaysia' : 'Asia',
-    role: localize(mentor.role, language) || 'Guest Artist',
-    shortIntro:
-      localize(mentor.shortIntro, language) ||
-      'A guest artist joining BICC 2026 to share clown craft, performance experience and creative exchange with delegates.',
-    specialties: mentor.specialties?.map((specialty) => localize(specialty, language)).filter(Boolean).slice(0, 3) || [
-      'Guest Artist',
-      'Performance',
-      'Creative Exchange',
-    ],
-    image: sanityImageUrl(mentor.portrait) || sanityImageUrl(mentor.posterImage) || null,
-    featured: Boolean(mentor.isFeatured),
-  }))
+  return cmsMentors.map((mentor) => {
+    const fallbackMentor = mentorLineup.find((item) => item.id === mentor._id || item.name === mentor.name)
+
+    return {
+      id: mentor._id,
+      name: mentor.name,
+      country: mentor.country || 'International',
+      region: mentor.country === 'USA' ? 'USA' : mentor.country === 'Malaysia' ? 'Malaysia' : 'Asia',
+      role: localize(mentor.role, language) || fallbackMentor?.role || 'Guest Artist',
+      shortIntro:
+        localize(mentor.shortIntro, language) ||
+        fallbackMentor?.shortIntro ||
+        'A guest artist joining BICC 2026 to share clown craft, performance experience and creative exchange with delegates.',
+      specialties: mentor.specialties?.map((specialty) => localize(specialty, language)).filter(Boolean).slice(0, 3) ||
+        fallbackMentor?.specialties || ['Guest Artist', 'Performance', 'Creative Exchange'],
+      image: sanityImageUrl(mentor.portrait) || sanityImageUrl(mentor.posterImage) || fallbackMentor?.image || null,
+      featured: Boolean(mentor.isFeatured),
+    }
+  })
 }
 
 function slugify(value: string) {
@@ -4829,7 +4858,7 @@ function FeaturedMentors({ mentors }: { mentors: MentorProfile[] }) {
 
       <div className="mentor-featured-grid">
         {featuredMentors.map((mentor) => (
-          <MentorCard key={mentor.id} mentor={mentor} />
+          <MentorCard featured key={mentor.id} mentor={mentor} />
         ))}
       </div>
     </section>
@@ -5158,6 +5187,167 @@ function HomePage() {
   )
 }
 
+function AboutPage() {
+  return (
+    <main className="about-page">
+      <section className="about-hero section-shell">
+        <div className="about-hero-copy">
+          <p className="section-kicker">About BICC 2026</p>
+          <h1>A convention built around laughter, craft, culture and human connection.</h1>
+          <p>
+            BICC 2026 is a professional clowning convention held in Borneo, bringing together performers, educators,
+            artists, families and communities through workshops, showcases, cultural exchange and meaningful human
+            connection.
+          </p>
+          <div className="page-actions">
+            <a className="primary-btn" href="/passes">
+              View Passes
+            </a>
+            <a className="secondary-btn" href="/programme">
+              Explore Programme
+            </a>
+          </div>
+        </div>
+
+        <aside className="about-editorial-card">
+          <SmileDoodle />
+          <PatternCorner side="right" />
+          <p className="page-aside-kicker">Editorial Note</p>
+          <h2>Why it matters</h2>
+          <p>
+            BICC 2026 was created to raise the standard of clowning as an art form, a performance discipline and a tool
+            for community impact. Beyond entertainment, clowning carries the power to connect people, bring joy into
+            difficult spaces, and create unforgettable human moments.
+          </p>
+        </aside>
+      </section>
+
+      <section className="editorial-section section-shell about-overview-section">
+        <div className="section-head single">
+          <div>
+            <p className="section-kicker">Page Overview</p>
+            <h2>What makes BICC 2026 different.</h2>
+          </div>
+        </div>
+
+        <div className="page-card-grid">
+          {aboutValueCards.map((card) => (
+            <article className="page-card about-value-card" key={card.title}>
+              <RedNoseIcon />
+              <h3>{card.title}</h3>
+              <p>{card.body}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="about-vision-section section-shell">
+        <p className="section-kicker">Our Vision</p>
+        <h2>Where laughter becomes legacy.</h2>
+        <p>
+          To build BICC into a respected international platform where clown artists, educators, performers and
+          communities gather to learn, collaborate and carry the spirit of joy beyond the stage.
+        </p>
+        <strong>This is more than a convention. It is a growing movement for craft, culture and connection.</strong>
+      </section>
+
+      <section className="editorial-section section-shell about-audience-section">
+        <div className="about-split-copy">
+          <p className="section-kicker">Who Should Join</p>
+          <h2>Designed for performers, educators, families and communities.</h2>
+          <p>
+            BICC 2026 welcomes people from different backgrounds who believe in the power of joy, creativity and human
+            connection.
+          </p>
+        </div>
+
+        <div className="about-audience-list">
+          {aboutAudienceGroups.map((item) => (
+            <span key={item}>{item}</span>
+          ))}
+        </div>
+      </section>
+
+      <section className="about-borneo-section section-shell">
+        <div className="about-borneo-copy">
+          <p className="section-kicker">Built In Borneo</p>
+          <h2>Built in Borneo. Open to the world.</h2>
+          <p>
+            Hosted in Tawau, Sabah, BICC 2026 carries the warmth of Borneo while welcoming guests from different
+            countries and creative backgrounds. It is a convention, a cultural meeting point, and a shared celebration of
+            laughter, learning and community.
+          </p>
+          <a className="secondary-btn" href="/visit-tawau">
+            Discover Tawau
+          </a>
+        </div>
+
+        <div className="about-borneo-visual">
+          <img alt="Tawau and Borneo convention atmosphere" src={visitWaterfrontImage} />
+          <div className="about-map-card">
+            <RedNoseIcon />
+            <strong>Tawau, Sabah</strong>
+            <span>Borneo warmth · international welcome</span>
+          </div>
+          <PatternCorner side="right" />
+        </div>
+      </section>
+
+      <section className="about-beyond-section section-shell">
+        <div>
+          <p className="section-kicker">Beyond The Event</p>
+          <h2>More than a three-day event.</h2>
+        </div>
+        <p>
+          BICC 2026 is part of a bigger journey to strengthen clowning culture, support creative growth and build a
+          connected community through the Borneo Clown Hub. The convention is the beginning — the relationships, learning
+          and impact continue beyond the event.
+        </p>
+        <div className="about-mini-points">
+          {aboutBeyondPoints.map((point) => (
+            <span key={point}>{point}</span>
+          ))}
+        </div>
+      </section>
+
+      <section className="about-purpose-section section-shell">
+        <div>
+          <p className="section-kicker">Organised With Purpose</p>
+          <h2>Created by people who believe in the power of joyful impact.</h2>
+          <p>
+            BICC 2026 is organised by a team passionate about performance, education, community service and creative
+            collaboration. With local roots and an international outlook, the event is built to create a professional,
+            welcoming and meaningful convention experience for every participant.
+          </p>
+        </div>
+        <div className="about-organiser-mark">
+          <img alt="BICC 2026 official logo" src={biccLogo} />
+          <span>Official BICC 2026 convention platform</span>
+        </div>
+      </section>
+
+      <section className="final-cta about-final-cta">
+        <div className="final-cta-copy">
+          <p className="section-kicker">Ready To Join</p>
+          <h2>Be part of BICC 2026.</h2>
+          <p>
+            Whether you are joining as a performer, learner, mentor, sponsor or supporter, BICC 2026 invites you to be
+            part of a convention where laughter becomes craft, culture and legacy.
+          </p>
+          <div className="final-cta-actions">
+            <a className="primary-btn" href="/passes">
+              Get Pass
+            </a>
+            <a className="secondary-btn" href="/programme">
+              View Programme
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+  )
+}
+
 function InteriorPage({ path }: { path: RouteKey }) {
   const page = routeContent[path]
 
@@ -5329,6 +5519,7 @@ function App() {
   const [cmsMentors, setCmsMentors] = useState<MentorProfile[] | null>(null)
   const [cmsPageContent, setCmsPageContent] = useState<CmsPageContent | null>(null)
   const isHome = currentPath === '/'
+  const isAbout = currentPath === '/about'
   const isProgramme = currentPath === '/programme'
   const isWorkshops = currentPath === '/workshops'
   const isMentors = currentPath === '/mentors'
@@ -5474,6 +5665,8 @@ function App() {
 
       {isHome ? (
         <HomePage />
+      ) : isAbout ? (
+        <AboutPage />
       ) : isProgramme ? (
         <ProgrammePage />
       ) : isWorkshops ? (
