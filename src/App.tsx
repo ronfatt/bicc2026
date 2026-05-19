@@ -4844,7 +4844,7 @@ function MentorCard({
 }
 
 function FeaturedMentors({ mentors }: { mentors: MentorProfile[] }) {
-  const featuredMentors = mentors.filter((mentor) => mentor.featured).slice(0, 6)
+  const featuredMentors = mentors.filter((mentor) => mentor.featured).slice(0, 4)
 
   return (
     <section className="editorial-section section-shell mentor-featured-section">
@@ -4858,8 +4858,30 @@ function FeaturedMentors({ mentors }: { mentors: MentorProfile[] }) {
 
       <div className="mentor-featured-grid">
         {featuredMentors.map((mentor) => (
-          <MentorCard featured key={mentor.id} mentor={mentor} />
+          <article className="mentor-feature-card" data-mentor-id={mentor.id} key={mentor.id}>
+            <div className="mentor-feature-media">
+              {mentor.image ? <img alt={`${mentor.name} portrait`} src={mentor.image} /> : <MentorPlaceholderArt label={mentor.name} />}
+            </div>
+            <div className="mentor-feature-copy">
+              <div className="mentor-lineup-badges">
+                <span className="track-label red">{mentor.country}</span>
+                <span className="mentor-role-pill">{mentor.role}</span>
+              </div>
+              <h3>{mentor.name}</h3>
+              <p>{mentor.shortIntro}</p>
+              <div className="pass-focus-chips">
+                {mentor.specialties.slice(0, 2).map((item) => (
+                  <span key={item}>{item}</span>
+                ))}
+              </div>
+            </div>
+          </article>
         ))}
+      </div>
+      <div className="mentor-feature-footer">
+        <a className="secondary-btn" href="#mentor-lineup">
+          View Full Line-up
+        </a>
       </div>
     </section>
   )
@@ -4880,7 +4902,7 @@ function MentorGrid({ mentors }: { mentors: MentorProfile[] }) {
   })
 
   return (
-    <section className="editorial-section section-shell mentor-grid-section">
+    <section className="editorial-section section-shell mentor-grid-section" id="mentor-lineup">
       <div className="section-head with-copy">
         <div>
           <p className="section-kicker">Meet the Line-up</p>
