@@ -45,10 +45,10 @@ const visitPasarTanjungImage = 'https://commons.wikimedia.org/wiki/Special:FileP
 const visitTawauHillsImage = 'https://commons.wikimedia.org/wiki/Special:FilePath/Table%20Waterfall%20at%20Tawau%20Hills%20Park%20-%20panoramio.jpg?width=900'
 const visitCocoaVillageImage = 'https://commons.wikimedia.org/wiki/Special:FilePath/Teck%20Guan%20Cocoa%20Village%20Columnar%20Basalt.jpg?width=1000'
 const visitWaterfrontImage = 'https://commons.wikimedia.org/wiki/Special:FilePath/Tawau%20-%20The%20City%20%2848869140708%29.jpg?width=1600'
-const hotelBorneoRoyaleImage = 'https://commons.wikimedia.org/wiki/Special:FilePath/Eastern%20Plaza%20Tawau.jpg?width=1400'
-const hotelShervintonImage = 'https://commons.wikimedia.org/wiki/Special:FilePath/Tawau%20Sabah%20Shervinton-Executive-Boutique-Hotel-01.jpg?width=1200'
-const hotelLaImage = 'https://commons.wikimedia.org/wiki/Special:FilePath/Tawau%20Sabah%20LA-Hotel-01.jpg?width=900'
-const hotelDanlopImage = 'https://commons.wikimedia.org/wiki/Special:FilePath/Tawau%20Sabah%20Danlop-Hotel-02.jpg?width=1200'
+const hotelAeroHomeSuiteImage = '/visit-tawau/hotels/aero-home-suite.jpg'
+const hotelBluSentralImage = '/visit-tawau/hotels/blu-sentral-hotel.jpg'
+const hotelBorneoRoyaleImage = '/visit-tawau/hotels/borneo-royale-hotel.jpg'
+const hotelGraceHomestayImage = '/visit-tawau/hotels/grace-homestay.jpg'
 
 type ProgrammeFilterKey =
   | 'all'
@@ -1730,64 +1730,48 @@ const tawauStayCards = [
 
 const tawauHotelSamples = [
   {
+    name: 'AeroHomeSuite',
+    area: 'Tawau Plaza, Taman Anson',
+    fit: 'Family-friendly themed stay',
+    tag: 'Aviation homestay',
+    note: 'A creative aviation-themed homestay for families or small groups who want a memorable Tawau stay.',
+    image: hotelAeroHomeSuiteImage,
+    link: 'https://wa.me/601110036227',
+    credit: 'Image provided by AeroHomeSuite',
+    contact: '+60 11-1003 6227',
+  },
+  {
+    name: 'Blu Sentral Hotel',
+    area: 'TB 96, Kubota Sentral',
+    fit: 'Comfort-focused hotel',
+    tag: 'Kubota Sentral',
+    note: 'A cozy hotel option with Smart TV, daily housekeeping and 24-hour reception for business or leisure stays.',
+    image: hotelBluSentralImage,
+    link: 'https://blusentralhotel.com.my/',
+    credit: 'Image provided by Blu Sentral Hotel',
+    contact: '+60 13-873 9988 / +60 89-773 388',
+  },
+  {
     name: 'Borneo Royale Hotel',
-    area: 'Eastern Plaza / Jalan Kuhara',
-    fit: 'Larger hotel option',
-    tag: 'Venue access',
-    note: 'Useful for delegates who prefer a full-service hotel environment with mall-area convenience.',
+    area: 'East Coast Sabah, Tawau',
+    fit: 'Business class hotel',
+    tag: 'MICE ready',
+    note: 'A smoke-free business class hotel with 178 guest rooms/suites and a large pillar-less grand ballroom.',
     image: hotelBorneoRoyaleImage,
-    link: 'https://www.google.com/maps/search/?api=1&query=Borneo%20Royale%20Hotel%20Tawau',
-    credit: 'CEphoto, Uwe Aranas / Wikimedia Commons',
+    link: 'https://borneoroyale.com/rooms/',
+    credit: 'Image provided by Borneo Royale Hotel',
+    contact: 'Rooms and booking details on hotel website',
   },
   {
-    name: 'Shervinton Executive Boutique Hotel',
-    area: 'Fajar Complex / Jalan Bunga',
-    fit: 'Boutique city stay',
-    tag: 'City centre',
-    note: 'A central option for delegates who want food, town access and a more business-hotel rhythm.',
-    image: hotelShervintonImage,
-    link: 'https://www.google.com/maps/search/?api=1&query=Shervinton%20Executive%20Boutique%20Hotel%20Tawau',
-    credit: 'CEphoto, Uwe Aranas / Wikimedia Commons',
-  },
-  {
-    name: 'LA Hotel',
-    area: 'Bandar Tawau / town centre',
-    fit: 'Central city stay',
-    tag: 'City centre',
-    note: 'A familiar town hotel reference for delegates who want city access and easy local movement.',
-    image: hotelLaImage,
-    link: 'https://www.google.com/maps/search/?api=1&query=LA%20Hotel%20Tawau',
-    credit: 'CEphoto, Uwe Aranas / Wikimedia Commons',
-  },
-  {
-    name: 'Danlop Hotel',
-    area: 'Jalan Dunlop',
-    fit: 'Simple town option',
-    tag: 'Practical stay',
-    note: 'A practical city hotel reference for short stays and easy food access around town.',
-    image: hotelDanlopImage,
-    link: 'https://www.google.com/maps/search/?api=1&query=Danlop%20Hotel%20Tawau',
-    credit: 'CEphoto, Uwe Aranas / Wikimedia Commons',
-  },
-  {
-    name: 'Marco Polo Hotel - Tawau',
-    area: 'Jalan Clinic',
-    fit: 'Classic town hotel',
-    tag: 'Classic hotel',
-    note: 'A familiar Tawau hotel name for visitors who want a straightforward city stay.',
-    image: visitWaterfrontImage,
-    link: 'https://www.google.com/maps/search/?api=1&query=Marco%20Polo%20Hotel%20Tawau',
-    credit: 'City reference image / Wikimedia Commons',
-  },
-  {
-    name: 'Heritage Hotel',
-    area: 'Jalan Bunga / Fajar Complex',
-    fit: 'City centre convenience',
-    tag: 'City centre',
-    note: 'Good for delegates who want to stay near restaurants, shops and town movement.',
-    image: visitPasarTanjungImage,
-    link: 'https://www.google.com/maps/search/?api=1&query=Heritage%20Hotel%20Tawau',
-    credit: 'City reference image / Wikimedia Commons',
+    name: 'Grace Homestay Tawau',
+    area: 'Fajar Commercial Area',
+    fit: 'Homestay option',
+    tag: 'Local stay',
+    note: 'A cozy homestay in Fajar town with a home-away-from-home feel for travelers seeking a local experience.',
+    image: hotelGraceHomestayImage,
+    link: 'https://wa.me/601159921799',
+    credit: 'Image provided by Grace Homestay Tawau',
+    contact: '+60 11-5992 1799',
   },
 ] as const
 
@@ -3245,10 +3229,10 @@ function VisitStaySection() {
 
       <div className="visit-hotel-panel">
         <div className="visit-hotel-panel-head">
-          <p className="section-kicker">Tawau Hotel Samples</p>
-          <h3>Popular names to start your stay search.</h3>
+          <p className="section-kicker">Accommodation References</p>
+          <h3>Suggested stays from local accommodation materials.</h3>
           <p>
-            Planning references only. They are not official BICC hotel partners unless announced by the organiser.
+            Use these as starting points for delegate planning. Booking, rates and availability should be confirmed directly with each hotel or homestay.
           </p>
         </div>
 
@@ -3264,7 +3248,8 @@ function VisitStaySection() {
                 <h4>{hotel.name}</h4>
                 <p>{hotel.area}</p>
                 <small>{hotel.note}</small>
-                <strong>View on map</strong>
+                <p className="visit-hotel-contact">{hotel.contact}</p>
+                <strong>Open booking / contact</strong>
                 <em>{hotel.credit}</em>
               </div>
             </a>

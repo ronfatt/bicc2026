@@ -6303,15 +6303,15 @@ body {
 
 .visit-hotel-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 18px;
 }
 
 .visit-hotel-card {
   display: grid;
-  grid-template-rows: minmax(220px, 7fr) minmax(0, 3fr);
+  grid-template-rows: minmax(260px, 7fr) minmax(0, 3fr);
   overflow: hidden;
-  min-height: 390px;
+  min-height: 440px;
   border-radius: 24px;
   border: 1px solid rgba(20, 58, 63, 0.08);
   background: rgba(255, 255, 255, 0.9);
@@ -6329,7 +6329,7 @@ body {
 .visit-hotel-image {
   position: relative;
   overflow: hidden;
-  min-height: 250px;
+  min-height: 280px;
 }
 
 .visit-hotel-image img {
@@ -6395,6 +6395,19 @@ body {
   color: var(--color-red);
   font-size: 0.9rem;
   font-weight: 900;
+}
+
+.visit-hotel-contact {
+  display: inline-flex;
+  width: fit-content;
+  margin: 0;
+  padding: 7px 10px;
+  border-radius: 999px;
+  background: rgba(221, 247, 247, 0.72);
+  color: var(--color-ink);
+  font-size: 0.78rem;
+  font-weight: 900;
+  line-height: 1.2;
 }
 
 .visit-hotel-card em {
