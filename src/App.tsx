@@ -729,9 +729,9 @@ const mentorLineup: MentorProfile[] = [
     name: 'Uncle Sunday',
     country: 'Malaysia',
     region: 'Malaysia',
-    role: 'Guest Artist / Mentor',
-    shortIntro: 'A guest artist joining BICC 2026 to share clown craft, performance experience and creative exchange with delegates.',
-    specialties: ['Clown Craft', 'Performance', 'Creative Exchange'],
+    role: 'Guest Artist / Convention Organiser',
+    shortIntro: 'A Malaysia-based clown performer and BICC organiser known for heartwarming outreach in schools, churches and charity programmes, using humour as a bridge for connection and healing.',
+    specialties: ['Community Outreach', 'Faith-Driven Clowning', 'Connection'],
     image: mentorPortraitUncleSunday,
     featured: true,
   },
@@ -762,9 +762,9 @@ const mentorLineup: MentorProfile[] = [
     name: 'Uncle Button',
     country: 'Malaysia',
     region: 'Malaysia',
-    role: 'Workshop Mentor',
-    shortIntro: 'A workshop mentor joining BICC 2026 to support practical learning, playful performance and warm audience connection.',
-    specialties: ['Workshop Mentor', 'Family Entertainment', 'Audience Connection'],
+    role: 'Workshop Mentor / Community Clown',
+    shortIntro: 'One of Malaysia’s well-known clowns, Sam Tee began with balloons at children’s parties, trained in the U.S. and has brought clowning into charity, missions and community work.',
+    specialties: ['Family Entertainment', 'Balloon Art', 'Community Clowning'],
     image: mentorPortraitUncleButton,
     featured: true,
   },
@@ -773,9 +773,9 @@ const mentorLineup: MentorProfile[] = [
     name: 'Randy Christensen',
     country: 'USA',
     region: 'USA',
-    role: 'Performance Mentor',
-    shortIntro: 'A performance mentor joining BICC 2026 to share stage practice, showcase energy and live audience experience.',
-    specialties: ['Performance Mentor', 'Stage Presence', 'Showcase'],
+    role: 'Master Clown / Performance Mentor',
+    shortIntro: 'An award-winning Master Clown, entertainer and speaker with 40+ years of experience across 32 U.S. states and 9 countries, bringing variety arts, storytelling and physical comedy to BICC.',
+    specialties: ['Master Clown', 'Variety Arts', 'Storytelling'],
     image: mentorPortraitRandy,
     featured: true,
   },
@@ -784,9 +784,9 @@ const mentorLineup: MentorProfile[] = [
     name: 'Mr. John',
     country: 'Malaysia',
     region: 'Malaysia',
-    role: 'Teaching Artist',
-    shortIntro: 'A teaching artist joining BICC 2026 to share practical performance methods, workshop teaching and creative exchange.',
-    specialties: ['Teaching Artist', 'Workshop Mentor', 'Creative Exchange'],
+    role: 'Contemporary Clown / Teaching Artist',
+    shortIntro: 'A contemporary clown and performance artist with 20+ years across commercial events, theatre and street festivals worldwide, blending puppetry, mime, physical comedy and heartfelt interactive storytelling.',
+    specialties: ['Contemporary Performance', 'Puppetry & Mime', 'Physical Comedy'],
     image: mentorPortraitMrJohn,
     featured: true,
   },
@@ -2601,7 +2601,7 @@ function ProgramTrackConnection() {
               <p className="pass-price">US$130</p>
               <p className="track-summary">{item.copy}</p>
               <div className="track-chip-list">
-                {item.focus.map((focus) => (
+                {item.focus.slice(0, 4).map((focus) => (
                   <span className="track-chip" key={focus}>
                     {focus}
                   </span>
@@ -2629,7 +2629,7 @@ function ProgramFAQ() {
       </div>
 
       <div className="programme-faq-list">
-        {programmeFaqItems.map((item) => (
+        {programmeFaqItems.slice(0, 4).map((item) => (
           <details className="programme-faq-item" key={item.question}>
             <summary>
               <span className="programme-faq-dot" />
@@ -2648,7 +2648,7 @@ function ProgramCTA() {
     <section className="programme-final-cta">
       <div aria-hidden="true" className="confetti-field programme-cta-confetti" />
       <div className="programme-final-copy">
-        <p className="section-kicker">Final CTA</p>
+        <p className="section-kicker">Next Step</p>
         <h2>Plan Your 3-Day BICC Journey.</h2>
         <p>
           Choose your pass, follow the programme flow and prepare for three days of training, exchange, performance and community connection in Tawau, Sabah.
@@ -3015,7 +3015,7 @@ function VenueFAQ() {
       </div>
 
       <div className="programme-faq-list">
-        {venueFaqItems.map((item) => (
+        {venueFaqItems.slice(0, 5).map((item) => (
           <details className="programme-faq-item" key={item.question}>
             <summary>
               <span className="programme-faq-dot" />
@@ -3034,7 +3034,7 @@ function VenueCTA() {
     <section className="venue-final-cta">
       <div aria-hidden="true" className="confetti-field venue-cta-confetti" />
       <div className="programme-final-copy">
-        <p className="section-kicker">Final CTA</p>
+        <p className="section-kicker">Next Step</p>
         <h2>Ready to Gather in Borneo?</h2>
         <p>
           Plan your arrival, choose your pass and prepare for three days of workshops, exchange, performance and community connection in Tawau, Sabah.
@@ -3177,7 +3177,7 @@ function VisitFoodSection() {
         </div>
 
         <div className="visit-food-directory-grid visit-food-directory-compact">
-          {tawauFoodDirectory.slice(0, 12).map((item) => (
+          {tawauFoodDirectory.slice(0, 8).map((item) => (
             <article
               className="visit-food-directory-card"
               id={`food-directory-${slugify(item.category)}`}
@@ -3193,7 +3193,7 @@ function VisitFoodSection() {
             </article>
           ))}
         </div>
-        <p className="visit-directory-note">More local food entries can be added later without changing the page structure.</p>
+        <p className="visit-directory-note">Showing 8 starter ideas for quick planning. More local food entries can be added later without crowding this page.</p>
       </div>
     </section>
   )
@@ -3792,10 +3792,10 @@ function SponsorTrustStrip() {
     <section className="editorial-section section-shell sponsor-trust-strip">
       <div className="section-head with-copy">
         <div>
-          <p className="section-kicker">Trust Strip</p>
+          <p className="section-kicker">Official Support</p>
           <h2>Official support, visible immediately.</h2>
         </div>
-        <p className="section-intro">A clean partner strip helps sponsors understand that BICC is a real convention platform, not a small private activity.</p>
+        <p className="section-intro">Current organiser, collaboration and destination supporters at a glance.</p>
       </div>
 
       <div className="sponsor-support-groups">
@@ -3869,7 +3869,7 @@ function SponsorOpportunities() {
           <span>Visibility points can be packaged based on sponsor level.</span>
         </div>
         <div className="sponsor-brand-points">
-          {sponsorExposurePoints.map((point) => (
+          {sponsorExposurePoints.slice(0, 8).map((point) => (
             <span className="playful-chip" key={point}>{point}</span>
           ))}
         </div>
@@ -4080,6 +4080,37 @@ function PassComparisonCards() {
   )
 }
 
+function PassTrustStrip() {
+  const trustItems = [
+    {
+      title: 'Official Stripe checkout',
+      copy: 'Pay through the official BICC pass links.',
+    },
+    {
+      title: 'Same price, clear choice',
+      copy: 'Foundation and Mastery are both US$130.',
+    },
+    {
+      title: 'Delegate details after payment',
+      copy: 'Complete your profile once checkout is done.',
+    },
+  ]
+
+  return (
+    <section className="pass-trust-strip" aria-label="Pass registration reassurance">
+      {trustItems.map((item) => (
+        <article className="pass-trust-item" key={item.title}>
+          <span className="pass-trust-dot" aria-hidden="true" />
+          <div>
+            <strong>{item.title}</strong>
+            <span>{item.copy}</span>
+          </div>
+        </article>
+      ))}
+    </section>
+  )
+}
+
 function PassIncludedSection() {
   return (
     <section className="editorial-section section-shell pass-included-section">
@@ -4092,7 +4123,7 @@ function PassIncludedSection() {
       </div>
 
       <div className="pass-included-grid">
-        {passIncludedItems.map((item) => (
+        {passIncludedItems.slice(0, 4).map((item) => (
           <article className={`venue-fact-card ${item.tone}`} key={item.title}>
             <span className="venue-fact-icon">{item.icon}</span>
             <div className="venue-fact-copy">
@@ -4102,6 +4133,9 @@ function PassIncludedSection() {
           </article>
         ))}
       </div>
+      <p className="pass-included-note">
+        Final programme access, room assignments and any special activities follow official organiser confirmation.
+      </p>
     </section>
   )
 }
@@ -4148,7 +4182,7 @@ function PassFAQ() {
       </div>
 
       <div className="programme-faq-list">
-        {passFaqItems.map((item) => (
+        {passFaqItems.slice(0, 5).map((item) => (
           <details className="programme-faq-item" key={item.question}>
             <summary>
               <span className="programme-faq-dot" />
@@ -4190,6 +4224,7 @@ function PassesPage() {
   return (
     <main className="passes-page">
       <PassHero />
+      <PassTrustStrip />
       <PassComparisonCards />
       <PassIncludedSection />
       <PassRegistrationFlow />
@@ -4700,7 +4735,7 @@ function WorkshopCTA() {
     <section className="workshop-final-cta">
       <div aria-hidden="true" className="confetti-field venue-cta-confetti" />
       <div className="programme-final-copy">
-        <p className="section-kicker">Final CTA</p>
+        <p className="section-kicker">Join the Training</p>
         <h2>Ready to Build Your Clown Practice?</h2>
         <p>
           Join BICC 2026 and train with artists who understand laughter as craft, connection and community impact.
@@ -4925,7 +4960,7 @@ function MentorCTA() {
     <section className="mentor-page-cta">
       <div aria-hidden="true" className="confetti-field venue-cta-confetti" />
       <div className="programme-final-copy">
-        <p className="section-kicker">Final CTA</p>
+        <p className="section-kicker">Meet the Line-up</p>
         <h2>Train With the BICC Mentors.</h2>
         <p>Join BICC 2026 and learn from artists who understand clowning as craft, connection, performance and community impact.</p>
       </div>
@@ -5079,9 +5114,8 @@ function HomePage() {
                 <p className="track-audience">{index === 0 ? 'For beginners, emerging performers, educators, students and teaching artists.' : 'For experienced performers, working clowns and stage artists ready for critique.'}</p>
                 <p className="pass-price">{pass.price}</p>
                 <p className="track-summary">{index === 0 ? 'Build confidence, character, timing and the physical clarity needed to hold an audience.' : 'Refine stage presence, strengthen your act and make sharper professional choices under real feedback.'}</p>
-                <p className="track-value-line">{index === 0 ? 'Leave with stronger fundamentals, better audience connection and a more reliable performance base.' : 'Leave with sharper act structure, outside critique and a more polished professional identity.'}</p>
                 <div className="track-chip-list">
-                  {pass.includes.map((item) => (
+                  {pass.includes.slice(0, 4).map((item) => (
                     <span className="track-chip" key={item}>
                       {item}
                     </span>
@@ -5200,12 +5234,17 @@ function AboutPage() {
       <section className="about-hero section-shell">
         <div className="about-hero-copy">
           <p className="section-kicker">About BICC 2026</p>
-          <h1>A convention built around laughter, craft, culture and human connection.</h1>
+          <h1>Laughter, craft and culture in one Borneo convention.</h1>
           <p>
-            BICC 2026 is a professional clowning convention held in Borneo, bringing together performers, educators,
-            artists, families and communities through workshops, showcases, cultural exchange and meaningful human
-            connection.
+            BICC 2026 brings performers, educators, artists, families and communities together through workshops,
+            showcases, cultural exchange and meaningful human connection.
           </p>
+          <div className="about-hero-pills" aria-label="BICC focus areas">
+            <span>Professional workshops</span>
+            <span>Stage showcase</span>
+            <span>Borneo culture</span>
+            <span>Community impact</span>
+          </div>
           <div className="page-actions">
             <a className="primary-btn" href="/passes">
               View Passes
@@ -5216,16 +5255,20 @@ function AboutPage() {
           </div>
         </div>
 
-        <aside className="about-editorial-card">
-          <SmileDoodle />
-          <PatternCorner side="right" />
-          <p className="page-aside-kicker">Editorial Note</p>
-          <h2>Why it matters</h2>
-          <p>
-            BICC 2026 was created to raise the standard of clowning as an art form, a performance discipline and a tool
-            for community impact. Beyond entertainment, clowning carries the power to connect people, bring joy into
-            difficult spaces, and create unforgettable human moments.
-          </p>
+        <aside className="about-hero-visual">
+          <div className="about-hero-image-card">
+            <img alt="Professional clown performer connecting with an audience" src={landingStoryConnectionImage} />
+            <div className="about-hero-image-overlay" />
+            <span className="about-hero-image-badge">Craft · Culture · Connection</span>
+          </div>
+          <div className="about-editorial-card compact">
+            <SmileDoodle />
+            <p className="page-aside-kicker">Editorial Note</p>
+            <h2>Why it matters</h2>
+            <p>
+              BICC raises clowning as a performance discipline and a human tool for joy, care and connection.
+            </p>
+          </div>
         </aside>
       </section>
 

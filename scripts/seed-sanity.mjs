@@ -25,12 +25,12 @@ const client = createClient({
 const l = (en, zh = '', ms = '') => ({ en, zh, ms })
 
 const mentors = [
-  ['uncle-sunday', 'Uncle Sunday', 'Malaysia', 'Guest Artist / Mentor', 'A guest artist joining BICC 2026 to share clown craft, performance experience and creative exchange with delegates.', ['Stage Performance', 'Community', 'Clown Craft'], true],
+  ['uncle-sunday', 'Uncle Sunday', 'Malaysia', 'Guest Artist / Convention Organiser', 'A Malaysia-based clown performer and BICC organiser known for heartwarming outreach in schools, churches and charity programmes, using humour as a bridge for connection and healing.', ['Community Outreach', 'Faith-Driven Clowning', 'Connection'], true],
   ['paya-cocos', 'Paya Cocos', 'Mexico', 'Guest Artist / Mentor', 'A guest artist joining BICC 2026 to share clown craft, visual play and creative exchange with delegates.', ['Guest Artist', 'Physical Comedy', 'Creative Exchange'], true],
   ['chagy', 'Chagy', 'USA', 'Guest Artist / Mentor', 'A guest artist joining BICC 2026 to share clown craft, stage experience and creative exchange with delegates.', ['Stage Performance', 'Audience Interaction', 'Character Work'], true],
-  ['uncle-button', 'Uncle Button', 'Malaysia', 'Workshop Mentor', 'A workshop mentor joining BICC 2026 to support practical learning, playful performance and warm audience connection.', ['Workshop Mentor', 'Family Entertainment', 'Audience Connection'], true],
-  ['randy-christensen', 'Randy Christensen', 'USA', 'Performance Mentor', 'A performance mentor joining BICC 2026 to share stage practice, showcase energy and live audience experience.', ['Performance Mentor', 'Stage Presence', 'Showcase'], true],
-  ['mr-john', 'Mr. John', 'Malaysia', 'Teaching Artist', 'A teaching artist joining BICC 2026 to share practical performance methods, workshop teaching and creative exchange.', ['Teaching Artist', 'Workshop Mentor', 'Creative Exchange'], true],
+  ['uncle-button', 'Uncle Button', 'Malaysia', 'Workshop Mentor / Community Clown', 'One of Malaysia’s well-known clowns, Sam Tee began with balloons at children’s parties, trained in the U.S. and has brought clowning into charity, missions and community work.', ['Family Entertainment', 'Balloon Art', 'Community Clowning'], true],
+  ['randy-christensen', 'Randy Christensen', 'USA', 'Master Clown / Performance Mentor', 'An award-winning Master Clown, entertainer and speaker with 40+ years of experience across 32 U.S. states and 9 countries, bringing variety arts, storytelling and physical comedy to BICC.', ['Master Clown', 'Variety Arts', 'Storytelling'], true],
+  ['mr-john', 'Mr. John', 'Malaysia', 'Contemporary Clown / Teaching Artist', 'A contemporary clown and performance artist with 20+ years across commercial events, theatre and street festivals worldwide, blending puppetry, mime, physical comedy and heartfelt interactive storytelling.', ['Contemporary Performance', 'Puppetry & Mime', 'Physical Comedy'], true],
   ['kak-yogi', 'Kak Yogi', 'Indonesia', 'Community Mentor', 'A community mentor joining the BICC line-up to contribute regional perspective, creative exchange and performance conversation.', ['Community Clowning', 'Guest Artist', 'Details Coming Soon'], false],
   ['watt-de-clown', 'Watt De Clown', 'Malaysia', 'Performance Mentor', 'A performance mentor joining BICC 2026 to share audience connection, comic presence and live convention energy.', ['Performance Mentor', 'Character Work', 'Audience Interaction'], false],
   ['kosuke-omune', 'Kosuke Omune', 'Japan', 'Guest Artist', 'A guest artist in the BICC 2026 line-up, bringing a distinct performance perspective to the convention exchange.', ['Guest Artist', 'Puppetry', 'Performance'], false],
@@ -352,6 +352,15 @@ pageContents.forEach(([id, route, title], index) => {
 })
 
 const result = await transaction.commit()
+
+for (const [id, , , role, intro, specialties, isFeatured] of mentors) {
+  await client.patch(id).set({
+    role: l(role),
+    shortIntro: l(intro),
+    specialties: specialties.map((specialty) => l(specialty)),
+    isFeatured,
+  }).commit()
+}
 
 for (const [route, defaults] of Object.entries(pageEditorDefaults)) {
   const pageId = pageContents.find(([, pageRoute]) => pageRoute === route)?.[0]
