@@ -42,13 +42,20 @@ const visitSeafoodImage = 'https://commons.wikimedia.org/wiki/Special:FilePath/M
 const visitKopitiamImage = 'https://commons.wikimedia.org/wiki/Special:FilePath/Coffee%20shop%20zz.jpg?width=900'
 const visitNasiKuningImage = 'https://commons.wikimedia.org/wiki/Special:FilePath/Nasi%20Kuning%20Tawau.jpg?width=900'
 const visitPasarTanjungImage = 'https://commons.wikimedia.org/wiki/Special:FilePath/Tawau%20Sabah%20Pasar-Tanjung-Tawau-01.jpg?width=1400'
-const visitTawauHillsImage = 'https://commons.wikimedia.org/wiki/Special:FilePath/Table%20Waterfall%20at%20Tawau%20Hills%20Park%20-%20panoramio.jpg?width=900'
 const visitCocoaVillageImage = 'https://commons.wikimedia.org/wiki/Special:FilePath/Teck%20Guan%20Cocoa%20Village%20Columnar%20Basalt.jpg?width=1000'
 const visitWaterfrontImage = 'https://commons.wikimedia.org/wiki/Special:FilePath/Tawau%20-%20The%20City%20%2848869140708%29.jpg?width=1600'
+const tawauGuidePasarTanjungImage = '/visit-tawau/things/tawau-guide-000.jpg'
+const tawauGuideCitySignImage = '/visit-tawau/things/tawau-guide-001.jpg'
+const tawauGuideBalungCocosImage = '/visit-tawau/things/tawau-guide-002.jpg'
+const tawauGuideForestImage = '/visit-tawau/things/tawau-guide-003.jpg'
+const tawauGuideChesterMarketImage = '/visit-tawau/things/tawau-guide-004.jpg'
+const tawauGuideCocoaVillageImage = '/visit-tawau/things/tawau-guide-005.jpg'
 const hotelAeroHomeSuiteImage = '/visit-tawau/hotels/aero-home-suite.jpg'
 const hotelBluSentralImage = '/visit-tawau/hotels/blu-sentral-hotel.jpg'
 const hotelBorneoRoyaleImage = '/visit-tawau/hotels/borneo-royale-hotel.jpg'
 const hotelGraceHomestayImage = '/visit-tawau/hotels/grace-homestay.jpg'
+const hotelUmiiImage = '/visit-tawau/hotels/umii-hotel.png'
+const hotelUmiiHomestayImage = '/visit-tawau/hotels/umii-homestay.png'
 
 type ProgrammeFilterKey =
   | 'all'
@@ -96,6 +103,9 @@ type MentorProfile = {
   role: string
   shortIntro: string
   specialties: string[]
+  officialBioUrl?: string
+  sourceUrl?: string
+  socialUrl?: string
   image: string | null
   featured: boolean
 }
@@ -127,7 +137,7 @@ const navItems = [
   { label: 'About', path: '/about' },
   { label: 'Programme', path: '/programme' },
   { label: 'Workshops', path: '/workshops' },
-  { label: 'Mentors', path: '/mentors' },
+  { label: 'Instructors', path: '/mentors' },
   { label: 'Passes', path: '/passes' },
   { label: 'Venue', path: '/venue' },
   { label: 'Visit Tawau', path: '/visit-tawau' },
@@ -146,7 +156,7 @@ const translations: Record<Exclude<SiteLanguage, 'en'>, Record<string, string>> 
     About: '关于',
     Programme: '日程',
     Workshops: '工作坊',
-    Mentors: '导师',
+    Instructors: '导师',
     Passes: '通行证',
     Venue: '场地',
     'Visit Tawau': '探索斗湖',
@@ -192,7 +202,7 @@ const translations: Record<Exclude<SiteLanguage, 'en'>, Record<string, string>> 
     'Arrival & Opening': '抵达与开幕',
     'Workshops & Exchange': '工作坊与交流',
     'Showcase & Celebration': '展示与庆祝',
-    'Mentors & Guest Artists': '导师与嘉宾艺术家',
+    'Instructors & Guest Artists': '导师与嘉宾艺术家',
     'Learn From Artists Who Live the Stage.': '向真正活在舞台上的艺术家学习。',
     'Passes & Registration': '通行证与报名',
     'Choose Your Pass. Start Your BICC Journey.': '选择通行证，开启你的 BICC 旅程。',
@@ -234,7 +244,7 @@ const translations: Record<Exclude<SiteLanguage, 'en'>, Record<string, string>> 
     About: 'Tentang',
     Programme: 'Program',
     Workshops: 'Bengkel',
-    Mentors: 'Mentor',
+    Instructors: 'Pengajar',
     Passes: 'Pas',
     Venue: 'Lokasi',
     'Visit Tawau': 'Lawati Tawau',
@@ -280,7 +290,7 @@ const translations: Record<Exclude<SiteLanguage, 'en'>, Record<string, string>> 
     'Arrival & Opening': 'Ketibaan & Pembukaan',
     'Workshops & Exchange': 'Bengkel & Pertukaran',
     'Showcase & Celebration': 'Showcase & Sambutan',
-    'Mentors & Guest Artists': 'Mentor & Artis Jemputan',
+    'Instructors & Guest Artists': 'Pengajar & Artis Jemputan',
     'Learn From Artists Who Live the Stage.': 'Belajar daripada artis yang hidup di pentas.',
     'Passes & Registration': 'Pas & Pendaftaran',
     'Choose Your Pass. Start Your BICC Journey.': 'Pilih pas anda. Mulakan perjalanan BICC.',
@@ -337,14 +347,16 @@ const passes = [
     label: 'Foundation Workshop Pass',
     headline: 'Build Your Professional Foundation',
     body: 'For newer performers who want fundamentals, playful tools and stage confidence.',
-    badges: ['No prior experience required', 'Certificate of Participation awarded'],
+    badges: ['No prior experience required', '8 beginner classes included', 'All classes subject to change'],
     includes: [
-      'Physical Comedy Fundamentals',
-      'Character & Persona Building',
-      'Balloon Sculpting',
-      'Interactive Storytelling',
-      'Magic & Visual Illusions',
-      'Puppetry Performance',
+      'Balloon Twisting Class',
+      'Magic for Children',
+      'Creative Story-Telling for Children',
+      'Basic Puppet Making & Manipulation',
+      'How to Start a 1 Min Show',
+      'Basic Juggling Class',
+      'Clown Makeup & Costumes',
+      'Creative Clowns for Community Care',
     ],
     bestFor: [
       'New clown performers',
@@ -375,14 +387,16 @@ const passes = [
     label: 'Mastery Workshop Pass',
     headline: 'Elevate Your Stage Performance',
     body: 'For working performers ready for sharper timing, critique and stage command.',
-    badges: ['Prior stage experience recommended', 'Certificate of Completion awarded'],
+    badges: ['Prior stage experience recommended', '8 advance classes included', 'All classes subject to change'],
     includes: [
-      'Advanced Stage Craft',
-      'Signature Performance',
-      'Showcase & Mentorship',
-      'Advanced Comedy Timing & Acting',
-      'Professional Magic & Variety Integration',
-      'Career Positioning & Stage Command',
+      'Balloon Twisting Class',
+      'Magic for Children',
+      'Creative Story-Telling for Children / Clown Ministry',
+      'Puppet Sounds & Manipulation for Children',
+      'Develop Original Clown Performances',
+      'Juggling Class',
+      'Clown Characters & Costumes',
+      'Creative Clowns for Community Care & Hospitals',
     ],
     bestFor: [
       'Experienced clowns',
@@ -421,7 +435,7 @@ const passIncludedItems = [
     tone: 'soft-coral',
   },
   {
-    title: 'Mentor-Led Learning',
+    title: 'Instructor-Led Learning',
     description: 'Learn through demonstration, practice and guided feedback.',
     icon: 'M',
     tone: 'soft-yellow',
@@ -482,7 +496,8 @@ const passFaqItems = [
   },
   {
     question: 'Will I receive a certificate?',
-    answer: 'Certificate details, if available, will be shared by the organizer.',
+    answer:
+      'Yes. The e-certificate will be sent by email after participants complete the feedback form. The link will be provided by the organizer.',
   },
   {
     question: 'What happens after I register?',
@@ -498,118 +513,154 @@ const programme = [
   {
     day: 'Day 1',
     title: 'Arrival & Opening',
-    body: 'Registration, welcome reception, orientation, opening ceremony and creative connections.',
+    body: 'Registration, opening, first parallel sessions, jamming and International Show.',
   },
   {
     day: 'Day 2',
     title: 'Workshops & Exchange',
-    body: 'Full-day training, mentorship, workshop tracks, creative exchange and performance activity.',
+    body: 'Parallel classes, auditorium session, jamming and Variety Art Competition.',
   },
   {
     day: 'Day 3',
     title: 'Showcase & Community',
-    body: 'Final sessions, community sharing, showcase preparation and closing celebration.',
+    body: 'Humanitarian activities, final briefing, preparation and Gala Night (Closing).',
   },
 ]
 
 const workshopHighlights = [
   {
     track: 'Foundation',
-    title: 'Physical Comedy Fundamentals',
-    body: 'Build movement clarity, rhythm and body awareness for live performance.',
+    title: 'Balloon Twisting Class',
+    body: 'Build practical visual skills for family shows, schools and event audiences.',
     accent: 'foundation',
   },
   {
     track: 'Foundation',
-    title: 'Character & Persona Building',
-    body: 'Develop a stage identity that feels clear, warm and memorable.',
+    title: 'Magic for Children',
+    body: 'Create simple surprise, audience participation and child-friendly wonder.',
     accent: 'foundation',
   },
   {
     track: 'Foundation',
-    title: 'Balloon Sculpting',
-    body: 'Learn interactive crowd-friendly skills that add playfulness to performance.',
+    title: 'Creative Story-Telling',
+    body: 'Shape stories that carry character, message and audience connection.',
     accent: 'foundation',
   },
   {
     track: 'Mastery',
-    title: 'Advanced Stage Craft',
-    body: 'Sharpen timing, transitions and stronger performance structure.',
+    title: 'Original Clown Performance',
+    body: 'Develop clearer stage material and more distinctive performance choices.',
     accent: 'mastery',
   },
   {
     track: 'Mastery',
-    title: 'Signature Performance',
-    body: 'Refine material that better represents your professional performance voice.',
+    title: 'Puppet Sounds & Manipulation',
+    body: 'Use puppet voice, movement and handling for children-focused performance.',
     accent: 'mastery',
   },
   {
     track: 'Mastery',
-    title: 'Showcase & Mentorship',
-    body: 'Receive critique, direction and support shaped for experienced performers.',
+    title: 'Community & Hospital Clowning',
+    body: 'Explore creative clowning for care, community and sensitive spaces.',
     accent: 'mastery',
   },
 ]
 
 const workshopCards = [
   {
-    id: 'stage-work',
-    title: 'Stage Work, Character, and Presence',
-    track: 'Mastery',
+    id: 'balloon-twisting',
+    title: 'Balloon Twisting Class',
+    track: 'Foundation / Advance',
     trackType: 'mastery' as ProgrammeSessionType,
     description:
-      'Strengthen the performer’s body, rhythm, character choices and connection with an audience.',
-    forWhom: 'Stage performers, experienced clowns, actors and variety artists.',
-    outcomes: ['Stage presence', 'Character clarity', 'Movement and rhythm', 'Performance structure', 'Audience timing'],
+      'Build practical balloon skills that support visual comedy, audience connection and fast event-ready moments.',
+    forWhom: 'Beginners, family entertainers, school performers and working clowns.',
+    outcomes: ['Balloon forms', 'Visual play', 'Audience participation', 'Event routines', 'Hands-on practice'],
     image: landingMasteryTrackImage,
     featured: true,
   },
   {
-    id: 'balloon-art',
-    title: 'Balloon Art & Visual Play',
-    track: 'Foundation',
+    id: 'magic-for-children',
+    title: 'Magic for Children',
+    track: 'Foundation / Advance',
     trackType: 'foundation' as ProgrammeSessionType,
     description:
-      'Learn how balloons, shape, colour and physical play can become tools for storytelling, audience connection and instant visual comedy.',
-    forWhom: 'Beginners, family entertainers, teaching artists and event performers.',
-    outcomes: ['Simple balloon forms', 'Visual storytelling', 'Audience participation', 'Prop-based comedy', 'Safe playful handling'],
+      'Create simple moments of wonder designed for children, families and interactive stage situations.',
+    forWhom: 'Clowns, magicians, family performers, educators and children ministry teams.',
+    outcomes: ['Magic structure', 'Child-friendly wonder', 'Volunteer handling', 'Comic timing', 'Audience safety'],
     image: landingFoundationTrackImage,
     featured: false,
   },
   {
-    id: 'magic-interaction',
-    title: 'Magic, Interaction, and Wonder',
+    id: 'creative-storytelling',
+    title: 'Creative Story-Telling for Children',
     track: 'Foundation / Mastery',
     trackType: 'exchange' as ProgrammeSessionType,
     description:
-      'Build small moments of surprise that invite children, families and audiences into shared wonder.',
-    forWhom: 'Clowns, magicians, family performers and educators.',
-    outcomes: ['Simple magic structure', 'Audience interaction', 'Comic timing', 'Volunteer handling', 'Personal wonder'],
+      'Shape clearer stories for children, classroom audiences, family shows and clown ministry contexts.',
+    forWhom: 'Educators, children ministry teams, school performers and family entertainers.',
+    outcomes: ['Story structure', 'Character-led messages', 'Children audience flow', 'Clown ministry format', 'Participation'],
     image: landingWorkshopMagicImage,
     featured: false,
   },
   {
-    id: 'hospital-clowning',
-    title: 'Hospital Clowning in Practice',
-    track: 'Outreach / Community',
+    id: 'puppet-making',
+    title: 'Puppet Making, Sounds & Manipulation',
+    track: 'Foundation / Advance',
     trackType: 'community' as ProgrammeSessionType,
     description:
-      'Explore the sensitivity, presence and emotional awareness needed for meaningful clowning in care and outreach environments.',
-    forWhom: 'Community clowns, outreach teams, volunteers and performers interested in humanitarian clowning.',
-    outcomes: ['Gentle presence', 'Reading the room', 'Consent and sensitivity', 'Emotional safety', 'Human connection'],
+      'Explore puppet basics, sound, manipulation and child-friendly character work for live interaction.',
+    forWhom: 'Children performers, outreach teams, educators and visual storytellers.',
+    outcomes: ['Basic puppet making', 'Puppet sounds', 'Manipulation basics', 'Character voice', 'Visual communication'],
     image: landingWorkshopOutreachImage,
     featured: false,
   },
   {
-    id: 'kids-safety-show',
-    title: 'Kids Safety Show & Educational Performance',
-    track: 'Education / Community',
+    id: 'one-minute-show',
+    title: 'How to Start a 1 Min Show',
+    track: 'Foundation',
     trackType: 'foundation' as ProgrammeSessionType,
     description:
-      'Learn how clowning can make educational messages more memorable, engaging and audience-friendly.',
-    forWhom: 'Educators, school performers, community workers and family entertainers.',
-    outcomes: ['Educational storytelling', 'Safety show structure', 'Child-friendly communication', 'Participation formats', 'Message retention'],
+      'Learn how to begin a short act with a clear opening, simple rhythm and confident audience connection.',
+    forWhom: 'New performers, students, educators and artists building stage confidence.',
+    outcomes: ['Short act structure', 'Clear opening', 'Simple conflict', 'Ending beat', 'Confidence building'],
     image: landingWorkshopEducationImage,
+    featured: false,
+  },
+  {
+    id: 'juggling-class',
+    title: 'Juggling Class',
+    track: 'Foundation / Advance',
+    trackType: 'showcase' as ProgrammeSessionType,
+    description:
+      'Develop rhythm, focus and playful prop control through practical juggling exercises.',
+    forWhom: 'Clowns, variety artists, family entertainers and performers strengthening physical skill.',
+    outcomes: ['Basic patterns', 'Rhythm', 'Stage focus', 'Prop control', 'Practice habits'],
+    image: landingWorkshopTrainingImage,
+    featured: false,
+  },
+  {
+    id: 'clown-makeup-costumes',
+    title: 'Clown Makeup & Costumes',
+    track: 'Foundation / Advance',
+    trackType: 'foundation' as ProgrammeSessionType,
+    description:
+      'Understand how makeup, colour, costume choices and character clarity shape audience recognition.',
+    forWhom: 'Beginners, family entertainers, educators and performers refining character identity.',
+    outcomes: ['Makeup basics', 'Costume clarity', 'Character design', 'Colour choices', 'Stage readability'],
+    image: landingWorkshopEducationImage,
+    featured: false,
+  },
+  {
+    id: 'community-hospital-clowning',
+    title: 'Creative Clowns for Community Care & Hospitals',
+    track: 'Advance / Community',
+    trackType: 'community' as ProgrammeSessionType,
+    description:
+      'Practice respectful clowning for community care, hospital contexts and sensitive human connection.',
+    forWhom: 'Community workers, hospital clowns, volunteers and performers interested in outreach.',
+    outcomes: ['Reading the room', 'Gentle presence', 'Care settings', 'Community connection', 'Respectful interaction'],
+    image: landingWorkshopOutreachImage,
     featured: false,
   },
 ] as const
@@ -617,18 +668,18 @@ const workshopCards = [
 const workshopSchedulePreview = [
   {
     day: 'Day 1',
-    title: 'Arrival, Opening & Orientation',
-    body: 'Registration, welcome session, creative connection and track introduction.',
+    title: 'Registration, Opening & First Classes',
+    body: 'Opening flow, Parallel Session 1, Parallel Class 2, jamming and International Show.',
   },
   {
     day: 'Day 2',
-    title: 'Workshops & Exchange',
-    body: 'Full-day training, mentor-led sessions, track-based learning and creative exchange.',
+    title: 'Parallel Classes & Competition',
+    body: 'Auditorium session, Parallel Classes 3–5, jamming and Variety Art Competition.',
   },
   {
     day: 'Day 3',
-    title: 'Showcase, Feedback & Community',
-    body: 'Final sessions, performance sharing, community reflection and closing celebration.',
+    title: 'Outreach, Final Briefing & Gala Night (Closing)',
+    body: 'Humanitarian activities, Parallel Class 6, final briefing and Gala Night (Closing).',
   },
 ] as const
 
@@ -649,7 +700,7 @@ const workshopFaqItems = [
   },
   {
     question: 'Will there be a full workshop schedule?',
-    answer: 'Yes. The full workshop schedule and room assignments will be announced closer to the convention.',
+    answer: 'The main programme timing and class list are now available. Final room assignments, instructor allocation and class changes remain subject to organiser confirmation.',
   },
   {
     question: 'Are the workshops suitable for educators?',
@@ -662,18 +713,19 @@ const workshopFaqItems = [
   },
   {
     question: 'Will I receive a certificate?',
-    answer: 'Certificate details, if available, will be announced by the organizer.',
+    answer:
+      'Yes. The e-certificate will be sent by email after participants complete the feedback form. The link will be provided by the organizer.',
   },
 ] as const
 
 const mentorCards = [
   {
-    title: 'International Guest Mentors',
-    body: 'Official mentor announcements will be released as the faculty line-up is confirmed.',
+    title: 'International Guest Instructors',
+    body: 'Official instructor announcements will be released as the faculty line-up is confirmed.',
   },
   {
     title: 'Performance-Led Teaching',
-    body: 'The mentor team is being curated around clowning, stage craft, education and creative leadership.',
+    body: 'The instructor team is being curated around clowning, stage craft, education and creative leadership.',
   },
   {
     title: 'Regional & Global Exchange',
@@ -683,7 +735,7 @@ const mentorCards = [
 
 const mentorPreviewCards = [
   {
-    title: 'International Mentor',
+    title: 'International Instructor',
     meta: 'Physical Comedy, Stage Presence & Live Performance Craft',
     track: 'Foundation Track',
     note: 'Faculty Announcement Wave 1',
@@ -697,14 +749,14 @@ const mentorPreviewCards = [
     image: mentorPortraitUncleButton,
   },
   {
-    title: 'Creative Exchange Mentor',
+    title: 'Creative Exchange Instructor',
     meta: 'Audience Connection, Exchange Practice & Cultural Collaboration',
     track: 'Exchange Lab',
     note: 'International Exchange Faculty',
     image: mentorPortraitPayaCocos,
   },
   {
-    title: 'Showcase Development Mentor',
+    title: 'Showcase Development Instructor',
     meta: 'Act Refinement, Showcase Direction & Professional Feedback',
     track: 'Mastery Track',
     note: 'Mastery Track Faculty',
@@ -719,7 +771,7 @@ const mentorFilterItems: Array<{ key: MentorFilterKey; label: string }> = [
   { key: 'malaysia', label: 'Malaysia' },
   { key: 'asia', label: 'Asia' },
   { key: 'usa', label: 'USA' },
-  { key: 'workshop-mentors', label: 'Workshop Mentors' },
+  { key: 'workshop-mentors', label: 'Workshop Instructors' },
   { key: 'guest-artists', label: 'Guest Artists' },
 ]
 
@@ -751,9 +803,10 @@ const mentorLineup: MentorProfile[] = [
     name: 'Chagy',
     country: 'USA',
     region: 'USA',
-    role: 'Guest Artist / Mentor',
-    shortIntro: 'A guest artist joining BICC 2026 to share clown craft, stage experience and creative exchange with delegates.',
-    specialties: ['Stage Performance', 'Audience Interaction', 'Character Work'],
+    role: 'Comedy Clown / Global Family Entertainer',
+    shortIntro: 'Eugenio “Chagy” Adorno is a high-energy comedy clown and bilingual family entertainer whose work blends magic, mime, juggling, storytelling and heart-led audience connection across international stages.',
+    specialties: ['Magic & Mime', 'Family Entertainment', 'Storytelling'],
+    sourceUrl: 'https://texasclownassociation.com/tca-convention/headliner/',
     image: mentorPortraitChagy,
     featured: true,
   },
@@ -762,7 +815,7 @@ const mentorLineup: MentorProfile[] = [
     name: 'Uncle Button',
     country: 'Malaysia',
     region: 'Malaysia',
-    role: 'Workshop Mentor / Community Clown',
+    role: 'Workshop Instructor / Community Clown',
     shortIntro: 'One of Malaysia’s well-known clowns, Sam Tee began with balloons at children’s parties, trained in the U.S. and has brought clowning into charity, missions and community work.',
     specialties: ['Family Entertainment', 'Balloon Art', 'Community Clowning'],
     image: mentorPortraitUncleButton,
@@ -773,7 +826,7 @@ const mentorLineup: MentorProfile[] = [
     name: 'Randy Christensen',
     country: 'USA',
     region: 'USA',
-    role: 'Master Clown / Performance Mentor',
+    role: 'Master Clown / Performance Instructor',
     shortIntro: 'An award-winning Master Clown, entertainer and speaker with 40+ years of experience across 32 U.S. states and 9 countries, bringing variety arts, storytelling and physical comedy to BICC.',
     specialties: ['Master Clown', 'Variety Arts', 'Storytelling'],
     image: mentorPortraitRandy,
@@ -795,8 +848,8 @@ const mentorLineup: MentorProfile[] = [
     name: 'Kak Yogi',
     country: 'Indonesia',
     region: 'Asia',
-    role: 'Community Mentor',
-    shortIntro: 'A community mentor joining the BICC line-up to contribute regional perspective, creative exchange and performance conversation.',
+    role: 'Community Instructor',
+    shortIntro: 'A community instructor joining the BICC line-up to contribute regional perspective, creative exchange and performance conversation.',
     specialties: ['Community Clowning', 'Guest Artist', 'Details Coming Soon'],
     image: mentorPortraitKakYogi,
     featured: false,
@@ -806,9 +859,10 @@ const mentorLineup: MentorProfile[] = [
     name: 'Watt De Clown',
     country: 'Malaysia',
     region: 'Malaysia',
-    role: 'Performance Mentor',
-    shortIntro: 'A performance mentor joining BICC 2026 to share audience connection, comic presence and live convention energy.',
-    specialties: ['Performance Mentor', 'Character Work', 'Audience Interaction'],
+    role: 'Magical Clown / Community Performer',
+    shortIntro: 'Noor Hidawati Mohd Juki, known as Watt De Clown, is a Malaysian performer active in clowning, arts activities and community events, bringing magical clown shows and approachable family entertainment to public audiences.',
+    specialties: ['Magical Clowning', 'Community Events', 'Family Shows'],
+    sourceUrl: 'https://kitareporters.com/insan/WPe9r50ZaL',
     image: mentorPortraitWatt,
     featured: false,
   },
@@ -817,9 +871,10 @@ const mentorLineup: MentorProfile[] = [
     name: 'Kosuke Omune',
     country: 'Japan',
     region: 'Asia',
-    role: 'Guest Artist',
-    shortIntro: 'A guest artist in the BICC 2026 line-up, bringing a distinct performance perspective to the convention exchange.',
-    specialties: ['Guest Artist', 'Puppetry', 'Performance'],
+    role: 'Hospital Clown / Guest Artist',
+    shortIntro: 'Kosuke Omune is a pioneering Japanese hospital clown and president of the Japan Hospital Clown Association, recognised internationally for bringing laughter and care into children’s hospitals.',
+    specialties: ['Hospital Clowning', 'Community Care', 'International Artist'],
+    sourceUrl: 'https://www.asahi.com/ajw/articles/14380177',
     image: mentorPortraitKosuke,
     featured: false,
   },
@@ -828,9 +883,10 @@ const mentorLineup: MentorProfile[] = [
     name: 'Jackie Newton',
     country: 'USA',
     region: 'USA',
-    role: 'Workshop Mentor',
-    shortIntro: 'A workshop mentor joining the BICC 2026 line-up to bring audience experience, guest artist presence and practical convention exchange.',
-    specialties: ['Workshop Mentor', 'Guest Artist', 'Audience Experience'],
+    role: 'WCA Leader / Workshop Instructor',
+    shortIntro: 'Jackie Newton, also known as Sparky Malarkey, is a World Clown Association leader and teaching artist whose work focuses on movement, timing, character choices and approachable clowning for modern audiences.',
+    specialties: ['Clown Education', 'Movement & Timing', 'WCA Leadership'],
+    sourceUrl: 'https://worldclown.com/past-presidents/',
     image: mentorPortraitJackie,
     featured: false,
   },
@@ -839,9 +895,10 @@ const mentorLineup: MentorProfile[] = [
     name: 'Frankie Malachi',
     country: 'Singapore',
     region: 'Asia',
-    role: 'Guest Artist',
-    shortIntro: 'A guest artist joining BICC 2026 to bring live performance craft, visual storytelling and regional exchange to the mentor line-up.',
-    specialties: ['Guest Artist', 'Visual Storytelling', 'Performance'],
+    role: 'Puppeteer / Visual Storyteller',
+    shortIntro: 'Frankie Malachi is a Singapore-based puppeteer and maker whose work spans marionettes, mascots, theatre, children’s productions and regional puppetry exchange across Asia.',
+    specialties: ['Puppetry', 'Mascot Making', 'Visual Storytelling'],
+    sourceUrl: 'https://www.todayonline.com/business/sme/pulling-strings-work',
     image: mentorPortraitFrankie,
     featured: false,
   },
@@ -851,7 +908,7 @@ const mentorLineup: MentorProfile[] = [
     country: 'Hong Kong',
     region: 'Asia',
     role: 'Showcase Artist',
-    shortIntro: 'A showcase artist joining BICC 2026 to bring live performance presence and international exchange to the mentor line-up.',
+    shortIntro: 'A showcase artist joining BICC 2026 to bring live performance presence and international exchange to the instructor line-up.',
     specialties: ['Showcase Artist', 'Stage Performance', 'Guest Artist'],
     image: mentorPortraitTony,
     featured: false,
@@ -861,9 +918,10 @@ const mentorLineup: MentorProfile[] = [
     name: 'Edmund Khong',
     country: 'Singapore',
     region: 'Asia',
-    role: 'Teaching Artist',
-    shortIntro: 'A teaching artist joining BICC 2026 to contribute practical performance guidance and convention exchange.',
-    specialties: ['Teaching Artist', 'Puppetry', 'Workshop Mentor'],
+    role: 'Master Clown / Family Entertainer',
+    shortIntro: 'Edmund Khong, known for Captain Dazzle and Captain Bubbles, is an award-winning Singapore performer whose shows combine magic, comedy, bubbles, juggling, balloons and strong audience interaction.',
+    specialties: ['Magic & Comedy', 'Bubbles & Balloons', 'Audience Interaction'],
+    officialBioUrl: 'https://www.captaindazzle.com/',
     image: mentorPortraitEdmund,
     featured: false,
   },
@@ -872,9 +930,9 @@ const mentorLineup: MentorProfile[] = [
     name: 'Zipper',
     country: 'Thailand',
     region: 'Asia',
-    role: 'Guest Artist',
-    shortIntro: 'A guest artist joining BICC 2026 to bring live audience energy, character work and performance exchange.',
-    specialties: ['Stage Performance', 'Character Work', 'Audience Interaction'],
+    role: 'Guest Artist / Circus Director',
+    shortIntro: 'The creative force behind Zipper Circus, bringing clown and mime performance, juggling, visual acts, audience interaction and full-scale circus production experience to BICC.',
+    specialties: ['Clown & Mime', 'Circus Production', 'Audience Interaction'],
     image: mentorPortraitZipper,
     featured: false,
   },
@@ -1064,79 +1122,100 @@ const programmeDays: ProgrammeDay[] = [
     date: 'Aug 3, 2026',
     title: 'Arrival & Opening',
     description:
-      'A welcoming first day built around arrival, orientation, shared energy and clear entry into the convention.',
+      'Registration, opening, first parallel learning blocks, jamming and the evening international show.',
     focus:
-      'Registration, welcome reception, orientation, opening ceremony, creative connection and track introduction.',
+      'Registration, opening ceremony, lunch, parallel sessions, jamming session and international show.',
     accent: 'arrival',
     chipLabels: [
-      'Delegate Registration',
-      'Welcome & Orientation',
-      'Opening Ceremony',
-      'Creative Connection Session',
-      'Track Briefing',
+      'Registration',
+      'Opening',
+      'Parallel Session 1',
+      'Parallel Class 2',
+      'International Show',
     ],
     image: landingProgrammeOpeningImage,
     sessions: [
       {
-        time: 'Schedule to be announced',
-        title: 'Delegate Registration',
+        time: '9:00–10:00',
+        title: 'Registration',
         type: 'delegate-info',
         track: 'All Delegates',
-        venue: 'Venue to be announced',
-        description: 'Check in, collect materials and settle into the convention with the latest programme updates.',
-        status: 'coming-soon',
+        venue: 'Registration area',
+        description: 'Check in, collect materials and receive the latest programme updates.',
+        status: 'confirmed',
         icon: 'R',
       },
       {
-        time: 'Schedule to be announced',
-        title: 'Welcome & Orientation',
-        type: 'delegate-info',
-        track: 'All Delegates',
-        venue: 'Main welcome zone to be announced',
-        description: 'Get oriented to the 3-day flow, practical info, venue rhythm and delegate experience.',
-        status: 'coming-soon',
-        icon: 'I',
-      },
-      {
-        time: 'Schedule to be announced',
-        title: 'Opening Ceremony',
+        time: '10:30–12:00',
+        title: 'Opening',
         type: 'showcase',
         track: 'All Delegates',
-        venue: 'Main stage to be announced',
-        description: 'A shared opening moment for delegates, mentors, organisers and guests from different communities.',
-        status: 'coming-soon',
-        icon: 'S',
+        venue: 'Main hall',
+        description: 'Official opening moment for delegates, instructors, organisers and guests.',
+        status: 'confirmed',
+        icon: 'O',
         image: landingPerformanceAudienceImage,
       },
       {
-        time: 'Schedule to be announced',
-        title: 'Creative Connection Session',
-        type: 'exchange',
+        time: '12:00–13:00',
+        title: 'Lunch',
+        type: 'delegate-info',
         track: 'All Delegates',
-        venue: 'Exchange area to be announced',
-        description: 'A first gathering for introductions, creative exchange and warm cross-border conversation.',
-        status: 'coming-soon',
-        icon: 'E',
+        venue: 'Break area',
+        description: 'Midday break before the first parallel learning session.',
+        status: 'confirmed',
+        icon: 'L',
       },
       {
-        time: 'Schedule to be announced',
-        title: 'Track Briefing',
+        time: '13:00–14:00',
+        title: 'Parallel Session 1',
+        type: 'foundation',
+        track: 'Foundation / Advance groups',
+        venue: 'Workshop rooms',
+        description: 'Track-based learning begins with the first parallel session.',
+        status: 'confirmed',
+        icon: '1',
+      },
+      {
+        time: '14:00–15:00',
+        title: 'Tea Break',
         type: 'delegate-info',
-        track: 'Foundation & Mastery',
-        venue: 'Programme zone to be announced',
-        description: 'Understand how the Foundation and Mastery journeys will move across the convention.',
-        status: 'coming-soon',
+        track: 'All Delegates',
+        venue: 'Break area',
+        description: 'A pause between learning blocks.',
+        status: 'confirmed',
         icon: 'T',
       },
       {
-        time: 'Schedule to be announced',
-        title: 'Evening Welcome & Networking Moment',
+        time: '15:00–16:00',
+        title: 'Parallel Class 2',
+        type: 'mastery',
+        track: 'Foundation / Advance groups',
+        venue: 'Workshop rooms',
+        description: 'Second parallel class block for hands-on practice.',
+        status: 'confirmed',
+        icon: '2',
+      },
+      {
+        time: '16:00–17:00',
+        title: 'Jamming Session',
         type: 'community',
         track: 'All Delegates',
-        venue: 'Gathering space to be announced',
-        description: 'Close the first day with informal connection, shared stories and a gentle community rhythm.',
-        status: 'coming-soon',
-        icon: 'C',
+        venue: 'Shared practice space',
+        description: 'A creative jam for delegates to connect, test ideas and share energy.',
+        status: 'confirmed',
+        icon: 'J',
+      },
+      {
+        time: '19:30–21:30',
+        title: 'International Show',
+        type: 'showcase',
+        track: 'Audience-facing programme',
+        venue: 'Main hall',
+        description: 'An evening show celebrating international clown and variety performance.',
+        status: 'confirmed',
+        icon: 'S',
+        image: landingPerformanceAudienceImage,
       },
     ],
   },
@@ -1146,79 +1225,110 @@ const programmeDays: ProgrammeDay[] = [
     date: 'Aug 4, 2026',
     title: 'Workshops & Exchange',
     description:
-      'The most active training day, combining parallel track learning, exchange moments and performance practice.',
+      'The main workshop day with auditorium flow, parallel classes, jamming and the variety art competition.',
     focus:
-      'Full-day training, mentorship, workshop tracks, creative exchange and performance practice.',
+      'Auditorium session, parallel classes, rest breaks, jamming session and variety art competition.',
     accent: 'training',
     chipLabels: [
-      'Foundation Workshops',
-      'Mastery Workshops',
-      'Mentor Sessions',
-      'Exchange Lab',
-      'Practice / Rehearsal Blocks',
+      'Auditorium Lv 2',
+      'Parallel Class 3',
+      'Parallel Class 4',
+      'Parallel Class 5',
+      'Variety Art Competition',
     ],
     image: landingWorkshopTrainingImage,
     sessions: [
       {
-        time: 'Detailed session times will be announced closer to the convention.',
-        title: 'Foundation Track Workshop Block',
+        time: '9:00–10:00',
+        title: 'Auditorium Session',
+        type: 'delegate-info',
+        track: 'All Delegates',
+        venue: 'Auditorium, Lv 2',
+        description: 'Shared morning session in the Lv 2 auditorium.',
+        status: 'confirmed',
+        icon: 'A',
+      },
+      {
+        time: '10:00–11:00',
+        title: 'Parallel Class 3',
         type: 'foundation',
-        track: 'Foundation Track',
-        venue: 'Workshop room to be announced',
-        description: 'Beginner-friendly practical sessions focused on physical clarity, interaction and confidence.',
-        status: 'coming-soon',
-        icon: 'F',
+        track: 'Foundation / Advance groups',
+        venue: 'Workshop rooms',
+        description: 'Parallel learning block for track-based practical training.',
+        status: 'confirmed',
+        icon: '3',
       },
       {
-        time: 'Detailed session times will be announced closer to the convention.',
-        title: 'Mastery Track Workshop Block',
-        type: 'mastery',
-        track: 'Mastery Track',
-        venue: 'Workshop room to be announced',
-        description: 'Advanced sessions built around critique, structure, stage command and professional growth.',
-        status: 'coming-soon',
-        icon: 'M',
+        time: '11:00–11:30',
+        title: 'Rest',
+        type: 'delegate-info',
+        track: 'All Delegates',
+        venue: 'Break area',
+        description: 'Short rest before the next class block.',
+        status: 'confirmed',
+        icon: 'R',
       },
       {
-        time: 'Schedule to be announced',
-        title: 'Mentor-Led Practice',
+        time: '11:30–13:00',
+        title: 'Parallel Class 4',
         type: 'mastery',
-        track: 'Selected workshop groups',
-        venue: 'Practice zone to be announced',
-        description: 'Guided practice moments where participants test material and receive direct feedback.',
-        status: 'limited-capacity',
-        icon: 'P',
+        track: 'Foundation / Advance groups',
+        venue: 'Workshop rooms',
+        description: 'Extended parallel class block for deeper guided practice.',
+        status: 'confirmed',
+        icon: '4',
+      },
+      {
+        time: '13:00–14:00',
+        title: 'Lunch',
+        type: 'delegate-info',
+        track: 'All Delegates',
+        venue: 'Break area',
+        description: 'Lunch break between workshop blocks.',
+        status: 'confirmed',
+        icon: 'L',
+      },
+      {
+        time: '14:00–15:30',
+        title: 'Parallel Class 5',
+        type: 'foundation',
+        track: 'Foundation / Advance groups',
+        venue: 'Workshop rooms',
+        description: 'Afternoon parallel workshop block.',
+        status: 'confirmed',
+        icon: '5',
+      },
+      {
+        time: '15:30–16:30',
+        title: 'Tea Break',
+        type: 'delegate-info',
+        track: 'All Delegates',
+        venue: 'Break area',
+        description: 'Tea break before the late afternoon programme.',
+        status: 'confirmed',
+        icon: 'T',
+      },
+      {
+        time: '16:30–18:30',
+        title: 'Jamming Session',
+        type: 'community',
+        track: 'All Delegates',
+        venue: 'Shared practice space',
+        description: 'A longer creative jam for exchange, play and collaborative exploration.',
+        status: 'confirmed',
+        icon: 'J',
         image: landingWorkshopOutreachImage,
       },
       {
-        time: 'Schedule to be announced',
-        title: 'Exchange Lab',
-        type: 'exchange',
-        track: 'All Delegates / invited participation',
-        venue: 'Exchange area to be announced',
-        description: 'A space for local and international artists to share methods, perspectives and cultural context.',
-        status: 'coming-soon',
-        icon: 'E',
-      },
-      {
-        time: 'Schedule to be announced',
-        title: 'Performance Practice & Rehearsal',
+        time: '19:30–21:00',
+        title: 'Variety Art Competition',
         type: 'showcase',
-        track: 'Foundation & Mastery',
-        venue: 'Rehearsal area to be announced',
-        description: 'A working block for rehearsal, act shaping and showcase preparation.',
-        status: 'coming-soon',
-        icon: 'S',
-      },
-      {
-        time: 'Schedule to be announced',
-        title: 'Informal Community Gathering',
-        type: 'community',
-        track: 'All Delegates',
-        venue: 'Community space to be announced',
-        description: 'An informal gathering to reflect, connect and carry the energy of the day into the evening.',
-        status: 'coming-soon',
-        icon: 'C',
+        track: 'Audience-facing programme',
+        venue: 'Main hall',
+        description: 'An evening competition celebrating variety, stage presence and audience connection.',
+        status: 'confirmed',
+        icon: 'V',
+        image: landingMasteryTrackImage,
       },
     ],
   },
@@ -1228,79 +1338,90 @@ const programmeDays: ProgrammeDay[] = [
     date: 'Aug 5, 2026',
     title: 'Showcase & Community',
     description:
-      'A closing day that brings learning, sharing and performance into one joyful final convention rhythm.',
+      'Humanitarian activities, final class, briefing, gala preparation and the closing gala night.',
     focus:
-      'Final sessions, showcase preparation, performance sharing, community moments and closing celebration.',
+      'Humanitarian activities, final class, final briefing, gala preparation and gala night.',
     accent: 'showcase',
     chipLabels: [
-      'Final Workshop Blocks',
-      'Showcase Preparation',
-      'Community Sharing',
-      'Performance Showcase',
-      'Closing Celebration',
+      'Humanitarian Activities',
+      'Parallel Class 6',
+      'Final Briefing',
+      'Gala Preparation',
+      'Gala Night (Closing)',
     ],
     image: landingPerformanceAudienceImage,
     sessions: [
       {
-        time: 'Schedule to be announced',
-        title: 'Final Foundation Session',
+        time: '8:00–12:30',
+        title: 'Humanitarian Activities',
+        type: 'community',
+        track: 'Community outreach',
+        venue: 'Outreach locations',
+        description: 'A community-facing morning programme built around joyful service and connection.',
+        status: 'confirmed',
+        icon: 'H',
+        image: landingWorkshopOutreachImage,
+      },
+      {
+        time: '12:30–13:30',
+        title: 'Lunch',
+        type: 'delegate-info',
+        track: 'All Delegates',
+        venue: 'Break area',
+        description: 'Lunch break before the final class and gala preparation.',
+        status: 'confirmed',
+        icon: 'L',
+      },
+      {
+        time: '13:30–14:30',
+        title: 'Parallel Class 6',
         type: 'foundation',
-        track: 'Foundation Track',
-        venue: 'Workshop room to be announced',
-        description: 'A final practical session to consolidate skills and confidence before the convention closes.',
-        status: 'coming-soon',
-        icon: 'F',
+        track: 'Foundation / Advance groups',
+        venue: 'Workshop rooms',
+        description: 'Final parallel class block before closing programme preparations.',
+        status: 'confirmed',
+        icon: '6',
       },
       {
-        time: 'Schedule to be announced',
-        title: 'Final Mastery Session',
-        type: 'mastery',
-        track: 'Mastery Track',
-        venue: 'Workshop room to be announced',
-        description: 'A last advanced working block focused on refinement, notes and performance readiness.',
-        status: 'coming-soon',
-        icon: 'M',
-      },
-      {
-        time: 'Schedule to be announced',
-        title: 'Showcase Preparation',
-        type: 'showcase',
-        track: 'Selected delegates / showcase flow',
-        venue: 'Stage zone to be announced',
-        description: 'Preparation time for transitions, stage confidence and readiness for shared performance moments.',
-        status: 'coming-soon',
-        icon: 'S',
-      },
-      {
-        time: 'Schedule to be announced',
-        title: 'Community Sharing Session',
-        type: 'community',
+        time: '14:30–16:00',
+        title: 'Final Briefing',
+        type: 'delegate-info',
         track: 'All Delegates',
-        venue: 'Community circle to be announced',
-        description: 'A space to reflect on learning, joy, connection and the wider meaning of the convention.',
-        status: 'coming-soon',
-        icon: 'C',
+        venue: 'Main hall',
+        description: 'Final briefing for delegates before the evening gala flow.',
+        status: 'confirmed',
+        icon: 'B',
       },
       {
-        time: 'Schedule to be announced',
-        title: 'Performance Showcase',
+        time: '16:00',
+        title: 'Preparation for Gala Night',
         type: 'showcase',
-        track: 'Showcase delegates & audience',
-        venue: 'Main stage to be announced',
-        description: 'A shared performance moment where work, practice and celebration meet the audience.',
-        status: 'coming-soon',
-        icon: 'S',
-        image: landingMasteryTrackImage,
+        track: 'Gala participants',
+        venue: 'Main hall',
+        description: 'Preparation time for the evening gala programme.',
+        status: 'confirmed',
+        icon: 'P',
       },
       {
-        time: 'Schedule to be announced',
-        title: 'Closing Celebration',
-        type: 'community',
-        track: 'All Delegates',
-        venue: 'Closing zone to be announced',
-        description: 'A joyful final gathering to celebrate learning, exchange and the convention community.',
-        status: 'coming-soon',
-        icon: 'C',
+        time: '19:00',
+        title: 'Hall Opens',
+        type: 'delegate-info',
+        track: 'All Delegates & Guests',
+        venue: 'Main hall',
+        description: 'Doors open for the gala night audience and delegates.',
+        status: 'confirmed',
+        icon: 'O',
+      },
+      {
+        time: '19:30–21:30',
+        title: 'Gala Night (Closing)',
+        type: 'showcase',
+        track: 'All Delegates & Guests',
+        venue: 'Main hall',
+        description: 'The closing celebration for BICC 2026, bringing delegates, guests and performers together.',
+        status: 'confirmed',
+        icon: 'G',
+        image: landingPerformanceAudienceImage,
       },
     ],
   },
@@ -1328,7 +1449,7 @@ const programmeTrackConnection = [
       'Best for experienced performers and working artists who want sharper critique, stage presence and professional development.',
     focus: [
       'Advanced workshops',
-      'Mentor feedback',
+      'Instructor feedback',
       'Signature performance refinement',
       'Showcase preparation',
       'Professional exchange',
@@ -1343,7 +1464,7 @@ const programmeFaqItems = [
   {
     question: 'Is the full programme confirmed?',
     answer:
-      'The programme flow is available as a preview. Final times, rooms and mentor assignments will be announced closer to the convention.',
+      'The main three-day programme timing is now available. Room assignments, instructor allocation and any final organiser updates may still be refined before the convention.',
   },
   {
     question: 'Do I need to choose a track before attending?',
@@ -1407,15 +1528,15 @@ const venueQuickFacts = [
   {
     title: 'Main Activities',
     copy: 'Workshops, mentorship, exchange sessions, showcase moments and community gathering.',
-    note: `Hosted inside a ${venueInfo.buildingStoreys}-storey multi-use building designed for worship, learning, gathering and support.`,
+    note: `Hosted inside a ${venueInfo.buildingStoreys}-storey multi-use building with reception, auditorium, workshop, accommodation and dining levels.`,
     icon: 'A',
     tone: 'soft-yellow',
     comingSoon: false,
   },
   {
     title: 'Delegate Flow',
-    copy: 'Registration, orientation, learning floors, showcase spaces and visitor support.',
-    note: 'Expect a vertical convention flow across reception, hall, learning levels and shared gathering spaces.',
+    copy: 'Cafe/reception, auditorium, workshop rooms, accommodation, solat room and dining hall.',
+    note: 'Expect a vertical convention flow across clearly assigned Calvary Crown floors.',
     icon: 'F',
     tone: 'soft-green',
     comingSoon: false,
@@ -1583,6 +1704,41 @@ const firstTimeTawauFoodPicks = [
 
 const tawauFoodDirectory = [
   {
+    name: 'CC Café',
+    category: 'Venue Food',
+    image: visitKopitiamImage,
+    description: 'A convenient cafe stop connected to the Calvary Crown venue flow for delegates.',
+    bestFor: 'Venue cafe',
+  },
+  {
+    name: 'Pate Grill House',
+    category: 'Casual Dining',
+    image: visitSeafoodImage,
+    description: 'A practical grill-house option for dinner plans, groups and relaxed post-session meals.',
+    bestFor: 'Group dinner',
+  },
+  {
+    name: 'Calvary Canteen',
+    category: 'Venue Food',
+    image: visitKopitiamImage,
+    description: 'Simple canteen-style food option for delegates around the Calvary Crown venue.',
+    bestFor: 'Convenient meals',
+  },
+  {
+    name: 'Hapi Café',
+    category: 'Cafe / Kopitiam',
+    image: visitWaterfrontImage,
+    description: 'Cafe stop for coffee, light meals and easy meetups between convention plans.',
+    bestFor: 'Coffee break',
+  },
+  {
+    name: 'Dojo',
+    category: 'Casual Dining',
+    image: visitNasiKuningImage,
+    description: 'Casual dining option to add to delegate food planning around Tawau.',
+    bestFor: 'Casual meal',
+  },
+  {
     name: 'Nasi Kuning Tawau',
     category: 'Street Food',
     image: visitNasiKuningImage,
@@ -1703,7 +1859,7 @@ const tawauFoodDirectory = [
   },
 ] as const
 
-const tawauFoodFilterItems = ['All', 'Seafood', 'Kopitiam', 'Street Food', 'Market', 'Cafe / Kopitiam', 'Drinks'] as const
+const tawauFoodFilterItems = ['All', 'Venue Food', 'Casual Dining', 'Seafood', 'Kopitiam', 'Street Food', 'Market', 'Cafe / Kopitiam', 'Drinks'] as const
 
 const tawauStayCards = [
   {
@@ -1729,6 +1885,28 @@ const tawauStayCards = [
 ] as const
 
 const tawauHotelSamples = [
+  {
+    name: 'UMii Hotel',
+    area: 'Tawau / Semporna travel base',
+    fit: 'Simple modern hotel stay',
+    tag: 'From RM150/night',
+    note: 'A cozy, modern stay option with comfortable bedding, high-speed Wi-Fi, coffee and tea facilities, toiletries and air conditioning.',
+    image: hotelUmiiImage,
+    link: 'https://wa.me/60168027721',
+    credit: 'Image provided by UMii Hotel',
+    contact: 'Wendee +60 16-802 7721',
+  },
+  {
+    name: 'UMii Homestay',
+    area: 'Tawau, Sabah',
+    fit: 'Family and group stay',
+    tag: 'From RM388/night',
+    note: 'A clean and cozy homestay for families, friends and small groups with practical room options for Tawau or Semporna travel plans.',
+    image: hotelUmiiHomestayImage,
+    link: 'https://wa.me/60128182417',
+    credit: 'Image provided by UMii Homestay',
+    contact: 'Wendy +60 12-818 2417 / Andy +60 16-220 0078',
+  },
   {
     name: 'AeroHomeSuite',
     area: 'Tawau Plaza, Taman Anson',
@@ -1809,44 +1987,88 @@ const tawauDelegateTips = [
 
 const tawauThingsToDoCards = [
   {
-    title: 'Tawau Hills Park',
-    copy: 'A nature escape with forest, fresh air and a different side of Tawau beyond the convention hall.',
-    tone: 'hills',
-    tag: 'Nature',
-    image: visitTawauHillsImage,
-    credit: 'Annette Teng / Wikimedia Commons',
+    title: 'Pasar Tanjung Tawau',
+    copy: 'Malaysia’s largest indoor market, with thousands of stalls across food, dried seafood, craft and souvenir floors.',
+    tone: 'market',
+    tag: 'Market & souvenirs',
+    image: tawauGuidePasarTanjungImage,
+    credit: 'BICC visitor guide source material',
+    highlights: [
+      'Ground floor: fresh produce, fruits, vegetables and local snacks.',
+      'First floor: dried salted fish, anchovies, prawns and preserved seafood.',
+      'Top floor: Pasar Gantung handicrafts, woven baskets and wooden souvenirs.',
+    ],
+    tip: 'Bring cash, bargain politely and go earlier if you want a calmer visit.',
   },
   {
-    title: 'Teck Guan Cocoa Museum & Cocoa Village',
-    copy: 'A local heritage stop for visitors curious about Tawau cocoa, flavour and place.',
+    title: 'Balung Cocos Columnar Basalt',
+    copy: 'A rare natural formation of hexagonal basalt columns, located less than an hour from Tawau town.',
+    tone: 'stone',
+    tag: 'Geological wonder',
+    image: tawauGuideBalungCocosImage,
+    credit: 'BICC visitor guide source material',
+    highlights: [
+      'Formed when thick basalt lava cooled and contracted into columns.',
+      'Good for photography, nature appreciation and a quieter countryside stop.',
+      'Use Google Maps or Waze; a local guide can make the route easier.',
+    ],
+    tip: 'Wear comfortable shoes because parts of the terrain can be uneven.',
+  },
+  {
+    title: 'Tawau Hills Park',
+    copy: 'A forest escape known for giant tropical trees, waterfalls, hot springs and hiking routes.',
+    tone: 'hills',
+    tag: 'Nature & hiking',
+    image: tawauGuideForestImage,
+    credit: 'BICC visitor guide source material',
+    highlights: [
+      'Look for Yellow Meranti and the Lowland Gardens with Borneo flora.',
+      'Popular stops include Table Waterfall, Galas Waterfall and the hot spring.',
+      'Mount Magdalena, Lucia and Maria climbs require registration with Sabah Parks.',
+    ],
+    tip: 'Weekdays are better if you want to avoid school holiday or weekend crowds.',
+  },
+  {
+    title: 'Pasar Malam Chester',
+    copy: 'A lively night market with food, busker stages, children’s play corners and local craft activity.',
+    tone: 'market',
+    tag: 'Night market',
+    image: tawauGuideChesterMarketImage,
+    credit: 'BICC visitor guide source material',
+    highlights: [
+      'Features traditional and international food in a casual evening setting.',
+      'Includes Sabah ethnic handicrafts, celebration exhibitions and busker energy.',
+      'The market layout uses East Gate and West Gate entrances.',
+    ],
+    tip: 'Good for a light evening walk when the convention schedule allows.',
+  },
+  {
+    title: 'Teck Guan Cocoa Village & Museum',
+    copy: 'A Tawau cocoa heritage experience covering local cocoa production, village activities and museum context.',
     tone: 'cocoa',
     tag: 'Cocoa heritage',
-    image: visitCocoaVillageImage,
-    credit: 'ChunXingWong / Wikimedia Commons',
-  },
-  {
-    title: 'Pasar Tanjung Tawau',
-    copy: 'A lively market experience for food, local colour and everyday city rhythm.',
-    tone: 'market',
-    tag: 'Market',
-    image: visitPasarTanjungImage,
-    credit: 'CEphoto, Uwe Aranas / Wikimedia Commons',
-  },
-  {
-    title: 'Batu Bersusun',
-    copy: 'A natural coastal formation that gives visitors a quieter Tawau landmark to explore.',
-    tone: 'stone',
-    tag: 'Coastal landmark',
-    image: visitCocoaVillageImage,
-    credit: 'ChunXingWong / Wikimedia Commons',
+    image: tawauGuideCocoaVillageImage,
+    credit: 'BICC visitor guide source material',
+    highlights: [
+      'Teck Guan is a major cocoa producer and distributor in Sabah.',
+      'The Cocoa Village in Quion Hill is around one hour from the museum in Tawau town.',
+      'Visitors can explore cocoa culture, leisure activities and dining options.',
+    ],
+    tip: 'Plan this as a half-day destination rather than a quick city stop.',
   },
   {
     title: 'Waterfront & City Walks',
-    copy: 'Easy low-pressure moments for delegates who want to stretch, snack and see the city.',
+    copy: 'A simple way to reset between sessions with city views, casual photos, snacks and low-pressure walking time.',
     tone: 'waterfront',
     tag: 'Easy walk',
-    image: visitWaterfrontImage,
-    credit: 'Adznee Abas / Wikimedia Commons',
+    image: tawauGuideCitySignImage,
+    credit: 'BICC visitor guide source material',
+    highlights: [
+      'Best for short, flexible moments between food, hotel and convention plans.',
+      'Good for casual photos and a quick sense of Tawau’s coastal city atmosphere.',
+      'Works well as a light option for families or delegates with limited free time.',
+    ],
+    tip: 'Keep this as an easy add-on rather than a fixed full-day activity.',
   },
 ] as const
 
@@ -1891,7 +2113,7 @@ const venueFaqItems = [
 const aboutValueCards = [
   {
     title: 'Professional Learning',
-    body: 'Structured workshops, international mentors and practical training for performers who want to grow their craft.',
+    body: 'Structured workshops, international instructors and practical training for performers who want to grow their craft.',
   },
   {
     title: 'Cultural Exchange',
@@ -1943,40 +2165,40 @@ const routeContent = {
   },
   '/programme': {
     eyebrow: 'Programme',
-    title: 'A three-day convention journey with space for arrival, training and celebration.',
+    title: 'A three-day convention journey with confirmed daily rhythm.',
     intro:
-      'The programme is being shaped to balance workshops, orientation, community exchange and showcase moments so delegates can learn, connect and perform with purpose.',
+      'The programme now shows the main timing for registration, opening, parallel classes, jamming sessions, humanitarian activity, shows and Gala Night (Closing).',
     cards: programme,
     asideTitle: 'Programme note',
     asideBody:
-      'Detailed timeslots, sessions and featured moments will be announced in the full programme release.',
+      'Final room assignments, instructor allocations and any class changes remain subject to organiser confirmation.',
     primaryCta: { label: 'View Passes', href: '/passes' },
     secondaryCta: { label: 'About BICC', href: '/about' },
   },
   '/workshops': {
     eyebrow: 'Workshops',
-    title: 'Training designed for real performance growth at two different experience levels.',
+    title: 'Practical clown classes across beginner and advance levels.',
     intro:
-      'BICC separates its workshop offer into two clear tracks so participants can choose a path that fits their current experience and learning goals.',
+      'The workshop list covers balloons, magic, storytelling, puppetry, juggling, makeup, costumes, short-show structure and community care.',
     cards: workshopHighlights.map((item) => ({
       title: `${item.track}: ${item.title}`,
       body: item.body,
     })),
     asideTitle: 'Track structure',
     asideBody:
-      'Foundation is for confidence and fundamentals. Mastery is for experienced performers seeking stronger critique, craft and stage direction.',
+      'Participants are entitled to attend the eight classes listed for their level. All classes are subject to change.',
     primaryCta: { label: 'Compare Passes', href: '/passes' },
     secondaryCta: { label: 'View Programme', href: '/programme' },
   },
   '/mentors': {
-    eyebrow: 'Mentors',
-    title: 'Learning shaped by international artists, educators and performance mentors.',
+    eyebrow: 'Instructors',
+    title: 'Learning shaped by international artists, educators and performance instructors.',
     intro:
       'The BICC faculty is being built to support both artistic excellence and approachable teaching, with space for international exchange and regional leadership.',
     cards: mentorCards,
     asideTitle: 'Announcement status',
     asideBody:
-      'Confirmed mentor names, countries and specialties will be published as soon as invitations and schedules are finalized.',
+      'Confirmed instructor names, countries and specialties will be published as soon as invitations and schedules are finalized.',
     primaryCta: { label: 'Explore Workshops', href: '/workshops' },
     secondaryCta: { label: 'Get Pass', href: '/passes' },
   },
@@ -2001,7 +2223,7 @@ const routeContent = {
     ],
     asideTitle: 'Pass note',
     asideBody:
-      'Both passes include access to your selected workshop track and a certificate aligned with that learning path.',
+      'Both passes include access to your selected workshop track. The e-certificate will be sent by email after the feedback form is completed.',
     primaryCta: { label: 'Get Foundation Pass', href: foundationPassPaymentLink },
     secondaryCta: { label: 'Get Mastery Pass', href: masteryPassPaymentLink },
   },
@@ -2119,6 +2341,9 @@ function mapCmsMentors(cmsMentors: CmsMentor[], language: SiteLanguage): MentorP
         'A guest artist joining BICC 2026 to share clown craft, performance experience and creative exchange with delegates.',
       specialties: mentor.specialties?.map((specialty) => localize(specialty, language)).filter(Boolean).slice(0, 3) ||
         fallbackMentor?.specialties || ['Guest Artist', 'Performance', 'Creative Exchange'],
+      officialBioUrl: mentor.officialBioUrl || fallbackMentor?.officialBioUrl,
+      sourceUrl: mentor.sourceUrl || fallbackMentor?.sourceUrl,
+      socialUrl: mentor.socialUrl || fallbackMentor?.socialUrl,
       image: sanityImageUrl(mentor.portrait) || sanityImageUrl(mentor.posterImage) || fallbackMentor?.image || null,
       featured: Boolean(mentor.isFeatured),
     }
@@ -2678,10 +2903,10 @@ function ProgrammePage() {
         <div className="section-head with-copy">
           <div>
             <p className="section-kicker">Day-by-Day Programme</p>
-            <h2>Explore the expected convention flow.</h2>
+            <h2>Follow the three-day convention rhythm.</h2>
           </div>
           <p className="section-intro">
-            Detailed times, rooms and final session assignments will be announced closer to the convention.
+            Main programme times are listed below. Final rooms, instructor allocations and any schedule changes remain subject to organiser confirmation.
           </p>
         </div>
 
@@ -2750,9 +2975,12 @@ function VenueHero() {
             <span>Visitor route</span>
           </article>
           <div className="venue-hero-flow-strip">
-            <span>L1 Reception</span>
-            <span>L3-L6 Learning</span>
-            <span>L10 Showcase</span>
+            <span>L1 Cafe / Reception</span>
+            <span>L2 Auditorium</span>
+            <span>L3 Workshop Room</span>
+            <span>L7 Accommodation</span>
+            <span>L9 Workshop + Solat</span>
+            <span>L10 Dining Hall</span>
           </div>
         </div>
       </div>
@@ -2791,26 +3019,32 @@ function VenueMap() {
   const floorGroups = [
     {
       range: 'L10',
-      title: 'Function Hall',
-      note: 'Showcase / large gathering potential',
+      title: 'Dining Hall',
+      note: 'Delegate meals and group dining',
       type: 'showcase' as ProgrammeSessionType,
     },
     {
-      range: 'L7-L9',
-      title: 'Support Floors',
-      note: 'Accommodation and operations',
+      range: 'L9',
+      title: 'Workshop Rooms + Solat Room',
+      note: 'Learning rooms and prayer space',
+      type: 'foundation' as ProgrammeSessionType,
+    },
+    {
+      range: 'L7',
+      title: 'Accommodation',
+      note: 'Accommodation level',
       type: 'community' as ProgrammeSessionType,
     },
     {
-      range: 'L3-L6',
-      title: 'Learning Floors',
-      note: 'Workshops, practice and exchange',
+      range: 'L3',
+      title: 'Workshop Room',
+      note: 'Hands-on workshop sessions',
       type: 'foundation' as ProgrammeSessionType,
     },
     {
       range: 'L2',
-      title: 'Worship Hall',
-      note: 'Shared hall / opening flow',
+      title: 'Auditorium',
+      note: 'Shared programme and stage flow',
       type: 'showcase' as ProgrammeSessionType,
     },
     {
@@ -2825,20 +3059,32 @@ function VenueMap() {
     {
       title: 'Arrive',
       level: 'L1',
-      copy: 'Start at reception for check-in, materials and latest room guidance.',
+      copy: 'Start at the cafe / reception level for check-in, materials and latest room guidance.',
       type: 'delegate-info' as ProgrammeSessionType,
     },
     {
+      title: 'Gather',
+      level: 'L2',
+      copy: 'Use the auditorium for shared programme moments, stage flow and major delegate gatherings.',
+      type: 'showcase' as ProgrammeSessionType,
+    },
+    {
       title: 'Train',
-      level: 'L3-L6',
-      copy: 'Workshop and learning floors support Foundation, Mastery and exchange moments.',
+      level: 'L3 / L9',
+      copy: 'Workshop rooms support Foundation, Mastery and practical class sessions.',
       type: 'foundation' as ProgrammeSessionType,
     },
     {
-      title: 'Gather',
-      level: 'L2 / L10',
-      copy: 'Shared hall and function spaces support opening, showcase and celebration flow.',
-      type: 'showcase' as ProgrammeSessionType,
+      title: 'Stay',
+      level: 'L7',
+      copy: 'Accommodation is located on Level 7 for assigned venue stay arrangements.',
+      type: 'community' as ProgrammeSessionType,
+    },
+    {
+      title: 'Dine',
+      level: 'L10',
+      copy: 'The dining hall supports group meal flow and delegate food coordination.',
+      type: 'delegate-info' as ProgrammeSessionType,
     },
   ]
 
@@ -2849,7 +3095,7 @@ function VenueMap() {
           <p className="section-kicker">Calvary Crown Overview</p>
           <h2>Know the building before you arrive.</h2>
         </div>
-        <p className="section-intro">A simple guide to the venue flow: arrival, learning floors and shared gathering spaces.</p>
+          <p className="section-intro">A simple guide to the updated Calvary Crown floor flow: reception, auditorium, workshop rooms, accommodation, prayer space and dining.</p>
       </div>
 
       <div className="venue-orientation-shell">
@@ -2871,7 +3117,7 @@ function VenueMap() {
           <div className="venue-orientation-panel-head">
             <p className="section-kicker">Delegate Flow</p>
             <h3>Think vertical, not complicated.</h3>
-            <p>Calvary Crown is a 10-storey venue. For BICC, delegates mainly need to understand three movements: arrive, train, gather.</p>
+            <p>Calvary Crown is a 10-storey venue. For BICC, delegates mainly need to understand where to arrive, gather, train, stay and dine.</p>
           </div>
 
           <div className="venue-building-cutaway">
@@ -3320,24 +3566,39 @@ function VisitThingsToDoSection() {
       <div className="section-head with-copy">
         <div>
           <p className="section-kicker">Things To Do</p>
-          <h2>Things To Do in Tawau</h2>
+          <h2>Explore Tawau between convention moments.</h2>
         </div>
         <p className="section-intro">
-          Beyond the convention, Tawau offers nature, food, local markets, cocoa heritage and quiet Borneo charm.
+          A focused visitor guide for markets, nature, cocoa heritage and simple city experiences delegates can plan around BICC.
         </p>
       </div>
 
-      <div className="visit-things-grid">
+      <div className="visit-guide-strip" aria-label="Tawau visitor highlights">
+        <span>Market culture</span>
+        <span>Geological landmark</span>
+        <span>Forest escape</span>
+        <span>Night market</span>
+        <span>Cocoa heritage</span>
+        <span>City walks</span>
+      </div>
+
+      <div className="visit-things-guide-grid">
         {tawauThingsToDoCards.map((card) => (
-          <article className="visit-photo-card" key={card.title}>
-            <div className={`visit-photo-media ${card.tone}`}>
+          <article className={`visit-destination-guide-card ${card.tone}`} key={card.title}>
+            <div className="visit-destination-guide-media">
               <img alt={card.title} src={card.image} />
               <small>{card.tag}</small>
-              <span>{card.title}</span>
             </div>
-            <div className="visit-card-copy">
+            <div className="visit-destination-guide-copy">
+              <span>{card.tag}</span>
               <h3>{card.title}</h3>
               <p>{card.copy}</p>
+              <div className="visit-destination-points">
+                {card.highlights.map((point) => (
+                  <p key={point}>{point}</p>
+                ))}
+              </div>
+              <p className="visit-destination-tip">{card.tip}</p>
               <small>{card.credit}</small>
             </div>
           </article>
@@ -3502,7 +3763,7 @@ const generalFaqItems = [
   {
     question: 'Will there be a programme PDF?',
     answer:
-      'The programme preview is available on the website. An official PDF can be added once final times, rooms and mentor allocations are confirmed.',
+      'The programme preview is available on the website. An official PDF can be added once final times, rooms and instructor allocations are confirmed.',
   },
   {
     question: 'Are hotel and travel bookings handled by BICC?',
@@ -3527,7 +3788,7 @@ function FAQPage() {
           <p className="section-kicker">BICC FAQ</p>
           <h1>Quick answers before you join BICC 2026.</h1>
           <p>
-            A practical guide for delegates, international visitors, mentors, sponsors and families planning for Tawau, Sabah.
+            A practical guide for delegates, international visitors, instructors, sponsors and families planning for Tawau, Sabah.
           </p>
         </div>
         <div className="hero-actions">
@@ -3677,7 +3938,7 @@ function AdminPage() {
           <p className="section-kicker">Content Admin</p>
           <h1>Manage BICC content through Sanity Studio.</h1>
           <p>
-            Sanity will become the editing dashboard for page content, images, mentors, sponsors, FAQ, workshops and Visit Tawau listings.
+            Sanity will become the editing dashboard for page content, images, instructors, sponsors, FAQ, workshops and Visit Tawau listings.
           </p>
           <div className="hero-actions">
             <a className="primary-btn" href="http://localhost:3333" rel="noreferrer" target="_blank">
@@ -3707,7 +3968,7 @@ function AdminPage() {
         <div className="contact-card-grid">
           {[
             ['Page Content', 'Hero text, section text, CTA labels and page images.'],
-            ['Mentors', 'Profile photo, country, role, bio, specialties and featured status.'],
+            ['Instructors', 'Profile photo, country, role, bio, specialties and featured status.'],
             ['Visit Tawau', 'Food, hotels, transport, attractions, links, maps and photos.'],
             ['Sponsors & FAQ', 'Partner logos, sponsor groups, questions and answers.'],
           ].map(([title, copy]) => (
@@ -4646,6 +4907,10 @@ function WorkshopCatalogue() {
           <p className="section-kicker">Workshop Catalogue</p>
           <h2>Hands-on sessions designed to help you create, connect, perform and serve.</h2>
         </div>
+        <p className="section-intro">
+          Participants are entitled to attend all eight classes included in their selected level. All classes are subject to
+          change.
+        </p>
       </div>
 
       <div className="workshop-catalogue-grid">
@@ -4790,11 +5055,34 @@ function MentorPlaceholderArt({ label }: { label: string }) {
   )
 }
 
+function MentorResourceLinks({ mentor }: { mentor: MentorProfile }) {
+  const links = [
+    mentor.officialBioUrl ? { label: 'Official bio', href: mentor.officialBioUrl } : null,
+    mentor.socialUrl ? { label: 'Social', href: mentor.socialUrl } : null,
+    mentor.sourceUrl ? { label: 'Source', href: mentor.sourceUrl } : null,
+  ]
+    .filter((link): link is { label: string; href: string } => Boolean(link?.href))
+    .filter((link, index, list) => list.findIndex((item) => item.href === link.href) === index)
+    .slice(0, 2)
+
+  if (!links.length) return null
+
+  return (
+    <div className="mentor-resource-links" aria-label={`${mentor.name} profile links`}>
+      {links.map((link) => (
+        <a href={link.href} key={`${mentor.id}-${link.label}`} rel="noreferrer" target="_blank">
+          {link.label}
+        </a>
+      ))}
+    </div>
+  )
+}
+
 function MentorHero() {
   return (
     <section className="mentor-page-hero section-shell">
       <div className="mentor-hero-copy">
-        <p className="section-kicker">Mentors & Guest Artists</p>
+        <p className="section-kicker">Instructors & Guest Artists</p>
         <h1>Meet the Artists Behind the BICC Stage.</h1>
         <p className="passes-hero-intro">
           Meet the performers, teachers and guest artists bringing real stage experience, practical craft and
@@ -4802,7 +5090,7 @@ function MentorHero() {
         </p>
         <div className="event-badges programme-hero-badges">
           <span>International Guest Artists</span>
-          <span>Workshop Mentors</span>
+          <span>Workshop Instructors</span>
           <span>Creative Exchange</span>
         </div>
         <div className="hero-actions programme-hero-actions">
@@ -4820,9 +5108,9 @@ function MentorHero() {
       </div>
 
       <div className="mentor-hero-visual">
-        <img alt="International BICC mentor and guest artist lineup" className="mentor-hero-poster" src={mentorHeroLineupImage} />
+        <img alt="International BICC instructor and guest artist lineup" className="mentor-hero-poster" src={mentorHeroLineupImage} />
         <div aria-hidden="true" className="mentor-hero-overlay" />
-        <span className="programme-ticket-badge mentor-hero-badge">2026 Mentor Line-up</span>
+        <span className="programme-ticket-badge mentor-hero-badge">2026 Instructor Line-up</span>
         <div className="mentor-hero-note">
           <span>Faculty Edition</span>
           <strong>Stage artists, teachers and performers gathered for a warm international exchange.</strong>
@@ -4852,6 +5140,7 @@ function MentorCard({
         </div>
         <h3>{mentor.name}</h3>
         <p>{mentor.shortIntro}</p>
+        <MentorResourceLinks mentor={mentor} />
         <span className="mentor-lineup-region">{mentor.region}</span>
         <div className="pass-focus-chips">
           {mentor.specialties.slice(0, 3).map((item) => (
@@ -4870,8 +5159,8 @@ function FeaturedMentors({ mentors }: { mentors: MentorProfile[] }) {
     <section className="editorial-section section-shell mentor-featured-section">
       <div className="section-head with-copy">
         <div>
-          <p className="section-kicker">Featured Mentors</p>
-          <h2>Featured mentors shaping BICC 2026.</h2>
+          <p className="section-kicker">Featured Instructors</p>
+          <h2>Featured instructors shaping BICC 2026.</h2>
         </div>
         <p className="section-intro">A focused preview of the guest artists, teachers and stage voices joining the convention.</p>
       </div>
@@ -4889,6 +5178,7 @@ function FeaturedMentors({ mentors }: { mentors: MentorProfile[] }) {
               </div>
               <h3>{mentor.name}</h3>
               <p>{mentor.shortIntro}</p>
+              <MentorResourceLinks mentor={mentor} />
               <div className="pass-focus-chips">
                 {mentor.specialties.slice(0, 2).map((item) => (
                   <span key={item}>{item}</span>
@@ -4926,11 +5216,11 @@ function MentorGrid({ mentors }: { mentors: MentorProfile[] }) {
       <div className="section-head with-copy">
         <div>
           <p className="section-kicker">Meet the Line-up</p>
-          <h2>Explore more of the BICC 2026 mentors, performers and guest artists.</h2>
+          <h2>Explore more of the BICC 2026 instructors, performers and guest artists.</h2>
         </div>
       </div>
 
-      <div className="mentor-filter-row" role="tablist" aria-label="Mentor filters">
+      <div className="mentor-filter-row" role="tablist" aria-label="Instructor filters">
         {mentorFilterItems.map((filter) => (
           <button
             aria-pressed={activeFilter === filter.key}
@@ -4944,7 +5234,7 @@ function MentorGrid({ mentors }: { mentors: MentorProfile[] }) {
           </button>
         ))}
       </div>
-      <p className="mentor-directory-meta">{filteredMentors.length} mentors and guest artists shown.</p>
+      <p className="mentor-directory-meta">{filteredMentors.length} instructors and guest artists shown.</p>
 
       <div className="mentor-directory-grid">
         {filteredMentors.map((mentor) => (
@@ -4961,7 +5251,7 @@ function MentorCTA() {
       <div aria-hidden="true" className="confetti-field venue-cta-confetti" />
       <div className="programme-final-copy">
         <p className="section-kicker">Meet the Line-up</p>
-        <h2>Train With the BICC Mentors.</h2>
+        <h2>Train With the BICC Instructors.</h2>
         <p>Join BICC 2026 and learn from artists who understand clowning as craft, connection, performance and community impact.</p>
       </div>
       <div className="final-cta-actions">
@@ -5059,7 +5349,7 @@ function HomePage() {
       <section className="editorial-section section-shell playful-band">
         <div className="story-layout">
           <div className="story-photo-frame">
-            <img alt="Clown performer or mentor on stage" src={landingStoryConnectionImage} />
+            <img alt="Clown performer or instructor on stage" src={landingStoryConnectionImage} />
             <span className="story-photo-tag">Performance / Culture / Connection</span>
           </div>
 
@@ -5167,10 +5457,10 @@ function HomePage() {
       <section className="editorial-section section-shell mentor-band">
         <div className="section-head with-copy">
           <div>
-            <p className="section-kicker">Mentors & Performers</p>
+            <p className="section-kicker">Instructors & Performers</p>
             <h2>Learn From Artists Who Live The Stage.</h2>
           </div>
-          <p className="section-intro">Mentors are selected for stage credibility, teaching clarity and real audience experience.</p>
+          <p className="section-intro">Instructors are selected for stage credibility, teaching clarity and real audience experience.</p>
         </div>
 
         <div className="mentor-preview-grid">
@@ -5191,7 +5481,7 @@ function HomePage() {
 
         <div className="section-cta">
           <a className="secondary-btn" href="/mentors">
-            View Mentors
+            View Instructors
           </a>
         </div>
       </section>
@@ -5219,7 +5509,7 @@ function HomePage() {
           </div>
           <div className="home-cta-meta" aria-label="Convention highlights">
             <span>2 Workshop Tracks</span>
-            <span>International Mentors</span>
+            <span>International Instructors</span>
             <span>US$130 Pass</span>
           </div>
         </div>
@@ -5381,7 +5671,7 @@ function AboutPage() {
           <p className="section-kicker">Ready To Join</p>
           <h2>Be part of BICC 2026.</h2>
           <p>
-            Whether you are joining as a performer, learner, mentor, sponsor or supporter, BICC 2026 invites you to be
+            Whether you are joining as a performer, learner, instructor, sponsor or supporter, BICC 2026 invites you to be
             part of a convention where laughter becomes craft, culture and legacy.
           </p>
           <div className="final-cta-actions">

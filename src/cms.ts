@@ -17,6 +17,9 @@ export type CmsMentor = {
   country?: string
   role?: LocalizedValue
   shortIntro?: LocalizedValue
+  officialBioUrl?: string
+  sourceUrl?: string
+  socialUrl?: string
   portrait?: CmsImage
   posterImage?: CmsImage
   specialties?: LocalizedValue[]
@@ -152,6 +155,9 @@ export const cmsQueries = {
     country,
     role,
     shortIntro,
+    officialBioUrl,
+    sourceUrl,
+    socialUrl,
     specialties,
     isFeatured,
     sortOrder,

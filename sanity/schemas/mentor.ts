@@ -2,7 +2,7 @@ import { defineField, defineType } from 'sanity'
 
 export const mentor = defineType({
   name: 'mentor',
-  title: 'Mentor / Guest Artist',
+  title: 'Instructor / Guest Artist',
   type: 'document',
   fields: [
     defineField({ name: 'name', title: 'Name', type: 'string', validation: (Rule) => Rule.required() }),
@@ -12,9 +12,27 @@ export const mentor = defineType({
     defineField({ name: 'shortIntro', title: 'Short Intro', type: 'localizedText' }),
     defineField({ name: 'bio', title: 'Full Bio', type: 'localizedText' }),
     defineField({
+      name: 'officialBioUrl',
+      title: 'Official Bio Link',
+      description: 'Optional. Link to the instructor official profile, website, association page, or organiser-approved bio.',
+      type: 'url',
+    }),
+    defineField({
+      name: 'sourceUrl',
+      title: 'Source URL',
+      description: 'Optional internal/reference link used to verify the instructor description.',
+      type: 'url',
+    }),
+    defineField({
+      name: 'socialUrl',
+      title: 'Social Link',
+      description: 'Optional. Instagram, Facebook, YouTube, LinkedIn, or other official public profile.',
+      type: 'url',
+    }),
+    defineField({
       name: 'portrait',
       title: 'Portrait',
-      description: 'Best for website mentor cards. Upload a clean portrait here when available.',
+      description: 'Best for website instructor cards. Upload a clean portrait here when available.',
       type: 'image',
       options: { hotspot: true },
     }),
@@ -27,7 +45,7 @@ export const mentor = defineType({
     }),
     defineField({ name: 'specialties', title: 'Specialties', type: 'array', of: [{ type: 'localizedString' }] }),
     defineField({ name: 'trackLabels', title: 'Track Labels', type: 'array', of: [{ type: 'string' }] }),
-    defineField({ name: 'isFeatured', title: 'Featured Mentor', type: 'boolean', initialValue: false }),
+    defineField({ name: 'isFeatured', title: 'Featured Instructor', type: 'boolean', initialValue: false }),
     defineField({ name: 'sortOrder', title: 'Sort Order', type: 'number', initialValue: 10 }),
     defineField({ name: 'isPublished', title: 'Published', type: 'boolean', initialValue: true }),
   ],
