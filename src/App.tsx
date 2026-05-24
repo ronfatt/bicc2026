@@ -13,7 +13,6 @@ const landingWorkshopMagicImage = '/landing/workshop-magic-wonder.jpg'
 const landingWorkshopOutreachImage = '/landing/workshop-community-outreach.jpg'
 const landingWorkshopEducationImage = '/landing/workshop-educational-show.jpg'
 const landingSponsorImpactImage = '/landing/sponsors-impact-story.jpg'
-const mentorHeroLineupImage = '/landing/mentors-hero-lineup.jpg'
 const passesRegistrationMomentImage = '/landing/passes-registration-moment.jpg'
 const passesFoundationWorkshopImage = '/landing/passes-foundation-workshop.jpg'
 const passesMasteryStageImage = '/landing/passes-mastery-stage.jpg'
@@ -34,7 +33,7 @@ const mentorPortraitEdmund = '/mentors/edmund-khong.webp'
 const mentorPortraitKosuke = '/mentors/kosuke-omune.webp'
 const mentorPortraitTony = '/mentors/tony-lee.jpg'
 const mentorPortraitJackie = '/mentors/jackie-newton.jpg'
-const mentorPortraitKakYogi = '/mentors/kak-yogi.jpg'
+const mentorPortraitKakYogi = '/mentors/kak-yogi-clown.webp'
 const mentorPortraitPayaCocos = '/mentors/paya-cocos.webp'
 const mentorPortraitFrankie = '/mentors/frankie-malachi.jpg'
 const calvaryCrownAerialImage = '/calvary-scene.webp'
@@ -43,6 +42,11 @@ const visitSeafoodImage = 'https://commons.wikimedia.org/wiki/Special:FilePath/M
 const visitKopitiamImage = 'https://commons.wikimedia.org/wiki/Special:FilePath/Coffee%20shop%20zz.jpg?width=900'
 const visitNasiKuningImage = 'https://commons.wikimedia.org/wiki/Special:FilePath/Nasi%20Kuning%20Tawau.jpg?width=900'
 const visitWaterfrontImage = 'https://commons.wikimedia.org/wiki/Special:FilePath/Tawau%20-%20The%20City%20%2848869140708%29.jpg?width=1600'
+const visitFoodCcCafeImage = '/visit-tawau/food-partners/cc-cafe.webp'
+const visitFoodCalvaryCanteenImage = '/visit-tawau/food-partners/calvary-canteen.webp'
+const visitFoodPateGrillImage = '/visit-tawau/food-partners/pate-grill.webp'
+const visitFoodDojoImage = '/visit-tawau/food-partners/dojo.webp'
+const visitFoodHansKopitiamImage = '/visit-tawau/food-partners/hans-kopitiam.webp'
 const tawauGuidePasarTanjungImage = '/visit-tawau/things/tawau-guide-000.jpg'
 const tawauGuideBalungCocosImage = '/visit-tawau/things/tawau-guide-002.jpg'
 const tawauGuideForestImage = '/visit-tawau/things/tawau-guide-003.jpg'
@@ -274,7 +278,7 @@ const translations: Record<Exclude<SiteLanguage, 'en'>, Record<string, string>> 
     'Compare Foundation & Mastery Tracks': '比较 Foundation 与 Mastery 课程',
     'Where Laughter Becomes Legacy.': '让欢笑成为传承。',
     'Borneo International Clown Convention 2026': '婆罗洲国际小丑大会 2026',
-    'Official Convention Magazine & Delegate Handbook': '官方大会杂志与参与者手册',
+    'Official Convention Magazine & Participant Handbook': '官方大会杂志与参与者手册',
     'What Is BICC?': '什么是 BICC？',
     'A convention for people who want practical growth, not just inspiration.': '一场为真正想成长的人而设的大会，不只是获得灵感。',
     'BICC brings together training, live performance, cultural exchange and community connection in one focused convention experience.':
@@ -358,7 +362,7 @@ const translations: Record<Exclude<SiteLanguage, 'en'>, Record<string, string>> 
     'Plan Your 3-Day BICC Journey.': '规划你的三天 BICC 旅程。',
     'Registration, Opening & First Classes': '报到、开幕与首轮课程',
     'Parallel Classes & Competition': '平行课程与比赛',
-    'Outreach, Final Briefing & Gala Night (Closing)': '外展、最终简报与闭幕晚会',
+    'Outreach, Final Briefing & International Night Show': '外展、最终简报与国际之夜演出',
     Registration: '报到',
     Opening: '开幕',
     Lunch: '午餐',
@@ -370,7 +374,9 @@ const translations: Record<Exclude<SiteLanguage, 'en'>, Record<string, string>> 
     'Parallel Class 5': '平行课程 5',
     'Parallel Class 6': '平行课程 6',
     'Jamming Session': '即兴交流环节',
-    'International Show': '国际演出',
+    'International Night Show': '国际之夜演出',
+    'A formal closing event celebrating cultural exchange and international collaboration. Attendees will enjoy an elegant dinner accompanied by lively performances, followed by an awards ceremony recognizing outstanding achievements and contributions to the art of clowning.':
+      '一场正式闭幕活动，庆祝文化交流与国际合作。来宾将享用优雅晚宴与精彩演出，并在颁奖环节表扬小丑艺术领域的杰出成就与贡献。',
     'Auditorium Session': '礼堂环节',
     Rest: '休息',
     'Variety Art Competition': '综艺艺术比赛',
@@ -378,7 +384,6 @@ const translations: Record<Exclude<SiteLanguage, 'en'>, Record<string, string>> 
     'Final Briefing': '最终简报',
     'Preparation for Gala Night': '晚会准备',
     'Hall Opens': '开放入场',
-    'Gala Night (Closing)': '闭幕晚会',
     'Workshop Catalogue': '工作坊目录',
     'Hands-on sessions designed to help you create, connect, perform and serve.': '通过动手实践，帮助你创作、连接、表演与服务。',
     'Participants are entitled to attend all eight classes included in their selected level. All classes are subject to change.':
@@ -409,19 +414,19 @@ const translations: Record<Exclude<SiteLanguage, 'en'>, Record<string, string>> 
     'Clown Makeup & Costumes': '小丑化妆与服装',
     'Creative Clowns for Community Care & Hospitals': '社区关怀与医院创意小丑',
     'Find Your Way in Borneo.': '在婆罗洲轻松找到方向。',
-    'Official Delegate Venue Guide': '官方参与者场地指南',
-    'The essentials most delegates want first.': '参与者最想先知道的重点。',
+    'Official Delegate & Participant Venue Guide': '官方参与者场地指南',
+    'The essentials delegates and participants want first.': '参与者最想先知道的重点。',
     'Calvary Crown Overview': 'Calvary Crown 概览',
     'Know the building before you arrive.': '抵达前先了解建筑动线。',
-    'Delegate Flow': '参与者动线',
+    'Delegate & Participant Flow': '参与者动线',
     'Think vertical, not complicated.': '把它看成垂直楼层动线，不复杂。',
     'How to Arrive and Check In': '如何抵达与报到',
-    'A simple step-by-step guide for the delegate arrival experience.': '参与者抵达体验的简单步骤指南。',
-    'A clear arrival plan for delegates.': '为参与者准备的清晰抵达计划。',
+    'A simple step-by-step guide for the delegate and participant arrival experience.': '参与者抵达体验的简单步骤指南。',
+    'A clear arrival plan for delegates and participants.': '为参与者准备的清晰抵达计划。',
     'Arrival Route': '抵达路线',
     'From travel to check-in.': '从交通到报到。',
     'Venue FAQ': '场地常见问题',
-    'Short answers for first-time delegates.': '第一次参加者的简短解答。',
+    'Short answers for first-time delegates and participants.': '第一次参加者的简短解答。',
     'Ready to Gather in Borneo?': '准备好相聚婆罗洲了吗？',
     Location: '地点',
     'Convention Dates': '大会日期',
@@ -506,6 +511,8 @@ const translations: Record<Exclude<SiteLanguage, 'en'>, Record<string, string>> 
     'Workshop Partner': '工作坊伙伴',
     'Red Nose CSR Partner': '红鼻子 CSR 伙伴',
     'Delegate Experience Partner': '参与者体验伙伴',
+    'Delegate & Participant Support': '参与者支持',
+    'Delegate / Participant Details': '参与者资料',
     'Travel & Hospitality Partner': '旅游与酒店伙伴',
     'Official Magazine / Media Partner': '官方杂志 / 媒体伙伴',
     'Legacy Partner': 'Legacy 伙伴',
@@ -654,7 +661,7 @@ const translations: Record<Exclude<SiteLanguage, 'en'>, Record<string, string>> 
     'Learn About BICC': 'Ketahui Tentang BICC',
     'Compare Foundation & Mastery Tracks': 'Bandingkan Trek Foundation & Mastery',
     'Where Laughter Becomes Legacy.': 'Di mana tawa menjadi legasi.',
-    'Official Convention Magazine & Delegate Handbook': 'Majalah Rasmi Konvensyen & Buku Panduan Delegat',
+    'Official Convention Magazine & Participant Handbook': 'Majalah Rasmi Konvensyen & Buku Panduan Peserta',
     'What Is BICC?': 'Apakah BICC?',
     'A convention for people who want practical growth, not just inspiration.': 'Konvensyen untuk mereka yang mahu perkembangan praktikal, bukan sekadar inspirasi.',
     'BICC brings together training, live performance, cultural exchange and community connection in one focused convention experience.':
@@ -741,7 +748,7 @@ const translations: Record<Exclude<SiteLanguage, 'en'>, Record<string, string>> 
     'Plan Your 3-Day BICC Journey.': 'Rancang perjalanan BICC 3 hari anda.',
     'Registration, Opening & First Classes': 'Pendaftaran, Pembukaan & Kelas Pertama',
     'Parallel Classes & Competition': 'Kelas Selari & Pertandingan',
-    'Outreach, Final Briefing & Gala Night (Closing)': 'Outreach, Taklimat Akhir & Gala Night (Penutup)',
+    'Outreach, Final Briefing & International Night Show': 'Outreach, Taklimat Akhir & Persembahan Malam Antarabangsa',
     Registration: 'Pendaftaran',
     Opening: 'Pembukaan',
     Lunch: 'Makan Tengah Hari',
@@ -753,7 +760,9 @@ const translations: Record<Exclude<SiteLanguage, 'en'>, Record<string, string>> 
     'Parallel Class 5': 'Kelas Selari 5',
     'Parallel Class 6': 'Kelas Selari 6',
     'Jamming Session': 'Sesi Jamming',
-    'International Show': 'Persembahan Antarabangsa',
+    'International Night Show': 'Persembahan Malam Antarabangsa',
+    'A formal closing event celebrating cultural exchange and international collaboration. Attendees will enjoy an elegant dinner accompanied by lively performances, followed by an awards ceremony recognizing outstanding achievements and contributions to the art of clowning.':
+      'Acara penutup rasmi yang meraikan pertukaran budaya dan kerjasama antarabangsa. Tetamu akan menikmati makan malam elegan bersama persembahan meriah, diikuti majlis anugerah yang mengiktiraf pencapaian dan sumbangan cemerlang dalam seni badut.',
     'Auditorium Session': 'Sesi Auditorium',
     Rest: 'Rehat',
     'Variety Art Competition': 'Pertandingan Seni Variasi',
@@ -761,7 +770,6 @@ const translations: Record<Exclude<SiteLanguage, 'en'>, Record<string, string>> 
     'Final Briefing': 'Taklimat Akhir',
     'Preparation for Gala Night': 'Persiapan Gala Night',
     'Hall Opens': 'Dewan Dibuka',
-    'Gala Night (Closing)': 'Gala Night (Penutup)',
     'Workshop Catalogue': 'Katalog Bengkel',
     'Hands-on sessions designed to help you create, connect, perform and serve.': 'Sesi praktikal yang membantu anda mencipta, berhubung, membuat persembahan dan berkhidmat.',
     'Participants are entitled to attend all eight classes included in their selected level. All classes are subject to change.':
@@ -792,19 +800,19 @@ const translations: Record<Exclude<SiteLanguage, 'en'>, Record<string, string>> 
     'Clown Makeup & Costumes': 'Solekan & Kostum Badut',
     'Creative Clowns for Community Care & Hospitals': 'Badut Kreatif untuk Penjagaan Komuniti & Hospital',
     'Find Your Way in Borneo.': 'Cari arah anda di Borneo.',
-    'Official Delegate Venue Guide': 'Panduan Lokasi Rasmi Delegat',
-    'The essentials most delegates want first.': 'Maklumat penting yang paling diperlukan delegat.',
+    'Official Delegate & Participant Venue Guide': 'Panduan Lokasi Rasmi Peserta',
+    'The essentials delegates and participants want first.': 'Maklumat penting yang paling diperlukan peserta.',
     'Calvary Crown Overview': 'Gambaran Calvary Crown',
     'Know the building before you arrive.': 'Kenali bangunan sebelum tiba.',
-    'Delegate Flow': 'Aliran Delegat',
+    'Delegate & Participant Flow': 'Aliran Peserta',
     'Think vertical, not complicated.': 'Fikirkan aliran tingkat, bukan sesuatu yang rumit.',
     'How to Arrive and Check In': 'Cara Tiba dan Daftar Masuk',
-    'A simple step-by-step guide for the delegate arrival experience.': 'Panduan langkah demi langkah untuk pengalaman ketibaan delegat.',
-    'A clear arrival plan for delegates.': 'Pelan ketibaan yang jelas untuk delegat.',
+    'A simple step-by-step guide for the delegate and participant arrival experience.': 'Panduan langkah demi langkah untuk pengalaman ketibaan peserta.',
+    'A clear arrival plan for delegates and participants.': 'Pelan ketibaan yang jelas untuk peserta.',
     'Arrival Route': 'Laluan Ketibaan',
     'From travel to check-in.': 'Dari perjalanan ke daftar masuk.',
     'Venue FAQ': 'Soalan Lazim Lokasi',
-    'Short answers for first-time delegates.': 'Jawapan ringkas untuk delegat pertama kali.',
+    'Short answers for first-time delegates and participants.': 'Jawapan ringkas untuk peserta pertama kali.',
     'Ready to Gather in Borneo?': 'Sedia berkumpul di Borneo?',
     Location: 'Lokasi',
     'Convention Dates': 'Tarikh Konvensyen',
@@ -888,7 +896,9 @@ const translations: Record<Exclude<SiteLanguage, 'en'>, Record<string, string>> 
     'Main Stage Partner': 'Rakan Pentas Utama',
     'Workshop Partner': 'Rakan Bengkel',
     'Red Nose CSR Partner': 'Rakan CSR Red Nose',
-    'Delegate Experience Partner': 'Rakan Pengalaman Delegat',
+    'Delegate Experience Partner': 'Rakan Pengalaman Peserta',
+    'Delegate & Participant Support': 'Sokongan Peserta',
+    'Delegate / Participant Details': 'Butiran Peserta',
     'Travel & Hospitality Partner': 'Rakan Perjalanan & Hospitaliti',
     'Official Magazine / Media Partner': 'Rakan Majalah Rasmi / Media',
     'Legacy Partner': 'Rakan Legacy',
@@ -1100,7 +1110,7 @@ const programme = [
   {
     day: 'Day 1',
     title: 'Arrival & Opening',
-    body: 'Registration, opening, first parallel sessions, jamming and International Show.',
+    body: 'Registration, opening, first parallel sessions, jamming and International Night Show.',
   },
   {
     day: 'Day 2',
@@ -1110,7 +1120,7 @@ const programme = [
   {
     day: 'Day 3',
     title: 'Showcase & Community',
-    body: 'Humanitarian activities, final briefing, preparation and Gala Night (Closing).',
+    body: 'Humanitarian activities, final briefing, preparation and International Night Show.',
   },
 ]
 
@@ -1256,7 +1266,7 @@ const workshopSchedulePreview = [
   {
     day: 'Day 1',
     title: 'Registration, Opening & First Classes',
-    body: 'Opening flow, Parallel Session 1, Parallel Class 2, jamming and International Show.',
+    body: 'Opening flow, Parallel Session 1, Parallel Class 2, jamming and International Night Show.',
   },
   {
     day: 'Day 2',
@@ -1265,8 +1275,8 @@ const workshopSchedulePreview = [
   },
   {
     day: 'Day 3',
-    title: 'Outreach, Final Briefing & Gala Night (Closing)',
-    body: 'Humanitarian activities, Parallel Class 6, final briefing and Gala Night (Closing).',
+    title: 'Outreach, Final Briefing & International Night Show',
+    body: 'Humanitarian activities, Parallel Class 6, final briefing and International Night Show.',
   },
 ] as const
 
@@ -1380,7 +1390,7 @@ const mentorLineup: MentorProfile[] = [
     country: 'Mexico',
     region: 'International',
     role: 'Guest Artist',
-    shortIntro: 'A guest artist joining the BICC 2026 line-up to bring colorful stage presence, international exchange and live performance energy to delegates.',
+    shortIntro: 'A guest artist joining the BICC 2026 line-up to bring colorful stage presence, international exchange and live performance energy to delegates and participants.',
     specialties: ['Guest Artist', 'Stage Performance', 'International Line-up'],
     image: mentorPortraitPayaCocos,
     featured: true,
@@ -1562,7 +1572,7 @@ const sponsorSupportGroups = [
 const sponsorValueCards = [
   {
     title: 'Brand Visibility',
-    body: 'Reach families, educators, performers, tourism partners and international delegates.',
+    body: 'Reach families, educators, performers, tourism partners and international delegates and participants.',
     tone: 'soft-coral',
     icon: 'V',
   },
@@ -1616,7 +1626,7 @@ const sponsorOpportunityCards = [
 const sponsorExposurePoints = [
   'Website',
   'Stage Backdrop',
-  'Delegate Pass',
+  'Delegate & Participant Pass',
   'Official Magazine',
   'Social Media',
   'Workshop Room',
@@ -1718,7 +1728,7 @@ const programmeDays: ProgrammeDay[] = [
       'Opening',
       'Parallel Session 1',
       'Parallel Class 2',
-      'International Show',
+      'International Night Show',
     ],
     image: landingProgrammeOpeningImage,
     sessions: [
@@ -1795,7 +1805,7 @@ const programmeDays: ProgrammeDay[] = [
       },
       {
         time: '19:30–21:30',
-        title: 'International Show',
+        title: 'International Night Show',
         type: 'showcase',
         track: 'Audience-facing programme',
         venue: 'Main hall',
@@ -1925,16 +1935,16 @@ const programmeDays: ProgrammeDay[] = [
     date: 'Aug 5, 2026',
     title: 'Showcase & Community',
     description:
-      'Humanitarian activities, final class, briefing, gala preparation and the closing gala night.',
+      'Humanitarian activities, final class, briefing, preparation and International Night Show.',
     focus:
-      'Humanitarian activities, final class, final briefing, gala preparation and gala night.',
+      'Humanitarian activities, final class, final briefing, preparation and International Night Show.',
     accent: 'showcase',
     chipLabels: [
       'Humanitarian Activities',
       'Parallel Class 6',
       'Final Briefing',
       'Gala Preparation',
-      'Gala Night (Closing)',
+      'International Night Show',
     ],
     image: landingPerformanceAudienceImage,
     sessions: [
@@ -2001,11 +2011,12 @@ const programmeDays: ProgrammeDay[] = [
       },
       {
         time: '19:30–21:30',
-        title: 'Gala Night (Closing)',
+        title: 'International Night Show',
         type: 'showcase',
         track: 'All Participants & Guests',
         venue: 'Main hall',
-        description: 'The closing celebration for BICC 2026, bringing participants, guests and performers together.',
+        description:
+          'A formal closing event celebrating cultural exchange and international collaboration. Attendees will enjoy an elegant dinner accompanied by lively performances, followed by an awards ceremony recognizing outstanding achievements and contributions to the art of clowning.',
         status: 'confirmed',
         icon: 'G',
         image: landingPerformanceAudienceImage,
@@ -2056,7 +2067,7 @@ const programmeFaqItems = [
   {
     question: 'Do I need to choose a track before attending?',
     answer:
-      'Yes. Delegates should select the pass or track that best fits their current experience and learning goals.',
+      'Yes. Delegates and participants should select the pass or track that best fits their current experience and learning goals.',
   },
   {
     question: 'Are all workshops included?',
@@ -2121,7 +2132,7 @@ const venueQuickFacts = [
     comingSoon: false,
   },
   {
-    title: 'Delegate Flow',
+    title: 'Delegate & Participant Flow',
     copy: 'Cafe/reception, auditorium, workshop rooms, accommodation, solat room and dining hall.',
     note: 'Expect a vertical convention flow across clearly assigned Calvary Crown floors.',
     icon: 'F',
@@ -2130,7 +2141,7 @@ const venueQuickFacts = [
   },
   {
     title: 'Updates',
-    copy: 'Delegate map overlays and final room assignments will be announced closer to the convention.',
+    copy: 'Delegate and participant map overlays and final room assignments will be announced closer to the convention.',
     note: 'Use official BICC updates for the most current visitor information.',
     icon: 'U',
     tone: 'soft-aqua',
@@ -2184,7 +2195,7 @@ const practicalGuideCards = [
     title: 'What to Bring',
     copy: 'Comfortable clothing, a notebook, a water bottle and any small workshop props.',
     icon: 'B',
-    note: 'Delegate essentials',
+    note: 'Delegate and participant essentials',
   },
   {
     title: 'Comfort & Access',
@@ -2291,36 +2302,43 @@ const firstTimeTawauFoodPicks = [
 
 const tawauFoodDirectory = [
   {
-    name: 'Seafood & Group Meals',
+    name: 'CC Cafe',
+    category: 'Cafe / Group Dining',
+    image: visitFoodCcCafeImage,
+    description: 'Comfort food, cafe meals and group dining spaces for participants planning meals around BICC.',
+    bestFor: 'Cafe meals',
+  },
+  {
+    name: 'Calvary Canteen',
+    category: 'Venue / Local Food',
+    image: visitFoodCalvaryCanteenImage,
+    description: 'A practical venue-side food reference with local favourites for simple daytime meals.',
+    bestFor: 'Venue convenience',
+  },
+  {
+    name: 'Pate Grill House',
     category: 'Dinner / Group Meals',
-    image: visitSeafoodImage,
-    description: 'Fresh coastal flavours and shared dinner options after programme days.',
-    bestFor: 'Group meals',
+    image: visitFoodPateGrillImage,
+    description: 'A casual dining option for dinner plans, small groups and relaxed post-session meals.',
+    bestFor: 'Group dinner',
   },
   {
-    name: 'Kopitiam Breakfast',
-    category: 'Morning / Quick Start',
-    image: visitKopitiamImage,
-    description: 'Coffee, toast, noodles and simple rice dishes before heading to the venue.',
-    bestFor: 'Breakfast',
+    name: 'Dojo',
+    category: 'Casual Dining',
+    image: visitFoodDojoImage,
+    description: 'A lively casual dining stop for participants who want an easy meal around Tawau.',
+    bestFor: 'Casual meal',
   },
   {
-    name: 'Street Food & Local Snacks',
-    category: 'Evening / Local Flavour',
-    image: visitNasiKuningImage,
-    description: 'Casual bites, market snacks and Tawau favourites during relaxed evening walks.',
-    bestFor: 'Light bites',
-  },
-  {
-    name: 'Cafe / Rest Stops',
-    category: 'Breaks / Casual Meetings',
-    image: visitWaterfrontImage,
-    description: 'General rest points for coffee, light meals and informal meetups between sessions.',
-    bestFor: 'Coffee breaks',
+    name: "Han's Kopitiam",
+    category: 'Kopitiam / Breakfast',
+    image: visitFoodHansKopitiamImage,
+    description: 'A kopitiam-style stop for breakfast, coffee and simple local meals before the programme day.',
+    bestFor: 'Breakfast / coffee',
   },
 ] as const
 
-const tawauFoodFilterItems = ['All', 'Dinner / Group Meals', 'Morning / Quick Start', 'Evening / Local Flavour', 'Breaks / Casual Meetings'] as const
+const tawauFoodFilterItems = ['All', 'Cafe / Group Dining', 'Venue / Local Food', 'Dinner / Group Meals', 'Casual Dining', 'Kopitiam / Breakfast'] as const
 
 const tawauStayCards = [
   {
@@ -2550,7 +2568,7 @@ const venueFaqItems = [
   },
   {
     question: 'Where do I register when I arrive?',
-    answer: 'Delegate registration details will be included in the final venue guide and programme update.',
+    answer: 'Delegate and participant registration details will be included in the final venue guide and programme update.',
   },
   {
     question: 'Are workshop rooms assigned already?',
@@ -2567,7 +2585,7 @@ const venueFaqItems = [
   },
   {
     question: 'How do I receive venue updates?',
-    answer: 'Follow the official BICC website or organiser updates for confirmed venue, programme and delegate information.',
+    answer: 'Follow the official BICC website or organiser updates for confirmed venue, programme and delegate/participant information.',
   },
 ] as const
 
@@ -2628,7 +2646,7 @@ const routeContent = {
     eyebrow: 'Programme',
     title: 'A three-day convention journey with confirmed daily rhythm.',
     intro:
-      'The programme now shows the main timing for registration, opening, parallel classes, jamming sessions, humanitarian activity, shows and Gala Night (Closing).',
+      'The programme now shows the main timing for registration, opening, parallel classes, jamming sessions, humanitarian activity, shows and International Night Show.',
     cards: programme,
     asideTitle: 'Programme note',
     asideBody:
@@ -2692,7 +2710,7 @@ const routeContent = {
     eyebrow: 'Venue & Travel',
     title: 'Gather in Tawau, Sabah and experience Borneo as part of the convention story.',
     intro:
-      'The venue page will help delegates understand where BICC takes place, how to plan travel and why the local setting matters to the convention atmosphere.',
+      'The venue page will help delegates and participants understand where BICC takes place, how to plan travel and why the local setting matters to the convention atmosphere.',
     cards: [
       {
         title: 'Tawau, Sabah, Malaysia',
@@ -2721,7 +2739,7 @@ const routeContent = {
     cards: [
       {
         title: 'Brand Visibility',
-        body: 'Reach performers, educators, families, creative leaders and international delegates in one official event platform.',
+        body: 'Reach performers, educators, families, creative leaders and international delegates and participants in one official event platform.',
       },
       {
         title: 'Cultural Alignment',
@@ -2799,7 +2817,7 @@ function mapCmsMentors(cmsMentors: CmsMentor[], language: SiteLanguage): MentorP
       shortIntro:
         localize(mentor.shortIntro, language) ||
         fallbackMentor?.shortIntro ||
-        'A guest artist joining BICC 2026 to share clown craft, performance experience and creative exchange with delegates.',
+        'A guest artist joining BICC 2026 to share clown craft, performance experience and creative exchange with delegates and participants.',
       specialties: mentor.specialties?.map((specialty) => localize(specialty, language)).filter(Boolean).slice(0, 3) ||
         fallbackMentor?.specialties || ['Guest Artist', 'Performance', 'Creative Exchange'],
       officialBioUrl: mentor.officialBioUrl || fallbackMentor?.officialBioUrl,
@@ -2981,7 +2999,7 @@ function applyPageTranslations(language: SiteLanguage) {
 function buildDelegateSummary(form: DelegateFormState) {
   const pass = getPassByTrack(form.track)
   return [
-    'BICC 2026 Delegate Details',
+    'BICC 2026 Delegate / Participant Details',
     '',
     `Full Name: ${form.fullName}`,
     `Email: ${form.email}`,
@@ -2999,7 +3017,7 @@ function buildDelegateSummary(form: DelegateFormState) {
 
 function buildDelegateMailto(form: DelegateFormState) {
   const pass = getPassByTrack(form.track)
-  const subject = `BICC 2026 Delegate Details - ${pass.shortName}`
+  const subject = `BICC 2026 Delegate / Participant Details - ${pass.shortName}`
   const body = buildDelegateSummary(form)
 
   const query = new URLSearchParams({
@@ -3397,7 +3415,7 @@ function VenueHero() {
         <p className="section-kicker">Venue & Visitor Guide</p>
         <div className="venue-hero-title-row">
           <h1>Find Your Way in Borneo.</h1>
-          <span className="programme-ticket-badge">Official Delegate Venue Guide</span>
+          <span className="programme-ticket-badge">Official Delegate & Participant Venue Guide</span>
         </div>
         <p className="venue-hero-intro">
           BICC 2026 gathers at {venueInfo.venueName} in {venueInfo.city}, {venueInfo.region}. This guide covers the building, arrival flow and essentials.
@@ -3405,7 +3423,7 @@ function VenueHero() {
         <div className="event-badges programme-hero-badges">
           <span>{venueInfo.city}, {venueInfo.region}</span>
           <span>Aug 3–5, 2026</span>
-          <span>Delegate Registration</span>
+          <span>Delegate & Participant Registration</span>
           <span>Workshop Floors</span>
         </div>
         <div className="hero-actions programme-hero-actions">
@@ -3420,7 +3438,7 @@ function VenueHero() {
 
       <div className="venue-hero-visual">
         <div className="venue-hero-collage">
-          <img alt="Delegates arriving at a BICC venue in Tawau" className="venue-hero-main-photo" src={venueArrivalDelegatesImage} />
+          <img alt="Delegates and participants arriving at a BICC venue in Tawau" className="venue-hero-main-photo" src={venueArrivalDelegatesImage} />
           <div className="venue-hero-photo-overlay" />
           <div className="venue-hero-card">
             <span>Confirmed Venue</span>
@@ -3455,7 +3473,7 @@ function VenueQuickFacts() {
       <div className="section-head with-copy">
         <div>
           <p className="section-kicker">Venue at a Glance</p>
-          <h2>The essentials most delegates want first.</h2>
+          <h2>The essentials delegates and participants want first.</h2>
         </div>
       </div>
 
@@ -3481,7 +3499,7 @@ function VenueMap() {
     {
       range: 'L10',
       title: 'Dining Hall',
-      note: 'Delegate meals and group dining',
+      note: 'Delegate and participant meals and group dining',
       type: 'showcase' as ProgrammeSessionType,
     },
     {
@@ -3576,9 +3594,9 @@ function VenueMap() {
 
         <div className="venue-orientation-panel">
           <div className="venue-orientation-panel-head">
-            <p className="section-kicker">Delegate Flow</p>
+            <p className="section-kicker">Delegate & Participant Flow</p>
             <h3>Think vertical, not complicated.</h3>
-            <p>Calvary Crown is a 10-storey venue. For BICC, delegates mainly need to understand where to arrive, gather, train, stay and dine.</p>
+            <p>Calvary Crown is a 10-storey venue. For BICC, delegates and participants mainly need to understand where to arrive, gather, train, stay and dine.</p>
           </div>
 
           <div className="venue-building-cutaway">
@@ -3637,7 +3655,7 @@ function DelegateArrivalFlow() {
       <div className="section-head with-copy">
         <div>
           <p className="section-kicker">How to Arrive and Check In</p>
-          <h2>A simple step-by-step guide for the delegate arrival experience.</h2>
+          <h2>A simple step-by-step guide for the delegate and participant arrival experience.</h2>
         </div>
       </div>
 
@@ -3665,7 +3683,7 @@ function GettingToTawau() {
       <div className="section-head with-copy">
         <div>
           <p className="section-kicker">Plan Your Visit</p>
-          <h2>A clear arrival plan for delegates.</h2>
+          <h2>A clear arrival plan for delegates and participants.</h2>
         </div>
         <p className="section-intro">Use this as your convention-day checklist before the final delegate guide is released.</p>
       </div>
@@ -3673,7 +3691,7 @@ function GettingToTawau() {
       <div className="venue-visit-planner-shell">
         <article className="venue-route-card">
           <img
-            alt="Delegates arriving for BICC in Tawau"
+            alt="Delegates and participants arriving for BICC in Tawau"
             className="venue-route-photo"
             decoding="async"
             loading="lazy"
@@ -3723,7 +3741,7 @@ function VenueFAQ() {
       <div className="section-head with-copy">
         <div>
           <p className="section-kicker">Venue FAQ</p>
-          <h2>Short answers for first-time delegates.</h2>
+          <h2>Short answers for first-time delegates and participants.</h2>
         </div>
       </div>
 
@@ -3879,8 +3897,8 @@ function VisitFoodSection() {
       <div className="visit-food-guide visit-food-guide-compact">
         <div className="visit-food-guide-head">
           <p className="section-kicker">Tawau Food Guide</p>
-          <h3>Food ideas participants can scan fast.</h3>
-          <p>Use these as general starting points. Specific cafe and restaurant listings will be added when sponsor or partner details are confirmed.</p>
+          <h3>Food stops participants can scan fast.</h3>
+          <p>Use these current BICC food references for simple planning. Confirm opening hours, menu and group arrangements directly before visiting.</p>
         </div>
 
         <div className="visit-food-filter-row" aria-label="Food directory filters">
@@ -3906,7 +3924,7 @@ function VisitFoodSection() {
             </article>
           ))}
         </div>
-        <p className="visit-directory-note">General food guidance only. Partner cafes, restaurants and sponsored food stops can be added later without crowding this page.</p>
+        <p className="visit-directory-note">Food references are provided for delegate and participant planning. Details may be updated as partner arrangements are confirmed.</p>
       </div>
     </section>
   )
@@ -4120,10 +4138,10 @@ function VisitTawauPage() {
 function ContactPage() {
   const contactCards = [
     {
-      title: 'Delegate Support',
+      title: 'Delegate & Participant Support',
       copy: 'Passes, track selection, payment follow-up and arrival questions.',
-      cta: 'Email Delegate Support',
-      href: 'mailto:hello@bicc2026.com?subject=BICC%202026%20Delegate%20Support',
+      cta: 'Email Delegate & Participant Support',
+      href: 'mailto:hello@bicc2026.com?subject=BICC%202026%20Delegate%20and%20Participant%20Support',
       tone: 'soft-aqua',
       external: false,
     },
@@ -4185,7 +4203,7 @@ function ContactPage() {
             <p className="section-kicker">Choose the right desk</p>
             <h2>Send your question to the right place.</h2>
           </div>
-          <p>Short, direct routes for delegates, international visitors, partners and media.</p>
+          <p>Short, direct routes for delegates and participants, international visitors, partners and media.</p>
         </div>
         <div className="contact-card-grid">
           {contactCards.map((card) => (
@@ -4235,7 +4253,7 @@ const generalFaqItems = [
   {
     question: 'Are hotel and travel bookings handled by BICC?',
     answer:
-      'Delegates should arrange hotels, flights and local travel directly unless BICC announces an official partner arrangement.',
+      'Delegates and participants should arrange hotels, flights and local travel directly unless BICC announces an official partner arrangement.',
   },
 ] as const
 
@@ -4255,7 +4273,7 @@ function FAQPage() {
           <p className="section-kicker">BICC FAQ</p>
           <h1>Quick answers before you join BICC 2026.</h1>
           <p>
-            A practical guide for delegates, international visitors, instructors, sponsors and families planning for Tawau, Sabah.
+            A practical guide for delegates and participants, international visitors, instructors, sponsors and families planning for Tawau, Sabah.
           </p>
         </div>
         <div className="hero-actions">
@@ -4309,7 +4327,7 @@ function LanguagesPage() {
       title: 'Main Site Language',
       headline: 'BICC 2026 is presented primarily in English.',
       copy:
-        'The full website, pass information, programme preview and visitor guide are maintained in English for international delegates and partners.',
+        'The full website, pass information, programme preview and visitor guide are maintained in English for international delegates, participants and partners.',
       points: ['Official website language', 'International delegate information', 'Programme and pass details'],
       cta: 'Back to Home',
       href: '/',
@@ -4348,7 +4366,7 @@ function LanguagesPage() {
           <p className="section-kicker">Language Support</p>
           <h1>English main site, with Chinese and Malay quick guides.</h1>
           <p>
-            BICC is an international convention rooted in Sabah. These quick guides help delegates, families, local partners and visitors understand the essentials before they explore the full English site.
+            BICC is an international convention rooted in Sabah. These quick guides help delegates, participants, families, local partners and visitors understand the essentials before they explore the full English site.
           </p>
         </div>
         <div className="language-quick-links" aria-label="Language quick links">
@@ -4577,7 +4595,7 @@ function SponsorOpportunities() {
           <p className="section-kicker">Sponsorship Opportunities</p>
           <h2>Choose the sponsorship lane that fits your brand.</h2>
         </div>
-        <p className="section-intro">Stage, workshops, CSR, delegates, travel or media. Each route can be shaped into a package.</p>
+        <p className="section-intro">Stage, workshops, CSR, delegates and participants, travel or media. Each route can be shaped into a package.</p>
       </div>
 
       <div className="sponsor-opportunity-grid">
@@ -4724,7 +4742,7 @@ function PassHero() {
       </div>
 
       <div className="passes-hero-visual">
-        <img alt="Delegate receiving a BICC convention pass" className="passes-hero-photo" src={passesRegistrationMomentImage} />
+        <img alt="Delegate or participant receiving a BICC convention pass" className="passes-hero-photo" src={passesRegistrationMomentImage} />
         <div className="passes-hero-photo-overlay" />
         <div className="passes-hero-ticket-stack" aria-label="Available passes">
           {passes.map((pass) => (
@@ -4821,7 +4839,7 @@ function PassTrustStrip() {
       copy: 'Foundation and Mastery are both US$130.',
     },
     {
-      title: 'Delegate details after payment',
+      title: 'Delegate / participant details after payment',
       copy: 'Complete your profile once checkout is done.',
     },
   ]
@@ -4894,7 +4912,7 @@ function PassRegistrationFlow() {
 
       <div className="section-cta left">
         <a className="text-link" href="/delegate-details?track=foundation">
-          Already paid? Complete Delegate Details
+          Already paid? Complete Delegate / Participant Details
         </a>
       </div>
     </section>
@@ -4987,7 +5005,7 @@ function RegistrationConfirmedPage() {
           </div>
           <div className="hero-actions">
             <a className="primary-btn" href={`/delegate-details?track=${track}`}>
-              Complete Delegate Details
+              Complete Delegate / Participant Details
             </a>
             <a className="secondary-btn" href="/programme">
               View Programme
@@ -5012,7 +5030,7 @@ function RegistrationConfirmedPage() {
       <section className="editorial-section section-shell registration-steps-panel">
         <div className="section-head with-copy">
           <div>
-            <p className="section-kicker">Delegate Flow</p>
+            <p className="section-kicker">Delegate / Participant Flow</p>
             <h2>The post-payment steps are simple.</h2>
           </div>
         </div>
@@ -5107,7 +5125,7 @@ function DelegateDetailsPage() {
   const handleCopyDetails = async () => {
     try {
       await navigator.clipboard.writeText(buildDelegateSummary(form))
-      setStatusMessage('Delegate details copied. You can paste them into an email to hello@bicc2026.com if needed.')
+      setStatusMessage('Delegate / participant details copied. You can paste them into an email to hello@bicc2026.com if needed.')
     } catch {
       setStatusMessage('Copy was not available in this browser. You can still use “Send Details to BICC” to open your email app.')
     }
@@ -5135,7 +5153,7 @@ function DelegateDetailsPage() {
     <main className="registration-page">
       <section className="registration-hero section-shell delegate-form-shell">
         <div className="registration-hero-copy">
-          <p className="section-kicker">Delegate Details</p>
+          <p className="section-kicker">Delegate / Participant Details</p>
           <h1>Complete your BICC delegate details.</h1>
           <p className="page-intro">
             Use this simple form so the BICC team can match your payment with your selected track and send you the right updates before the convention.
@@ -5143,7 +5161,7 @@ function DelegateDetailsPage() {
           <div className="event-badges">
             <span>{selectedPass.shortName}</span>
             <span>{selectedPass.price}</span>
-            <span>International Delegate</span>
+            <span>International Delegate / Participant</span>
             <span>Official BICC Contact Flow</span>
           </div>
         </div>
@@ -5582,7 +5600,14 @@ function MentorHero() {
       </div>
 
       <div className="mentor-hero-visual">
-        <img alt="International BICC instructor and guest artist lineup" className="mentor-hero-poster" src={mentorHeroLineupImage} />
+        <div className="mentor-hero-lineup-collage" aria-label="International BICC instructor and guest artist lineup">
+          <img alt="Mr. John" className="mentor-lineup-photo mentor-lineup-photo-john" src="/mentors/mr-john.jpg" />
+          <img alt="Chagy" className="mentor-lineup-photo mentor-lineup-photo-chagy" src="/mentors/chagy.jpg" />
+          <img alt="Randy Christensen" className="mentor-lineup-photo mentor-lineup-photo-randy" src="/mentors/randy-christensen.jpg" />
+          <img alt="Uncle Button" className="mentor-lineup-photo mentor-lineup-photo-button" src="/mentors/uncle-button.jpg" />
+          <img alt="Paya Cocos" className="mentor-lineup-photo mentor-lineup-photo-paya" src="/mentors/paya-cocos.png" />
+          <img alt="Uncle Sunday" className="mentor-lineup-photo mentor-lineup-photo-sunday" src="/mentors/uncle-sunday.png" />
+        </div>
         <div aria-hidden="true" className="mentor-hero-overlay" />
         <span className="programme-ticket-badge mentor-hero-badge">2026 Instructor Line-up</span>
         <div className="mentor-hero-note">
@@ -5772,7 +5797,6 @@ function HomePage() {
             <p className="hero-eyebrow">Borneo International Clown Convention 2026</p>
           </div>
           <div className="hero-title-block">
-            <p className="hero-monogram">BICC 2026</p>
             <h1>
               Where Laughter Becomes <span className="hero-highlight">Legacy</span>.
             </h1>
@@ -5814,7 +5838,6 @@ function HomePage() {
             <img alt="Clown performance and audience moment" src={landingPerformanceAudienceImage} />
             <span>Performance / Audience</span>
           </article>
-          <p className="hero-caption">Official Convention Magazine & Delegate Handbook</p>
         </div>
       </section>
 
@@ -6451,13 +6474,11 @@ function App() {
         <a className="brand-lockup" href="/">
           <img alt="BICC 2026 logo" className="brand-logo-image" src={biccLogo} />
           <div className="brand-text-lockup">
-            <span className="brand-site-tag">Official Site</span>
             <div className="brand-logo-line">
               <span>BICC</span>
               <RedNoseIcon />
               <span>2026</span>
             </div>
-            <small>Borneo International Clown Convention 2026</small>
           </div>
         </a>
 
