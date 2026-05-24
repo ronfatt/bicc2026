@@ -6445,13 +6445,13 @@ body {
 }
 
 .visit-food-directory-compact {
-  grid-template-columns: repeat(6, minmax(0, 1fr));
-  gap: 12px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
 }
 
 .visit-food-directory-card {
   display: grid;
-  grid-template-rows: 128px 1fr;
+  grid-template-rows: 170px 1fr;
   overflow: hidden;
   border-radius: 18px;
   border: 1px solid rgba(20, 58, 63, 0.08);
@@ -6497,7 +6497,7 @@ body {
   font-size: 0.82rem;
   line-height: 1.45;
   display: -webkit-box;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }

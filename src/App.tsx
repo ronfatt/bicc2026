@@ -1,5 +1,6 @@
 import { useEffect, useState, type ChangeEvent, type FormEvent } from 'react'
 import { cmsQueries, fetchFromSanity, localize, sanityImageUrl, type CmsMentor, type CmsPageContent } from './cms'
+import { siteConfig } from './siteConfig'
 
 const landingHeroPerformerImage = '/landing/home-hero-performer.jpg'
 const landingWorkshopTrainingImage = '/landing/home-workshop-training.jpg'
@@ -17,39 +18,37 @@ const passesRegistrationMomentImage = '/landing/passes-registration-moment.jpg'
 const passesFoundationWorkshopImage = '/landing/passes-foundation-workshop.jpg'
 const passesMasteryStageImage = '/landing/passes-mastery-stage.jpg'
 const venueArrivalDelegatesImage = '/landing/venue-arrival-delegates.jpg'
-const biccLogo = '/bicc-logo.png'
-const foundationPassPaymentLink = 'https://buy.stripe.com/6oUdR22tqekU9Siaun24006'
-const masteryPassPaymentLink = 'https://buy.stripe.com/28EeV69VS3Ggd4uaun24007'
-const visitTawauPartnerLink = 'https://linktr.ee/jwvnow'
-const delegateFormStorageKey = 'bicc2026-delegate-details-draft'
-const mentorPortraitUncleSunday = '/mentors/uncle-sunday.png'
+const biccLogo = '/bicc-logo.webp'
+const foundationPassPaymentLink = siteConfig.links.foundationPassPayment
+const masteryPassPaymentLink = siteConfig.links.masteryPassPayment
+const visitTawauPartnerLink = siteConfig.links.visitTawauPartner
+const delegateFormStorageKey = siteConfig.storageKeys.delegateDetailsDraft
+const mentorPortraitUncleSunday = '/mentors/uncle-sunday.webp'
 const mentorPortraitChagy = '/mentors/chagy.jpg'
 const mentorPortraitUncleButton = '/mentors/uncle-button.jpg'
 const mentorPortraitMrJohn = '/mentors/mr-john.jpg'
 const mentorPortraitWatt = '/mentors/watt-de-clown.jpg'
 const mentorPortraitZipper = '/mentors/zipper.jpg'
 const mentorPortraitRandy = '/mentors/randy-christensen.jpg'
-const mentorPortraitEdmund = '/mentors/edmund-khong.png'
-const mentorPortraitKosuke = '/mentors/kosuke-omune.png'
+const mentorPortraitEdmund = '/mentors/edmund-khong.webp'
+const mentorPortraitKosuke = '/mentors/kosuke-omune.webp'
 const mentorPortraitTony = '/mentors/tony-lee.jpg'
 const mentorPortraitJackie = '/mentors/jackie-newton.jpg'
 const mentorPortraitKakYogi = '/mentors/kak-yogi.jpg'
-const mentorPortraitPayaCocos = '/mentors/paya-cocos.png'
+const mentorPortraitPayaCocos = '/mentors/paya-cocos.webp'
 const mentorPortraitFrankie = '/mentors/frankie-malachi.jpg'
-const calvaryCrownAerialImage = '/calvary-scene.png'
+const calvaryCrownAerialImage = '/calvary-scene.webp'
 const calvaryCrownPlanImage = '/tawau-town-map.jpg'
 const visitSeafoodImage = 'https://commons.wikimedia.org/wiki/Special:FilePath/MakananLaut.jpg?width=1200'
 const visitKopitiamImage = 'https://commons.wikimedia.org/wiki/Special:FilePath/Coffee%20shop%20zz.jpg?width=900'
 const visitNasiKuningImage = 'https://commons.wikimedia.org/wiki/Special:FilePath/Nasi%20Kuning%20Tawau.jpg?width=900'
-const visitPasarTanjungImage = 'https://commons.wikimedia.org/wiki/Special:FilePath/Tawau%20Sabah%20Pasar-Tanjung-Tawau-01.jpg?width=1400'
-const visitCocoaVillageImage = 'https://commons.wikimedia.org/wiki/Special:FilePath/Teck%20Guan%20Cocoa%20Village%20Columnar%20Basalt.jpg?width=1000'
 const visitWaterfrontImage = 'https://commons.wikimedia.org/wiki/Special:FilePath/Tawau%20-%20The%20City%20%2848869140708%29.jpg?width=1600'
 const tawauGuidePasarTanjungImage = '/visit-tawau/things/tawau-guide-000.jpg'
-const tawauGuideCitySignImage = '/visit-tawau/things/tawau-guide-001.jpg'
 const tawauGuideBalungCocosImage = '/visit-tawau/things/tawau-guide-002.jpg'
 const tawauGuideForestImage = '/visit-tawau/things/tawau-guide-003.jpg'
-const tawauGuideChesterMarketImage = '/visit-tawau/things/tawau-guide-004.jpg'
+const tawauGuideChesterMarketImage = '/visit-tawau/things/chester-night-market.webp'
 const tawauGuideCocoaVillageImage = '/visit-tawau/things/tawau-guide-005.jpg'
+const tawauGuideWaterfrontImage = '/visit-tawau/things/tawau-jawi-waterfront.webp'
 const hotelAeroHomeSuiteImage = '/visit-tawau/hotels/aero-home-suite.jpg'
 const hotelBluSentralImage = '/visit-tawau/hotels/blu-sentral-hotel.jpg'
 const hotelBorneoRoyaleImage = '/visit-tawau/hotels/borneo-royale-hotel.jpg'
@@ -197,6 +196,10 @@ const translations: Record<Exclude<SiteLanguage, 'en'>, Record<string, string>> 
     'Exchange Lab': '交流实验室',
     Showcase: '展示',
     'Delegate Info': '参与者资讯',
+    'Participant Info': '参与者资讯',
+    'All Participants': '所有参与者',
+    'All Participants & Guests': '所有参与者与来宾',
+    'Gala participants & guests': '晚会参与者与来宾',
     'Professional Workshops': '专业工作坊',
     'Performance Showcase': '演出展示',
     'Community & Cultural Exchange': '社区与文化交流',
@@ -451,6 +454,7 @@ const translations: Record<Exclude<SiteLanguage, 'en'>, Record<string, string>> 
     'Eat Tawau Without Overplanning': '轻松吃遍斗湖',
     'Tawau Food Guide': '斗湖美食指南',
     'Food ideas delegates can scan fast.': '参与者可快速浏览的美食建议。',
+    'Food ideas participants can scan fast.': '参与者可快速浏览的美食建议。',
     'Accommodation References': '住宿参考',
     'Suggested stays from local accommodation materials.': '根据本地住宿资料整理的推荐住宿。',
     'Tawau, Sabah': '沙巴斗湖',
@@ -573,7 +577,11 @@ const translations: Record<Exclude<SiteLanguage, 'en'>, Record<string, string>> 
     'Mastery Track': 'Trek Mastery',
     'Exchange Lab': 'Makmal Pertukaran',
     Showcase: 'Showcase',
-    'Delegate Info': 'Maklumat Delegat',
+    'Delegate Info': 'Maklumat Peserta',
+    'Participant Info': 'Maklumat Peserta',
+    'All Participants': 'Semua Peserta',
+    'All Participants & Guests': 'Semua Peserta & Tetamu',
+    'Gala participants & guests': 'Peserta gala & tetamu',
     'Professional Workshops': 'Bengkel Profesional',
     'Performance Showcase': 'Persembahan Showcase',
     'Community & Cultural Exchange': 'Komuniti & Pertukaran Budaya',
@@ -828,7 +836,8 @@ const translations: Record<Exclude<SiteLanguage, 'en'>, Record<string, string>> 
     'Things To Do': 'Aktiviti',
     'Eat Tawau Without Overplanning': 'Nikmati Tawau tanpa terlalu banyak merancang',
     'Tawau Food Guide': 'Panduan Makanan Tawau',
-    'Food ideas delegates can scan fast.': 'Idea makanan yang mudah diimbas delegat.',
+    'Food ideas delegates can scan fast.': 'Idea makanan yang mudah diimbas peserta.',
+    'Food ideas participants can scan fast.': 'Idea makanan yang mudah diimbas peserta.',
     'Accommodation References': 'Rujukan Penginapan',
     'Suggested stays from local accommodation materials.': 'Cadangan penginapan berdasarkan bahan tempatan.',
     'Event Destination': 'Destinasi Acara',
@@ -1672,7 +1681,7 @@ const programmeLegendItems = [
   },
   {
     key: 'delegate-info',
-    label: 'Delegate Info',
+    label: 'Participant Info',
     description: 'Registration, orientation, breaks, meals and practical updates.',
   },
 ] as const
@@ -1684,7 +1693,7 @@ const programmeFilterItems: Array<{ key: ProgrammeFilterKey; label: string }> = 
   { key: 'exchange', label: 'Exchange' },
   { key: 'showcase', label: 'Showcase' },
   { key: 'community', label: 'Community' },
-  { key: 'delegate-info', label: 'Delegate Info' },
+  { key: 'delegate-info', label: 'Participant Info' },
 ]
 
 const programmeStatusLabels: Record<ProgrammeSessionStatus, string> = {
@@ -1717,7 +1726,7 @@ const programmeDays: ProgrammeDay[] = [
         time: '9:00–10:00',
         title: 'Registration',
         type: 'delegate-info',
-        track: 'All Delegates',
+        track: 'All Participants',
         venue: 'Registration area',
         description: 'Check in, collect materials and receive the latest programme updates.',
         status: 'confirmed',
@@ -1727,9 +1736,9 @@ const programmeDays: ProgrammeDay[] = [
         time: '10:30–12:00',
         title: 'Opening',
         type: 'showcase',
-        track: 'All Delegates',
+        track: 'All Participants',
         venue: 'Main hall',
-        description: 'Official opening moment for delegates, instructors, organisers and guests.',
+        description: 'Official opening moment for participants, instructors, organisers and guests.',
         status: 'confirmed',
         icon: 'O',
         image: landingPerformanceAudienceImage,
@@ -1738,7 +1747,7 @@ const programmeDays: ProgrammeDay[] = [
         time: '12:00–13:00',
         title: 'Lunch',
         type: 'delegate-info',
-        track: 'All Delegates',
+        track: 'All Participants',
         venue: 'Break area',
         description: 'Midday break before the first parallel learning session.',
         status: 'confirmed',
@@ -1758,7 +1767,7 @@ const programmeDays: ProgrammeDay[] = [
         time: '14:00–15:00',
         title: 'Tea Break',
         type: 'delegate-info',
-        track: 'All Delegates',
+        track: 'All Participants',
         venue: 'Break area',
         description: 'A pause between learning blocks.',
         status: 'confirmed',
@@ -1778,9 +1787,9 @@ const programmeDays: ProgrammeDay[] = [
         time: '16:00–17:00',
         title: 'Jamming Session',
         type: 'community',
-        track: 'All Delegates',
+        track: 'All Participants',
         venue: 'Shared practice space',
-        description: 'A creative jam for delegates to connect, test ideas and share energy.',
+        description: 'A creative jam for participants to connect, test ideas and share energy.',
         status: 'confirmed',
         icon: 'J',
       },
@@ -1820,7 +1829,7 @@ const programmeDays: ProgrammeDay[] = [
         time: '9:00–10:00',
         title: 'Auditorium Session',
         type: 'delegate-info',
-        track: 'All Delegates',
+        track: 'All Participants',
         venue: 'Auditorium, Lv 2',
         description: 'Shared morning session in the Lv 2 auditorium.',
         status: 'confirmed',
@@ -1840,7 +1849,7 @@ const programmeDays: ProgrammeDay[] = [
         time: '11:00–11:30',
         title: 'Rest',
         type: 'delegate-info',
-        track: 'All Delegates',
+        track: 'All Participants',
         venue: 'Break area',
         description: 'Short rest before the next class block.',
         status: 'confirmed',
@@ -1860,7 +1869,7 @@ const programmeDays: ProgrammeDay[] = [
         time: '13:00–14:00',
         title: 'Lunch',
         type: 'delegate-info',
-        track: 'All Delegates',
+        track: 'All Participants',
         venue: 'Break area',
         description: 'Lunch break between workshop blocks.',
         status: 'confirmed',
@@ -1880,7 +1889,7 @@ const programmeDays: ProgrammeDay[] = [
         time: '15:30–16:30',
         title: 'Tea Break',
         type: 'delegate-info',
-        track: 'All Delegates',
+        track: 'All Participants',
         venue: 'Break area',
         description: 'Tea break before the late afternoon programme.',
         status: 'confirmed',
@@ -1890,7 +1899,7 @@ const programmeDays: ProgrammeDay[] = [
         time: '16:30–18:30',
         title: 'Jamming Session',
         type: 'community',
-        track: 'All Delegates',
+        track: 'All Participants',
         venue: 'Shared practice space',
         description: 'A longer creative jam for exchange, play and collaborative exploration.',
         status: 'confirmed',
@@ -1944,7 +1953,7 @@ const programmeDays: ProgrammeDay[] = [
         time: '12:30–13:30',
         title: 'Lunch',
         type: 'delegate-info',
-        track: 'All Delegates',
+        track: 'All Participants',
         venue: 'Break area',
         description: 'Lunch break before the final class and gala preparation.',
         status: 'confirmed',
@@ -1964,9 +1973,9 @@ const programmeDays: ProgrammeDay[] = [
         time: '14:30–16:00',
         title: 'Final Briefing',
         type: 'delegate-info',
-        track: 'All Delegates',
+        track: 'All Participants',
         venue: 'Main hall',
-        description: 'Final briefing for delegates before the evening gala flow.',
+        description: 'Final briefing for participants before the evening gala flow.',
         status: 'confirmed',
         icon: 'B',
       },
@@ -1974,7 +1983,7 @@ const programmeDays: ProgrammeDay[] = [
         time: '16:00',
         title: 'Preparation for Gala Night',
         type: 'showcase',
-        track: 'Gala participants',
+        track: 'Gala participants & guests',
         venue: 'Main hall',
         description: 'Preparation time for the evening gala programme.',
         status: 'confirmed',
@@ -1984,9 +1993,9 @@ const programmeDays: ProgrammeDay[] = [
         time: '19:00',
         title: 'Hall Opens',
         type: 'delegate-info',
-        track: 'All Delegates & Guests',
+        track: 'All Participants & Guests',
         venue: 'Main hall',
-        description: 'Doors open for the gala night audience and delegates.',
+        description: 'Doors open for the gala night audience and participants.',
         status: 'confirmed',
         icon: 'O',
       },
@@ -1994,9 +2003,9 @@ const programmeDays: ProgrammeDay[] = [
         time: '19:30–21:30',
         title: 'Gala Night (Closing)',
         type: 'showcase',
-        track: 'All Delegates & Guests',
+        track: 'All Participants & Guests',
         venue: 'Main hall',
-        description: 'The closing celebration for BICC 2026, bringing delegates, guests and performers together.',
+        description: 'The closing celebration for BICC 2026, bringing participants, guests and performers together.',
         status: 'confirmed',
         icon: 'G',
         image: landingPerformanceAudienceImage,
@@ -2213,7 +2222,7 @@ const tawauFoodCards = [
   {
     id: 'seafood',
     title: 'Seafood & Local Dining',
-    copy: 'Fresh coastal flavours, shared meals and easy delegate dinners after programme days.',
+    copy: 'Fresh coastal flavours, shared meals and easy participant dinners after programme days.',
     tone: 'seafood',
     meta: 'Dinner / group meals',
     image: visitSeafoodImage,
@@ -2258,17 +2267,17 @@ const tawauFoodCards = [
   {
     id: 'cafe',
     title: 'Cafe Stops',
-    copy: 'Slow moments for delegates, families and guests to recharge between convention plans.',
+    copy: 'Slow moments for participants, families and guests to recharge between convention plans.',
     tone: 'cafe',
     meta: 'Breaks / casual meetings',
     image: visitWaterfrontImage,
     credit: 'Adznee Abas / Wikimedia Commons',
     guideTitle: 'Use cafes as reset points',
     guideCopy:
-      'Cafes are useful between travel, workshops and evening plans. They give delegates a calmer place to rest, talk and plan the next move.',
+      'Cafes are useful between travel, workshops and evening plans. They give participants a calmer place to rest, talk and plan the next move.',
     bestTime: 'Afternoon / between sessions',
     whereToStart: 'Look near city-centre hotels, shopping areas and routes back from the venue.',
-    highlights: ['Coffee breaks', 'Cocoa drinks', 'Light meals', 'Delegate meetups'],
+    highlights: ['Coffee breaks', 'Cocoa drinks', 'Light meals', 'Participant meetups'],
   },
 ] as const
 
@@ -2282,167 +2291,41 @@ const firstTimeTawauFoodPicks = [
 
 const tawauFoodDirectory = [
   {
-    name: 'CC Café',
-    category: 'Venue Food',
-    image: visitKopitiamImage,
-    description: 'A convenient cafe stop connected to the Calvary Crown venue flow for delegates.',
-    bestFor: 'Venue cafe',
-  },
-  {
-    name: 'Pate Grill House',
-    category: 'Casual Dining',
+    name: 'Seafood & Group Meals',
+    category: 'Dinner / Group Meals',
     image: visitSeafoodImage,
-    description: 'A practical grill-house option for dinner plans, groups and relaxed post-session meals.',
-    bestFor: 'Group dinner',
+    description: 'Fresh coastal flavours and shared dinner options after programme days.',
+    bestFor: 'Group meals',
   },
   {
-    name: 'Calvary Canteen',
-    category: 'Venue Food',
+    name: 'Kopitiam Breakfast',
+    category: 'Morning / Quick Start',
     image: visitKopitiamImage,
-    description: 'Simple canteen-style food option for delegates around the Calvary Crown venue.',
-    bestFor: 'Convenient meals',
+    description: 'Coffee, toast, noodles and simple rice dishes before heading to the venue.',
+    bestFor: 'Breakfast',
   },
   {
-    name: 'Hapi Café',
-    category: 'Cafe / Kopitiam',
+    name: 'Street Food & Local Snacks',
+    category: 'Evening / Local Flavour',
+    image: visitNasiKuningImage,
+    description: 'Casual bites, market snacks and Tawau favourites during relaxed evening walks.',
+    bestFor: 'Light bites',
+  },
+  {
+    name: 'Cafe / Rest Stops',
+    category: 'Breaks / Casual Meetings',
     image: visitWaterfrontImage,
-    description: 'Cafe stop for coffee, light meals and easy meetups between convention plans.',
-    bestFor: 'Coffee break',
-  },
-  {
-    name: 'Dojo',
-    category: 'Casual Dining',
-    image: visitNasiKuningImage,
-    description: 'Casual dining option to add to delegate food planning around Tawau.',
-    bestFor: 'Casual meal',
-  },
-  {
-    name: 'Nasi Kuning Tawau',
-    category: 'Street Food',
-    image: visitNasiKuningImage,
-    description: 'A signature Tawau rice dish often served with sambal and rich local flavours.',
-    bestFor: 'First-time local food',
-  },
-  {
-    name: 'Fresh Seafood Dinner',
-    category: 'Seafood',
-    image: visitSeafoodImage,
-    description: 'A relaxed group dinner option after workshops, especially around town or waterfront dining areas.',
-    bestFor: 'Delegate groups',
-  },
-  {
-    name: 'Mee Tauhu',
-    category: 'Kopitiam',
-    image: visitKopitiamImage,
-    description: 'A local breakfast or lunch idea to look for in kopitiams and casual food shops.',
-    bestFor: 'Morning meal',
-  },
-  {
-    name: 'Amplang',
-    category: 'Local Snack',
-    image: visitNasiKuningImage,
-    description: 'A crunchy Sabah snack that is easy to bring back or share with friends.',
-    bestFor: 'Souvenir snack',
-  },
-  {
-    name: 'Local Coffee',
-    category: 'Cafe / Kopitiam',
-    image: visitKopitiamImage,
-    description: 'A simple way to start the day or reset between programme blocks.',
-    bestFor: 'Coffee break',
-  },
-  {
-    name: 'Cocoa Drinks',
-    category: 'Cafe / Cocoa',
-    image: visitCocoaVillageImage,
-    description: 'A nice Tawau-themed drink idea, especially if you plan to explore cocoa heritage stops.',
-    bestFor: 'Afternoon stop',
-  },
-  {
-    name: 'Market Snacks',
-    category: 'Market',
-    image: visitPasarTanjungImage,
-    description: 'Small bites and everyday local flavours around Pasar Tanjung and town food areas.',
-    bestFor: 'Short walks',
-  },
-  {
-    name: 'Toast & Eggs',
-    category: 'Kopitiam',
-    image: visitKopitiamImage,
-    description: 'A familiar kopitiam breakfast option before heading to the convention venue.',
-    bestFor: 'Quick breakfast',
-  },
-  {
-    name: 'Soto',
-    category: 'Street Food',
-    image: visitNasiKuningImage,
-    description: 'A warm local bowl option for delegates who want something simple and comforting.',
-    bestFor: 'Light meal',
-  },
-  {
-    name: 'Satay',
-    category: 'Street Food',
-    image: visitPasarTanjungImage,
-    description: 'A casual sharing food idea for evening walks, markets or group food hunting.',
-    bestFor: 'Group snack',
-  },
-  {
-    name: 'Coconut Drink',
-    category: 'Drinks',
-    image: visitWaterfrontImage,
-    description: 'A refreshing tropical drink to look for after a warm day around town.',
-    bestFor: 'Hot afternoon',
-  },
-  {
-    name: 'Grilled Fish',
-    category: 'Seafood',
-    image: visitSeafoodImage,
-    description: 'A straightforward seafood dinner choice for visitors who want something familiar and local.',
-    bestFor: 'Dinner',
-  },
-  {
-    name: 'Prawn Dishes',
-    category: 'Seafood',
-    image: visitSeafoodImage,
-    description: 'Tawau seafood meals often work well for shared tables and group dining.',
-    bestFor: 'Shared meal',
-  },
-  {
-    name: 'Curry Mee',
-    category: 'Kopitiam',
-    image: visitKopitiamImage,
-    description: 'A richer noodle option for visitors who enjoy stronger breakfast or lunch flavours.',
-    bestFor: 'Lunch',
-  },
-  {
-    name: 'Local Cakes',
-    category: 'Cafe / Kopitiam',
-    image: visitKopitiamImage,
-    description: 'Small sweet bites for coffee breaks, casual meetups or after-session resets.',
-    bestFor: 'Tea break',
-  },
-  {
-    name: 'Seafood Noodles',
-    category: 'Seafood',
-    image: visitSeafoodImage,
-    description: 'A practical middle ground between seafood dinner and casual noodle meals.',
-    bestFor: 'Casual meal',
-  },
-  {
-    name: 'Market Fruit',
-    category: 'Market',
-    image: visitPasarTanjungImage,
-    description: 'Fresh fruit is an easy market stop for families, guests and delegates between plans.',
-    bestFor: 'Market walk',
+    description: 'General rest points for coffee, light meals and informal meetups between sessions.',
+    bestFor: 'Coffee breaks',
   },
 ] as const
 
-const tawauFoodFilterItems = ['All', 'Venue Food', 'Casual Dining', 'Seafood', 'Kopitiam', 'Street Food', 'Market', 'Cafe / Kopitiam', 'Drinks'] as const
+const tawauFoodFilterItems = ['All', 'Dinner / Group Meals', 'Morning / Quick Start', 'Evening / Local Flavour', 'Breaks / Casual Meetings'] as const
 
 const tawauStayCards = [
   {
     title: 'Near the Convention Venue',
-    copy: 'Best for delegates who want the simplest morning arrival and evening return.',
+    copy: 'Best for participants who want the simplest morning arrival and evening return.',
     icon: 'V',
   },
   {
@@ -2457,7 +2340,7 @@ const tawauStayCards = [
   },
   {
     title: 'Simple & Practical Options',
-    copy: 'Clean, convenient stays for delegates focused on programme days.',
+    copy: 'Clean, convenient stays for participants focused on programme days.',
     icon: 'S',
   },
 ] as const
@@ -2639,12 +2522,12 @@ const tawauThingsToDoCards = [
     copy: 'A simple way to reset between sessions with city views, casual photos, snacks and low-pressure walking time.',
     tone: 'waterfront',
     tag: 'Easy walk',
-    image: tawauGuideCitySignImage,
+    image: tawauGuideWaterfrontImage,
     credit: 'BICC visitor guide source material',
     highlights: [
       'Best for short, flexible moments between food, hotel and convention plans.',
       'Good for casual photos and a quick sense of Tawau’s coastal city atmosphere.',
-      'Works well as a light option for families or delegates with limited free time.',
+      'Works well as a light option for families or participants with limited free time.',
     ],
     tip: 'Keep this as an easy add-on rather than a fixed full-day activity.',
   },
@@ -3338,7 +3221,7 @@ function ProgramSessionCard({ session }: { session: ProgrammeSession }) {
         <p>{session.description}</p>
         {session.image ? (
           <div className="programme-session-thumb">
-            <img alt={session.title} src={session.image} />
+            <img alt={session.title} decoding="async" loading="lazy" src={session.image} />
           </div>
         ) : null}
       </div>
@@ -3678,7 +3561,7 @@ function VenueMap() {
 
       <div className="venue-orientation-shell">
         <article className="venue-orientation-photo-card">
-          <img alt="Calvary Crown aerial site context" src={calvaryCrownAerialImage} />
+          <img alt="Calvary Crown aerial site context" decoding="async" loading="lazy" src={calvaryCrownAerialImage} />
           <div className="venue-orientation-photo-overlay" />
           <div className="venue-orientation-badge">
             <span>Confirmed Venue</span>
@@ -3789,7 +3672,13 @@ function GettingToTawau() {
 
       <div className="venue-visit-planner-shell">
         <article className="venue-route-card">
-          <img alt="Delegates arriving for BICC in Tawau" className="venue-route-photo" src={venueArrivalDelegatesImage} />
+          <img
+            alt="Delegates arriving for BICC in Tawau"
+            className="venue-route-photo"
+            decoding="async"
+            loading="lazy"
+            src={venueArrivalDelegatesImage}
+          />
           <div className="venue-route-photo-overlay" />
           <div className="venue-route-head">
             <span className="section-kicker">Arrival Route</span>
@@ -3941,7 +3830,7 @@ function VisitTawauHero() {
       </nav>
 
       <p className="visit-official-note">
-        Use this as a delegate planning guide. Final hotel, tour and transport arrangements should be confirmed directly with providers or the BICC travel partner.
+        Use this as a participant planning guide. Final hotel, tour and transport arrangements should be confirmed directly with providers or the BICC travel partner.
       </p>
     </section>
   )
@@ -3973,7 +3862,7 @@ function VisitFoodSection() {
         {tawauFoodCards.map((card) => (
           <a className="visit-photo-card visit-food-link-card" href={`#food-${card.id}`} key={card.title}>
             <div className={`visit-photo-media ${card.tone}`}>
-              <img alt={card.title} src={card.image} />
+              <img alt={card.title} decoding="async" loading="lazy" src={card.image} />
               <small>{card.meta}</small>
               <span>{card.title}</span>
             </div>
@@ -3990,8 +3879,8 @@ function VisitFoodSection() {
       <div className="visit-food-guide visit-food-guide-compact">
         <div className="visit-food-guide-head">
           <p className="section-kicker">Tawau Food Guide</p>
-          <h3>Food ideas delegates can scan fast.</h3>
-          <p>Use these as starting points. Exact restaurant choices can be confirmed with your hotel, local hosts or the travel partner.</p>
+          <h3>Food ideas participants can scan fast.</h3>
+          <p>Use these as general starting points. Specific cafe and restaurant listings will be added when sponsor or partner details are confirmed.</p>
         </div>
 
         <div className="visit-food-filter-row" aria-label="Food directory filters">
@@ -4001,13 +3890,13 @@ function VisitFoodSection() {
         </div>
 
         <div className="visit-food-directory-grid visit-food-directory-compact">
-          {tawauFoodDirectory.slice(0, 8).map((item) => (
+          {tawauFoodDirectory.map((item) => (
             <article
               className="visit-food-directory-card"
               id={`food-directory-${slugify(item.category)}`}
               key={item.name}
             >
-              <img alt={item.name} src={item.image} />
+              <img alt={item.name} decoding="async" loading="lazy" src={item.image} />
               <div>
                 <span>{item.category}</span>
                 <h4>{item.name}</h4>
@@ -4017,7 +3906,7 @@ function VisitFoodSection() {
             </article>
           ))}
         </div>
-        <p className="visit-directory-note">Showing 8 starter ideas for quick planning. More local food entries can be added later without crowding this page.</p>
+        <p className="visit-directory-note">General food guidance only. Partner cafes, restaurants and sponsored food stops can be added later without crowding this page.</p>
       </div>
     </section>
   )
@@ -4048,7 +3937,7 @@ function VisitStaySection() {
         ))}
       </div>
       <p className="visit-note">
-        Official hotel partners and recommended delegate options will be updated once confirmed. BICC does not manage hotel bookings unless official hotel partners are announced.
+        Official hotel partners and recommended participant options will be updated once confirmed. BICC does not manage hotel bookings unless official hotel partners are announced.
       </p>
 
       <div className="visit-hotel-panel">
@@ -4056,7 +3945,7 @@ function VisitStaySection() {
           <p className="section-kicker">Accommodation References</p>
           <h3>Suggested stays from local accommodation materials.</h3>
           <p>
-            Use these as starting points for delegate planning. Booking, rates and availability should be confirmed directly with each hotel or homestay.
+            Use these as starting points for participant planning. Booking, rates and availability should be confirmed directly with each hotel or homestay.
           </p>
         </div>
 
@@ -4064,7 +3953,7 @@ function VisitStaySection() {
           {tawauHotelSamples.map((hotel) => (
             <a className="visit-hotel-card" href={hotel.link} key={hotel.name} rel="noreferrer" target="_blank">
               <div className="visit-hotel-image">
-                <img alt={`${hotel.name} in Tawau`} src={hotel.image} />
+                <img alt={`${hotel.name} in Tawau`} decoding="async" loading="lazy" src={hotel.image} />
                 <span>{hotel.tag}</span>
               </div>
               <div className="visit-hotel-copy">
@@ -4082,7 +3971,7 @@ function VisitStaySection() {
       </div>
 
       <div className="visit-tip-strip">
-        <strong>Delegate reminders</strong>
+        <strong>Participant reminders</strong>
         {tawauDelegateTips.map((tip) => (
           <span key={tip}>{tip}</span>
         ))}
@@ -4114,7 +4003,7 @@ function VisitGettingAroundSection() {
       </div>
 
       <p className="visit-route-note">
-        International delegates should check flight connections into Tawau before booking hotels. Final BICC travel notes will be updated closer to the convention.
+        International participants should check flight connections into Tawau before booking hotels. Final BICC travel notes will be updated closer to the convention.
       </p>
 
       <div className="visit-info-grid">
@@ -4147,7 +4036,7 @@ function VisitThingsToDoSection() {
           <h2>Explore Tawau between convention moments.</h2>
         </div>
         <p className="section-intro">
-          A focused visitor guide for markets, nature, cocoa heritage and simple city experiences delegates can plan around BICC.
+          A focused visitor guide for markets, nature, cocoa heritage and simple city experiences participants can plan around BICC.
         </p>
       </div>
 
@@ -4164,7 +4053,7 @@ function VisitThingsToDoSection() {
         {tawauThingsToDoCards.map((card) => (
           <article className={`visit-destination-guide-card ${card.tone}`} key={card.title}>
             <div className="visit-destination-guide-media">
-              <img alt={card.title} src={card.image} />
+              <img alt={card.title} decoding="async" loading="lazy" src={card.image} />
               <small>{card.tag}</small>
             </div>
             <div className="visit-destination-guide-copy">
@@ -4614,11 +4503,11 @@ function SponsorHero() {
           </div>
         </div>
         <article className="programme-floating-card top">
-          <img alt="Interactive clown performance" src={landingPerformanceAudienceImage} />
+          <img alt="Interactive clown performance" decoding="async" loading="lazy" src={landingPerformanceAudienceImage} />
           <span>Stage visibility</span>
         </article>
         <article className="programme-floating-card bottom">
-          <img alt="Hands-on workshop" src={landingWorkshopTrainingImage} />
+          <img alt="Hands-on workshop" decoding="async" loading="lazy" src={landingWorkshopTrainingImage} />
           <span>Workshop engagement</span>
         </article>
       </div>
@@ -4869,6 +4758,8 @@ function PassComparisonCards() {
             <div className="pass-ticket-media">
               <img
                 alt={pass.name}
+                decoding="async"
+                loading="lazy"
                 src={pass.accent === 'foundation' ? passesFoundationWorkshopImage : passesMasteryStageImage}
               />
             </div>
@@ -5408,7 +5299,7 @@ function WorkshopHero() {
           <strong>Stage craft, visual play, outreach and live audience connection.</strong>
         </article>
         <article className="programme-floating-card top">
-          <img alt="Workshop practice" src={landingFoundationTrackImage} />
+          <img alt="Workshop practice" decoding="async" loading="lazy" src={landingFoundationTrackImage} />
           <span>Practice & props</span>
         </article>
       </div>
@@ -5431,7 +5322,12 @@ function TrackSelector() {
           <article className={`pass-ticket-card workshop-track-ticket ${pass.accent}`} key={`workshop-track-${pass.id}`}>
             <div className="ticket-perforation" />
             <div className="pass-ticket-media">
-              <img alt={pass.name} src={pass.accent === 'foundation' ? landingFoundationTrackImage : landingMasteryTrackImage} />
+              <img
+                alt={pass.name}
+                decoding="async"
+                loading="lazy"
+                src={pass.accent === 'foundation' ? landingFoundationTrackImage : landingMasteryTrackImage}
+              />
             </div>
             <div className="pass-ticket-body">
               <div className="pass-ticket-head">
@@ -5495,7 +5391,7 @@ function WorkshopCatalogue() {
         {workshopCards.map((workshop) => (
           <article className={`workshop-card ${workshop.featured ? 'featured' : ''} ${workshop.trackType}`} key={workshop.id}>
             <div className="workshop-card-media">
-              <img alt={workshop.title} src={workshop.image} />
+              <img alt={workshop.title} decoding="async" loading="lazy" src={workshop.image} />
             </div>
             <div className="workshop-card-copy">
               <div className="workshop-card-top">
@@ -5708,7 +5604,11 @@ function MentorCard({
   return (
     <article className={`mentor-lineup-card ${featured ? 'featured' : ''}`} data-mentor-id={mentor.id}>
       <div className="mentor-lineup-media">
-        {mentor.image ? <img alt={`${mentor.name} portrait`} src={mentor.image} /> : <MentorPlaceholderArt label={mentor.name} />}
+        {mentor.image ? (
+          <img alt={`${mentor.name} portrait`} decoding="async" loading="lazy" src={mentor.image} />
+        ) : (
+          <MentorPlaceholderArt label={mentor.name} />
+        )}
         <span className="mentor-card-flag">{featured ? 'Featured' : mentor.country}</span>
       </div>
       <div className="mentor-lineup-copy">
@@ -5747,7 +5647,11 @@ function FeaturedMentors({ mentors }: { mentors: MentorProfile[] }) {
         {featuredMentors.map((mentor) => (
           <article className="mentor-feature-card" data-mentor-id={mentor.id} key={mentor.id}>
             <div className="mentor-feature-media">
-              {mentor.image ? <img alt={`${mentor.name} portrait`} src={mentor.image} /> : <MentorPlaceholderArt label={mentor.name} />}
+              {mentor.image ? (
+                <img alt={`${mentor.name} portrait`} decoding="async" loading="lazy" src={mentor.image} />
+              ) : (
+                <MentorPlaceholderArt label={mentor.name} />
+              )}
             </div>
             <div className="mentor-feature-copy">
               <div className="mentor-lineup-badges">
@@ -6045,7 +5949,7 @@ function HomePage() {
           {mentorPreviewCards.map((item) => (
             <article className="mentor-preview-card" key={item.title}>
               <div className="mentor-preview-image">
-                <img alt={item.title} src={item.image} />
+                <img alt={item.title} decoding="async" loading="lazy" src={item.image} />
               </div>
               <div className="mentor-preview-copy">
                 <span className="track-label red sticker-badge">{item.track}</span>
@@ -6125,7 +6029,12 @@ function AboutPage() {
 
         <aside className="about-hero-visual">
           <div className="about-hero-image-card">
-            <img alt="Professional clown performer connecting with an audience" src={landingStoryConnectionImage} />
+            <img
+              alt="Professional clown performer connecting with an audience"
+              decoding="async"
+              loading="lazy"
+              src={landingStoryConnectionImage}
+            />
             <div className="about-hero-image-overlay" />
             <span className="about-hero-image-badge">Craft · Culture · Connection</span>
           </div>
@@ -6201,7 +6110,7 @@ function AboutPage() {
         </div>
 
         <div className="about-borneo-visual">
-          <img alt="Tawau and Borneo convention atmosphere" src={visitWaterfrontImage} />
+          <img alt="Tawau and Borneo convention atmosphere" decoding="async" loading="lazy" src={visitWaterfrontImage} />
           <div className="about-map-card">
             <RedNoseIcon />
             <strong>Tawau, Sabah</strong>
