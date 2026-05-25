@@ -1,4 +1,5 @@
 import { useEffect, useState, type ChangeEvent, type FormEvent } from 'react'
+import { Analytics } from '@vercel/analytics/react'
 import { cmsQueries, fetchFromSanity, localize, sanityImageUrl, type CmsMentor, type CmsPageContent } from './cms'
 import { siteConfig } from './siteConfig'
 
@@ -6548,6 +6549,7 @@ function App() {
       )}
 
       <Footer />
+      <Analytics />
     </div>
   )
 }
