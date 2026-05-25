@@ -12,6 +12,9 @@
   --color-border: #eed9b8;
   --color-muted: #5f7680;
   --shadow-soft: 0 16px 40px rgba(23, 59, 76, 0.08);
+  --ratio-mentor-card: 4 / 5;
+  --ratio-hero-media: 16 / 10;
+  --ratio-travel-card: 4 / 3;
   font-family: 'Montserrat', 'Avenir Next', sans-serif;
   color: var(--color-navy);
   background: var(--color-bg);
@@ -77,7 +80,7 @@ select {
   position: sticky;
   top: 10px;
   display: grid;
-  grid-template-columns: minmax(270px, 300px) minmax(0, 1fr) auto;
+  grid-template-columns: minmax(210px, 250px) minmax(0, 1fr) auto;
   grid-template-areas: 'brand nav actions';
   align-items: center;
   gap: 10px;
@@ -97,7 +100,7 @@ select {
   align-items: center;
   gap: 10px;
   min-width: 0;
-  max-width: 300px;
+  max-width: 250px;
 }
 
 .brand-text-lockup {
@@ -176,9 +179,11 @@ select {
 .main-nav a {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   min-height: 38px;
   padding: 0 7px;
   border-radius: 999px;
+  line-height: 1.15;
   transition:
     color 180ms ease,
     background 180ms ease;
@@ -206,6 +211,21 @@ select {
   font: inherit;
   font-size: 0.76rem;
   font-weight: 800;
+}
+
+.page-shell[data-language='ms'] .main-nav,
+.page-shell[data-language='zh'] .main-nav {
+  gap: 2px;
+  font-size: 0.76rem;
+}
+
+.page-shell[data-language='ms'] .main-nav a,
+.page-shell[data-language='zh'] .main-nav a {
+  padding: 0 6px;
+}
+
+.page-shell[data-language='ms'] .header-cta {
+  padding-inline: 18px;
 }
 
 .language-switcher button.active,
@@ -243,6 +263,9 @@ select {
   padding: 0 22px;
   border-radius: 999px;
   font-weight: 700;
+  line-height: 1.15;
+  text-align: center;
+  white-space: normal;
   transition:
     transform 180ms ease,
     background 180ms ease,
@@ -441,14 +464,18 @@ select {
 .pass-badges span {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   min-height: 34px;
-  padding: 0 11px;
+  padding: 7px 11px;
   border: 1px solid var(--color-border);
   border-radius: 999px;
   background: rgba(255, 253, 247, 0.94);
   color: var(--color-navy);
   font-size: 0.82rem;
   font-weight: 650;
+  line-height: 1.18;
+  text-align: center;
+  white-space: normal;
 }
 
 .hero-actions,
@@ -585,6 +612,29 @@ select {
   min-height: 44px;
   padding: 0 18px;
   white-space: nowrap;
+}
+
+.programme-hero-main,
+.venue-hero-collage,
+.passes-hero-visual,
+.workshop-collage-main,
+.sponsors-hero-main,
+.mentor-hero-visual,
+.about-hero-image-card,
+.visit-hero-visual {
+  aspect-ratio: var(--ratio-hero-media);
+}
+
+.mentor-lineup-media,
+.mentor-feature-media {
+  aspect-ratio: var(--ratio-mentor-card);
+}
+
+.visit-photo-placeholder,
+.visit-photo-media,
+.visit-hotel-image,
+.visit-destination-guide-media {
+  aspect-ratio: var(--ratio-travel-card);
 }
 
 .interior-main {
@@ -3619,13 +3669,15 @@ body {
   align-items: center;
   gap: 10px;
   min-height: 34px;
-  padding: 0 12px;
+  padding: 7px 12px;
   border-radius: 999px;
   border: 1px solid rgba(20, 58, 63, 0.08);
   background: rgba(255, 255, 255, 0.86);
   color: var(--color-ink);
   font-size: 0.8rem;
   font-weight: 700;
+  line-height: 1.18;
+  white-space: normal;
 }
 
 .programme-type-dot {
@@ -4055,10 +4107,12 @@ body {
   align-items: center;
   gap: 12px;
   min-height: 64px;
+  padding: 12px 0;
   cursor: pointer;
   list-style: none;
   font-weight: 700;
   color: var(--color-ink);
+  line-height: 1.35;
 }
 
 .programme-faq-item summary::-webkit-details-marker {
@@ -5113,8 +5167,8 @@ body {
   grid-template-columns: 72px minmax(0, 1fr);
   gap: 12px;
   align-items: center;
-  min-height: 74px;
-  padding: 12px;
+  min-height: 62px;
+  padding: 10px;
   border-radius: 18px;
   border: 1px solid rgba(255, 252, 244, 0.16);
   background: rgba(255, 252, 244, 0.1);
@@ -5139,7 +5193,7 @@ body {
 .venue-building-cutaway-level > span {
   display: inline-grid;
   place-items: center;
-  min-height: 48px;
+  min-height: 42px;
   border-radius: 999px;
   background: rgba(255, 252, 244, 0.94);
   color: var(--color-ink);
@@ -5160,8 +5214,8 @@ body {
 .venue-key-zone-card {
   display: grid;
   gap: 8px;
-  min-height: 170px;
-  padding: 15px;
+  min-height: 138px;
+  padding: 14px;
   border-radius: 20px;
   border: 1px solid rgba(20, 58, 63, 0.08);
   background: rgba(255, 255, 255, 0.86);
@@ -5206,11 +5260,40 @@ body {
   background: rgba(20, 58, 63, 0.04);
 }
 
+.venue-floor-accordion {
+  padding: 0;
+  overflow: hidden;
+}
+
 .venue-floor-flow-head {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 12px;
+  padding: 16px;
+  cursor: pointer;
+  list-style: none;
+}
+
+.venue-floor-flow-head::-webkit-details-marker {
+  display: none;
+}
+
+.venue-floor-flow-head::after {
+  content: '+';
+  display: inline-grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  flex: 0 0 auto;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.86);
+  color: var(--color-ink);
+  font-weight: 900;
+}
+
+.venue-floor-accordion[open] .venue-floor-flow-head::after {
+  content: '-';
 }
 
 .venue-floor-flow-head span {
@@ -5230,6 +5313,7 @@ body {
 .venue-floor-flow-list {
   display: grid;
   gap: 8px;
+  padding: 0 16px 16px;
 }
 
 .venue-floor-flow-row {
@@ -6033,7 +6117,8 @@ body {
 
 .visit-destination-guide-media {
   position: relative;
-  min-height: 100%;
+  min-height: 0;
+  aspect-ratio: var(--ratio-travel-card);
   overflow: hidden;
   background: linear-gradient(135deg, var(--color-deep-teal), var(--color-turquoise));
 }
@@ -6048,7 +6133,7 @@ body {
 .visit-destination-guide-media img {
   width: 100%;
   height: 100%;
-  min-height: 330px;
+  min-height: 0;
   object-fit: cover;
   object-position: center;
   transition: transform 180ms ease;
@@ -6149,7 +6234,7 @@ body {
 .visit-photo-card {
   overflow: hidden;
   display: grid;
-  grid-template-rows: 190px 1fr;
+  grid-template-rows: auto 1fr;
   border-radius: 26px;
   color: inherit;
   transition: transform 180ms ease, box-shadow 180ms ease;
@@ -6167,7 +6252,8 @@ body {
 .visit-photo-placeholder,
 .visit-photo-media {
   position: relative;
-  min-height: 190px;
+  min-height: 0;
+  aspect-ratio: var(--ratio-travel-card);
   display: grid;
   align-content: end;
   gap: 10px;
@@ -6482,6 +6568,31 @@ body {
   font-weight: 800;
 }
 
+.visit-reveal-btn {
+  justify-self: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 20px;
+  border: 1px solid rgba(20, 58, 63, 0.12);
+  border-radius: 999px;
+  background: rgba(255, 252, 244, 0.92);
+  color: var(--color-ink);
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 900;
+  cursor: pointer;
+  box-shadow: 0 14px 28px rgba(20, 58, 63, 0.08);
+  transition: transform 180ms ease, background 180ms ease, box-shadow 180ms ease;
+}
+
+.visit-reveal-btn:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 225, 220, 0.78);
+  box-shadow: 0 18px 34px rgba(255, 90, 79, 0.16);
+}
+
 .visit-directory-note {
   margin: 0;
   color: var(--color-muted);
@@ -6550,9 +6661,9 @@ body {
 
 .visit-hotel-card {
   display: grid;
-  grid-template-rows: minmax(260px, 7fr) minmax(0, 3fr);
+  grid-template-rows: auto 1fr;
   overflow: hidden;
-  min-height: 440px;
+  min-height: 0;
   border-radius: 24px;
   border: 1px solid rgba(20, 58, 63, 0.08);
   background: rgba(255, 255, 255, 0.9);
@@ -6570,7 +6681,8 @@ body {
 .visit-hotel-image {
   position: relative;
   overflow: hidden;
-  min-height: 280px;
+  min-height: 0;
+  aspect-ratio: var(--ratio-travel-card);
 }
 
 .visit-hotel-image img {
@@ -7160,6 +7272,17 @@ body {
   text-wrap: balance;
 }
 
+.page-shell[data-language='ms'] .passes-hero h1,
+.page-shell[data-language='ms'] .venue-hero h1,
+.page-shell[data-language='ms'] .mentor-page-hero h1,
+.page-shell[data-language='ms'] .programme-hero h1,
+.page-shell[data-language='zh'] .passes-hero h1,
+.page-shell[data-language='zh'] .venue-hero h1,
+.page-shell[data-language='zh'] .mentor-page-hero h1,
+.page-shell[data-language='zh'] .programme-hero h1 {
+  font-size: clamp(2.45rem, 4.2vw, 3.9rem);
+}
+
 .passes-hero-intro {
   max-width: 48ch;
   margin: 0;
@@ -7177,7 +7300,8 @@ body {
 
 .passes-hero-visual {
   position: relative;
-  min-height: 520px;
+  min-height: 0;
+  aspect-ratio: var(--ratio-hero-media);
   overflow: hidden;
   border: 8px solid rgba(255, 255, 255, 0.78);
   border-radius: 34px;
@@ -7432,7 +7556,7 @@ body {
 
 .pass-ticket-media {
   min-height: 0;
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 16 / 8.6;
 }
 
 .pass-ticket-media img {
@@ -7446,8 +7570,8 @@ body {
 .pass-ticket-body {
   display: grid;
   grid-template-rows: auto auto auto auto auto minmax(0, 1fr) auto;
-  gap: 14px;
-  padding: 18px 18px 20px;
+  gap: 10px;
+  padding: 16px 18px 18px;
   min-height: 100%;
 }
 
@@ -7464,8 +7588,8 @@ body {
 
 .pass-ticket-quick-row {
   display: grid;
-  gap: 8px;
-  padding: 12px;
+  gap: 7px;
+  padding: 10px;
   border-radius: 18px;
   background: rgba(255, 255, 255, 0.66);
   border: 1px solid rgba(20, 58, 63, 0.07);
@@ -7536,9 +7660,9 @@ body {
   display: flex;
   flex-wrap: wrap;
   align-content: flex-start;
-  gap: 8px;
+  gap: 7px;
   margin-top: 4px;
-  min-height: 68px;
+  min-height: 38px;
 }
 
 .pass-focus-chips span {
@@ -7563,6 +7687,13 @@ body {
 .pass-ticket-note {
   color: var(--color-muted);
   font-size: 0.8rem;
+}
+
+.pass-ticket-description {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .pass-included-grid,
@@ -7657,6 +7788,52 @@ body {
 
 .pass-unsure-note.compact {
   max-width: 760px;
+}
+
+.pass-after-payment-panel {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 22px;
+  align-items: center;
+  padding: 24px 26px;
+  border-radius: 28px;
+  border: 1px solid rgba(20, 58, 63, 0.1);
+  background:
+    radial-gradient(circle at 12% 20%, rgba(255, 90, 79, 0.12), transparent 28%),
+    linear-gradient(135deg, rgba(255, 252, 244, 0.98), rgba(221, 247, 247, 0.52));
+  box-shadow: var(--shadow-soft);
+}
+
+.pass-after-payment-panel h2,
+.pass-after-payment-panel p {
+  margin: 0;
+}
+
+.pass-after-payment-panel h2 {
+  color: var(--color-ink);
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(2rem, 3.2vw, 3rem);
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.pass-after-payment-panel p {
+  max-width: 68ch;
+  color: var(--color-muted);
+  line-height: 1.65;
+}
+
+.pass-after-payment-panel > div:first-child {
+  display: grid;
+  gap: 10px;
+}
+
+.pass-after-payment-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 10px;
+  max-width: 520px;
 }
 
 .pass-table-desktop {
@@ -9149,12 +9326,12 @@ body {
 
 .mentor-directory-grid .mentor-lineup-media {
   min-height: 0;
-  aspect-ratio: 4 / 5;
+  aspect-ratio: var(--ratio-mentor-card);
 }
 
 .mentor-featured-grid .mentor-lineup-media {
   min-height: 0;
-  aspect-ratio: 4 / 3.35;
+  aspect-ratio: var(--ratio-mentor-card);
 }
 
 .mentor-lineup-media img {
@@ -9523,6 +9700,7 @@ body {
   .pass-mockup-grid,
   .pass-decision-grid,
   .pass-registration-flow,
+  .pass-after-payment-panel,
   .delegate-form-grid,
   .calvary-level-grid,
   .venue-arrival-flow,
@@ -9583,6 +9761,14 @@ body {
 
   .pass-registration-flow::before {
     display: none;
+  }
+
+  .pass-after-payment-panel {
+    grid-template-columns: 1fr;
+  }
+
+  .pass-after-payment-actions {
+    justify-content: flex-start;
   }
 
   .pass-table-desktop {

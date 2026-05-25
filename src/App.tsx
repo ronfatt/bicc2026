@@ -59,6 +59,7 @@ const hotelBorneoRoyaleImage = '/visit-tawau/hotels/borneo-royale-hotel.jpg'
 const hotelGraceHomestayImage = '/visit-tawau/hotels/grace-homestay.jpg'
 const hotelUmiiImage = '/visit-tawau/hotels/umii-hotel.png'
 const hotelUmiiHomestayImage = '/visit-tawau/hotels/umii-homestay.png'
+const hotelEmasImage = '/visit-tawau/hotels/hotel-emas-tawau.jpg'
 
 type ProgrammeFilterKey =
   | 'all'
@@ -218,6 +219,10 @@ const translations: Record<Exclude<SiteLanguage, 'en'>, Record<string, string>> 
     'Instructors & Guest Artists': '导师与嘉宾艺术家',
     'Learn From Artists Who Live the Stage.': '向真正活在舞台上的艺术家学习。',
     'Passes & Registration': '通行证与报名',
+    'Choose Your BICC Pass.': '选择你的 BICC 通行证。',
+    'Official Registration': '官方报名',
+    'One convention. Two training paths. Pick Foundation if you are building confidence, or Mastery if you are ready for stronger stage critique.':
+      '一场大会，两条训练路径。想建立信心请选择 Foundation；准备接受更强舞台反馈请选择 Mastery。',
     'Choose Your Pass. Start Your BICC Journey.': '选择通行证，开启你的 BICC 旅程。',
     'What Your Pass Gives You': '通行证包含什么',
     'Before You Register': '报名之前',
@@ -232,6 +237,107 @@ const translations: Record<Exclude<SiteLanguage, 'en'>, Record<string, string>> 
     'Shared Convention Moments': '共同大会体验',
     'Why Join BICC 2026?': '为什么参加 BICC 2026？',
     'Ready to Choose Your Pass?': '准备好选择通行证了吗？',
+    'After Payment': '付款之后',
+    'Your next step is simple.': '下一步很简单。',
+    'Keep your Stripe receipt, then submit your participant details with the same email address. This helps the BICC team match your payment, selected track and official updates.':
+      '请保留 Stripe 收据，并使用同一个电邮提交参与者资料。这能帮助 BICC 团队核对付款、所选课程与官方更新。',
+    'Complete Participant Details': '填写参与者资料',
+    'View Thank You Page': '查看感谢页面',
+    'Need help? Email BICC': '需要协助？电邮 BICC',
+    'Short answers before you register.': '报名之前的简短解答。',
+    'Registration Confirmed': '报名已确认',
+    'Thank you for securing your BICC pass.': '感谢你成功购买 BICC 通行证。',
+    'Your payment step is complete. The next thing we need is your delegate details so the BICC team can match your payment, selected track and future programme updates.':
+      '你的付款步骤已经完成。接下来请提交参与者资料，让 BICC 团队可以核对付款、所选课程和后续日程更新。',
+    'Complete Delegate / Participant Details': '填写参与者资料',
+    'What to do next': '接下来要做什么',
+    'Save your Stripe receipt or payment confirmation.': '保存你的 Stripe 收据或付款确认。',
+    'Complete your delegate details form for BICC.': '填写 BICC 参与者资料表。',
+    'Watch for official updates about programme, venue and check-in.': '留意官方日程、场地与报到更新。',
+    'Use the same email as your Stripe receipt when you complete the participant form. That makes organizer matching much easier.':
+      '填写参与者表格时，请使用与 Stripe 收据相同的电邮，方便主办方核对。',
+    'Need help matching your payment?': '需要协助核对付款？',
+    'After Stripe checkout, complete the participant details form using your receipt email. The BICC team will use that information for official follow-up, programme updates and check-in preparation.':
+      '完成 Stripe 付款后，请使用收据电邮填写参与者资料表。BICC 团队会用这些资料进行官方跟进、日程更新和报到准备。',
+    'Venue & Visit': '场地与旅行',
+    'Where should I ask general questions?': '一般问题应该问哪里？',
+    'Email hello@bicc2026.com or use the Contact page so the BICC team can route your enquiry.':
+      '你可以电邮 hello@bicc2026.com，或使用联系页面，让 BICC 团队把问题转给合适负责人。',
+    'How do I match my Stripe payment with my delegate details?': '如何把 Stripe 付款和参与者资料对应起来？',
+    'After payment, submit your delegate details and include the email used for your Stripe receipt so the organiser can match the purchase with your selected pass.':
+      '付款后，请提交参与者资料，并填写 Stripe 收据使用的电邮，方便主办方把付款与你选择的通行证对应起来。',
+    'Will there be a programme PDF?': '会有日程 PDF 吗？',
+    'The programme preview is available on the website. An official PDF can be added once final times, rooms and instructor allocations are confirmed.':
+      '网站上已有日程预览。正式时间、房间与导师安排确认后，可以加入官方 PDF。',
+    'Are hotel and travel bookings handled by BICC?': '酒店和交通预订由 BICC 处理吗？',
+    'Delegates and participants should arrange hotels, flights and local travel directly unless BICC announces an official partner arrangement.':
+      '除非 BICC 公布官方合作安排，否则参与者需自行安排酒店、机票与本地交通。',
+    'What is the price of each pass?': '每一种通行证多少钱？',
+    'Both Foundation and Mastery passes are listed at US$130, unless the organizer updates the official pricing.':
+      'Foundation 与 Mastery 通行证目前均为 US$130，除非主办方更新官方价格。',
+    'What is the difference between Foundation and Mastery?': 'Foundation 和 Mastery 有什么不同？',
+    'Foundation is designed for beginners and emerging performers who want essential clown craft. Mastery is designed for experienced performers who want deeper critique, stage presence and professional development.':
+      'Foundation 适合想建立基本小丑技艺的初学者和新晋表演者；Mastery 适合希望获得更深入反馈、舞台表现和专业发展的有经验表演者。',
+    'Are workshops included in the pass?': '工作坊包含在通行证内吗？',
+    'Workshop access follows your selected pass and track. Final session access and capacity details are subject to organizer confirmation.':
+      '工作坊参与权限会根据你选择的通行证和课程而定。最终环节权限与人数安排以主办方确认为准。',
+    'Can I change tracks after registering?': '报名后可以更换课程吗？',
+    'Track changes are subject to availability and organizer confirmation.': '课程更换需视名额情况与主办方确认而定。',
+    'Are accommodation, meals or transport included?': '住宿、餐食或交通包含在内吗？',
+    'These should not be assumed included unless the organizer confirms them separately.': '除非主办方另行确认，否则不应默认包含这些项目。',
+    'What happens after I register?': '报名后会发生什么？',
+    'What if the programme changes?': '如果日程有变怎么办？',
+    'Final programme details, venue information and room assignments may be updated closer to the convention.':
+      '最终日程、场地资讯与房间安排可能会在大会临近时更新。',
+    'Do I need prior clowning experience?': '我需要有小丑经验吗？',
+    'No. Foundation sessions are suitable for beginners and emerging performers. Mastery sessions are designed for experienced performers who want sharper feedback and deeper practice.':
+      '不需要。Foundation 适合初学者与新晋表演者；Mastery 适合希望获得更深入练习和反馈的有经验表演者。',
+    'Can I switch tracks?': '可以转换课程吗？',
+    'Track switching is subject to availability and organizer confirmation.': '课程转换需视名额情况与主办方确认而定。',
+    'Will there be a full workshop schedule?': '会有完整工作坊时间表吗？',
+    'The main programme timing and class list are now available. Final room assignments, instructor allocation and class changes remain subject to organiser confirmation.':
+      '主要日程时间与课程列表已公布。最终房间、导师安排与课程调整仍以主办方确认为准。',
+    'Are the workshops suitable for educators?': '工作坊适合教育工作者吗？',
+    'Yes. Several sessions are relevant for educators, school performers, family entertainers and community-based creative practitioners.':
+      '适合。部分环节适合教育者、学校表演者、家庭娱乐表演者与社区创意实践者。',
+    'Are materials provided?': '会提供材料吗？',
+    'Workshop material requirements, if any, will be announced by the organizer.': '如有工作坊材料要求，主办方会另行公布。',
+    'Will I receive a certificate?': '我会获得证书吗？',
+    'Yes. The e-certificate will be sent by email after participants complete the feedback form. The link will be provided by the organizer.':
+      '会。参与者完成反馈表后，电子证书将通过电邮发送；链接会由主办方提供。',
+    'Is the full programme confirmed?': '完整日程已经确认了吗？',
+    'The main three-day programme timing is now available. Room assignments, instructor allocation and any final organiser updates may still be refined before the convention.':
+      '三天主要日程时间已公布。房间安排、导师分配及最终主办方更新仍可能在大会前调整。',
+    'Do I need to choose a track before attending?': '参加前需要先选择课程吗？',
+    'Yes. Delegates and participants should select the pass or track that best fits their current experience and learning goals.':
+      '需要。参与者应选择最符合当前经验与学习目标的通行证或课程。',
+    'Are all workshops included?': '所有工作坊都包含吗？',
+    'Workshop access follows the selected pass and track structure. Some sessions may have capacity limits or organiser confirmation.':
+      '工作坊权限根据所选通行证与课程结构而定，部分环节可能有人数限制或需主办方确认。',
+    'Can I attend both Foundation and Mastery sessions?': '我可以同时参加 Foundation 和 Mastery 吗？',
+    'Track access is subject to pass type, availability and organiser confirmation.': '课程权限取决于通行证类型、名额和主办方确认。',
+    'Will there be showcase opportunities?': '会有展示机会吗？',
+    'The programme includes showcase and community-sharing moments. Specific participation details will be confirmed in the final schedule.':
+      '日程包含展示与社区分享环节，具体参与方式会在最终日程中确认。',
+    'Where will the sessions happen?': '环节会在哪里进行？',
+    'Venue zones and room assignments will be announced closer to the convention.': '场地区域与房间安排会在大会临近时公布。',
+    'Where is BICC 2026 held?': 'BICC 2026 在哪里举行？',
+    'Will there be a venue map?': '会有场地地图吗？',
+    'Yes. The official venue map will be shared before the convention and will include key zones such as registration, workshop rooms, main hall, photo spots and food or rest areas.':
+      '会。官方场地地图会在大会前发布，并包含报到处、工作坊房间、主厅、拍照点及餐饮/休息区域等重点。',
+    'Where do I register when I arrive?': '抵达后在哪里报到？',
+    'Delegate and participant registration details will be included in the final venue guide and programme update.':
+      '参与者报到详情会包含在最终场地指南与日程更新中。',
+    'Are workshop rooms assigned already?': '工作坊房间已经安排了吗？',
+    'Room assignments will be confirmed closer to the convention and may depend on track, session type and final venue layout.':
+      '房间安排会在大会临近时确认，并可能根据课程、环节类型与最终场地布局调整。',
+    'Will there be food areas?': '会有餐饮区域吗？',
+    'Food and rest area information will be included in the official venue guide once confirmed.': '餐饮与休息区域资讯确认后会加入官方场地指南。',
+    'Is accommodation included in the pass?': '通行证包含住宿吗？',
+    'Accommodation is not listed as included unless specifically stated by the organiser.': '除非主办方明确说明，否则住宿不包含在通行证内。',
+    'How do I receive venue updates?': '我要如何收到场地更新？',
+    'Follow the official BICC website or organiser updates for confirmed venue, programme and delegate/participant information.':
+      '请关注 BICC 官方网站或主办方更新，以获取已确认的场地、日程与参与者资讯。',
     'Venue & Visitor Guide': '场地与访客指南',
     'Gather in Borneo. Find Your Way With Ease.': '相聚婆罗洲，轻松找到方向。',
     'Venue at a Glance': '场地重点',
@@ -600,9 +706,12 @@ const translations: Record<Exclude<SiteLanguage, 'en'>, Record<string, string>> 
     'Workshops & Exchange': 'Bengkel & Pertukaran',
     'Showcase & Celebration': 'Showcase & Sambutan',
     'Showcase & Community': 'Showcase & Komuniti',
-    'Instructors & Guest Artists': 'Pengajar & Artis Jemputan',
     'Learn From Artists Who Live the Stage.': 'Belajar daripada artis yang hidup di pentas.',
     'Passes & Registration': 'Pas & Pendaftaran',
+    'Choose Your BICC Pass.': 'Pilih Pas BICC Anda.',
+    'Official Registration': 'Pendaftaran Rasmi',
+    'One convention. Two training paths. Pick Foundation if you are building confidence, or Mastery if you are ready for stronger stage critique.':
+      'Satu konvensyen, dua laluan latihan. Pilih Foundation jika anda sedang membina keyakinan, atau Mastery jika anda bersedia untuk kritikan pentas yang lebih kuat.',
     'Choose Your Pass. Start Your BICC Journey.': 'Pilih pas anda. Mulakan perjalanan BICC.',
     'What Your Pass Gives You': 'Apa Yang Termasuk Dalam Pas',
     'Before You Register': 'Sebelum Mendaftar',
@@ -617,6 +726,107 @@ const translations: Record<Exclude<SiteLanguage, 'en'>, Record<string, string>> 
     'Shared Convention Moments': 'Momen Konvensyen Bersama',
     'Why Join BICC 2026?': 'Mengapa Sertai BICC 2026?',
     'Ready to Choose Your Pass?': 'Sedia Memilih Pas?',
+    'After Payment': 'Selepas Bayaran',
+    'Your next step is simple.': 'Langkah seterusnya mudah.',
+    'Keep your Stripe receipt, then submit your participant details with the same email address. This helps the BICC team match your payment, selected track and official updates.':
+      'Simpan resit Stripe anda, kemudian hantar maklumat peserta menggunakan alamat e-mel yang sama. Ini membantu pasukan BICC memadankan bayaran, trek pilihan dan kemas kini rasmi.',
+    'Complete Participant Details': 'Lengkapkan Maklumat Peserta',
+    'View Thank You Page': 'Lihat Halaman Terima Kasih',
+    'Need help? Email BICC': 'Perlu bantuan? E-mel BICC',
+    'Short answers before you register.': 'Jawapan ringkas sebelum anda mendaftar.',
+    'Registration Confirmed': 'Pendaftaran Disahkan',
+    'Thank you for securing your BICC pass.': 'Terima kasih kerana mendapatkan pas BICC anda.',
+    'Your payment step is complete. The next thing we need is your delegate details so the BICC team can match your payment, selected track and future programme updates.':
+      'Langkah bayaran anda telah selesai. Seterusnya, kami perlukan maklumat peserta supaya pasukan BICC boleh memadankan bayaran, trek pilihan dan kemas kini program akan datang.',
+    'Complete Delegate / Participant Details': 'Lengkapkan Maklumat Peserta',
+    'What to do next': 'Apa langkah seterusnya',
+    'Save your Stripe receipt or payment confirmation.': 'Simpan resit Stripe atau pengesahan bayaran anda.',
+    'Complete your delegate details form for BICC.': 'Lengkapkan borang maklumat peserta BICC.',
+    'Watch for official updates about programme, venue and check-in.': 'Pantau kemas kini rasmi tentang program, lokasi dan daftar masuk.',
+    'Use the same email as your Stripe receipt when you complete the participant form. That makes organizer matching much easier.':
+      'Gunakan e-mel yang sama seperti resit Stripe semasa melengkapkan borang peserta. Ini memudahkan pihak penganjur membuat padanan.',
+    'Need help matching your payment?': 'Perlu bantuan memadankan bayaran?',
+    'After Stripe checkout, complete the participant details form using your receipt email. The BICC team will use that information for official follow-up, programme updates and check-in preparation.':
+      'Selepas pembayaran Stripe, lengkapkan borang maklumat peserta menggunakan e-mel resit anda. Pasukan BICC akan menggunakan maklumat itu untuk susulan rasmi, kemas kini program dan persediaan daftar masuk.',
+    'Venue & Visit': 'Lokasi & Lawatan',
+    'Where should I ask general questions?': 'Di mana saya boleh bertanya soalan umum?',
+    'Email hello@bicc2026.com or use the Contact page so the BICC team can route your enquiry.':
+      'E-mel hello@bicc2026.com atau gunakan halaman Contact supaya pasukan BICC boleh menyalurkan pertanyaan anda.',
+    'How do I match my Stripe payment with my delegate details?': 'Bagaimana saya padankan bayaran Stripe dengan maklumat peserta?',
+    'After payment, submit your delegate details and include the email used for your Stripe receipt so the organiser can match the purchase with your selected pass.':
+      'Selepas bayaran, hantar maklumat peserta dan masukkan e-mel yang digunakan untuk resit Stripe supaya penganjur boleh memadankan pembelian dengan pas pilihan anda.',
+    'Will there be a programme PDF?': 'Adakah PDF program akan disediakan?',
+    'The programme preview is available on the website. An official PDF can be added once final times, rooms and instructor allocations are confirmed.':
+      'Pratonton program tersedia di laman web. PDF rasmi boleh ditambah selepas masa akhir, bilik dan penugasan pengajar disahkan.',
+    'Are hotel and travel bookings handled by BICC?': 'Adakah tempahan hotel dan perjalanan diuruskan oleh BICC?',
+    'Delegates and participants should arrange hotels, flights and local travel directly unless BICC announces an official partner arrangement.':
+      'Delegat dan peserta perlu mengurus hotel, penerbangan dan perjalanan tempatan sendiri melainkan BICC mengumumkan aturan rakan rasmi.',
+    'What is the price of each pass?': 'Berapakah harga setiap pas?',
+    'Both Foundation and Mastery passes are listed at US$130, unless the organizer updates the official pricing.':
+      'Pas Foundation dan Mastery disenaraikan pada US$130, kecuali penganjur mengemas kini harga rasmi.',
+    'What is the difference between Foundation and Mastery?': 'Apakah perbezaan antara Foundation dan Mastery?',
+    'Foundation is designed for beginners and emerging performers who want essential clown craft. Mastery is designed for experienced performers who want deeper critique, stage presence and professional development.':
+      'Foundation direka untuk pemula dan penghibur baharu yang mahu asas seni badut. Mastery direka untuk penghibur berpengalaman yang mahu kritikan lebih mendalam, kehadiran pentas dan perkembangan profesional.',
+    'Are workshops included in the pass?': 'Adakah bengkel termasuk dalam pas?',
+    'Workshop access follows your selected pass and track. Final session access and capacity details are subject to organizer confirmation.':
+      'Akses bengkel mengikut pas dan trek pilihan anda. Akses sesi akhir dan maklumat kapasiti tertakluk kepada pengesahan penganjur.',
+    'Can I change tracks after registering?': 'Bolehkah saya menukar trek selepas mendaftar?',
+    'Track changes are subject to availability and organizer confirmation.': 'Pertukaran trek tertakluk kepada ketersediaan dan pengesahan penganjur.',
+    'Are accommodation, meals or transport included?': 'Adakah penginapan, makanan atau pengangkutan termasuk?',
+    'These should not be assumed included unless the organizer confirms them separately.': 'Jangan anggap perkara ini termasuk melainkan disahkan secara berasingan oleh penganjur.',
+    'What happens after I register?': 'Apa berlaku selepas saya mendaftar?',
+    'What if the programme changes?': 'Bagaimana jika program berubah?',
+    'Final programme details, venue information and room assignments may be updated closer to the convention.':
+      'Butiran program akhir, maklumat lokasi dan penugasan bilik mungkin dikemas kini lebih dekat dengan konvensyen.',
+    'Do I need prior clowning experience?': 'Adakah saya perlu pengalaman badut sebelum ini?',
+    'No. Foundation sessions are suitable for beginners and emerging performers. Mastery sessions are designed for experienced performers who want sharper feedback and deeper practice.':
+      'Tidak. Sesi Foundation sesuai untuk pemula dan penghibur baharu. Sesi Mastery direka untuk penghibur berpengalaman yang mahu maklum balas lebih tajam dan latihan lebih mendalam.',
+    'Can I switch tracks?': 'Bolehkah saya menukar trek?',
+    'Track switching is subject to availability and organizer confirmation.': 'Pertukaran trek tertakluk kepada ketersediaan dan pengesahan penganjur.',
+    'Will there be a full workshop schedule?': 'Adakah jadual bengkel penuh akan disediakan?',
+    'The main programme timing and class list are now available. Final room assignments, instructor allocation and class changes remain subject to organiser confirmation.':
+      'Masa program utama dan senarai kelas kini tersedia. Penugasan bilik akhir, penugasan pengajar dan perubahan kelas masih tertakluk kepada pengesahan penganjur.',
+    'Are the workshops suitable for educators?': 'Adakah bengkel sesuai untuk pendidik?',
+    'Yes. Several sessions are relevant for educators, school performers, family entertainers and community-based creative practitioners.':
+      'Ya. Beberapa sesi sesuai untuk pendidik, penghibur sekolah, penghibur keluarga dan pengamal kreatif komuniti.',
+    'Are materials provided?': 'Adakah bahan disediakan?',
+    'Workshop material requirements, if any, will be announced by the organizer.': 'Keperluan bahan bengkel, jika ada, akan diumumkan oleh penganjur.',
+    'Will I receive a certificate?': 'Adakah saya akan menerima sijil?',
+    'Yes. The e-certificate will be sent by email after participants complete the feedback form. The link will be provided by the organizer.':
+      'Ya. E-sijil akan dihantar melalui e-mel selepas peserta melengkapkan borang maklum balas. Pautan akan diberikan oleh penganjur.',
+    'Is the full programme confirmed?': 'Adakah program penuh telah disahkan?',
+    'The main three-day programme timing is now available. Room assignments, instructor allocation and any final organiser updates may still be refined before the convention.':
+      'Masa program utama tiga hari kini tersedia. Penugasan bilik, penugasan pengajar dan kemas kini akhir penganjur masih boleh diperhalusi sebelum konvensyen.',
+    'Do I need to choose a track before attending?': 'Adakah saya perlu memilih trek sebelum hadir?',
+    'Yes. Delegates and participants should select the pass or track that best fits their current experience and learning goals.':
+      'Ya. Delegat dan peserta perlu memilih pas atau trek yang paling sesuai dengan pengalaman semasa dan matlamat pembelajaran mereka.',
+    'Are all workshops included?': 'Adakah semua bengkel termasuk?',
+    'Workshop access follows the selected pass and track structure. Some sessions may have capacity limits or organiser confirmation.':
+      'Akses bengkel mengikut pas dan struktur trek yang dipilih. Sesetengah sesi mungkin mempunyai had kapasiti atau memerlukan pengesahan penganjur.',
+    'Can I attend both Foundation and Mastery sessions?': 'Bolehkah saya menghadiri sesi Foundation dan Mastery?',
+    'Track access is subject to pass type, availability and organiser confirmation.': 'Akses trek tertakluk kepada jenis pas, ketersediaan dan pengesahan penganjur.',
+    'Will there be showcase opportunities?': 'Adakah peluang showcase disediakan?',
+    'The programme includes showcase and community-sharing moments. Specific participation details will be confirmed in the final schedule.':
+      'Program ini merangkumi showcase dan momen perkongsian komuniti. Butiran penyertaan khusus akan disahkan dalam jadual akhir.',
+    'Where will the sessions happen?': 'Di mana sesi akan berlangsung?',
+    'Venue zones and room assignments will be announced closer to the convention.': 'Zon lokasi dan penugasan bilik akan diumumkan lebih dekat dengan konvensyen.',
+    'Where is BICC 2026 held?': 'Di mana BICC 2026 diadakan?',
+    'Will there be a venue map?': 'Adakah peta lokasi akan disediakan?',
+    'Yes. The official venue map will be shared before the convention and will include key zones such as registration, workshop rooms, main hall, photo spots and food or rest areas.':
+      'Ya. Peta lokasi rasmi akan dikongsi sebelum konvensyen dan merangkumi zon utama seperti pendaftaran, bilik bengkel, dewan utama, lokasi bergambar serta kawasan makanan atau rehat.',
+    'Where do I register when I arrive?': 'Di mana saya daftar apabila tiba?',
+    'Delegate and participant registration details will be included in the final venue guide and programme update.':
+      'Butiran pendaftaran delegat dan peserta akan dimasukkan dalam panduan lokasi akhir dan kemas kini program.',
+    'Are workshop rooms assigned already?': 'Adakah bilik bengkel sudah ditetapkan?',
+    'Room assignments will be confirmed closer to the convention and may depend on track, session type and final venue layout.':
+      'Penugasan bilik akan disahkan lebih dekat dengan konvensyen dan mungkin bergantung pada trek, jenis sesi dan susun atur lokasi akhir.',
+    'Will there be food areas?': 'Adakah kawasan makanan tersedia?',
+    'Food and rest area information will be included in the official venue guide once confirmed.': 'Maklumat kawasan makanan dan rehat akan dimasukkan dalam panduan lokasi rasmi selepas disahkan.',
+    'Is accommodation included in the pass?': 'Adakah penginapan termasuk dalam pas?',
+    'Accommodation is not listed as included unless specifically stated by the organiser.': 'Penginapan tidak disenaraikan sebagai termasuk melainkan dinyatakan secara khusus oleh penganjur.',
+    'How do I receive venue updates?': 'Bagaimana saya menerima kemas kini lokasi?',
+    'Follow the official BICC website or organiser updates for confirmed venue, programme and delegate/participant information.':
+      'Ikuti laman web rasmi BICC atau kemas kini penganjur untuk maklumat lokasi, program dan peserta yang disahkan.',
     'Venue & Visitor Guide': 'Panduan Lokasi & Pelawat',
     'Gather in Borneo. Find Your Way With Ease.': 'Berkumpul di Borneo. Bergerak dengan mudah.',
     'Venue at a Glance': 'Lokasi Sepintas Lalu',
@@ -683,6 +893,7 @@ const translations: Record<Exclude<SiteLanguage, 'en'>, Record<string, string>> 
     'Programme Snapshot': 'Ringkasan Program',
     'Fast to scan, easy to understand and built around a shared convention rhythm.': 'Mudah diimbas, senang difahami dan dibina mengikut rentak konvensyen bersama.',
     'Instructors & Performers': 'Pengajar & Penghibur',
+    'Instructors & Guest Artists': 'Pengajar & Artis Jemputan',
     'Learn From Artists Who Live The Stage.': 'Belajar daripada artis yang hidup di pentas.',
     'Instructors are selected for stage credibility, teaching clarity and real audience experience.':
       'Pengajar dipilih berdasarkan kredibiliti pentas, kejelasan mengajar dan pengalaman penonton sebenar.',
@@ -1053,17 +1264,17 @@ const passRegistrationSteps = [
   },
   {
     title: 'Register Your Details',
-    description: 'Complete your checkout through the official BICC Stripe payment link for your selected pass.',
+    description: 'Complete checkout through the official BICC Stripe payment link for your selected pass.',
     icon: 'F',
   },
   {
-    title: 'Receive Organizer Confirmation',
-    description: 'Watch for official confirmation, updates and next steps from the BICC team.',
+    title: 'Submit Participant Details',
+    description: 'After payment, send your details with the same email used for your Stripe receipt.',
     icon: 'E',
   },
   {
     title: 'Prepare for BICC',
-    description: 'Review programme updates, venue details, what to bring and final session information before arriving in Tawau.',
+    description: 'Watch for official email updates about programme, venue, check-in and arrival notes.',
     icon: 'B',
   },
 ] as const
@@ -1098,7 +1309,8 @@ const passFaqItems = [
   },
   {
     question: 'What happens after I register?',
-    answer: 'After checkout, follow the official BICC updates and organizer communication for programme, venue and next-step details.',
+    answer:
+      'After Stripe checkout, complete the participant details form using your receipt email. The BICC team will use that information for official follow-up, programme updates and check-in preparation.',
   },
   {
     question: 'What if the programme changes?',
@@ -1335,7 +1547,7 @@ const mentorPreviewCards = [
     title: 'International Instructor',
     meta: 'Physical Comedy, Stage Presence & Live Performance Craft',
     track: 'Foundation Track',
-    note: 'Faculty Announcement Wave 1',
+    note: 'Instructor Announcement Wave 1',
     image: mentorPortraitRandy,
   },
   {
@@ -1349,14 +1561,14 @@ const mentorPreviewCards = [
     title: 'Creative Exchange Instructor',
     meta: 'Audience Connection, Exchange Practice & Cultural Collaboration',
     track: 'Exchange Lab',
-    note: 'International Exchange Faculty',
+    note: 'International Exchange Instructor',
     image: mentorPortraitPayaCocos,
   },
   {
     title: 'Showcase Development Instructor',
     meta: 'Act Refinement, Showcase Direction & Professional Feedback',
     track: 'Mastery Track',
-    note: 'Mastery Track Faculty',
+    note: 'Mastery Track Instructor',
     image: mentorPortraitChagy,
   },
 ]
@@ -2407,6 +2619,17 @@ const tawauHotelSamples = [
     link: 'https://blusentralhotel.com.my/',
     credit: 'Image provided by Blu Sentral Hotel',
     contact: '+60 13-873 9988 / +60 89-773 388',
+  },
+  {
+    name: 'Hotel Emas Tawau',
+    area: 'Heart of Tawau city centre',
+    fit: 'City hotel with 102 rooms',
+    tag: 'Central location',
+    note: 'A practical city stay within walking distance of Hospital Besar Tawau and Tawau Tanjung Market, with dining, sauna, ballroom and 24-hour front desk support.',
+    image: hotelEmasImage,
+    link: 'mailto:emas@teckguan.com',
+    credit: 'Image provided for Hotel Emas Tawau',
+    contact: '+60 89-762 000 / emas@teckguan.com',
   },
   {
     name: 'Borneo Royale Hotel',
@@ -3622,11 +3845,11 @@ function VenueMap() {
             </div>
           </div>
 
-          <div className="venue-floor-flow-card">
-            <div className="venue-floor-flow-head">
+          <details className="venue-floor-flow-card venue-floor-accordion">
+            <summary className="venue-floor-flow-head">
               <strong>Floor guide</strong>
               <span>Room assignments coming soon</span>
-            </div>
+            </summary>
             <div className="venue-floor-flow-list">
               {floorGroups.map((group) => (
                 <article className={`venue-floor-flow-row ${group.type}`} key={group.range}>
@@ -3638,7 +3861,7 @@ function VenueMap() {
                 </article>
               ))}
             </div>
-          </div>
+          </details>
 
           <p className="venue-map-status-note">
             The official BICC room map will be added closer to the convention. Use this section as the venue orientation, not a final floor plan.
@@ -3855,6 +4078,9 @@ function VisitTawauHero() {
 }
 
 function VisitFoodSection() {
+  const [showAllFood, setShowAllFood] = useState(false)
+  const visibleFoodDirectory = showAllFood ? tawauFoodDirectory : tawauFoodDirectory.slice(0, 3)
+
   return (
     <section className="editorial-section section-shell visit-section" id="visit-food">
       <div className="section-head with-copy">
@@ -3908,7 +4134,7 @@ function VisitFoodSection() {
         </div>
 
         <div className="visit-food-directory-grid visit-food-directory-compact">
-          {tawauFoodDirectory.map((item) => (
+          {visibleFoodDirectory.map((item) => (
             <article
               className="visit-food-directory-card"
               id={`food-directory-${slugify(item.category)}`}
@@ -3924,6 +4150,16 @@ function VisitFoodSection() {
             </article>
           ))}
         </div>
+        {tawauFoodDirectory.length > 3 && (
+          <button
+            aria-expanded={showAllFood}
+            className="visit-reveal-btn"
+            onClick={() => setShowAllFood((current) => !current)}
+            type="button"
+          >
+            {showAllFood ? 'Show fewer food ideas' : `Show ${tawauFoodDirectory.length - 3} more food ideas`}
+          </button>
+        )}
         <p className="visit-directory-note">Food references are provided for delegate and participant planning. Details may be updated as partner arrangements are confirmed.</p>
       </div>
     </section>
@@ -3931,6 +4167,10 @@ function VisitFoodSection() {
 }
 
 function VisitStaySection() {
+  const [showAllStays, setShowAllStays] = useState(false)
+  const visibleStayCards = tawauStayCards.slice(0, 3)
+  const visibleHotels = showAllStays ? tawauHotelSamples : tawauHotelSamples.slice(0, 4)
+
   return (
     <section className="editorial-section section-shell visit-section" id="visit-stay">
       <div className="section-head with-copy">
@@ -3944,7 +4184,7 @@ function VisitStaySection() {
       </div>
 
       <div className="visit-stay-strategy" aria-label="Accommodation planning styles">
-        {tawauStayCards.map((card) => (
+        {visibleStayCards.map((card) => (
           <article key={card.title}>
             <span>{card.icon}</span>
             <div>
@@ -3968,7 +4208,7 @@ function VisitStaySection() {
         </div>
 
         <div className="visit-hotel-grid">
-          {tawauHotelSamples.map((hotel) => (
+          {visibleHotels.map((hotel) => (
             <a className="visit-hotel-card" href={hotel.link} key={hotel.name} rel="noreferrer" target="_blank">
               <div className="visit-hotel-image">
                 <img alt={`${hotel.name} in Tawau`} decoding="async" loading="lazy" src={hotel.image} />
@@ -3986,6 +4226,16 @@ function VisitStaySection() {
             </a>
           ))}
         </div>
+        {tawauHotelSamples.length > 4 && (
+          <button
+            aria-expanded={showAllStays}
+            className="visit-reveal-btn"
+            onClick={() => setShowAllStays((current) => !current)}
+            type="button"
+          >
+            {showAllStays ? 'Show fewer stay options' : `Show ${tawauHotelSamples.length - 4} more stay options`}
+          </button>
+        )}
       </div>
 
       <div className="visit-tip-strip">
@@ -4046,6 +4296,9 @@ function VisitGettingAroundSection() {
 }
 
 function VisitThingsToDoSection() {
+  const [showAllThings, setShowAllThings] = useState(false)
+  const visibleThings = showAllThings ? tawauThingsToDoCards : tawauThingsToDoCards.slice(0, 3)
+
   return (
     <section className="editorial-section section-shell visit-section" id="visit-things">
       <div className="section-head with-copy">
@@ -4068,7 +4321,7 @@ function VisitThingsToDoSection() {
       </div>
 
       <div className="visit-things-guide-grid">
-        {tawauThingsToDoCards.map((card) => (
+        {visibleThings.map((card) => (
           <article className={`visit-destination-guide-card ${card.tone}`} key={card.title}>
             <div className="visit-destination-guide-media">
               <img alt={card.title} decoding="async" loading="lazy" src={card.image} />
@@ -4089,6 +4342,16 @@ function VisitThingsToDoSection() {
           </article>
         ))}
       </div>
+      {tawauThingsToDoCards.length > 3 && (
+        <button
+          aria-expanded={showAllThings}
+          className="visit-reveal-btn"
+          onClick={() => setShowAllThings((current) => !current)}
+          type="button"
+        >
+          {showAllThings ? 'Show fewer places' : `Show ${tawauThingsToDoCards.length - 3} more places`}
+        </button>
+      )}
 
       <div className="section-cta">
         <a className="secondary-btn" href="/programme">
@@ -4792,7 +5055,7 @@ function PassComparisonCards() {
               <div className="pass-ticket-quick-row">
                 <strong>Best for</strong>
                 <div>
-                  {pass.bestFor.slice(0, 3).map((item) => (
+                  {pass.bestFor.slice(0, 2).map((item) => (
                     <span key={item}>{item}</span>
                   ))}
                 </div>
@@ -4819,7 +5082,7 @@ function PassComparisonCards() {
 
       <div className="pass-unsure-note compact">
         <strong>Quick guide:</strong>
-        <p>New to clown training? Choose Foundation. Already performing? Choose Mastery.</p>
+        <p>New to clown training? Choose Foundation. Already performing? Choose Mastery. After Stripe checkout, complete participant details with your receipt email.</p>
         <a className="text-link" href="/workshops">
           View Workshop Tracks
         </a>
@@ -4840,7 +5103,7 @@ function PassTrustStrip() {
     },
     {
       title: 'Delegate / participant details after payment',
-      copy: 'Complete your profile once checkout is done.',
+      copy: 'After Stripe checkout, submit your profile with the same receipt email.',
     },
   ]
 
@@ -4919,6 +5182,31 @@ function PassRegistrationFlow() {
   )
 }
 
+function PassAfterPaymentPanel() {
+  return (
+    <section className="pass-after-payment-panel section-shell" id="after-payment">
+      <div>
+        <p className="section-kicker">After Payment</p>
+        <h2>Your next step is simple.</h2>
+        <p>
+          Keep your Stripe receipt, then submit your participant details with the same email address. This helps the BICC team match your payment, selected track and official updates.
+        </p>
+      </div>
+      <div className="pass-after-payment-actions">
+        <a className="primary-btn" href="/delegate-details">
+          Complete Participant Details
+        </a>
+        <a className="secondary-btn" href="/registration-confirmed">
+          View Thank You Page
+        </a>
+        <a className="text-link" href="mailto:hello@bicc2026.com?subject=BICC%202026%20Payment%20Follow-up">
+          Need help? Email BICC
+        </a>
+      </div>
+    </section>
+  )
+}
+
 function PassFAQ() {
   return (
     <section className="editorial-section section-shell programme-faq">
@@ -4976,6 +5264,7 @@ function PassesPage() {
       <PassComparisonCards />
       <PassIncludedSection />
       <PassRegistrationFlow />
+      <PassAfterPaymentPanel />
       <PassFAQ />
       <PassCTA />
     </main>
@@ -5022,8 +5311,11 @@ function RegistrationConfirmedPage() {
             <li>Watch for official updates about programme, venue and check-in.</li>
           </ol>
           <p className="registration-note">
-            If you reached this page after payment, you are on the right track. If your Stripe link currently returns elsewhere, update its success URL in Stripe to this page later.
+            Use the same email as your Stripe receipt when you complete the participant form. That makes organizer matching much easier.
           </p>
+          <a className="text-link" href="mailto:hello@bicc2026.com?subject=BICC%202026%20Payment%20Confirmation%20Help">
+            Need help matching your payment?
+          </a>
         </aside>
       </section>
 
@@ -5046,7 +5338,7 @@ function RegistrationConfirmedPage() {
           <article className="venue-fact-card soft-coral">
             <span className="venue-fact-icon">2</span>
             <div className="venue-fact-copy">
-              <h3>Send delegate details</h3>
+              <h3>Submit participant details</h3>
               <p>Tell BICC who you are, which track you selected and how to reach you.</p>
             </div>
           </article>
@@ -5054,7 +5346,7 @@ function RegistrationConfirmedPage() {
             <span className="venue-fact-icon">3</span>
             <div className="venue-fact-copy">
               <h3>Receive updates</h3>
-              <p>Programme, venue and arrival details will follow through official communication.</p>
+              <p>Programme, venue, check-in and follow-up details will be sent through official communication.</p>
             </div>
           </article>
         </div>
@@ -5662,8 +5954,8 @@ function FeaturedMentors({ mentors }: { mentors: MentorProfile[] }) {
     <section className="editorial-section section-shell mentor-featured-section">
       <div className="section-head with-copy">
         <div>
-          <p className="section-kicker">Featured Instructors</p>
-          <h2>Featured instructors shaping BICC 2026.</h2>
+          <p className="section-kicker">Featured Guest Artists</p>
+          <h2>Featured artists shaping BICC 2026.</h2>
         </div>
         <p className="section-intro">A focused preview of the guest artists, teachers and stage voices joining the convention.</p>
       </div>
@@ -5962,7 +6254,7 @@ function HomePage() {
       <section className="editorial-section section-shell mentor-band">
         <div className="section-head with-copy">
           <div>
-            <p className="section-kicker">Instructors & Performers</p>
+            <p className="section-kicker">Instructors & Guest Artists</p>
             <h2>Learn From Artists Who Live The Stage.</h2>
           </div>
           <p className="section-intro">Instructors are selected for stage credibility, teaching clarity and real audience experience.</p>
@@ -6387,6 +6679,7 @@ function App() {
 
   useEffect(() => {
     window.localStorage.setItem('bicc-site-language', siteLanguage)
+    document.documentElement.lang = siteLanguage === 'zh' ? 'zh-Hans' : siteLanguage === 'ms' ? 'ms' : 'en'
     window.setTimeout(() => {
       applyPageTranslations(siteLanguage)
       applyCmsPageContent(cmsPageContent, siteLanguage)
@@ -6469,7 +6762,7 @@ function App() {
   }
 
   return (
-    <div className="page-shell">
+    <div className="page-shell" data-language={siteLanguage}>
       <header className="site-header">
         <a className="brand-lockup" href="/">
           <img alt="BICC 2026 logo" className="brand-logo-image" src={biccLogo} />
@@ -6491,7 +6784,7 @@ function App() {
         </nav>
 
         <div className="header-actions">
-          <span className="language-switcher" data-no-translate>
+          <span aria-label="Website language" className="language-switcher" data-no-translate>
             {languageOptions.map((option) => (
               <button
                 aria-pressed={siteLanguage === option.code}
