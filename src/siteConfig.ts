@@ -1,4 +1,5 @@
 export const siteConfig = {
+  publicBaseUrl: 'https://www.bicc.my',
   links: {
     foundationPassPayment: 'https://buy.stripe.com/6oUdR22tqekU9Siaun24006',
     masteryPassPayment: 'https://buy.stripe.com/28EeV69VS3Ggd4uaun24007',

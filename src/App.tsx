@@ -22,6 +22,8 @@ const foundationPassPaymentLink = siteConfig.links.foundationPassPayment
 const masteryPassPaymentLink = siteConfig.links.masteryPassPayment
 const visitTawauPartnerLink = siteConfig.links.visitTawauPartner
 const delegateFormStorageKey = siteConfig.storageKeys.delegateDetailsDraft
+const publicBaseUrl = siteConfig.publicBaseUrl.replace(/\/+$/, '')
+const defaultOgImage = `${publicBaseUrl}/og-image.jpg`
 const mentorPortraitUncleSunday = '/mentors/uncle-sunday.webp'
 const mentorPortraitChagy = '/mentors/chagy.jpg'
 const mentorPortraitUncleButton = '/mentors/uncle-button.jpg'
@@ -51,7 +53,8 @@ const tawauGuidePasarTanjungImage = '/visit-tawau/things/tawau-guide-000.jpg'
 const tawauGuideBalungCocosImage = '/visit-tawau/things/tawau-guide-002.jpg'
 const tawauGuideForestImage = '/visit-tawau/things/tawau-guide-003.jpg'
 const tawauGuideChesterMarketImage = '/visit-tawau/things/chester-night-market.webp'
-const tawauGuideCocoaVillageImage = '/visit-tawau/things/tawau-guide-005.jpg'
+const tawauGuideCocoaVillageImage = '/visit-tawau/things/teck-guan-cocoa-village.jpg'
+const tawauGuideCocoaWaterfallImage = '/visit-tawau/things/teck-guan-waterfall.jpg'
 const tawauGuideWaterfrontImage = '/visit-tawau/things/tawau-jawi-waterfront.webp'
 const hotelAeroHomeSuiteImage = '/visit-tawau/hotels/aero-home-suite.jpg'
 const hotelBluSentralImage = '/visit-tawau/hotels/blu-sentral-hotel.jpg'
@@ -176,8 +179,36 @@ const translations: Record<Exclude<SiteLanguage, 'en'>, Record<string, string>> 
     'View Workshops': '查看工作坊',
     'Back to Home': '返回首页',
     'Plan Your Visit': '规划行程',
-    'Contact BICC': '联系 BICC',
+    'Travel Help': '旅行协助',
+    'Travel Support Partners': '旅行协助伙伴',
+    'Choose the support that fits your arrival plan.': '选择适合你抵达计划的协助方式。',
+    'Travel partners are listed for visitor convenience. Please confirm pricing, availability and booking details directly with each provider.':
+      '旅行伙伴资料仅供访客规划参考。价格、名额与预订详情请直接向各服务方确认。',
+    'Mini travel desk': '旅行服务台',
+    'Airport': '机场',
+    'Hotel': '酒店',
+    'Attractions': '景点',
+    'Best for': '适合',
+    'Languages': '语言',
+    'Open JWV Now': '打开 JWV Now',
+    'Open Chanliving': '打开 Chanliving',
+    'Travel agency': '旅行社',
+    'Hotel / Homestay partner': '酒店 / 民宿伙伴',
+    'Visitor planning, local Tawau arrangements, day tours, transfers and group travel help.':
+      '适合访客行程规划、斗湖本地安排、一日游、接送与团队旅行协助。',
+    'Hotel and homestay booking support for delegates extending their Borneo trip around Semporna or regional stays.':
+      '适合想延伸婆罗洲旅程、安排仙本那或周边住宿的参与者。',
+    'Airport transfer': '机场接送',
+    'Tawau day tours': '斗湖一日游',
+    'Hotel guidance': '酒店建议',
+    'Group travel': '团队旅行',
+    'Homestay booking': '民宿预订',
+    'Semporna stays': '仙本那住宿',
+    'Group stays': '团队住宿',
+    'Direct booking': '直接预订',
     'Email BICC Team': '电邮 BICC 团队',
+    'More travel partners can be added here once confirmed.': '更多已确认旅行伙伴可继续加在这里。',
+    'Contact BICC': '联系 BICC',
     'View FAQ': '查看常见问题',
     'Foundation Pass': 'Foundation 通行证',
     'Mastery Pass': 'Mastery 通行证',
@@ -472,7 +503,7 @@ const translations: Record<Exclude<SiteLanguage, 'en'>, Record<string, string>> 
     Registration: '报到',
     Opening: '开幕',
     Lunch: '午餐',
-    'Parallel Session 1': '平行环节 1',
+    'Parallel Class 1': '平行课程 1',
     'Tea Break': '茶点休息',
     'Parallel Class 2': '平行课程 2',
     'Parallel Class 3': '平行课程 3',
@@ -586,7 +617,8 @@ const translations: Record<Exclude<SiteLanguage, 'en'>, Record<string, string>> 
     'Balung Cocos Columnar Basalt': 'Balung Cocos 柱状玄武岩',
     'Tawau Hills Park': '斗湖山公园',
     'Pasar Malam Chester': 'Chester 夜市',
-    'Teck Guan Cocoa Village & Museum': '德源可可村与博物馆',
+    'Teck Guan Cocoa Village & Waterfall': '德源可可村与瀑布',
+    'Teck Guan Cocoa Village Waterfall': '德源可可村瀑布',
     'Waterfront & City Walks': '海滨与城市漫步',
     'Explore Tawau between convention moments.': '在大会空档探索斗湖。',
     'Borneo Experience': '婆罗洲体验',
@@ -664,8 +696,36 @@ const translations: Record<Exclude<SiteLanguage, 'en'>, Record<string, string>> 
     'View Workshops': 'Lihat Bengkel',
     'Back to Home': 'Kembali ke Laman Utama',
     'Plan Your Visit': 'Rancang Lawatan',
-    'Contact BICC': 'Hubungi BICC',
+    'Travel Help': 'Bantuan Perjalanan',
+    'Travel Support Partners': 'Rakan Sokongan Perjalanan',
+    'Choose the support that fits your arrival plan.': 'Pilih sokongan yang sesuai dengan rancangan ketibaan anda.',
+    'Travel partners are listed for visitor convenience. Please confirm pricing, availability and booking details directly with each provider.':
+      'Rakan perjalanan disenaraikan untuk kemudahan pelawat. Sila sahkan harga, ketersediaan dan butiran tempahan terus dengan setiap penyedia.',
+    'Mini travel desk': 'Meja bantuan perjalanan',
+    Airport: 'Lapangan Terbang',
+    Hotel: 'Hotel',
+    Attractions: 'Tarikan',
+    'Best for': 'Sesuai untuk',
+    Languages: 'Bahasa',
+    'Open JWV Now': 'Buka JWV Now',
+    'Open Chanliving': 'Buka Chanliving',
+    'Travel agency': 'Agensi perjalanan',
+    'Hotel / Homestay partner': 'Rakan hotel / homestay',
+    'Visitor planning, local Tawau arrangements, day tours, transfers and group travel help.':
+      'Sesuai untuk perancangan pelawat, aturan tempatan Tawau, lawatan harian, pemindahan dan bantuan perjalanan berkumpulan.',
+    'Hotel and homestay booking support for delegates extending their Borneo trip around Semporna or regional stays.':
+      'Sesuai untuk peserta yang ingin melanjutkan perjalanan Borneo dengan penginapan sekitar Semporna atau kawasan berdekatan.',
+    'Airport transfer': 'Pemindahan lapangan terbang',
+    'Tawau day tours': 'Lawatan harian Tawau',
+    'Hotel guidance': 'Panduan hotel',
+    'Group travel': 'Perjalanan berkumpulan',
+    'Homestay booking': 'Tempahan homestay',
+    'Semporna stays': 'Penginapan Semporna',
+    'Group stays': 'Penginapan berkumpulan',
+    'Direct booking': 'Tempahan terus',
     'Email BICC Team': 'E-mel Pasukan BICC',
+    'More travel partners can be added here once confirmed.': 'Lebih banyak rakan perjalanan boleh ditambah di sini selepas disahkan.',
+    'Contact BICC': 'Hubungi BICC',
     'View FAQ': 'Lihat Soalan Lazim',
     'Foundation Pass': 'Pas Foundation',
     'Mastery Pass': 'Pas Mastery',
@@ -963,7 +1023,7 @@ const translations: Record<Exclude<SiteLanguage, 'en'>, Record<string, string>> 
     Registration: 'Pendaftaran',
     Opening: 'Pembukaan',
     Lunch: 'Makan Tengah Hari',
-    'Parallel Session 1': 'Sesi Selari 1',
+    'Parallel Class 1': 'Kelas Selari 1',
     'Tea Break': 'Rehat Teh',
     'Parallel Class 2': 'Kelas Selari 2',
     'Parallel Class 3': 'Kelas Selari 3',
@@ -1076,7 +1136,8 @@ const translations: Record<Exclude<SiteLanguage, 'en'>, Record<string, string>> 
     'Balung Cocos Columnar Basalt': 'Balung Cocos Columnar Basalt',
     'Tawau Hills Park': 'Taman Bukit Tawau',
     'Pasar Malam Chester': 'Pasar Malam Chester',
-    'Teck Guan Cocoa Village & Museum': 'Teck Guan Cocoa Village & Museum',
+    'Teck Guan Cocoa Village & Waterfall': 'Teck Guan Cocoa Village & Waterfall',
+    'Teck Guan Cocoa Village Waterfall': 'Air Terjun Teck Guan Cocoa Village',
     'Waterfront & City Walks': 'Waterfront & Jalan-jalan Bandar',
     'Explore Tawau between convention moments.': 'Teroka Tawau di antara sesi konvensyen.',
     'Borneo Experience': 'Pengalaman Borneo',
@@ -1195,7 +1256,7 @@ const passes = [
     label: 'Mastery Workshop Pass',
     headline: 'Elevate Your Stage Performance',
     body: 'For working performers ready for sharper timing, critique and stage command.',
-    badges: ['Prior stage experience recommended', '8 advance classes included', 'All classes subject to change'],
+    badges: ['Prior stage experience recommended', '8 mastery classes included', 'All classes subject to change'],
     includes: [
       'Balloon Twisting Class',
       'Magic for Children',
@@ -1322,7 +1383,7 @@ const programme = [
   {
     day: 'Day 1',
     title: 'Arrival & Opening',
-    body: 'Registration, opening, first parallel sessions, jamming and International Night Show.',
+    body: 'Registration, opening, first parallel classes, jamming and International Night Show.',
   },
   {
     day: 'Day 2',
@@ -1379,7 +1440,7 @@ const workshopCards = [
   {
     id: 'balloon-twisting',
     title: 'Balloon Twisting Class',
-    track: 'Foundation / Advance',
+    track: 'Foundation / Mastery',
     trackType: 'mastery' as ProgrammeSessionType,
     description:
       'Build practical balloon skills that support visual comedy, audience connection and fast event-ready moments.',
@@ -1391,7 +1452,7 @@ const workshopCards = [
   {
     id: 'magic-for-children',
     title: 'Magic for Children',
-    track: 'Foundation / Advance',
+    track: 'Foundation / Mastery',
     trackType: 'foundation' as ProgrammeSessionType,
     description:
       'Create simple moments of wonder designed for children, families and interactive stage situations.',
@@ -1415,7 +1476,7 @@ const workshopCards = [
   {
     id: 'puppet-making',
     title: 'Puppet Making, Sounds & Manipulation',
-    track: 'Foundation / Advance',
+    track: 'Foundation / Mastery',
     trackType: 'community' as ProgrammeSessionType,
     description:
       'Explore puppet basics, sound, manipulation and child-friendly character work for live interaction.',
@@ -1439,7 +1500,7 @@ const workshopCards = [
   {
     id: 'juggling-class',
     title: 'Juggling Class',
-    track: 'Foundation / Advance',
+    track: 'Foundation / Mastery',
     trackType: 'showcase' as ProgrammeSessionType,
     description:
       'Develop rhythm, focus and playful prop control through practical juggling exercises.',
@@ -1451,7 +1512,7 @@ const workshopCards = [
   {
     id: 'clown-makeup-costumes',
     title: 'Clown Makeup & Costumes',
-    track: 'Foundation / Advance',
+    track: 'Foundation / Mastery',
     trackType: 'foundation' as ProgrammeSessionType,
     description:
       'Understand how makeup, colour, costume choices and character clarity shape audience recognition.',
@@ -1463,7 +1524,7 @@ const workshopCards = [
   {
     id: 'community-hospital-clowning',
     title: 'Creative Clowns for Community Care & Hospitals',
-    track: 'Advance / Community',
+    track: 'Mastery / Community',
     trackType: 'community' as ProgrammeSessionType,
     description:
       'Practice respectful clowning for community care, hospital contexts and sensitive human connection.',
@@ -1478,7 +1539,7 @@ const workshopSchedulePreview = [
   {
     day: 'Day 1',
     title: 'Registration, Opening & First Classes',
-    body: 'Opening flow, Parallel Session 1, Parallel Class 2, jamming and International Night Show.',
+    body: 'Opening flow, Parallel Class 1, Parallel Class 2, jamming and International Night Show.',
   },
   {
     day: 'Day 2',
@@ -1933,12 +1994,12 @@ const programmeDays: ProgrammeDay[] = [
     description:
       'Registration, opening, first parallel learning blocks, jamming and the evening international show.',
     focus:
-      'Registration, opening ceremony, lunch, parallel sessions, jamming session and international show.',
+      'Registration, opening ceremony, lunch, parallel classes, jamming session and international show.',
     accent: 'arrival',
     chipLabels: [
       'Registration',
       'Opening',
-      'Parallel Session 1',
+      'Parallel Class 1',
       'Parallel Class 2',
       'International Night Show',
     ],
@@ -1971,17 +2032,17 @@ const programmeDays: ProgrammeDay[] = [
         type: 'delegate-info',
         track: 'All Participants',
         venue: 'Break area',
-        description: 'Midday break before the first parallel learning session.',
+        description: 'Midday break before the first parallel class.',
         status: 'confirmed',
         icon: 'L',
       },
       {
         time: '13:00–14:00',
-        title: 'Parallel Session 1',
+        title: 'Parallel Class 1',
         type: 'foundation',
-        track: 'Foundation / Advance groups',
+        track: 'Foundation Track / Mastery Track',
         venue: 'Workshop rooms',
-        description: 'Track-based learning begins with the first parallel session.',
+        description: 'Foundation and Mastery participants begin their track-based classes at the same time.',
         status: 'confirmed',
         icon: '1',
       },
@@ -1999,9 +2060,9 @@ const programmeDays: ProgrammeDay[] = [
         time: '15:00–16:00',
         title: 'Parallel Class 2',
         type: 'mastery',
-        track: 'Foundation / Advance groups',
+        track: 'Foundation Track / Mastery Track',
         venue: 'Workshop rooms',
-        description: 'Second parallel class block for hands-on practice.',
+        description: 'Second simultaneous class block for Foundation and Mastery track practice.',
         status: 'confirmed',
         icon: '2',
       },
@@ -2061,9 +2122,9 @@ const programmeDays: ProgrammeDay[] = [
         time: '10:00–11:00',
         title: 'Parallel Class 3',
         type: 'foundation',
-        track: 'Foundation / Advance groups',
+        track: 'Foundation Track / Mastery Track',
         venue: 'Workshop rooms',
-        description: 'Parallel learning block for track-based practical training.',
+        description: 'Simultaneous Foundation and Mastery class block for practical training.',
         status: 'confirmed',
         icon: '3',
       },
@@ -2081,9 +2142,9 @@ const programmeDays: ProgrammeDay[] = [
         time: '11:30–13:00',
         title: 'Parallel Class 4',
         type: 'mastery',
-        track: 'Foundation / Advance groups',
+        track: 'Foundation Track / Mastery Track',
         venue: 'Workshop rooms',
-        description: 'Extended parallel class block for deeper guided practice.',
+        description: 'Extended simultaneous class block for deeper guided practice.',
         status: 'confirmed',
         icon: '4',
       },
@@ -2101,9 +2162,9 @@ const programmeDays: ProgrammeDay[] = [
         time: '14:00–15:30',
         title: 'Parallel Class 5',
         type: 'foundation',
-        track: 'Foundation / Advance groups',
+        track: 'Foundation Track / Mastery Track',
         venue: 'Workshop rooms',
-        description: 'Afternoon parallel workshop block.',
+        description: 'Afternoon simultaneous workshop block for both learning tracks.',
         status: 'confirmed',
         icon: '5',
       },
@@ -2185,9 +2246,9 @@ const programmeDays: ProgrammeDay[] = [
         time: '13:30–14:30',
         title: 'Parallel Class 6',
         type: 'foundation',
-        track: 'Foundation / Advance groups',
+        track: 'Foundation Track / Mastery Track',
         venue: 'Workshop rooms',
-        description: 'Final parallel class block before closing programme preparations.',
+        description: 'Final simultaneous class block before closing programme preparations.',
         status: 'confirmed',
         icon: '6',
       },
@@ -2680,6 +2741,42 @@ const tawauTransportCards = [
 
 const tawauRouteSteps = ['Airport', 'Hotel', 'Venue', 'Food', 'Attractions'] as const
 
+const tawauTravelPartners = [
+  {
+    name: 'JWV Now',
+    label: 'Travel agency',
+    bestFor: 'Visitor planning, local Tawau arrangements, day tours, transfers and group travel help.',
+    languages: 'EN / 中文 / BM',
+    services: ['Airport transfer', 'Tawau day tours', 'Hotel guidance', 'Group travel'],
+    cta: 'Open JWV Now',
+    href: visitTawauPartnerLink,
+    external: true,
+    badge: 'Travel partner',
+  },
+  {
+    name: 'Chanliving',
+    label: 'Hotel / Homestay partner',
+    bestFor: 'Hotel and homestay booking support for delegates extending their Borneo trip around Semporna or regional stays.',
+    languages: 'EN / 中文 / BM',
+    services: ['Homestay booking', 'Semporna stays', 'Group stays', 'Direct booking'],
+    cta: 'Open Chanliving',
+    href: 'https://book-directonline.com/properties/chanlivingsemporna',
+    external: true,
+    badge: 'HotelHomestay',
+  },
+  {
+    name: 'BICC Travel Desk',
+    label: 'Convention visitor help',
+    bestFor: 'Participants who are unsure which travel partner or service fits their arrival plan.',
+    languages: 'EN / 中文 / BM',
+    services: ['General travel questions', 'Partner routing', 'Visitor notes', 'Convention-day planning'],
+    cta: 'Email BICC Team',
+    href: 'mailto:hello@bicc2026.com?subject=BICC%202026%20Travel%20Help',
+    external: false,
+    badge: 'Visitor support',
+  },
+] as const
+
 const tawauDelegateTips = [
   'Book accommodation early around the convention dates.',
   'Keep your first evening flexible for registration and settling in.',
@@ -2745,18 +2842,32 @@ const tawauThingsToDoCards = [
     tip: 'Good for a light evening walk when the convention schedule allows.',
   },
   {
-    title: 'Teck Guan Cocoa Village & Museum',
-    copy: 'A Tawau cocoa heritage experience covering local cocoa production, village activities and museum context.',
+    title: 'Teck Guan Cocoa Village & Waterfall',
+    copy: 'A cocoa heritage and nature stop where participants can learn about local cocoa production, village activity and a relaxed waterfall setting.',
     tone: 'cocoa',
-    tag: 'Cocoa heritage',
+    tag: 'Cocoa + waterfall',
     image: tawauGuideCocoaVillageImage,
     credit: 'BICC visitor guide source material',
     highlights: [
       'Teck Guan is a major cocoa producer and distributor in Sabah.',
-      'The Cocoa Village in Quion Hill is around one hour from the museum in Tawau town.',
-      'Visitors can explore cocoa culture, leisure activities and dining options.',
+      'The Cocoa Village gives visitors a closer look at Tawau’s cocoa story.',
+      'The waterfall cafe setting adds a cool, relaxed nature stop to the visit.',
     ],
-    tip: 'Plan this as a half-day destination rather than a quick city stop.',
+    tip: 'Plan this as a half-day experience and confirm access details before travelling.',
+  },
+  {
+    title: 'Teck Guan Cocoa Village Waterfall',
+    copy: 'A scenic rest stop connected to the cocoa village experience, suitable for photos, refreshments and a slower Borneo moment.',
+    tone: 'hills',
+    tag: 'Waterfall cafe',
+    image: tawauGuideCocoaWaterfallImage,
+    credit: 'BICC visitor guide source material',
+    highlights: [
+      'Best treated as a leisure stop rather than a quick city walk.',
+      'Useful for small groups who want a nature-and-cafe experience.',
+      'Check opening hours and transport arrangements before planning the visit.',
+    ],
+    tip: 'Bring comfortable footwear and keep the schedule flexible around weather.',
   },
   {
     title: 'Waterfront & City Walks',
@@ -2879,7 +2990,7 @@ const routeContent = {
   },
   '/workshops': {
     eyebrow: 'Workshops',
-    title: 'Practical clown classes across beginner and advance levels.',
+    title: 'Practical clown classes across Foundation and Mastery levels.',
     intro:
       'The workshop list covers balloons, magic, storytelling, puppetry, juggling, makeup, costumes, short-show structure and community care.',
     cards: workshopHighlights.map((item) => ({
@@ -3016,6 +3127,108 @@ function PatternCorner({ side }: { side: 'left' | 'right' }) {
 function normalizePath(pathname: string) {
   if (!pathname || pathname === '/') return '/'
   return pathname.replace(/\/+$/, '')
+}
+
+type SeoMeta = {
+  title: string
+  description: string
+  path: string
+  image?: string
+}
+
+const defaultSeo: SeoMeta = {
+  title: 'BICC 2026 | Borneo International Clown Convention in Tawau, Sabah',
+  description:
+    'Join BICC 2026 in Tawau, Sabah from Aug 3-5, 2026 for international clown workshops, instructors, performance, culture, community and a Borneo destination experience.',
+  path: '/',
+  image: defaultOgImage,
+}
+
+const routeSeo: Record<string, SeoMeta> = {
+  '/': defaultSeo,
+  '/about': {
+    title: 'About BICC 2026 | Clown Craft, Culture and Human Connection',
+    description:
+      'Learn about BICC 2026, a professional clowning convention in Borneo built around laughter, craft, culture, community impact and international exchange.',
+    path: '/about',
+  },
+  '/programme': {
+    title: 'Programme | BICC 2026 3-Day Convention Journey',
+    description:
+      'Explore the BICC 2026 programme flow across arrival, workshops, exchange sessions, showcase moments and community celebration in Tawau, Sabah.',
+    path: '/programme',
+  },
+  '/workshops': {
+    title: 'Workshops | BICC 2026 Foundation and Mastery Tracks',
+    description:
+      'Compare hands-on BICC 2026 clown workshops for Foundation and Mastery tracks, including performance craft, character, magic, balloons, outreach and educational shows.',
+    path: '/workshops',
+  },
+  '/mentors': {
+    title: 'Instructors & Guest Artists | BICC 2026',
+    description:
+      'Meet the BICC 2026 instructors, mentors and guest artists joining the international clown convention from Malaysia, Asia, the USA and beyond.',
+    path: '/mentors',
+  },
+  '/passes': {
+    title: 'Passes & Registration | BICC 2026',
+    description:
+      'Choose your BICC 2026 Foundation or Mastery Track Pass and join three days of clown craft, training, performance, exchange and community in Tawau, Sabah.',
+    path: '/passes',
+  },
+  '/venue': {
+    title: 'Venue | Calvary Crown Tawau for BICC 2026',
+    description:
+      'Plan your BICC 2026 arrival at Calvary Crown in Tawau, Sabah with venue zones, floor guidance, delegate check-in and visitor information.',
+    path: '/venue',
+  },
+  '/visit-tawau': {
+    title: 'Visit Tawau | BICC 2026 Food, Hotels, Transport and Things To Do',
+    description:
+      'Discover Tawau food, hotels, local transport, markets, nature, cocoa heritage and waterfront experiences while joining BICC 2026 in Sabah.',
+    path: '/visit-tawau',
+  },
+  '/sponsors': {
+    title: 'Sponsors | Partner with BICC 2026',
+    description:
+      'Partner with BICC 2026 and connect your brand with performance, culture, tourism, family reach and community impact in Tawau, Sabah.',
+    path: '/sponsors',
+  },
+  '/faq': {
+    title: 'FAQ | BICC 2026 Delegate Questions',
+    description:
+      'Find answers about BICC 2026 passes, workshops, programme flow, venue, travel planning, languages, registration and participant updates.',
+    path: '/faq',
+  },
+  '/contact': {
+    title: 'Contact | BICC 2026',
+    description:
+      'Contact the BICC 2026 team for registration, sponsorship, visitor planning, media and convention questions.',
+    path: '/contact',
+  },
+}
+
+function setMetaBySelector(selector: string, value: string, attribute = 'content') {
+  const element = document.querySelector(selector)
+  if (element) element.setAttribute(attribute, value)
+}
+
+function updateDocumentSeo(path: string) {
+  const seo = routeSeo[path] || defaultSeo
+  const canonicalUrl = `${publicBaseUrl}${seo.path === '/' ? '/' : seo.path}`
+  const imageUrl = seo.image || defaultOgImage
+
+  document.title = seo.title
+  setMetaBySelector('meta[name="description"]', seo.description)
+  setMetaBySelector('link[rel="canonical"]', canonicalUrl, 'href')
+  setMetaBySelector('meta[property="og:title"]', seo.title)
+  setMetaBySelector('meta[property="og:description"]', seo.description)
+  setMetaBySelector('meta[property="og:url"]', canonicalUrl)
+  setMetaBySelector('meta[property="og:image"]', imageUrl)
+  setMetaBySelector('meta[property="og:image:secure_url"]', imageUrl)
+  setMetaBySelector('meta[name="twitter:title"]', seo.title)
+  setMetaBySelector('meta[name="twitter:description"]', seo.description)
+  setMetaBySelector('meta[name="twitter:image"]', imageUrl)
 }
 
 function getTrackFromSearch(search: string): PassTrackId {
@@ -4034,7 +4247,7 @@ function VisitTawauHero() {
           Discover the food, nature, culture and local warmth of Tawau, a coastal city in Sabah where your convention journey becomes a true Borneo experience.
         </p>
         <div className="hero-actions">
-          <a className="primary-btn" href={visitTawauPartnerLink} rel="noreferrer" target="_blank">
+          <a className="primary-btn" href="#visit-travel-support">
             Plan Your Visit
           </a>
           <a className="secondary-btn" href="/programme">
@@ -4064,14 +4277,12 @@ function VisitTawauHero() {
         <a href="#visit-food">Food</a>
         <a href="#visit-stay">Stay</a>
         <a href="#visit-transport">Transport</a>
+        <a href="#visit-travel-support">Travel Help</a>
         <a href="#visit-things">Things To Do</a>
-        <a href={visitTawauPartnerLink} rel="noreferrer" target="_blank">
-          Travel Partner
-        </a>
       </nav>
 
       <p className="visit-official-note">
-        Use this as a participant planning guide. Final hotel, tour and transport arrangements should be confirmed directly with providers or the BICC travel partner.
+        Use this as a participant planning guide. Final hotel, tour and transport arrangements should be confirmed directly with providers or listed travel support partners.
       </p>
     </section>
   )
@@ -4295,6 +4506,69 @@ function VisitGettingAroundSection() {
   )
 }
 
+function VisitTravelSupportSection() {
+  return (
+    <section className="editorial-section section-shell visit-travel-support" id="visit-travel-support">
+      <div className="section-head with-copy">
+        <div>
+          <p className="section-kicker">Travel Help</p>
+          <h2>Travel Support Partners</h2>
+        </div>
+        <p className="section-intro">
+          Choose the support that fits your arrival plan. Use this mini travel desk for transfers, tours, hotel routing and group visitor questions.
+        </p>
+      </div>
+
+      <div className="visit-travel-desk">
+        <div className="visit-travel-map-card">
+          <span>Mini travel desk</span>
+          <h3>Airport → Hotel → Venue → Food → Attractions</h3>
+          <div className="visit-travel-mini-route" aria-label="Travel planning route">
+            {tawauRouteSteps.map((step) => (
+              <strong key={step}>{step}</strong>
+            ))}
+          </div>
+          <p>
+            Travel partners are listed for visitor convenience. Please confirm pricing, availability and booking details directly with each provider.
+          </p>
+        </div>
+
+        <div className="visit-travel-partner-grid">
+          {tawauTravelPartners.map((partner) => (
+            <a
+              className="visit-travel-partner-card"
+              href={partner.href}
+              key={partner.name}
+              rel={partner.external ? 'noreferrer' : undefined}
+              target={partner.external ? '_blank' : undefined}
+            >
+              <div className="visit-travel-partner-head">
+                <span>{partner.badge}</span>
+                <small>{partner.label}</small>
+              </div>
+              <h3>{partner.name}</h3>
+              <p>
+                <strong>Best for:</strong> {partner.bestFor}
+              </p>
+              <p>
+                <strong>Languages:</strong> {partner.languages}
+              </p>
+              <div className="pass-focus-chips">
+                {partner.services.map((service) => (
+                  <span key={service}>{service}</span>
+                ))}
+              </div>
+              <em>{partner.cta}</em>
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <p className="visit-directory-note">More travel partners can be added here once confirmed.</p>
+    </section>
+  )
+}
+
 function VisitThingsToDoSection() {
   const [showAllThings, setShowAllThings] = useState(false)
   const visibleThings = showAllThings ? tawauThingsToDoCards : tawauThingsToDoCards.slice(0, 3)
@@ -4371,7 +4645,7 @@ function VisitTawauCTA() {
         <p>Join us in Tawau for learning, laughter, connection and a journey beyond the convention hall.</p>
       </div>
       <div className="final-cta-actions">
-        <a className="primary-btn" href={visitTawauPartnerLink} rel="noreferrer" target="_blank">
+        <a className="primary-btn" href="#visit-travel-support">
           Plan with Travel Partner
         </a>
         <a className="primary-btn" href="/passes">
@@ -4392,6 +4666,7 @@ function VisitTawauPage() {
       <VisitFoodSection />
       <VisitStaySection />
       <VisitGettingAroundSection />
+      <VisitTravelSupportSection />
       <VisitThingsToDoSection />
       <VisitTawauCTA />
     </main>
@@ -6676,6 +6951,10 @@ function App() {
   const isRegistrationConfirmed = currentPath === '/registration-confirmed'
   const isDelegateDetails = currentPath === '/delegate-details'
   const routePath = isHome ? null : (currentPath in routeContent ? (currentPath as RouteKey) : null)
+
+  useEffect(() => {
+    updateDocumentSeo(currentPath)
+  }, [currentPath])
 
   useEffect(() => {
     window.localStorage.setItem('bicc-site-language', siteLanguage)
