@@ -180,7 +180,17 @@ const translations: Record<Exclude<SiteLanguage, 'en'>, Record<string, string>> 
     'Back to Home': '返回首页',
     'Plan Your Visit': '规划行程',
     'Travel Help': '旅行协助',
+    'Travel Agencies': '旅行社',
     'Travel Support Partners': '旅行协助伙伴',
+    'Plan with local travel support.': '通过本地旅行支援规划行程。',
+    'Use this section to compare travel agencies and visitor support options for airport transfers, tours, hotels and group travel.':
+      '在这里比较旅行社与访客支援选项，安排机场接送、旅游、酒店与团队行程。',
+    'Agency directory': '旅行社目录',
+    'Related visitor support': '相关访客支援',
+    'Travel agency partners can be added here as they are confirmed.': '已确认的旅行社伙伴可以继续加在这里。',
+    'Travel route support': '旅行路线支援',
+    'A simple planning path for participants who want help beyond the convention venue.':
+      '给需要大会场地以外协助的参与者，一个简单的行程规划路径。',
     'Choose the support that fits your arrival plan.': '选择适合你抵达计划的协助方式。',
     'Travel partners are listed for visitor convenience. Please confirm pricing, availability and booking details directly with each provider.':
       '旅行伙伴资料仅供访客规划参考。价格、名额与预订详情请直接向各服务方确认。',
@@ -697,7 +707,17 @@ const translations: Record<Exclude<SiteLanguage, 'en'>, Record<string, string>> 
     'Back to Home': 'Kembali ke Laman Utama',
     'Plan Your Visit': 'Rancang Lawatan',
     'Travel Help': 'Bantuan Perjalanan',
+    'Travel Agencies': 'Agensi Perjalanan',
     'Travel Support Partners': 'Rakan Sokongan Perjalanan',
+    'Plan with local travel support.': 'Rancang dengan sokongan perjalanan tempatan.',
+    'Use this section to compare travel agencies and visitor support options for airport transfers, tours, hotels and group travel.':
+      'Gunakan bahagian ini untuk membandingkan agensi perjalanan dan pilihan sokongan pelawat untuk pemindahan lapangan terbang, lawatan, hotel dan perjalanan berkumpulan.',
+    'Agency directory': 'Direktori agensi',
+    'Related visitor support': 'Sokongan pelawat berkaitan',
+    'Travel agency partners can be added here as they are confirmed.': 'Rakan agensi perjalanan boleh ditambah di sini selepas disahkan.',
+    'Travel route support': 'Sokongan laluan perjalanan',
+    'A simple planning path for participants who want help beyond the convention venue.':
+      'Laluan perancangan ringkas untuk peserta yang memerlukan bantuan selain lokasi konvensyen.',
     'Choose the support that fits your arrival plan.': 'Pilih sokongan yang sesuai dengan rancangan ketibaan anda.',
     'Travel partners are listed for visitor convenience. Please confirm pricing, availability and booking details directly with each provider.':
       'Rakan perjalanan disenaraikan untuk kemudahan pelawat. Sila sahkan harga, ketersediaan dan butiran tempahan terus dengan setiap penyedia.',
@@ -2743,35 +2763,47 @@ const tawauRouteSteps = ['Airport', 'Hotel', 'Venue', 'Food', 'Attractions'] as 
 
 const tawauTravelPartners = [
   {
+    kind: 'agency',
     name: 'JWV Now',
     label: 'Travel agency',
+    summary: 'Local travel support for participants who want help planning Tawau visitor moments before or after BICC.',
     bestFor: 'Visitor planning, local Tawau arrangements, day tours, transfers and group travel help.',
     languages: 'EN / 中文 / BM',
     services: ['Airport transfer', 'Tawau day tours', 'Hotel guidance', 'Group travel'],
     cta: 'Open JWV Now',
     href: visitTawauPartnerLink,
+    image: tawauGuideWaterfrontImage,
+    contact: 'Travel planning via Linktree',
     external: true,
     badge: 'Travel partner',
   },
   {
+    kind: 'stay',
     name: 'Chanliving',
     label: 'Hotel / Homestay partner',
+    summary: 'Hotel and homestay booking option for participants extending their Borneo route.',
     bestFor: 'Hotel and homestay booking support for delegates extending their Borneo trip around Semporna or regional stays.',
     languages: 'EN / 中文 / BM',
     services: ['Homestay booking', 'Semporna stays', 'Group stays', 'Direct booking'],
     cta: 'Open Chanliving',
     href: 'https://book-directonline.com/properties/chanlivingsemporna',
+    image: visitWaterfrontImage,
+    contact: 'Direct booking website',
     external: true,
     badge: 'HotelHomestay',
   },
   {
+    kind: 'support',
     name: 'BICC Travel Desk',
     label: 'Convention visitor help',
+    summary: 'Official routing help for participants who are unsure which provider to contact first.',
     bestFor: 'Participants who are unsure which travel partner or service fits their arrival plan.',
     languages: 'EN / 中文 / BM',
     services: ['General travel questions', 'Partner routing', 'Visitor notes', 'Convention-day planning'],
     cta: 'Email BICC Team',
     href: 'mailto:hello@bicc2026.com?subject=BICC%202026%20Travel%20Help',
+    image: tawauGuideChesterMarketImage,
+    contact: 'hello@bicc2026.com',
     external: false,
     badge: 'Visitor support',
   },
@@ -4506,22 +4538,25 @@ function VisitGettingAroundSection() {
   )
 }
 
-function VisitTravelSupportSection() {
+function VisitTravelAgencySection() {
+  const travelAgencies = tawauTravelPartners.filter((partner) => partner.kind === 'agency')
+  const relatedSupport = tawauTravelPartners.filter((partner) => partner.kind !== 'agency')
+
   return (
-    <section className="editorial-section section-shell visit-travel-support" id="visit-travel-support">
+    <section className="editorial-section section-shell visit-travel-support visit-travel-agency-section" id="visit-travel-support">
       <div className="section-head with-copy">
         <div>
-          <p className="section-kicker">Travel Help</p>
-          <h2>Travel Support Partners</h2>
+          <p className="section-kicker">Travel Agencies</p>
+          <h2>Plan with local travel support.</h2>
         </div>
         <p className="section-intro">
-          Choose the support that fits your arrival plan. Use this mini travel desk for transfers, tours, hotel routing and group visitor questions.
+          Use this section to compare travel agencies and visitor support options for airport transfers, tours, hotels and group travel.
         </p>
       </div>
 
       <div className="visit-travel-desk">
         <div className="visit-travel-map-card">
-          <span>Mini travel desk</span>
+          <span>Travel route support</span>
           <h3>Airport → Hotel → Venue → Food → Attractions</h3>
           <div className="visit-travel-mini-route" aria-label="Travel planning route">
             {tawauRouteSteps.map((step) => (
@@ -4529,12 +4564,55 @@ function VisitTravelSupportSection() {
             ))}
           </div>
           <p>
-            Travel partners are listed for visitor convenience. Please confirm pricing, availability and booking details directly with each provider.
+            A simple planning path for participants who want help beyond the convention venue.
           </p>
         </div>
 
-        <div className="visit-travel-partner-grid">
-          {tawauTravelPartners.map((partner) => (
+        <div className="visit-travel-agency-panel">
+          <p className="section-kicker">Agency directory</p>
+          <div className="visit-agency-grid">
+            {travelAgencies.map((partner) => (
+              <a
+                className="visit-agency-card"
+                href={partner.href}
+                key={partner.name}
+                rel={partner.external ? 'noreferrer' : undefined}
+                target={partner.external ? '_blank' : undefined}
+              >
+                <div className="visit-agency-image">
+                  <img alt={`${partner.name} travel support for BICC visitors`} decoding="async" loading="lazy" src={partner.image} />
+                  <span>{partner.badge}</span>
+                </div>
+                <div className="visit-agency-copy">
+                  <div className="visit-travel-partner-head">
+                    <small>{partner.label}</small>
+                  </div>
+                  <h3>{partner.name}</h3>
+                  <p>{partner.summary}</p>
+                  <p>
+                    <strong>Best for:</strong> {partner.bestFor}
+                  </p>
+                  <div className="pass-focus-chips">
+                    {partner.services.map((service) => (
+                      <span key={service}>{service}</span>
+                    ))}
+                  </div>
+                  <p className="visit-hotel-contact">{partner.contact}</p>
+                  <em>{partner.cta}</em>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <div className="visit-related-support">
+        <div>
+          <p className="section-kicker">Related visitor support</p>
+          <p>Travel partners are listed for visitor convenience. Please confirm pricing, availability and booking details directly with each provider.</p>
+        </div>
+        <div className="visit-travel-partner-grid compact">
+          {relatedSupport.map((partner) => (
             <a
               className="visit-travel-partner-card"
               href={partner.href}
@@ -4564,7 +4642,7 @@ function VisitTravelSupportSection() {
         </div>
       </div>
 
-      <p className="visit-directory-note">More travel partners can be added here once confirmed.</p>
+      <p className="visit-directory-note">Travel agency partners can be added here as they are confirmed.</p>
     </section>
   )
 }
@@ -4666,7 +4744,7 @@ function VisitTawauPage() {
       <VisitFoodSection />
       <VisitStaySection />
       <VisitGettingAroundSection />
-      <VisitTravelSupportSection />
+      <VisitTravelAgencySection />
       <VisitThingsToDoSection />
       <VisitTawauCTA />
     </main>
