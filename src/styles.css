@@ -6933,9 +6933,8 @@ body {
 
 .visit-travel-desk {
   display: grid;
-  grid-template-columns: 0.82fr 1.18fr;
-  gap: 18px;
-  align-items: stretch;
+  gap: 22px;
+  align-items: start;
 }
 
 .visit-travel-map-card,
@@ -6947,11 +6946,12 @@ body {
 }
 
 .visit-travel-map-card {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 18px;
-  padding: 24px;
+  display: grid;
+  grid-template-columns: minmax(260px, 0.38fr) minmax(0, 0.62fr);
+  gap: 22px;
+  align-items: center;
+  min-height: auto;
+  padding: 22px;
   background:
     linear-gradient(135deg, rgba(20, 58, 63, 0.98), rgba(23, 52, 58, 0.92)),
     radial-gradient(circle at 22% 18%, rgba(255, 211, 78, 0.28), transparent 34%);
@@ -6974,20 +6974,23 @@ body {
 }
 
 .visit-travel-map-card h3 {
-  max-width: 440px;
+  max-width: 360px;
+  margin: 14px 0 0;
   color: #fff8eb;
   font-family: var(--font-display);
-  font-size: clamp(1.9rem, 4vw, 3.2rem);
+  font-size: clamp(2rem, 3vw, 3.15rem);
   line-height: 0.98;
 }
 
 .visit-travel-map-card p {
+  margin: 12px 0 0;
   color: rgba(255, 248, 235, 0.82);
   line-height: 1.55;
 }
 
 .visit-travel-mini-route {
   display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 10px;
 }
 
@@ -6997,8 +7000,9 @@ body {
   align-items: center;
   gap: 10px;
   border-radius: 999px;
-  background: rgba(255, 252, 244, 0.1);
+  background: rgba(255, 252, 244, 0.13);
   color: #fff8eb;
+  min-height: 48px;
   padding: 10px 12px;
 }
 
@@ -7078,17 +7082,27 @@ body {
 
 .visit-travel-agency-panel {
   display: grid;
-  gap: 12px;
+  gap: 14px;
+  align-self: stretch;
+}
+
+.visit-travel-agency-panel > .section-kicker {
+  margin: 0;
+  min-height: 28px;
+  display: flex;
+  align-items: center;
 }
 
 .visit-agency-grid {
   display: grid;
-  gap: 16px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
 }
 
 .visit-agency-card {
   display: grid;
-  grid-template-columns: minmax(240px, 0.78fr) minmax(0, 1fr);
+  grid-template-rows: 245px 1fr;
+  min-height: 100%;
   overflow: hidden;
   border: 1px solid rgba(20, 58, 63, 0.12);
   border-radius: 28px;
@@ -7107,7 +7121,7 @@ body {
 
 .visit-agency-image {
   position: relative;
-  min-height: 280px;
+  min-height: 245px;
   background: var(--color-soft-aqua);
 }
 
@@ -7143,12 +7157,13 @@ body {
   display: flex;
   flex-direction: column;
   gap: 12px;
+  min-height: 430px;
   padding: 22px;
 }
 
 .visit-agency-copy h3 {
   margin: 0;
-  font-size: clamp(1.55rem, 2.5vw, 2.2rem);
+  font-size: clamp(1.55rem, 2.2vw, 2rem);
 }
 
 .visit-agency-copy p {
@@ -7167,33 +7182,6 @@ body {
   font-size: 0.95rem;
   font-style: normal;
   font-weight: 900;
-}
-
-.visit-related-support {
-  display: grid;
-  grid-template-columns: 0.44fr 1fr;
-  gap: 16px;
-  margin-top: 18px;
-  padding: 18px;
-  border: 1px solid rgba(20, 58, 63, 0.1);
-  border-radius: 26px;
-  background: rgba(255, 252, 244, 0.72);
-}
-
-.visit-related-support > div:first-child {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.visit-related-support p {
-  margin: 0;
-  color: var(--color-muted);
-  line-height: 1.55;
-}
-
-.visit-travel-partner-grid.compact {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .visit-final-cta {
@@ -9987,8 +9975,6 @@ body {
   .venue-facts-grid,
   .venue-photo-grid,
   .visit-travel-desk,
-  .visit-agency-card,
-  .visit-related-support,
   .visit-travel-partner-grid,
   .sponsor-value-grid,
   .sponsor-opportunity-grid,
@@ -10108,6 +10094,15 @@ body {
 
   .sponsor-brand-map-shell {
     grid-template-columns: 1fr;
+  }
+
+  .visit-travel-map-card,
+  .visit-agency-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .visit-agency-image {
+    min-height: 300px;
   }
 }
 
@@ -10436,6 +10431,10 @@ body {
     padding: 22px;
   }
 
+  .visit-travel-map-card {
+    min-height: auto;
+  }
+
   .visit-travel-map-card,
   .visit-travel-partner-card,
   .visit-agency-card {
@@ -10450,6 +10449,10 @@ body {
 
   .visit-agency-image {
     min-height: 210px;
+  }
+
+  .visit-travel-mini-route {
+    grid-template-columns: 1fr;
   }
 
   .visit-travel-mini-route strong {

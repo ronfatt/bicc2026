@@ -4539,9 +4539,6 @@ function VisitGettingAroundSection() {
 }
 
 function VisitTravelAgencySection() {
-  const travelAgencies = tawauTravelPartners.filter((partner) => partner.kind === 'agency')
-  const relatedSupport = tawauTravelPartners.filter((partner) => partner.kind !== 'agency')
-
   return (
     <section className="editorial-section section-shell visit-travel-support visit-travel-agency-section" id="visit-travel-support">
       <div className="section-head with-copy">
@@ -4556,22 +4553,24 @@ function VisitTravelAgencySection() {
 
       <div className="visit-travel-desk">
         <div className="visit-travel-map-card">
-          <span>Travel route support</span>
-          <h3>Airport → Hotel → Venue → Food → Attractions</h3>
+          <div>
+            <span>Travel route support</span>
+            <h3>One simple visitor route.</h3>
+            <p>
+              A simple planning path for participants who want help beyond the convention venue.
+            </p>
+          </div>
           <div className="visit-travel-mini-route" aria-label="Travel planning route">
             {tawauRouteSteps.map((step) => (
               <strong key={step}>{step}</strong>
             ))}
           </div>
-          <p>
-            A simple planning path for participants who want help beyond the convention venue.
-          </p>
         </div>
 
         <div className="visit-travel-agency-panel">
           <p className="section-kicker">Agency directory</p>
           <div className="visit-agency-grid">
-            {travelAgencies.map((partner) => (
+            {tawauTravelPartners.map((partner) => (
               <a
                 className="visit-agency-card"
                 href={partner.href}
@@ -4603,42 +4602,6 @@ function VisitTravelAgencySection() {
               </a>
             ))}
           </div>
-        </div>
-      </div>
-
-      <div className="visit-related-support">
-        <div>
-          <p className="section-kicker">Related visitor support</p>
-          <p>Travel partners are listed for visitor convenience. Please confirm pricing, availability and booking details directly with each provider.</p>
-        </div>
-        <div className="visit-travel-partner-grid compact">
-          {relatedSupport.map((partner) => (
-            <a
-              className="visit-travel-partner-card"
-              href={partner.href}
-              key={partner.name}
-              rel={partner.external ? 'noreferrer' : undefined}
-              target={partner.external ? '_blank' : undefined}
-            >
-              <div className="visit-travel-partner-head">
-                <span>{partner.badge}</span>
-                <small>{partner.label}</small>
-              </div>
-              <h3>{partner.name}</h3>
-              <p>
-                <strong>Best for:</strong> {partner.bestFor}
-              </p>
-              <p>
-                <strong>Languages:</strong> {partner.languages}
-              </p>
-              <div className="pass-focus-chips">
-                {partner.services.map((service) => (
-                  <span key={service}>{service}</span>
-                ))}
-              </div>
-              <em>{partner.cta}</em>
-            </a>
-          ))}
         </div>
       </div>
 
