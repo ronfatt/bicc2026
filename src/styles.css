@@ -145,12 +145,11 @@ select {
   display: flex;
   justify-content: flex-start;
   flex-wrap: nowrap;
-  gap: clamp(2px, 0.45vw, 8px);
+  gap: clamp(4px, 0.7vw, 10px);
   min-width: 0;
-  font-size: 0.8rem;
+  font-size: 0.82rem;
   white-space: nowrap;
-  overflow-x: auto;
-  scrollbar-width: none;
+  overflow: visible;
 }
 
 .header-actions {
@@ -162,31 +161,80 @@ select {
   min-width: max-content;
 }
 
-.main-nav::-webkit-scrollbar {
-  display: none;
-}
-
-.main-nav a:hover {
+.main-nav a:hover,
+.nav-group-trigger:hover {
   color: var(--color-red);
   background: rgba(246, 91, 87, 0.08);
 }
 
-.main-nav a.active {
+.main-nav a.active,
+.nav-group.active > .nav-group-trigger {
   color: var(--color-red);
   background: rgba(246, 91, 87, 0.1);
 }
 
-.main-nav a {
+.main-nav a,
+.nav-group-trigger {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   min-height: 38px;
-  padding: 0 7px;
+  padding: 0 12px;
+  border: 0;
   border-radius: 999px;
+  background: transparent;
+  color: var(--color-ink);
+  cursor: pointer;
+  font: inherit;
   line-height: 1.15;
+  text-decoration: none;
   transition:
     color 180ms ease,
     background 180ms ease;
+}
+
+.nav-group {
+  position: relative;
+}
+
+.nav-group-trigger::after {
+  content: '▾';
+  margin-left: 6px;
+  color: rgba(23, 52, 58, 0.5);
+  font-size: 0.62rem;
+}
+
+.nav-group-menu {
+  position: absolute;
+  left: 50%;
+  top: calc(100% + 10px);
+  z-index: 20;
+  display: grid;
+  min-width: 190px;
+  padding: 8px;
+  border: 1px solid rgba(20, 58, 63, 0.1);
+  border-radius: 20px;
+  background: rgba(255, 252, 244, 0.98);
+  box-shadow: 0 22px 52px rgba(20, 58, 63, 0.16);
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, -4px);
+  transition:
+    opacity 160ms ease,
+    transform 160ms ease;
+}
+
+.nav-group:hover .nav-group-menu,
+.nav-group:focus-within .nav-group-menu {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate(-50%, 0);
+}
+
+.nav-group-menu a {
+  justify-content: flex-start;
+  min-height: 36px;
+  padding-inline: 12px;
 }
 
 .language-switcher {
@@ -220,12 +268,31 @@ select {
 }
 
 .page-shell[data-language='ms'] .main-nav a,
-.page-shell[data-language='zh'] .main-nav a {
+.page-shell[data-language='zh'] .main-nav a,
+.page-shell[data-language='ms'] .nav-group-trigger,
+.page-shell[data-language='zh'] .nav-group-trigger {
   padding: 0 6px;
 }
 
 .page-shell[data-language='ms'] .header-cta {
   padding-inline: 18px;
+}
+
+.page-shell[data-language='ms'] .visit-food-filter-row button,
+.page-shell[data-language='zh'] .visit-food-filter-row button,
+.page-shell[data-language='ms'] .visit-guide-strip button,
+.page-shell[data-language='zh'] .visit-guide-strip button {
+  font-size: 0.76rem;
+  letter-spacing: 0.01em;
+}
+
+.page-shell[data-language='ms'] .pass-ticket-badge,
+.page-shell[data-language='zh'] .pass-ticket-badge,
+.page-shell[data-language='ms'] .pass-focus-chips span,
+.page-shell[data-language='zh'] .pass-focus-chips span,
+.page-shell[data-language='ms'] .visit-agency-copy p,
+.page-shell[data-language='zh'] .visit-agency-copy p {
+  line-height: 1.35;
 }
 
 .language-switcher button.active,
@@ -1988,11 +2055,12 @@ select {
   .main-nav {
     width: 100%;
     padding-top: 6px;
-    gap: 14px;
+    gap: 8px;
     justify-content: flex-start;
   }
 
-  .main-nav a {
+  .main-nav a,
+  .nav-group-trigger {
     padding: 0 10px;
   }
 
@@ -2021,17 +2089,41 @@ select {
 
   .main-nav {
     justify-content: start;
-    flex-wrap: wrap;
-    gap: 8px 10px;
+    flex-wrap: nowrap;
+    gap: 8px;
     padding-top: 8px;
-    overflow: visible;
-    white-space: normal;
+    overflow-x: auto;
+    overflow-y: visible;
+    white-space: nowrap;
+    scrollbar-width: none;
   }
 
-  .main-nav a {
+  .main-nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .main-nav a,
+  .nav-group-trigger {
     min-height: 34px;
     padding: 0 8px;
     font-size: 0.84rem;
+  }
+
+  .nav-group {
+    position: static;
+  }
+
+  .nav-group-menu {
+    left: auto;
+    right: 12px;
+    top: 108px;
+    min-width: min(240px, calc(100vw - 32px));
+    transform: translateY(-4px);
+  }
+
+  .nav-group:hover .nav-group-menu,
+  .nav-group:focus-within .nav-group-menu {
+    transform: translateY(0);
   }
 
   .header-cta {
@@ -6077,7 +6169,8 @@ body {
   margin-bottom: 22px;
 }
 
-.visit-guide-strip span {
+.visit-guide-strip span,
+.visit-guide-strip button {
   display: inline-flex;
   align-items: center;
   min-height: 34px;
@@ -6086,6 +6179,8 @@ body {
   border-radius: 999px;
   background: rgba(255, 252, 244, 0.88);
   color: var(--color-ink);
+  cursor: pointer;
+  font: inherit;
   font-size: 0.78rem;
   font-weight: 900;
   letter-spacing: 0.05em;
@@ -6480,23 +6575,37 @@ body {
 }
 
 .visit-food-filter-row a,
-.visit-food-filter-row span {
+.visit-food-filter-row span,
+.visit-food-filter-row button,
+.visit-guide-strip button {
   display: inline-flex;
   align-items: center;
   min-height: 36px;
   padding: 0 12px;
+  border: 1px solid rgba(20, 58, 63, 0.08);
   border-radius: 999px;
   background: rgba(255, 252, 244, 0.94);
   color: var(--color-ink);
+  cursor: pointer;
+  font: inherit;
   font-size: 0.82rem;
   font-weight: 900;
   text-decoration: none;
-  transition: background 180ms ease, transform 180ms ease;
+  transition: background 180ms ease, color 180ms ease, transform 180ms ease, border-color 180ms ease;
 }
 
-.visit-food-filter-row a:hover {
+.visit-food-filter-row a:hover,
+.visit-food-filter-row button:hover,
+.visit-guide-strip button:hover {
   transform: translateY(-2px);
   background: rgba(255, 225, 220, 0.86);
+}
+
+.visit-food-filter-row button.active,
+.visit-guide-strip button.active {
+  border-color: rgba(20, 58, 63, 0.1);
+  background: var(--color-deep-teal);
+  color: #fff8eb;
 }
 
 .visit-food-directory-grid {
@@ -6933,7 +7042,7 @@ body {
 
 .visit-travel-desk {
   display: grid;
-  gap: 22px;
+  gap: 18px;
   align-items: start;
 }
 
@@ -6988,6 +7097,43 @@ body {
   line-height: 1.55;
 }
 
+.visit-travel-route-strip {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.28fr) minmax(0, 0.72fr);
+  gap: 18px;
+  align-items: center;
+  padding: 16px;
+  border-radius: 24px;
+  background:
+    linear-gradient(135deg, rgba(20, 58, 63, 0.98), rgba(23, 52, 58, 0.92)),
+    radial-gradient(circle at 22% 18%, rgba(255, 211, 78, 0.28), transparent 34%);
+  color: #fff8eb;
+  box-shadow: 0 18px 42px rgba(20, 58, 63, 0.12);
+}
+
+.visit-travel-route-strip span {
+  display: inline-flex;
+  width: fit-content;
+  margin-bottom: 8px;
+  border-radius: 999px;
+  background: rgba(255, 90, 79, 0.18);
+  color: #fff8eb;
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  padding: 7px 11px;
+  text-transform: uppercase;
+}
+
+.visit-travel-route-strip h3 {
+  max-width: 34ch;
+  margin: 0;
+  color: #fff8eb;
+  font-family: var(--font-body);
+  font-size: clamp(1.05rem, 1.45vw, 1.35rem);
+  line-height: 1.12;
+}
+
 .visit-travel-mini-route {
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
@@ -7002,8 +7148,9 @@ body {
   border-radius: 999px;
   background: rgba(255, 252, 244, 0.13);
   color: #fff8eb;
-  min-height: 48px;
-  padding: 10px 12px;
+  min-height: 42px;
+  padding: 8px 11px;
+  font-size: 0.82rem;
 }
 
 .visit-travel-mini-route strong::before {
@@ -7014,6 +7161,47 @@ body {
   border-radius: 50%;
   background: var(--color-yellow);
   box-shadow: 0 0 0 5px rgba(255, 211, 78, 0.14);
+}
+
+.visit-travel-directory-head {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.48fr) minmax(0, 0.52fr);
+  gap: 18px;
+  align-items: center;
+  padding: 18px;
+  border: 1px solid rgba(20, 58, 63, 0.1);
+  border-radius: 24px;
+  background: rgba(255, 252, 244, 0.72);
+}
+
+.visit-travel-directory-head h3 {
+  margin: 4px 0 6px;
+  font-size: clamp(1.5rem, 2.3vw, 2rem);
+}
+
+.visit-travel-directory-head p {
+  margin: 0;
+  color: var(--color-muted);
+  line-height: 1.55;
+}
+
+.visit-food-filter-row.compact {
+  justify-content: flex-end;
+  margin: 0;
+}
+
+.visit-travel-directory-controls {
+  display: grid;
+  justify-items: end;
+  gap: 10px;
+}
+
+.visit-travel-directory-controls small {
+  color: var(--color-muted);
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
 }
 
 .visit-travel-partner-grid {
@@ -7099,9 +7287,14 @@ body {
   gap: 18px;
 }
 
+.visit-agency-grid.directory {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  align-items: stretch;
+}
+
 .visit-agency-card {
   display: grid;
-  grid-template-rows: 245px 1fr;
+  grid-template-rows: auto 1fr;
   min-height: 100%;
   overflow: hidden;
   border: 1px solid rgba(20, 58, 63, 0.12);
@@ -7121,8 +7314,8 @@ body {
 
 .visit-agency-image {
   position: relative;
-  min-height: 245px;
   background: var(--color-soft-aqua);
+  aspect-ratio: 16 / 10;
 }
 
 .visit-agency-image img {
@@ -7156,30 +7349,77 @@ body {
 .visit-agency-copy {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  min-height: 430px;
-  padding: 22px;
+  gap: 9px;
+  padding: 20px;
 }
 
 .visit-agency-copy h3 {
   margin: 0;
-  font-size: clamp(1.55rem, 2.2vw, 2rem);
+  font-size: clamp(1.42rem, 1.9vw, 1.78rem);
 }
 
 .visit-agency-copy p {
   margin: 0;
   color: var(--color-muted);
-  line-height: 1.5;
+  font-size: 0.94rem;
+  line-height: 1.42;
+}
+
+.visit-agency-copy > p:not(.visit-agency-best-for):not(.visit-agency-meta):not(.visit-hotel-contact) {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .visit-agency-copy p strong {
   color: var(--color-ink);
 }
 
+.visit-agency-best-for,
+.visit-agency-meta {
+  display: grid;
+  gap: 3px;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  font-size: 0.88rem;
+}
+
+.visit-agency-best-for strong,
+.visit-agency-meta strong {
+  color: var(--color-ink);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.visit-agency-best-for span,
+.visit-agency-meta span {
+  color: var(--color-muted);
+}
+
+.visit-agency-best-for span {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.visit-agency-meta {
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 8px;
+  width: fit-content;
+  padding: 7px 10px;
+  border-radius: 999px;
+  background: rgba(221, 247, 247, 0.68);
+}
+
 .visit-agency-copy em {
   margin-top: auto;
   color: var(--color-red);
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   font-style: normal;
   font-weight: 900;
 }
@@ -8050,6 +8290,45 @@ body {
 
 .pass-unsure-note.compact {
   max-width: 760px;
+}
+
+.pass-decision-mini-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.pass-decision-mini-grid article {
+  display: grid;
+  gap: 6px;
+  padding: 12px;
+  border-radius: 18px;
+  border: 1px solid rgba(20, 58, 63, 0.08);
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.pass-decision-mini-grid span {
+  display: inline-grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #fff6f0, var(--color-red) 64%, #db352f);
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 900;
+}
+
+.pass-decision-mini-grid h3 {
+  margin: 0;
+  color: var(--color-ink);
+  font-size: 0.96rem;
+}
+
+.pass-decision-mini-grid p {
+  color: var(--color-muted);
+  font-size: 0.84rem;
+  line-height: 1.45;
 }
 
 .pass-after-payment-panel {
@@ -9985,6 +10264,19 @@ body {
     grid-template-columns: 1fr;
   }
 
+  .visit-travel-route-strip,
+  .visit-travel-directory-head {
+    grid-template-columns: 1fr;
+  }
+
+  .visit-travel-directory-controls {
+    justify-items: start;
+  }
+
+  .visit-agency-grid.directory {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .sponsor-exposure-strip {
     grid-template-columns: 1fr;
   }
@@ -10097,8 +10389,13 @@ body {
   }
 
   .visit-travel-map-card,
+  .visit-travel-directory-head,
   .visit-agency-grid {
     grid-template-columns: 1fr;
+  }
+
+  .visit-food-filter-row.compact {
+    justify-content: flex-start;
   }
 
   .visit-agency-image {
@@ -10431,20 +10728,29 @@ body {
     padding: 22px;
   }
 
+  .visit-travel-route-strip,
   .visit-travel-map-card {
     min-height: auto;
   }
 
+  .visit-travel-route-strip,
   .visit-travel-map-card,
+  .visit-travel-directory-head,
   .visit-travel-partner-card,
   .visit-agency-card {
     border-radius: 22px;
   }
 
+  .visit-travel-route-strip,
   .visit-travel-map-card,
+  .visit-travel-directory-head,
   .visit-travel-partner-card,
   .visit-agency-copy {
     padding: 18px;
+  }
+
+  .visit-agency-grid.directory {
+    grid-template-columns: 1fr;
   }
 
   .visit-agency-image {
@@ -10457,6 +10763,10 @@ body {
 
   .visit-travel-mini-route strong {
     font-size: 0.82rem;
+  }
+
+  .pass-decision-mini-grid {
+    grid-template-columns: 1fr;
   }
 }
 

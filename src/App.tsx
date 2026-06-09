@@ -56,6 +56,8 @@ const tawauGuideChesterMarketImage = '/visit-tawau/things/chester-night-market.w
 const tawauGuideCocoaVillageImage = '/visit-tawau/things/teck-guan-cocoa-village.jpg'
 const tawauGuideCocoaWaterfallImage = '/visit-tawau/things/teck-guan-waterfall.jpg'
 const tawauGuideWaterfrontImage = '/visit-tawau/things/tawau-jawi-waterfront.webp'
+const travelChanlivingImage = '/visit-tawau/travel/chanliving-smart-living.webp'
+const travelBergosongImage = '/visit-tawau/travel/bergosong-eco-travel.webp'
 const hotelAeroHomeSuiteImage = '/visit-tawau/hotels/aero-home-suite.jpg'
 const hotelBluSentralImage = '/visit-tawau/hotels/blu-sentral-hotel.jpg'
 const hotelBorneoRoyaleImage = '/visit-tawau/hotels/borneo-royale-hotel.jpg'
@@ -140,16 +142,32 @@ type DelegateFormState = {
   notes: string
 }
 
-const navItems = [
-  { label: 'About', path: '/about' },
-  { label: 'Programme', path: '/programme' },
-  { label: 'Workshops', path: '/workshops' },
-  { label: 'Instructors', path: '/mentors' },
-  { label: 'Passes', path: '/passes' },
-  { label: 'Venue', path: '/venue' },
-  { label: 'Visit Tawau', path: '/visit-tawau' },
-  { label: 'Sponsors', path: '/sponsors' },
-]
+const navGroups = [
+  {
+    label: 'Attend',
+    items: [
+      { label: 'Programme', path: '/programme' },
+      { label: 'Workshops', path: '/workshops' },
+      { label: 'Instructors', path: '/mentors' },
+      { label: 'Passes', path: '/passes' },
+    ],
+  },
+  {
+    label: 'Visit',
+    items: [
+      { label: 'Venue', path: '/venue' },
+      { label: 'Visit Tawau', path: '/visit-tawau' },
+    ],
+  },
+  {
+    label: 'Partner',
+    items: [
+      { label: 'Sponsors', path: '/sponsors' },
+      { label: 'Contact', path: '/contact' },
+      { label: 'FAQ', path: '/faq' },
+    ],
+  },
+] as const
 
 const languageOptions: { code: SiteLanguage; label: string; shortLabel: string }[] = [
   { code: 'en', label: 'English', shortLabel: 'EN' },
@@ -180,18 +198,54 @@ const translations: Record<Exclude<SiteLanguage, 'en'>, Record<string, string>> 
     'Back to Home': '返回首页',
     'Plan Your Visit': '规划行程',
     'Travel Help': '旅行协助',
+    All: '全部',
+    Homestay: '民宿',
+    'City Centre': '市中心',
+    'Group-Friendly': '适合团队',
+    Markets: '市集',
+    Nature: '自然',
+    Culture: '文化',
+    'Easy Walks': '轻松步行',
+    'Cafe / Group Dining': '咖啡馆 / 团体餐饮',
+    'Venue / Local Food': '场地 / 本地美食',
+    'Dinner / Group Meals': '晚餐 / 团体餐',
+    'Casual Dining': '休闲餐饮',
+    'Kopitiam / Breakfast': '咖啡店 / 早餐',
+    Attend: '参加',
+    Visit: '到访',
+    Partner: '合作',
     'Travel Agencies': '旅行社',
+    'Travel Agency': '旅行社',
+    'Hotel / Homestay': '酒店 / 民宿',
+    'Visitor Support': '访客支援',
     'Travel Support Partners': '旅行协助伙伴',
     'Plan with local travel support.': '通过本地旅行支援规划行程。',
+    'Choose the support that fits your trip.': '选择适合你行程的旅行协助。',
     'Use this section to compare travel agencies and visitor support options for airport transfers, tours, hotels and group travel.':
       '在这里比较旅行社与访客支援选项，安排机场接送、旅游、酒店与团队行程。',
+    'Compare confirmed visitor support partners for airport transfers, stays, local tours and convention-day questions.':
+      '比较已确认的访客支援伙伴，安排机场接送、住宿、本地行程与大会期间问题。',
+    'Find the right travel partner for your BICC trip.': '为你的 BICC 行程找到合适的旅行伙伴。',
+    'Compare by support type, language and service.': '按协助类型、语言和服务比较。',
+    'Planning route': '规划路线',
+    'Travel partner directory': '旅行伙伴目录',
+    Showing: '显示',
+    partners: '个伙伴',
     'Agency directory': '旅行社目录',
     'Related visitor support': '相关访客支援',
     'Travel agency partners can be added here as they are confirmed.': '已确认的旅行社伙伴可以继续加在这里。',
     'Travel route support': '旅行路线支援',
+    'Airport to hotel, venue and Tawau moments.': '从机场、酒店、会场到斗湖体验。',
     'A simple planning path for participants who want help beyond the convention venue.':
       '给需要大会场地以外协助的参与者，一个简单的行程规划路径。',
     'Choose the support that fits your arrival plan.': '选择适合你抵达计划的协助方式。',
+    'Choose local support.': '选择本地协助。',
+    'All partners are listed at the same level.': '所有伙伴以同等级目录呈现。',
+    'All partners are listed at the same level. Please confirm pricing, availability and booking details directly with each provider.':
+      '所有伙伴以同等级目录呈现。价格、名额与预订详情请直接向各服务方确认。',
+    'Use the filters to find travel agency, stay support or official routing help.':
+      '使用筛选找到旅行社、住宿协助或官方行程咨询。',
+    'Compare confirmed visitor support partners in one clean directory.': '在一个清晰目录里比较已确认的访客支援伙伴。',
     'Travel partners are listed for visitor convenience. Please confirm pricing, availability and booking details directly with each provider.':
       '旅行伙伴资料仅供访客规划参考。价格、名额与预订详情请直接向各服务方确认。',
     'Mini travel desk': '旅行服务台',
@@ -203,7 +257,25 @@ const translations: Record<Exclude<SiteLanguage, 'en'>, Record<string, string>> 
     'Open JWV Now': '打开 JWV Now',
     'Open Chanliving': '打开 Chanliving',
     'Travel agency': '旅行社',
+    'Travel partner': '旅行伙伴',
+    'HotelHomestay': '酒店民宿',
+    'Visitor support': '访客支援',
+    'Convention visitor help': '大会访客协助',
     'Hotel / Homestay partner': '酒店 / 民宿伙伴',
+    'Local Tawau travel planning before or after BICC.': 'BICC 前后斗湖本地行程规划。',
+    'Airport transfers, day tours, hotel guidance and group arrivals.': '机场接送、一日游、酒店建议与团队抵达。',
+    'Hotel and homestay booking option for extended Borneo routes.': '延伸婆罗洲路线的酒店与民宿预订选择。',
+    'Visitors arranging stays around Semporna or regional travel.': '安排仙本那或周边行程住宿的访客。',
+    'Smart Living Inn stay option in Semporna with simple booking support for extended Borneo routes.':
+      '位于仙本那的 Smart Living Inn 住宿选择，适合延伸婆罗洲行程的简单预订安排。',
+    'Delegates adding Semporna stays, island trips or family travel around BICC.':
+      '适合在 BICC 前后安排仙本那住宿、岛屿行程或家庭旅行的参与者。',
+    'Eco travel partner for Sebatik Island, mangrove routes, dolphin spotting and nature-based visitor experiences.':
+      '生态旅行伙伴，提供 Sebatik Island、红树林路线、观海豚与自然体验行程。',
+    'Delegates who want eco day trips, river cruises, overnight packages or a nature extension after BICC.':
+      '适合想在 BICC 后安排生态一日游、河流巡游、过夜配套或自然延伸行程的参与者。',
+    'Official routing help for convention visitor questions.': '大会访客问题的官方咨询入口。',
+    'Participants unsure which travel partner to contact first.': '不确定应先联系哪位旅行伙伴的参与者。',
     'Visitor planning, local Tawau arrangements, day tours, transfers and group travel help.':
       '适合访客行程规划、斗湖本地安排、一日游、接送与团队旅行协助。',
     'Hotel and homestay booking support for delegates extending their Borneo trip around Semporna or regional stays.':
@@ -214,8 +286,22 @@ const translations: Record<Exclude<SiteLanguage, 'en'>, Record<string, string>> 
     'Group travel': '团队旅行',
     'Homestay booking': '民宿预订',
     'Semporna stays': '仙本那住宿',
+    'Room booking': '房间预订',
+    'Family travel': '家庭旅行',
+    'Island trip add-on': '岛屿行程加购',
+    'Sebatik Island': 'Sebatik Island',
+    'Eco day tours': '生态一日游',
+    'Mangrove cruise': '红树林巡游',
+    'Dolphin spotting': '观海豚',
     'Group stays': '团队住宿',
     'Direct booking': '直接预订',
+    'General travel questions': '一般旅行问题',
+    'Partner routing': '伙伴转介',
+    'Visitor notes': '访客须知',
+    'Convention-day planning': '大会当天规划',
+    'Travel planning via Linktree': 'Linktree 行程规划',
+    'Direct booking website': '直接预订网站',
+    'Contact Bergosong Eco Travel': '联系 Bergosong Eco Travel',
     'Email BICC Team': '电邮 BICC 团队',
     'More travel partners can be added here once confirmed.': '更多已确认旅行伙伴可继续加在这里。',
     'Contact BICC': '联系 BICC',
@@ -226,6 +312,38 @@ const translations: Record<Exclude<SiteLanguage, 'en'>, Record<string, string>> 
     'Mastery Track Pass': 'Mastery 课程通行证',
     'Foundation Workshop Pass': 'Foundation 工作坊通行证',
     'Mastery Workshop Pass': 'Mastery 工作坊通行证',
+    'View Foundation Workshops': '查看 Foundation 工作坊',
+    'View Mastery Workshops': '查看 Mastery 工作坊',
+    'View Workshop Tracks': '查看工作坊课程',
+    'Two Passes. One Shared Convention.': '两种通行证，一段共同大会体验。',
+    'Pick your training track.': '选择你的训练课程。',
+    'Same convention, same price. Choose by experience level.': '同一场大会，同一价格。请按经验阶段选择。',
+    'For newer performers who want fundamentals, playful tools and stage confidence.':
+      '适合想建立基础、玩乐工具与舞台信心的新晋表演者。',
+    'For working performers ready for sharper timing, critique and stage command.':
+      '适合准备提升节奏、接受反馈并强化舞台掌控的工作表演者。',
+    'Track access subject to organizer confirmation.': '课程参与权限以主办方确认为准。',
+    'Quick guide:': '快速建议：',
+    'Choose track': '选择课程',
+    'Foundation for new performers. Mastery for experienced performers.': '新手选择 Foundation；有经验的表演者选择 Mastery。',
+    'Checkout safely': '安全付款',
+    'Use the official Stripe button on the pass you choose.': '使用所选通行证上的官方 Stripe 按钮付款。',
+    'Submit details': '提交资料',
+    'Complete the participant form with your Stripe receipt email.': '用 Stripe 收据电邮填写参与者资料表。',
+    'Newer performers choose Foundation. Working performers choose Mastery. After Stripe checkout, complete participant details with your receipt email.':
+      '新手或正在建立基础的表演者选择 Foundation；已有演出经验者选择 Mastery。Stripe 付款后，请用收据电邮填写参与者资料。',
+    'Official Stripe checkout': '官方 Stripe 付款',
+    'Pay through the official BICC pass links.': '请通过 BICC 官方通行证链接付款。',
+    'Same price, clear choice': '同一价格，清楚选择',
+    'Foundation and Mastery are both US$130.': 'Foundation 与 Mastery 都是 US$130。',
+    'Delegate / participant details after payment': '付款后填写参与者资料',
+    'After Stripe checkout, submit your profile with the same receipt email.': 'Stripe 付款后，请用同一个收据电邮提交资料。',
+    'Everything essential. Nothing confusing.': '只保留重点，清楚不复杂。',
+    'A clear 3-day convention pass connected to your selected training track.': '一张清晰的三天大会通行证，连接你选择的训练课程。',
+    'Final programme access, room assignments and any special activities follow official organiser confirmation.':
+      '最终日程权限、房间安排与特别活动以主办方确认为准。',
+    'Buy your pass. Then prepare for BICC.': '购买通行证，然后准备参加 BICC。',
+    'Already paid? Complete Delegate / Participant Details': '已付款？填写参与者资料',
     'Build Your Professional Foundation': '建立你的专业基础',
     'Elevate Your Stage Performance': '提升你的舞台表现',
     'Where Laughter Becomes Legacy': '让欢笑成为传承',
@@ -707,18 +825,54 @@ const translations: Record<Exclude<SiteLanguage, 'en'>, Record<string, string>> 
     'Back to Home': 'Kembali ke Laman Utama',
     'Plan Your Visit': 'Rancang Lawatan',
     'Travel Help': 'Bantuan Perjalanan',
+    All: 'Semua',
+    Homestay: 'Homestay',
+    'City Centre': 'Pusat Bandar',
+    'Group-Friendly': 'Sesuai Kumpulan',
+    Markets: 'Pasar',
+    Nature: 'Alam',
+    Culture: 'Budaya',
+    'Easy Walks': 'Jalan Santai',
+    'Cafe / Group Dining': 'Kafe / Kumpulan',
+    'Venue / Local Food': 'Lokasi / Makanan',
+    'Dinner / Group Meals': 'Malam / Kumpulan',
+    'Casual Dining': 'Makan Santai',
+    'Kopitiam / Breakfast': 'Kopitiam / Sarapan',
+    Attend: 'Sertai',
+    Visit: 'Lawatan',
+    Partner: 'Rakan',
     'Travel Agencies': 'Agensi Perjalanan',
+    'Travel Agency': 'Agensi Perjalanan',
+    'Hotel / Homestay': 'Hotel / Homestay',
+    'Visitor Support': 'Sokongan Pelawat',
     'Travel Support Partners': 'Rakan Sokongan Perjalanan',
     'Plan with local travel support.': 'Rancang dengan sokongan perjalanan tempatan.',
+    'Choose the support that fits your trip.': 'Pilih sokongan yang sesuai dengan perjalanan anda.',
     'Use this section to compare travel agencies and visitor support options for airport transfers, tours, hotels and group travel.':
       'Gunakan bahagian ini untuk membandingkan agensi perjalanan dan pilihan sokongan pelawat untuk pemindahan lapangan terbang, lawatan, hotel dan perjalanan berkumpulan.',
+    'Compare confirmed visitor support partners for airport transfers, stays, local tours and convention-day questions.':
+      'Bandingkan rakan sokongan pelawat yang disahkan untuk pemindahan lapangan terbang, penginapan, lawatan tempatan dan soalan hari konvensyen.',
+    'Find the right travel partner for your BICC trip.': 'Cari rakan perjalanan yang sesuai untuk perjalanan BICC anda.',
+    'Compare by support type, language and service.': 'Bandingkan mengikut jenis sokongan, bahasa dan perkhidmatan.',
+    'Planning route': 'Laluan perancangan',
+    'Travel partner directory': 'Direktori rakan perjalanan',
+    Showing: 'Memaparkan',
+    partners: 'rakan',
     'Agency directory': 'Direktori agensi',
     'Related visitor support': 'Sokongan pelawat berkaitan',
     'Travel agency partners can be added here as they are confirmed.': 'Rakan agensi perjalanan boleh ditambah di sini selepas disahkan.',
     'Travel route support': 'Sokongan laluan perjalanan',
+    'Airport to hotel, venue and Tawau moments.': 'Dari lapangan terbang ke hotel, lokasi dan pengalaman Tawau.',
     'A simple planning path for participants who want help beyond the convention venue.':
       'Laluan perancangan ringkas untuk peserta yang memerlukan bantuan selain lokasi konvensyen.',
     'Choose the support that fits your arrival plan.': 'Pilih sokongan yang sesuai dengan rancangan ketibaan anda.',
+    'Choose local support.': 'Pilih sokongan tempatan.',
+    'All partners are listed at the same level.': 'Semua rakan disenaraikan pada tahap yang sama.',
+    'All partners are listed at the same level. Please confirm pricing, availability and booking details directly with each provider.':
+      'Semua rakan disenaraikan pada tahap yang sama. Sila sahkan harga, ketersediaan dan butiran tempahan terus dengan setiap penyedia.',
+    'Use the filters to find travel agency, stay support or official routing help.':
+      'Gunakan penapis untuk mencari agensi perjalanan, sokongan penginapan atau bantuan laluan rasmi.',
+    'Compare confirmed visitor support partners in one clean directory.': 'Bandingkan rakan sokongan pelawat yang disahkan dalam satu direktori yang jelas.',
     'Travel partners are listed for visitor convenience. Please confirm pricing, availability and booking details directly with each provider.':
       'Rakan perjalanan disenaraikan untuk kemudahan pelawat. Sila sahkan harga, ketersediaan dan butiran tempahan terus dengan setiap penyedia.',
     'Mini travel desk': 'Meja bantuan perjalanan',
@@ -730,7 +884,25 @@ const translations: Record<Exclude<SiteLanguage, 'en'>, Record<string, string>> 
     'Open JWV Now': 'Buka JWV Now',
     'Open Chanliving': 'Buka Chanliving',
     'Travel agency': 'Agensi perjalanan',
+    'Travel partner': 'Rakan perjalanan',
+    HotelHomestay: 'HotelHomestay',
+    'Visitor support': 'Sokongan pelawat',
+    'Convention visitor help': 'Bantuan pelawat konvensyen',
     'Hotel / Homestay partner': 'Rakan hotel / homestay',
+    'Local Tawau travel planning before or after BICC.': 'Perancangan perjalanan Tawau sebelum atau selepas BICC.',
+    'Airport transfers, day tours, hotel guidance and group arrivals.': 'Pemindahan lapangan terbang, lawatan harian, panduan hotel dan ketibaan kumpulan.',
+    'Hotel and homestay booking option for extended Borneo routes.': 'Pilihan tempahan hotel dan homestay untuk laluan Borneo lanjutan.',
+    'Visitors arranging stays around Semporna or regional travel.': 'Pelawat yang mengatur penginapan sekitar Semporna atau perjalanan serantau.',
+    'Smart Living Inn stay option in Semporna with simple booking support for extended Borneo routes.':
+      'Pilihan penginapan Smart Living Inn di Semporna dengan sokongan tempahan ringkas untuk perjalanan Borneo lanjutan.',
+    'Delegates adding Semporna stays, island trips or family travel around BICC.':
+      'Sesuai untuk peserta yang menambah penginapan Semporna, lawatan pulau atau perjalanan keluarga sekitar BICC.',
+    'Eco travel partner for Sebatik Island, mangrove routes, dolphin spotting and nature-based visitor experiences.':
+      'Rakan eko-pelancongan untuk Pulau Sebatik, laluan bakau, melihat ikan lumba-lumba dan pengalaman alam semula jadi.',
+    'Delegates who want eco day trips, river cruises, overnight packages or a nature extension after BICC.':
+      'Sesuai untuk peserta yang mahukan lawatan eko harian, pelayaran sungai, pakej bermalam atau sambungan alam selepas BICC.',
+    'Official routing help for convention visitor questions.': 'Bantuan rasmi untuk soalan pelawat konvensyen.',
+    'Participants unsure which travel partner to contact first.': 'Peserta yang belum pasti rakan perjalanan mana perlu dihubungi dahulu.',
     'Visitor planning, local Tawau arrangements, day tours, transfers and group travel help.':
       'Sesuai untuk perancangan pelawat, aturan tempatan Tawau, lawatan harian, pemindahan dan bantuan perjalanan berkumpulan.',
     'Hotel and homestay booking support for delegates extending their Borneo trip around Semporna or regional stays.':
@@ -741,8 +913,22 @@ const translations: Record<Exclude<SiteLanguage, 'en'>, Record<string, string>> 
     'Group travel': 'Perjalanan berkumpulan',
     'Homestay booking': 'Tempahan homestay',
     'Semporna stays': 'Penginapan Semporna',
+    'Room booking': 'Tempahan bilik',
+    'Family travel': 'Perjalanan keluarga',
+    'Island trip add-on': 'Tambahan lawatan pulau',
+    'Sebatik Island': 'Pulau Sebatik',
+    'Eco day tours': 'Lawatan eko harian',
+    'Mangrove cruise': 'Pelayaran bakau',
+    'Dolphin spotting': 'Melihat ikan lumba-lumba',
     'Group stays': 'Penginapan berkumpulan',
     'Direct booking': 'Tempahan terus',
+    'General travel questions': 'Soalan perjalanan umum',
+    'Partner routing': 'Rujukan rakan',
+    'Visitor notes': 'Nota pelawat',
+    'Convention-day planning': 'Perancangan hari konvensyen',
+    'Travel planning via Linktree': 'Perancangan melalui Linktree',
+    'Direct booking website': 'Laman tempahan terus',
+    'Contact Bergosong Eco Travel': 'Hubungi Bergosong Eco Travel',
     'Email BICC Team': 'E-mel Pasukan BICC',
     'More travel partners can be added here once confirmed.': 'Lebih banyak rakan perjalanan boleh ditambah di sini selepas disahkan.',
     'Contact BICC': 'Hubungi BICC',
@@ -753,6 +939,38 @@ const translations: Record<Exclude<SiteLanguage, 'en'>, Record<string, string>> 
     'Mastery Track Pass': 'Pas Trek Mastery',
     'Foundation Workshop Pass': 'Pas Bengkel Foundation',
     'Mastery Workshop Pass': 'Pas Bengkel Mastery',
+    'View Foundation Workshops': 'Lihat Bengkel Foundation',
+    'View Mastery Workshops': 'Lihat Bengkel Mastery',
+    'View Workshop Tracks': 'Lihat Trek Bengkel',
+    'Two Passes. One Shared Convention.': 'Dua Pas. Satu Pengalaman Konvensyen.',
+    'Pick your training track.': 'Pilih trek latihan anda.',
+    'Same convention, same price. Choose by experience level.': 'Konvensyen yang sama, harga yang sama. Pilih mengikut tahap pengalaman.',
+    'For newer performers who want fundamentals, playful tools and stage confidence.':
+      'Untuk penghibur baharu yang mahukan asas, alat kreatif dan keyakinan pentas.',
+    'For working performers ready for sharper timing, critique and stage command.':
+      'Untuk penghibur berpengalaman yang bersedia memperkemas timing, menerima kritikan dan menguasai pentas.',
+    'Track access subject to organizer confirmation.': 'Akses trek tertakluk kepada pengesahan penganjur.',
+    'Quick guide:': 'Panduan ringkas:',
+    'Choose track': 'Pilih trek',
+    'Foundation for new performers. Mastery for experienced performers.': 'Foundation untuk peserta baharu. Mastery untuk penghibur berpengalaman.',
+    'Checkout safely': 'Bayar dengan selamat',
+    'Use the official Stripe button on the pass you choose.': 'Gunakan butang Stripe rasmi pada pas pilihan anda.',
+    'Submit details': 'Hantar maklumat',
+    'Complete the participant form with your Stripe receipt email.': 'Lengkapkan borang peserta menggunakan e-mel resit Stripe anda.',
+    'Newer performers choose Foundation. Working performers choose Mastery. After Stripe checkout, complete participant details with your receipt email.':
+      'Peserta baharu pilih Foundation. Penghibur berpengalaman pilih Mastery. Selepas pembayaran Stripe, lengkapkan butiran peserta menggunakan e-mel resit anda.',
+    'Official Stripe checkout': 'Pembayaran rasmi Stripe',
+    'Pay through the official BICC pass links.': 'Bayar melalui pautan pas rasmi BICC.',
+    'Same price, clear choice': 'Harga sama, pilihan jelas',
+    'Foundation and Mastery are both US$130.': 'Foundation dan Mastery kedua-duanya US$130.',
+    'Delegate / participant details after payment': 'Butiran peserta selepas pembayaran',
+    'After Stripe checkout, submit your profile with the same receipt email.': 'Selepas pembayaran Stripe, hantar profil anda dengan e-mel resit yang sama.',
+    'Everything essential. Nothing confusing.': 'Semua yang penting, tanpa kekeliruan.',
+    'A clear 3-day convention pass connected to your selected training track.': 'Pas konvensyen 3 hari yang jelas dan berkaitan dengan trek latihan pilihan anda.',
+    'Final programme access, room assignments and any special activities follow official organiser confirmation.':
+      'Akses program akhir, bilik dan aktiviti khas tertakluk kepada pengesahan rasmi penganjur.',
+    'Buy your pass. Then prepare for BICC.': 'Beli pas anda. Kemudian bersedia untuk BICC.',
+    'Already paid? Complete Delegate / Participant Details': 'Sudah bayar? Lengkapkan Butiran Peserta',
     'Build Your Professional Foundation': 'Bina Asas Profesional Anda',
     'Elevate Your Stage Performance': 'Tingkatkan Persembahan Pentas Anda',
     'Borneo International Clown Convention 2026': 'Konvensyen Badut Antarabangsa Borneo 2026',
@@ -1656,6 +1874,13 @@ const mentorPreviewCards = [
 
 type MentorFilterKey = 'all' | 'malaysia' | 'asia' | 'usa' | 'workshop-mentors' | 'guest-artists'
 
+const mentorLineupOnlyIds = new Set(['mr-john'])
+const mentorLineupOnlyNames = new Set(['mr. john'])
+
+function isLineupOnlyMentor(id: string, name: string) {
+  return mentorLineupOnlyIds.has(id) || mentorLineupOnlyNames.has(name.trim().toLowerCase())
+}
+
 const mentorFilterItems: Array<{ key: MentorFilterKey; label: string }> = [
   { key: 'all', label: 'All' },
   { key: 'malaysia', label: 'Malaysia' },
@@ -1731,7 +1956,7 @@ const mentorLineup: MentorProfile[] = [
     shortIntro: 'A contemporary clown and performance artist with 20+ years across commercial events, theatre and street festivals worldwide, blending puppetry, mime, physical comedy and heartfelt interactive storytelling.',
     specialties: ['Contemporary Performance', 'Puppetry & Mime', 'Physical Comedy'],
     image: mentorPortraitMrJohn,
-    featured: true,
+    featured: false,
   },
   {
     id: 'kak-yogi',
@@ -2332,7 +2557,7 @@ const programmeTrackConnection = [
     ],
     accent: 'foundation',
     cta: 'Get Foundation Pass',
-    ctaHref: foundationPassPaymentLink,
+    ctaHref: '/passes#foundation-pass',
   },
   {
     title: 'Mastery Track Pass',
@@ -2347,7 +2572,7 @@ const programmeTrackConnection = [
     ],
     accent: 'mastery',
     cta: 'Get Mastery Pass',
-    ctaHref: masteryPassPaymentLink,
+    ctaHref: '/passes#mastery-pass',
   },
 ] as const
 
@@ -2633,6 +2858,8 @@ const tawauFoodDirectory = [
 
 const tawauFoodFilterItems = ['All', 'Cafe / Group Dining', 'Venue / Local Food', 'Dinner / Group Meals', 'Casual Dining', 'Kopitiam / Breakfast'] as const
 
+const tawauStayFilterItems = ['All', 'Hotel', 'Homestay', 'City Centre', 'Group-Friendly'] as const
+
 const tawauStayCards = [
   {
     title: 'Near the Convention Venue',
@@ -2663,6 +2890,7 @@ const tawauHotelSamples = [
     fit: 'Simple modern hotel stay',
     tag: 'From RM150/night',
     note: 'A cozy, modern stay option with comfortable bedding, high-speed Wi-Fi, coffee and tea facilities, toiletries and air conditioning.',
+    filters: ['Hotel'],
     image: hotelUmiiImage,
     link: 'https://wa.me/60168027721',
     credit: 'Image provided by UMii Hotel',
@@ -2674,6 +2902,7 @@ const tawauHotelSamples = [
     fit: 'Family and group stay',
     tag: 'From RM388/night',
     note: 'A clean and cozy homestay for families, friends and small groups with practical room options for Tawau or Semporna travel plans.',
+    filters: ['Homestay', 'Group-Friendly'],
     image: hotelUmiiHomestayImage,
     link: 'https://wa.me/60128182417',
     credit: 'Image provided by UMii Homestay',
@@ -2685,6 +2914,7 @@ const tawauHotelSamples = [
     fit: 'Family-friendly themed stay',
     tag: 'Aviation homestay',
     note: 'A creative aviation-themed homestay for families or small groups who want a memorable Tawau stay.',
+    filters: ['Homestay', 'Group-Friendly'],
     image: hotelAeroHomeSuiteImage,
     link: 'https://wa.me/601110036227',
     credit: 'Image provided by AeroHomeSuite',
@@ -2696,6 +2926,7 @@ const tawauHotelSamples = [
     fit: 'Comfort-focused hotel',
     tag: 'Kubota Sentral',
     note: 'A cozy hotel option with Smart TV, daily housekeeping and 24-hour reception for business or leisure stays.',
+    filters: ['Hotel'],
     image: hotelBluSentralImage,
     link: 'https://blusentralhotel.com.my/',
     credit: 'Image provided by Blu Sentral Hotel',
@@ -2707,6 +2938,7 @@ const tawauHotelSamples = [
     fit: 'City hotel with 102 rooms',
     tag: 'Central location',
     note: 'A practical city stay within walking distance of Hospital Besar Tawau and Tawau Tanjung Market, with dining, sauna, ballroom and 24-hour front desk support.',
+    filters: ['Hotel', 'City Centre'],
     image: hotelEmasImage,
     link: 'mailto:emas@teckguan.com',
     credit: 'Image provided for Hotel Emas Tawau',
@@ -2718,6 +2950,7 @@ const tawauHotelSamples = [
     fit: 'Business class hotel',
     tag: 'MICE ready',
     note: 'A smoke-free business class hotel with 178 guest rooms/suites and a large pillar-less grand ballroom.',
+    filters: ['Hotel', 'Group-Friendly'],
     image: hotelBorneoRoyaleImage,
     link: 'https://borneoroyale.com/rooms/',
     credit: 'Image provided by Borneo Royale Hotel',
@@ -2729,6 +2962,7 @@ const tawauHotelSamples = [
     fit: 'Homestay option',
     tag: 'Local stay',
     note: 'A cozy homestay in Fajar town with a home-away-from-home feel for travelers seeking a local experience.',
+    filters: ['Homestay', 'Group-Friendly'],
     image: hotelGraceHomestayImage,
     link: 'https://wa.me/601159921799',
     credit: 'Image provided by Grace Homestay Tawau',
@@ -2766,8 +3000,8 @@ const tawauTravelPartners = [
     kind: 'agency',
     name: 'JWV Now',
     label: 'Travel agency',
-    summary: 'Local travel support for participants who want help planning Tawau visitor moments before or after BICC.',
-    bestFor: 'Visitor planning, local Tawau arrangements, day tours, transfers and group travel help.',
+    summary: 'Local Tawau travel planning before or after BICC.',
+    bestFor: 'Airport transfers, day tours, hotel guidance and group arrivals.',
     languages: 'EN / 中文 / BM',
     services: ['Airport transfer', 'Tawau day tours', 'Hotel guidance', 'Group travel'],
     cta: 'Open JWV Now',
@@ -2781,23 +3015,38 @@ const tawauTravelPartners = [
     kind: 'stay',
     name: 'Chanliving',
     label: 'Hotel / Homestay partner',
-    summary: 'Hotel and homestay booking option for participants extending their Borneo route.',
-    bestFor: 'Hotel and homestay booking support for delegates extending their Borneo trip around Semporna or regional stays.',
+    summary: 'Smart Living Inn stay option in Semporna with simple booking support for extended Borneo routes.',
+    bestFor: 'Delegates adding Semporna stays, island trips or family travel around BICC.',
     languages: 'EN / 中文 / BM',
-    services: ['Homestay booking', 'Semporna stays', 'Group stays', 'Direct booking'],
+    services: ['Semporna stays', 'Room booking', 'Family travel', 'Island trip add-on'],
     cta: 'Open Chanliving',
     href: 'https://book-directonline.com/properties/chanlivingsemporna',
-    image: visitWaterfrontImage,
-    contact: 'Direct booking website',
+    image: travelChanlivingImage,
+    contact: '016-822 1589 / 017-898 2000',
     external: true,
     badge: 'HotelHomestay',
+  },
+  {
+    kind: 'agency',
+    name: 'Bergosong Eco Travel',
+    label: 'Travel agency',
+    summary: 'Eco travel partner for Sebatik Island, mangrove routes, dolphin spotting and nature-based visitor experiences.',
+    bestFor: 'Delegates who want eco day trips, river cruises, overnight packages or a nature extension after BICC.',
+    languages: 'EN / BM',
+    services: ['Sebatik Island', 'Eco day tours', 'Mangrove cruise', 'Dolphin spotting'],
+    cta: 'Contact Bergosong Eco Travel',
+    href: 'https://wa.me/60138578178',
+    image: travelBergosongImage,
+    contact: '+6013-857 8178 / info.bergosongecotravel@gmail.com',
+    external: true,
+    badge: 'Travel partner',
   },
   {
     kind: 'support',
     name: 'BICC Travel Desk',
     label: 'Convention visitor help',
-    summary: 'Official routing help for participants who are unsure which provider to contact first.',
-    bestFor: 'Participants who are unsure which travel partner or service fits their arrival plan.',
+    summary: 'Official routing help for convention visitor questions.',
+    bestFor: 'Participants unsure which travel partner to contact first.',
     languages: 'EN / 中文 / BM',
     services: ['General travel questions', 'Partner routing', 'Visitor notes', 'Convention-day planning'],
     cta: 'Email BICC Team',
@@ -2807,6 +3056,13 @@ const tawauTravelPartners = [
     external: false,
     badge: 'Visitor support',
   },
+] as const
+
+const tawauTravelFilterItems = [
+  { key: 'all', label: 'All' },
+  { key: 'agency', label: 'Travel Agency' },
+  { key: 'stay', label: 'Hotel / Homestay' },
+  { key: 'support', label: 'Visitor Support' },
 ] as const
 
 const tawauDelegateTips = [
@@ -2824,6 +3080,7 @@ const tawauThingsToDoCards = [
     tag: 'Market & souvenirs',
     image: tawauGuidePasarTanjungImage,
     credit: 'BICC visitor guide source material',
+    filters: ['Markets', 'Easy Walks'],
     highlights: [
       'Ground floor: fresh produce, fruits, vegetables and local snacks.',
       'First floor: dried salted fish, anchovies, prawns and preserved seafood.',
@@ -2838,6 +3095,7 @@ const tawauThingsToDoCards = [
     tag: 'Geological wonder',
     image: tawauGuideBalungCocosImage,
     credit: 'BICC visitor guide source material',
+    filters: ['Nature'],
     highlights: [
       'Formed when thick basalt lava cooled and contracted into columns.',
       'Good for photography, nature appreciation and a quieter countryside stop.',
@@ -2852,6 +3110,7 @@ const tawauThingsToDoCards = [
     tag: 'Nature & hiking',
     image: tawauGuideForestImage,
     credit: 'BICC visitor guide source material',
+    filters: ['Nature'],
     highlights: [
       'Look for Yellow Meranti and the Lowland Gardens with Borneo flora.',
       'Popular stops include Table Waterfall, Galas Waterfall and the hot spring.',
@@ -2866,6 +3125,7 @@ const tawauThingsToDoCards = [
     tag: 'Night market',
     image: tawauGuideChesterMarketImage,
     credit: 'BICC visitor guide source material',
+    filters: ['Markets', 'Food'],
     highlights: [
       'Features traditional and international food in a casual evening setting.',
       'Includes Sabah ethnic handicrafts, celebration exhibitions and busker energy.',
@@ -2880,6 +3140,7 @@ const tawauThingsToDoCards = [
     tag: 'Cocoa + waterfall',
     image: tawauGuideCocoaVillageImage,
     credit: 'BICC visitor guide source material',
+    filters: ['Culture', 'Nature'],
     highlights: [
       'Teck Guan is a major cocoa producer and distributor in Sabah.',
       'The Cocoa Village gives visitors a closer look at Tawau’s cocoa story.',
@@ -2894,6 +3155,7 @@ const tawauThingsToDoCards = [
     tag: 'Waterfall cafe',
     image: tawauGuideCocoaWaterfallImage,
     credit: 'BICC visitor guide source material',
+    filters: ['Nature'],
     highlights: [
       'Best treated as a leisure stop rather than a quick city walk.',
       'Useful for small groups who want a nature-and-cafe experience.',
@@ -2908,6 +3170,7 @@ const tawauThingsToDoCards = [
     tag: 'Easy walk',
     image: tawauGuideWaterfrontImage,
     credit: 'BICC visitor guide source material',
+    filters: ['Easy Walks'],
     highlights: [
       'Best for short, flexible moments between food, hotel and convention plans.',
       'Good for casual photos and a quick sense of Tawau’s coastal city atmosphere.',
@@ -2916,6 +3179,8 @@ const tawauThingsToDoCards = [
     tip: 'Keep this as an easy add-on rather than a fixed full-day activity.',
   },
 ] as const
+
+const tawauThingsFilterItems = ['All', 'Markets', 'Nature', 'Culture', 'Food', 'Easy Walks'] as const
 
 const venueFaqItems = [
   {
@@ -3069,8 +3334,8 @@ const routeContent = {
     asideTitle: 'Pass note',
     asideBody:
       'Both passes include access to your selected workshop track. The e-certificate will be sent by email after the feedback form is completed.',
-    primaryCta: { label: 'Get Foundation Pass', href: foundationPassPaymentLink },
-    secondaryCta: { label: 'Get Mastery Pass', href: masteryPassPaymentLink },
+    primaryCta: { label: 'Get Foundation Pass', href: '/passes#foundation-pass' },
+    secondaryCta: { label: 'Get Mastery Pass', href: '/passes#mastery-pass' },
   },
   '/venue': {
     eyebrow: 'Venue & Travel',
@@ -3199,7 +3464,7 @@ const routeSeo: Record<string, SeoMeta> = {
   '/mentors': {
     title: 'Instructors & Guest Artists | BICC 2026',
     description:
-      'Meet the BICC 2026 instructors, mentors and guest artists joining the international clown convention from Malaysia, Asia, the USA and beyond.',
+      'Meet the BICC 2026 instructors and guest artists joining the international clown convention from Malaysia, Asia, the USA and beyond.',
     path: '/mentors',
   },
   '/passes': {
@@ -3292,9 +3557,26 @@ function mapCmsMentors(cmsMentors: CmsMentor[], language: SiteLanguage): MentorP
       sourceUrl: mentor.sourceUrl || fallbackMentor?.sourceUrl,
       socialUrl: mentor.socialUrl || fallbackMentor?.socialUrl,
       image: sanityImageUrl(mentor.portrait) || sanityImageUrl(mentor.posterImage) || fallbackMentor?.image || null,
-      featured: Boolean(mentor.isFeatured),
+      featured: Boolean(mentor.isFeatured) && !isLineupOnlyMentor(mentor._id, mentor.name),
     }
   })
+}
+
+function mergeMentorProfiles(cmsMentors: MentorProfile[]) {
+  const mergedMentors = [...cmsMentors]
+  const existingIds = new Set(mergedMentors.map((mentor) => mentor.id))
+  const existingNames = new Set(mergedMentors.map((mentor) => mentor.name.toLowerCase()))
+
+  mentorLineup.forEach((mentor) => {
+    if (existingIds.has(mentor.id) || existingNames.has(mentor.name.toLowerCase())) return
+    mergedMentors.push(mentor)
+  })
+
+  return mergedMentors
+}
+
+function getDisplayedFeaturedMentorIds(mentors: MentorProfile[]) {
+  return new Set(mentors.filter((mentor) => mentor.featured).slice(0, 4).map((mentor) => mentor.id))
 }
 
 function slugify(value: string) {
@@ -3516,7 +3798,7 @@ function renderPassCards() {
               <li key={item}>{item}</li>
             ))}
           </ul>
-              <a className="primary-btn wide-btn" href={pass.ctaHref} rel="noreferrer" target="_blank">
+              <a className="primary-btn wide-btn" href={`/passes#${pass.id}-pass`}>
                 {pass.cta}
               </a>
         </article>
@@ -4322,7 +4604,12 @@ function VisitTawauHero() {
 
 function VisitFoodSection() {
   const [showAllFood, setShowAllFood] = useState(false)
-  const visibleFoodDirectory = showAllFood ? tawauFoodDirectory : tawauFoodDirectory.slice(0, 3)
+  const [activeFoodFilter, setActiveFoodFilter] = useState<(typeof tawauFoodFilterItems)[number]>('All')
+  const filteredFoodDirectory =
+    activeFoodFilter === 'All'
+      ? tawauFoodDirectory
+      : tawauFoodDirectory.filter((item) => item.category === activeFoodFilter)
+  const visibleFoodDirectory = showAllFood ? filteredFoodDirectory : filteredFoodDirectory.slice(0, 3)
 
   return (
     <section className="editorial-section section-shell visit-section" id="visit-food">
@@ -4371,8 +4658,19 @@ function VisitFoodSection() {
         </div>
 
         <div className="visit-food-filter-row" aria-label="Food directory filters">
-          {tawauFoodFilterItems.slice(1).map((filter) => (
-            <span key={filter}>{filter}</span>
+          {tawauFoodFilterItems.map((filter) => (
+            <button
+              aria-pressed={activeFoodFilter === filter}
+              className={activeFoodFilter === filter ? 'active' : ''}
+              key={filter}
+              onClick={() => {
+                setActiveFoodFilter(filter)
+                setShowAllFood(false)
+              }}
+              type="button"
+            >
+              {filter}
+            </button>
           ))}
         </div>
 
@@ -4393,14 +4691,14 @@ function VisitFoodSection() {
             </article>
           ))}
         </div>
-        {tawauFoodDirectory.length > 3 && (
+        {filteredFoodDirectory.length > 3 && (
           <button
             aria-expanded={showAllFood}
             className="visit-reveal-btn"
             onClick={() => setShowAllFood((current) => !current)}
             type="button"
           >
-            {showAllFood ? 'Show fewer food ideas' : `Show ${tawauFoodDirectory.length - 3} more food ideas`}
+            {showAllFood ? 'Show fewer food ideas' : `Show ${filteredFoodDirectory.length - 3} more food ideas`}
           </button>
         )}
         <p className="visit-directory-note">Food references are provided for delegate and participant planning. Details may be updated as partner arrangements are confirmed.</p>
@@ -4411,8 +4709,13 @@ function VisitFoodSection() {
 
 function VisitStaySection() {
   const [showAllStays, setShowAllStays] = useState(false)
+  const [activeStayFilter, setActiveStayFilter] = useState<(typeof tawauStayFilterItems)[number]>('All')
   const visibleStayCards = tawauStayCards.slice(0, 3)
-  const visibleHotels = showAllStays ? tawauHotelSamples : tawauHotelSamples.slice(0, 4)
+  const filteredHotels =
+    activeStayFilter === 'All'
+      ? tawauHotelSamples
+      : tawauHotelSamples.filter((hotel) => (hotel.filters as readonly string[]).includes(activeStayFilter))
+  const visibleHotels = showAllStays ? filteredHotels : filteredHotels.slice(0, 4)
 
   return (
     <section className="editorial-section section-shell visit-section" id="visit-stay">
@@ -4450,6 +4753,23 @@ function VisitStaySection() {
           </p>
         </div>
 
+        <div className="visit-food-filter-row" aria-label="Accommodation filters">
+          {tawauStayFilterItems.map((filter) => (
+            <button
+              aria-pressed={activeStayFilter === filter}
+              className={activeStayFilter === filter ? 'active' : ''}
+              key={filter}
+              onClick={() => {
+                setActiveStayFilter(filter)
+                setShowAllStays(false)
+              }}
+              type="button"
+            >
+              {filter}
+            </button>
+          ))}
+        </div>
+
         <div className="visit-hotel-grid">
           {visibleHotels.map((hotel) => (
             <a className="visit-hotel-card" href={hotel.link} key={hotel.name} rel="noreferrer" target="_blank">
@@ -4469,14 +4789,14 @@ function VisitStaySection() {
             </a>
           ))}
         </div>
-        {tawauHotelSamples.length > 4 && (
+        {filteredHotels.length > 4 && (
           <button
             aria-expanded={showAllStays}
             className="visit-reveal-btn"
             onClick={() => setShowAllStays((current) => !current)}
             type="button"
           >
-            {showAllStays ? 'Show fewer stay options' : `Show ${tawauHotelSamples.length - 4} more stay options`}
+            {showAllStays ? 'Show fewer stay options' : `Show ${filteredHotels.length - 4} more stay options`}
           </button>
         )}
       </div>
@@ -4539,26 +4859,29 @@ function VisitGettingAroundSection() {
 }
 
 function VisitTravelAgencySection() {
+  const [activeTravelFilter, setActiveTravelFilter] = useState<(typeof tawauTravelFilterItems)[number]['key']>('all')
+  const visibleTravelPartners =
+    activeTravelFilter === 'all'
+      ? tawauTravelPartners
+      : tawauTravelPartners.filter((partner) => partner.kind === activeTravelFilter)
+
   return (
     <section className="editorial-section section-shell visit-travel-support visit-travel-agency-section" id="visit-travel-support">
       <div className="section-head with-copy">
         <div>
           <p className="section-kicker">Travel Agencies</p>
-          <h2>Plan with local travel support.</h2>
+          <h2>Find the right travel partner for your BICC trip.</h2>
         </div>
         <p className="section-intro">
-          Use this section to compare travel agencies and visitor support options for airport transfers, tours, hotels and group travel.
+          Compare confirmed visitor support partners for airport transfers, stays, local tours and convention-day questions.
         </p>
       </div>
 
       <div className="visit-travel-desk">
-        <div className="visit-travel-map-card">
+        <div className="visit-travel-route-strip">
           <div>
-            <span>Travel route support</span>
-            <h3>One simple visitor route.</h3>
-            <p>
-              A simple planning path for participants who want help beyond the convention venue.
-            </p>
+            <span>Planning route</span>
+            <h3>Airport to hotel, venue and Tawau moments.</h3>
           </div>
           <div className="visit-travel-mini-route" aria-label="Travel planning route">
             {tawauRouteSteps.map((step) => (
@@ -4567,41 +4890,70 @@ function VisitTravelAgencySection() {
           </div>
         </div>
 
-        <div className="visit-travel-agency-panel">
-          <p className="section-kicker">Agency directory</p>
-          <div className="visit-agency-grid">
-            {tawauTravelPartners.map((partner) => (
-              <a
-                className="visit-agency-card"
-                href={partner.href}
-                key={partner.name}
-                rel={partner.external ? 'noreferrer' : undefined}
-                target={partner.external ? '_blank' : undefined}
-              >
-                <div className="visit-agency-image">
-                  <img alt={`${partner.name} travel support for BICC visitors`} decoding="async" loading="lazy" src={partner.image} />
-                  <span>{partner.badge}</span>
-                </div>
-                <div className="visit-agency-copy">
-                  <div className="visit-travel-partner-head">
-                    <small>{partner.label}</small>
-                  </div>
-                  <h3>{partner.name}</h3>
-                  <p>{partner.summary}</p>
-                  <p>
-                    <strong>Best for:</strong> {partner.bestFor}
-                  </p>
-                  <div className="pass-focus-chips">
-                    {partner.services.map((service) => (
-                      <span key={service}>{service}</span>
-                    ))}
-                  </div>
-                  <p className="visit-hotel-contact">{partner.contact}</p>
-                  <em>{partner.cta}</em>
-                </div>
-              </a>
-            ))}
+        <div className="visit-travel-directory-head">
+          <div>
+            <p className="section-kicker">Travel partner directory</p>
+            <h3>Compare by support type, language and service.</h3>
+            <p>All partners are listed at the same level. Please confirm pricing, availability and booking details directly with each provider.</p>
           </div>
+          <div className="visit-travel-directory-controls">
+            <div className="visit-food-filter-row compact" aria-label="Travel partner filters">
+              {tawauTravelFilterItems.map((filter) => (
+                <button
+                  aria-pressed={activeTravelFilter === filter.key}
+                  className={activeTravelFilter === filter.key ? 'active' : ''}
+                  key={filter.key}
+                  onClick={() => setActiveTravelFilter(filter.key)}
+                  type="button"
+                >
+                  {filter.label}
+                </button>
+              ))}
+            </div>
+            <small>
+              Showing {visibleTravelPartners.length} partners
+            </small>
+          </div>
+        </div>
+
+        <div className="visit-agency-grid directory">
+          {visibleTravelPartners.map((partner) => (
+            <a
+              className={`visit-agency-card ${partner.kind}`}
+              href={partner.href}
+              key={partner.name}
+              rel={partner.external ? 'noreferrer' : undefined}
+              target={partner.external ? '_blank' : undefined}
+            >
+              <div className="visit-agency-image">
+                <img alt={`${partner.name} travel support for BICC visitors`} decoding="async" loading="lazy" src={partner.image} />
+                <span>{partner.badge}</span>
+              </div>
+              <div className="visit-agency-copy">
+                <div className="visit-travel-partner-head">
+                  <small>{partner.label}</small>
+                </div>
+                <h3>{partner.name}</h3>
+                <p>{partner.summary}</p>
+                <p className="visit-agency-best-for">
+                  <strong>Best for</strong>
+                  <span>{partner.bestFor}</span>
+                </p>
+                <p className="visit-agency-meta">
+                  <strong>Languages</strong>
+                  <span>{partner.languages}</span>
+                </p>
+                <div className="pass-focus-chips">
+                  {partner.services.slice(0, 3).map((service) => (
+                    <span key={service}>{service}</span>
+                  ))}
+                  {partner.services.length > 3 ? <span>+{partner.services.length - 3}</span> : null}
+                </div>
+                <p className="visit-hotel-contact">{partner.contact}</p>
+                <em>{partner.cta}</em>
+              </div>
+            </a>
+          ))}
         </div>
       </div>
 
@@ -4612,7 +4964,12 @@ function VisitTravelAgencySection() {
 
 function VisitThingsToDoSection() {
   const [showAllThings, setShowAllThings] = useState(false)
-  const visibleThings = showAllThings ? tawauThingsToDoCards : tawauThingsToDoCards.slice(0, 3)
+  const [activeThingFilter, setActiveThingFilter] = useState<(typeof tawauThingsFilterItems)[number]>('All')
+  const filteredThings =
+    activeThingFilter === 'All'
+      ? tawauThingsToDoCards
+      : tawauThingsToDoCards.filter((card) => (card.filters as readonly string[]).includes(activeThingFilter))
+  const visibleThings = showAllThings ? filteredThings : filteredThings.slice(0, 3)
 
   return (
     <section className="editorial-section section-shell visit-section" id="visit-things">
@@ -4627,12 +4984,20 @@ function VisitThingsToDoSection() {
       </div>
 
       <div className="visit-guide-strip" aria-label="Tawau visitor highlights">
-        <span>Market culture</span>
-        <span>Geological landmark</span>
-        <span>Forest escape</span>
-        <span>Night market</span>
-        <span>Cocoa heritage</span>
-        <span>City walks</span>
+        {tawauThingsFilterItems.map((filter) => (
+          <button
+            aria-pressed={activeThingFilter === filter}
+            className={activeThingFilter === filter ? 'active' : ''}
+            key={filter}
+            onClick={() => {
+              setActiveThingFilter(filter)
+              setShowAllThings(false)
+            }}
+            type="button"
+          >
+            {filter}
+          </button>
+        ))}
       </div>
 
       <div className="visit-things-guide-grid">
@@ -4657,14 +5022,14 @@ function VisitThingsToDoSection() {
           </article>
         ))}
       </div>
-      {tawauThingsToDoCards.length > 3 && (
+      {filteredThings.length > 3 && (
         <button
           aria-expanded={showAllThings}
           className="visit-reveal-btn"
           onClick={() => setShowAllThings((current) => !current)}
           type="button"
         >
-          {showAllThings ? 'Show fewer places' : `Show ${tawauThingsToDoCards.length - 3} more places`}
+          {showAllThings ? 'Show fewer places' : `Show ${filteredThings.length - 3} more places`}
         </button>
       )}
 
@@ -5311,7 +5676,7 @@ function PassHero() {
           <span>US$130</span>
         </div>
         <div className="hero-actions programme-hero-actions">
-          <a className="primary-btn" href="#choose-pass">
+          <a className="primary-btn" href="#pass-compare">
             Choose Your Pass
           </a>
           <a className="secondary-btn" href="#pass-compare">
@@ -5339,13 +5704,13 @@ function PassHero() {
 
 function PassComparisonCards() {
   return (
-    <section className="editorial-section section-shell pass-comparison-section" id="choose-pass">
+    <section className="editorial-section section-shell pass-comparison-section" id="pass-compare">
       <div className="section-head with-copy">
         <div>
           <p className="section-kicker">Two Passes. One Shared Convention.</p>
-          <h2>Choose the pass that fits where you are right now.</h2>
+          <h2>Pick your training track.</h2>
         </div>
-        <p className="section-intro">Same convention. Different training level.</p>
+        <p className="section-intro">Same convention, same price. Choose by experience level.</p>
       </div>
 
       <div className="pass-ticket-grid">
@@ -5387,7 +5752,7 @@ function PassComparisonCards() {
                   {pass.cta}
                 </a>
                 <a className="text-link" href={pass.workshopHref}>
-                  View {pass.shortName.replace(' Pass', '')} Workshops
+                  {pass.id === 'foundation' ? 'View Foundation Workshops' : 'View Mastery Workshops'}
                 </a>
               </div>
               <small className="pass-ticket-note">Track access subject to organizer confirmation.</small>
@@ -5398,7 +5763,23 @@ function PassComparisonCards() {
 
       <div className="pass-unsure-note compact">
         <strong>Quick guide:</strong>
-        <p>New to clown training? Choose Foundation. Already performing? Choose Mastery. After Stripe checkout, complete participant details with your receipt email.</p>
+        <div className="pass-decision-mini-grid">
+          <article>
+            <span>01</span>
+            <h3>Choose track</h3>
+            <p>Foundation for new performers. Mastery for experienced performers.</p>
+          </article>
+          <article>
+            <span>02</span>
+            <h3>Checkout safely</h3>
+            <p>Use the official Stripe button on the pass you choose.</p>
+          </article>
+          <article>
+            <span>03</span>
+            <h3>Submit details</h3>
+            <p>Complete the participant form with your Stripe receipt email.</p>
+          </article>
+        </div>
         <a className="text-link" href="/workshops">
           View Workshop Tracks
         </a>
@@ -5984,7 +6365,7 @@ function TrackSelector() {
                 <span>3-day convention track</span>
                 <span>{pass.accent === 'foundation' ? 'Build core craft' : 'Sharpen stage identity'}</span>
               </div>
-              <a className="primary-btn wide-btn" href={pass.ctaHref} rel="noreferrer" target="_blank">
+              <a className="primary-btn wide-btn" href={`/passes#${pass.id}-pass`}>
                 {pass.cta}
               </a>
             </div>
@@ -6113,10 +6494,10 @@ function WorkshopCTA() {
         <p>Choose the track that matches your current stage, then arrive ready to practice, receive feedback and perform with purpose.</p>
       </div>
       <div className="final-cta-actions">
-        <a className="primary-btn foundation-btn" href={passes[0].ctaHref} rel="noreferrer" target="_blank">
+        <a className="primary-btn foundation-btn" href="/passes#foundation-pass">
           Get Foundation Pass
         </a>
-        <a className="primary-btn" href={passes[1].ctaHref} rel="noreferrer" target="_blank">
+        <a className="primary-btn" href="/passes#mastery-pass">
           Get Mastery Pass
         </a>
         <a className="secondary-btn" href="/passes#pass-compare">
@@ -6312,11 +6693,11 @@ function FeaturedMentors({ mentors }: { mentors: MentorProfile[] }) {
   )
 }
 
-function MentorGrid({ mentors }: { mentors: MentorProfile[] }) {
+function MentorGrid({ mentors, hiddenMentorIds }: { mentors: MentorProfile[]; hiddenMentorIds?: Set<string> }) {
   const [activeFilter, setActiveFilter] = useState<MentorFilterKey>('all')
 
   const filteredMentors = mentors.filter((mentor) => {
-    if (mentor.featured) return false
+    if (hiddenMentorIds?.has(mentor.id)) return false
     if (activeFilter === 'all') return true
     if (activeFilter === 'malaysia') return mentor.country === 'Malaysia'
     if (activeFilter === 'asia') return mentor.region === 'Asia' || mentor.country === 'Malaysia'
@@ -6382,11 +6763,13 @@ function MentorCTA() {
 }
 
 function MentorsPage({ mentors = mentorLineup }: { mentors?: MentorProfile[] }) {
+  const displayedFeaturedMentorIds = getDisplayedFeaturedMentorIds(mentors)
+
   return (
     <main className="mentors-page">
       <MentorHero />
       <FeaturedMentors mentors={mentors} />
-      <MentorGrid mentors={mentors} />
+      <MentorGrid mentors={mentors} hiddenMentorIds={displayedFeaturedMentorIds} />
       <MentorCTA />
     </main>
   )
@@ -6610,10 +6993,10 @@ function HomePage() {
           <h2>Take your place in the BICC 2026 circle.</h2>
           <p>Choose your track and join three days of training, performance, exchange and red-nose energy in Borneo.</p>
           <div className="final-cta-actions">
-            <a className="primary-btn home-cta-primary" href={foundationPassPaymentLink} rel="noreferrer" target="_blank">
+            <a className="primary-btn home-cta-primary" href="/passes#foundation-pass">
               Get Foundation Pass
             </a>
-            <a className="secondary-btn home-cta-secondary" href={masteryPassPaymentLink} rel="noreferrer" target="_blank">
+            <a className="secondary-btn home-cta-secondary" href="/passes#mastery-pass">
               Get Mastery Pass
             </a>
             <a className="secondary-btn home-cta-ghost" href="/programme">
@@ -7032,7 +7415,7 @@ function App() {
       try {
         const result = await fetchFromSanity<CmsMentor[]>(cmsQueries.mentors)
         if (!isActive || !result?.length) return
-        setCmsMentors(mapCmsMentors(result, siteLanguage))
+        setCmsMentors(mergeMentorProfiles(mapCmsMentors(result, siteLanguage)))
       } catch {
         if (isActive) setCmsMentors(null)
       }
@@ -7095,12 +7478,28 @@ function App() {
           </div>
         </a>
 
-        <nav className="main-nav">
-          {navItems.map((item) => (
-            <a className={currentPath === item.path ? 'active' : ''} href={item.path} key={item.path}>
-              {item.label}
-            </a>
-          ))}
+        <nav className="main-nav" aria-label="Main navigation">
+          <a className={currentPath === '/about' ? 'active' : ''} href="/about">
+            About
+          </a>
+          {navGroups.map((group) => {
+            const isGroupActive = group.items.some((item) => currentPath === item.path)
+
+            return (
+              <div className={`nav-group ${isGroupActive ? 'active' : ''}`} key={group.label}>
+                <button className="nav-group-trigger" type="button" aria-haspopup="true">
+                  {group.label}
+                </button>
+                <div className="nav-group-menu">
+                  {group.items.map((item) => (
+                    <a className={currentPath === item.path ? 'active' : ''} href={item.path} key={item.path}>
+                      {item.label}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            )
+          })}
         </nav>
 
         <div className="header-actions">
