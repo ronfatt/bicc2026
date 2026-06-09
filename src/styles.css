@@ -79,6 +79,7 @@ select {
 .site-header {
   position: sticky;
   top: 10px;
+  z-index: 1000;
   display: grid;
   grid-template-columns: minmax(210px, 250px) minmax(0, 1fr) auto;
   grid-template-areas: 'brand nav actions';
@@ -195,6 +196,7 @@ select {
 
 .nav-group {
   position: relative;
+  z-index: 1001;
 }
 
 .nav-group-trigger::after {
@@ -208,14 +210,15 @@ select {
   position: absolute;
   left: 50%;
   top: calc(100% + 10px);
-  z-index: 20;
+  z-index: 1002;
   display: grid;
   min-width: 190px;
   padding: 8px;
   border: 1px solid rgba(20, 58, 63, 0.1);
   border-radius: 20px;
-  background: rgba(255, 252, 244, 0.98);
-  box-shadow: 0 22px 52px rgba(20, 58, 63, 0.16);
+  background: rgba(255, 252, 244, 0.99);
+  box-shadow: 0 24px 60px rgba(20, 58, 63, 0.22);
+  backdrop-filter: blur(18px);
   opacity: 0;
   pointer-events: none;
   transform: translate(-50%, -4px);
