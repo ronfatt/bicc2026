@@ -81,8 +81,8 @@ const faqs = [
 ]
 
 const passes = [
-  ['pass-foundation', 'Foundation Pass', 'US$190', 'https://buy.stripe.com/6oUdR22tqekU9Siaun24006', 'Best for beginners and emerging performers'],
-  ['pass-mastery', 'Mastery Pass', 'US$190', 'https://buy.stripe.com/28EeV69VS3Ggd4uaun24007', 'Best for experienced performers'],
+  ['pass-foundation', 'Foundation Pass', 'US$190', 'https://buy.stripe.com/bJe4gsec890A2pQ6e72400d', 'Best for beginners and emerging performers'],
+  ['pass-mastery', 'Mastery Pass', 'US$190', 'https://buy.stripe.com/4gMcMYec84Kk0hIcCv2400c', 'Best for experienced performers'],
 ]
 
 const pageContents = [
