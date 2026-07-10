@@ -74,15 +74,15 @@ const visitItems = [
 ]
 
 const faqs = [
-  ['faq-price', 'What is the price of each pass?', 'Both Foundation and Mastery passes are listed at US$130, unless the organizer updates the official pricing.', 'Passes & Registration'],
+  ['faq-price', 'What is the price of each pass?', 'Both Foundation and Mastery passes are listed at US$190, unless the organizer updates the official pricing.', 'Passes & Registration'],
   ['faq-track-difference', 'What is the difference between Foundation and Mastery?', 'Foundation is for beginners and emerging performers. Mastery is for experienced performers who want deeper critique, stage presence and professional development.', 'Passes & Registration'],
   ['faq-programme-confirmed', 'Is the full programme confirmed?', 'The programme flow is available as a preview. Final times, rooms and instructor assignments will be announced closer to the convention.', 'Programme'],
   ['faq-venue', 'Where is BICC 2026 held?', 'BICC 2026 is currently presented as taking place at Calvary Crown, Tawau, Sabah.', 'Venue & Visit'],
 ]
 
 const passes = [
-  ['pass-foundation', 'Foundation Pass', 'US$130', 'https://buy.stripe.com/6oUdR22tqekU9Siaun24006', 'Best for beginners and emerging performers'],
-  ['pass-mastery', 'Mastery Pass', 'US$130', 'https://buy.stripe.com/28EeV69VS3Ggd4uaun24007', 'Best for experienced performers'],
+  ['pass-foundation', 'Foundation Pass', 'US$190', 'https://buy.stripe.com/6oUdR22tqekU9Siaun24006', 'Best for beginners and emerging performers'],
+  ['pass-mastery', 'Mastery Pass', 'US$190', 'https://buy.stripe.com/28EeV69VS3Ggd4uaun24007', 'Best for experienced performers'],
 ]
 
 const pageContents = [
@@ -129,7 +129,7 @@ const pageEditorDefaults = {
       ['Hero: date badge', 'Aug 3–5, 2026'],
       ['Hero: location badge', 'Tawau, Sabah'],
       ['Hero: tracks badge', '2 Workshop Tracks'],
-      ['Hero: price badge', 'US$130'],
+      ['Hero: price badge', 'US$190'],
       ['Hero: primary button', 'Get Your Pass'],
       ['Hero: secondary button', 'View Programme'],
       ['Hero: compare link', 'Compare Foundation & Mastery Tracks'],

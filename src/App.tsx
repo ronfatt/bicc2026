@@ -24,6 +24,20 @@ const visitTawauPartnerLink = siteConfig.links.visitTawauPartner
 const delegateFormStorageKey = siteConfig.storageKeys.delegateDetailsDraft
 const publicBaseUrl = siteConfig.publicBaseUrl.replace(/\/+$/, '')
 const defaultOgImage = `${publicBaseUrl}/og-image.jpg`
+
+const heroParticipationCountries = [
+  'Hong Kong',
+  'Taiwan',
+  'Japan',
+  'India',
+  'Singapore',
+  'Indonesia',
+  'Mexico',
+  'USA',
+  'Thailand',
+  'China',
+  'Myanmar',
+] as const
 const mentorPortraitUncleSunday = '/mentors/uncle-sunday.webp'
 const mentorPortraitChagy = '/mentors/chagy.jpg'
 const mentorPortraitUncleButton = '/mentors/uncle-button.jpg'
@@ -335,7 +349,7 @@ const translations: Record<Exclude<SiteLanguage, 'en'>, Record<string, string>> 
     'Official Stripe checkout': '官方 Stripe 付款',
     'Pay through the official BICC pass links.': '请通过 BICC 官方通行证链接付款。',
     'Same price, clear choice': '同一价格，清楚选择',
-    'Foundation and Mastery are both US$130.': 'Foundation 与 Mastery 都是 US$130。',
+    'Foundation and Mastery are both US$190.': 'Foundation 与 Mastery 都是 US$190。',
     'Delegate / participant details after payment': '付款后填写参与者资料',
     'After Stripe checkout, submit your profile with the same receipt email.': 'Stripe 付款后，请用同一个收据电邮提交资料。',
     'Everything essential. Nothing confusing.': '只保留重点，清楚不复杂。',
@@ -352,7 +366,7 @@ const translations: Record<Exclude<SiteLanguage, 'en'>, Record<string, string>> 
     'Aug 3-5, 2026': '2026年8月3日至5日',
     'Aug 3–5, 2026': '2026年8月3日至5日',
     '2 Workshop Tracks': '两大工作坊课程',
-    'US$130 Pass': 'US$130 通行证',
+    'US$190 Pass': 'US$190 通行证',
     'Choose Your Track': '选择你的课程',
     'Two Paths. One Price. Different Professional Needs.': '两条路径，同一价格，满足不同专业需求。',
     'Foundation Track': 'Foundation 课程',
@@ -432,8 +446,8 @@ const translations: Record<Exclude<SiteLanguage, 'en'>, Record<string, string>> 
     'Delegates and participants should arrange hotels, flights and local travel directly unless BICC announces an official partner arrangement.':
       '除非 BICC 公布官方合作安排，否则参与者需自行安排酒店、机票与本地交通。',
     'What is the price of each pass?': '每一种通行证多少钱？',
-    'Both Foundation and Mastery passes are listed at US$130, unless the organizer updates the official pricing.':
-      'Foundation 与 Mastery 通行证目前均为 US$130，除非主办方更新官方价格。',
+    'Both Foundation and Mastery passes are listed at US$190, unless the organizer updates the official pricing.':
+      'Foundation 与 Mastery 通行证目前均为 US$190，除非主办方更新官方价格。',
     'What is the difference between Foundation and Mastery?': 'Foundation 和 Mastery 有什么不同？',
     'Foundation is designed for beginners and emerging performers who want essential clown craft. Mastery is designed for experienced performers who want deeper critique, stage presence and professional development.':
       'Foundation 适合想建立基本小丑技艺的初学者和新晋表演者；Mastery 适合希望获得更深入反馈、舞台表现和专业发展的有经验表演者。',
@@ -962,7 +976,7 @@ const translations: Record<Exclude<SiteLanguage, 'en'>, Record<string, string>> 
     'Official Stripe checkout': 'Pembayaran rasmi Stripe',
     'Pay through the official BICC pass links.': 'Bayar melalui pautan pas rasmi BICC.',
     'Same price, clear choice': 'Harga sama, pilihan jelas',
-    'Foundation and Mastery are both US$130.': 'Foundation dan Mastery kedua-duanya US$130.',
+    'Foundation and Mastery are both US$190.': 'Foundation dan Mastery kedua-duanya US$190.',
     'Delegate / participant details after payment': 'Butiran peserta selepas pembayaran',
     'After Stripe checkout, submit your profile with the same receipt email.': 'Selepas pembayaran Stripe, hantar profil anda dengan e-mel resit yang sama.',
     'Everything essential. Nothing confusing.': 'Semua yang penting, tanpa kekeliruan.',
@@ -981,7 +995,7 @@ const translations: Record<Exclude<SiteLanguage, 'en'>, Record<string, string>> 
     'Aug 3–5, 2026': '3-5 Ogos 2026',
     'Tawau, Sabah': 'Tawau, Sabah',
     '2 Workshop Tracks': '2 Trek Bengkel',
-    'US$130 Pass': 'Pas US$130',
+    'US$190 Pass': 'Pas US$190',
     'Choose Your Track': 'Pilih Trek Anda',
     'Two Paths. One Price. Different Professional Needs.': 'Dua laluan. Satu harga. Keperluan profesional berbeza.',
     'Foundation Track': 'Trek Foundation',
@@ -1060,8 +1074,8 @@ const translations: Record<Exclude<SiteLanguage, 'en'>, Record<string, string>> 
     'Delegates and participants should arrange hotels, flights and local travel directly unless BICC announces an official partner arrangement.':
       'Delegat dan peserta perlu mengurus hotel, penerbangan dan perjalanan tempatan sendiri melainkan BICC mengumumkan aturan rakan rasmi.',
     'What is the price of each pass?': 'Berapakah harga setiap pas?',
-    'Both Foundation and Mastery passes are listed at US$130, unless the organizer updates the official pricing.':
-      'Pas Foundation dan Mastery disenaraikan pada US$130, kecuali penganjur mengemas kini harga rasmi.',
+    'Both Foundation and Mastery passes are listed at US$190, unless the organizer updates the official pricing.':
+      'Pas Foundation dan Mastery disenaraikan pada US$190, kecuali penganjur mengemas kini harga rasmi.',
     'What is the difference between Foundation and Mastery?': 'Apakah perbezaan antara Foundation dan Mastery?',
     'Foundation is designed for beginners and emerging performers who want essential clown craft. Mastery is designed for experienced performers who want deeper critique, stage presence and professional development.':
       'Foundation direka untuk pemula dan penghibur baharu yang mahu asas seni badut. Mastery direka untuk penghibur berpengalaman yang mahu kritikan lebih mendalam, kehadiran pentas dan perkembangan profesional.',
@@ -1449,7 +1463,7 @@ const passes = [
     id: 'foundation',
     name: 'Foundation Track Pass',
     shortName: 'Foundation Pass',
-    price: 'US$130',
+    price: 'US$190',
     badge: 'Best for beginners and emerging performers',
     label: 'Foundation Workshop Pass',
     headline: 'Build Your Professional Foundation',
@@ -1489,7 +1503,7 @@ const passes = [
     id: 'mastery',
     name: 'Mastery Track Pass',
     shortName: 'Mastery Pass',
-    price: 'US$130',
+    price: 'US$190',
     badge: 'Best for experienced performers',
     label: 'Mastery Workshop Pass',
     headline: 'Elevate Your Stage Performance',
@@ -1581,7 +1595,7 @@ const passRegistrationSteps = [
 const passFaqItems = [
   {
     question: 'What is the price of each pass?',
-    answer: 'Both Foundation and Mastery passes are listed at US$130, unless the organizer updates the official pricing.',
+    answer: 'Both Foundation and Mastery passes are listed at US$190, unless the organizer updates the official pricing.',
   },
   {
     question: 'What is the difference between Foundation and Mastery?',
@@ -3319,11 +3333,11 @@ const routeContent = {
       'BICC keeps the pass structure simple on purpose. Visitors should be able to decide quickly whether they need a foundation-building experience or a more advanced performance path.',
     cards: [
       {
-        title: 'Foundation Track Pass — US$130',
+        title: 'Foundation Track Pass — US$190',
         body: 'Best for beginners, emerging performers and educators building confidence, technique and core clowning fundamentals.',
       },
       {
-        title: 'Mastery Track Pass — US$130',
+        title: 'Mastery Track Pass — US$190',
         body: 'Best for experienced performers who want stronger stage craft, sharper structure and more professional critique.',
       },
       {
@@ -4052,7 +4066,7 @@ function ProgramTrackConnection() {
           <article className={`track-card ticket-card ${item.accent}`} key={item.title}>
             <div className="track-card-copy">
               <span className={`track-label ${item.accent} sticker-badge`}>{item.title}</span>
-              <p className="pass-price">US$130</p>
+              <p className="pass-price">US$190</p>
               <p className="track-summary">{item.copy}</p>
               <div className="track-chip-list">
                 {item.focus.slice(0, 4).map((focus) => (
@@ -5284,7 +5298,7 @@ function LanguagesPage() {
       headline: '婆罗洲国际小丑大会 2026 将在沙巴斗湖举行。',
       copy:
         '这是一个为小丑演员、教育工作者、舞台表演者、家庭娱乐者和国际参与者而设的三天大会，内容包括工作坊、导师交流、演出展示、社区连接和斗湖体验。',
-      points: ['日期：2026年8月3日至5日', '地点：马来西亚沙巴斗湖', '通行证：Foundation / Mastery，US$130'],
+      points: ['日期：2026年8月3日至5日', '地点：马来西亚沙巴斗湖', '通行证：Foundation / Mastery，US$190'],
       cta: '查看通行证',
       href: '/passes',
       tone: 'soft-coral',
@@ -5296,7 +5310,7 @@ function LanguagesPage() {
       headline: 'BICC 2026 berlangsung di Tawau, Sabah.',
       copy:
         'Konvensyen tiga hari ini menghimpunkan artis badut, penghibur, pendidik dan komuniti melalui bengkel, persembahan, pertukaran budaya dan pengalaman destinasi Borneo.',
-      points: ['Tarikh: 3-5 Ogos 2026', 'Lokasi: Tawau, Sabah, Malaysia', 'Pas: Foundation / Mastery, US$130'],
+      points: ['Tarikh: 3-5 Ogos 2026', 'Lokasi: Tawau, Sabah, Malaysia', 'Pas: Foundation / Mastery, US$190'],
       cta: 'Lihat Pas',
       href: '/passes',
       tone: 'soft-yellow',
@@ -5673,7 +5687,7 @@ function PassHero() {
         <div className="event-badges programme-hero-badges">
           <span>Aug 3–5, 2026</span>
           <span>Tawau, Sabah</span>
-          <span>US$130</span>
+          <span>US$190</span>
         </div>
         <div className="hero-actions programme-hero-actions">
           <a className="primary-btn" href="#pass-compare">
@@ -5796,7 +5810,7 @@ function PassTrustStrip() {
     },
     {
       title: 'Same price, clear choice',
-      copy: 'Foundation and Mastery are both US$130.',
+      copy: 'Foundation and Mastery are both US$190.',
     },
     {
       title: 'Delegate / participant details after payment',
@@ -6800,7 +6814,7 @@ function HomePage() {
             <span>Aug 3–5, 2026</span>
             <span>Tawau, Sabah</span>
             <span>2 Workshop Tracks</span>
-            <span>US$130</span>
+            <span>US$190</span>
           </div>
 
           <div className="hero-actions">
@@ -6829,6 +6843,19 @@ function HomePage() {
             <img alt="Clown performance and audience moment" src={landingPerformanceAudienceImage} />
             <span>Performance / Audience</span>
           </article>
+          <aside className="hero-participation-card" aria-label="BICC 2026 participation snapshot">
+            <span className="hero-participation-kicker">Participation Snapshot</span>
+            <div className="hero-participation-stats">
+              <strong>32+</strong>
+              <span>participants so far</span>
+            </div>
+            <p>11 countries / regions represented</p>
+            <div className="hero-country-cloud">
+              {heroParticipationCountries.map((country) => (
+                <span key={country}>{country}</span>
+              ))}
+            </div>
+          </aside>
         </div>
       </section>
 
@@ -7006,7 +7033,7 @@ function HomePage() {
           <div className="home-cta-meta" aria-label="Convention highlights">
             <span>2 Workshop Tracks</span>
             <span>International Instructors</span>
-            <span>US$130 Pass</span>
+            <span>US$190 Pass</span>
           </div>
         </div>
       </section>
